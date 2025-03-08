@@ -82,7 +82,7 @@
   section #submit:hover {
     background-color:#45a049;
   }
-  section #pmsg, #pmsg1 {
+  section #pmsg, #pmsg2, #pmsg3 {
     font-size:13px;
     margin-bottom:2px;
     display:block;
@@ -102,7 +102,7 @@
     		//alert(chk.responseText);
     		if(chk.responseText=="0")
     		{
-    			document.getElementById("pmsg").innerText="다른 비밀번호 입니다.";
+    			document.getElementById("pmsg").innerText="비밀번호가 일치하지 않습니다.";
     			document.getElementById("pmsg").style.color="red";
     		}
     		else
@@ -113,6 +113,27 @@
     	chk.open("get", "pwdCheck?oPwd="+oPwd);
     	chk.send();
     }
+    function newPwd()
+    {
+		var nPwd=document.vform.nPwd.value;
+		var nPwd2=document.vform.nPwd2.value;
+		
+		if(nPwd != 0)
+		{
+			if(nPwd == nPwd2)
+			{
+				document.getElementById("pmsg")
+			}
+			else
+			{
+				
+			}
+		}
+		else
+		{
+			
+		}
+	}
   </script>
 </head>
 <body> <!-- user/userView.jsp -->
@@ -139,9 +160,10 @@
       <td>
         <input type="password" name="oPwd" id="pwd" onblur="pwdCheck()" placeholder="현재 비밀번호">
         <span id="pmsg"> </span>
-        <input type="password" name="nPwd" id="pwd" onkeyup="pwdCk()" placeholder="새 비밀번호"> 
-        <input type="password" name="nPwd2" id="pwd" onkeyup="pwdCk()" placeholder="비밀번호 확인">
-        <span id="pmsg1"> </span>
+        <input type="password" name="nPwd" id="pwd" onkeyup="newPwd()" placeholder="새 비밀번호">
+        <span id="pmsg2"> </span> 
+        <input type="password" name="nPwd2" id="pwd" onkeyup="newPwd()" placeholder="비밀번호 확인">
+        <span id="pmsg3"> </span>
       </td>
     </tr>
     <tr>
