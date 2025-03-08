@@ -284,50 +284,8 @@
 			</table>
 		</div>
 	</div>
-	<div
-  id="kakao-talk-channel-chat-button"
-  data-channel-public-id="_lxfgGn"
-  data-title="consult"
-  data-size="large"
-  data-color="yellow"
-  data-shape="pc"
-  data-support-multiple-densities="true"
-></div>
-	
+		
 </section>
-
-<div id="kakao-talk-channel-chat-button"></div>
-    <script type="text/javascript">
-      // 사용할 앱의 JavaScript 키를 설정해 주세요.
-      Kakao.init('c089c8172def97eb00c07217cae17495');
-      // 채널 1:1 채팅 버튼을 생성합니다.
-      Kakao.Channel.createChatButton({
-        container: '#kakao-talk-channel-chat-button',
-        channelPublicId: '_lxfgGn',
-        title: 'consult',
-        size: 'large',
-        color: 'yellow',
-        shape: 'pc',
-        supportMultipleDensities: true,
-      });
-    </script>
-    <script>
-  window.kakaoAsyncInit = function() {
-    Kakao.Channel.createChatButton({
-      container: '#kakao-talk-channel-chat-button',
-    });
-  };
-
-  (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = 'https://t1.kakaocdn.net/kakao_js_sdk/2.7.4/kakao.channel.min.js';
-    js.integrity = 'sha384-8oNFBbAHWVovcMLgR+mLbxqwoucixezSAzniBcjnEoumhfIbMIg4DrVsoiPEtlnt';
-    js.crossOrigin = 'anonymous';
-    fjs.parentNode.insertBefore(js, fjs);
-  })(document, 'script', 'kakao-js-sdk');
-</script>
 
 </body>
 </html>
