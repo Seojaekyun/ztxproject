@@ -17,7 +17,7 @@
 	</update>
 	
 	<select id="list" resultType="com.example.demo.dto.ReservDto">
-		select * from reservlist order by reservid desc
+		select * from reservlist order by reservid desc limit 0,10
 	</select>    
 
 	<select id="getRsvanow" resultType="com.example.demo.dto.ReservDto">
