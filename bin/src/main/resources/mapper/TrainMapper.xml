@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.TrainMapper">
+	<resultMap id="StationResultMap" type="com.example.demo.dto.StationsDto">
+	    <result column="id" property="id"/>
+	    <result column="station_name" property="station_name"/>
+	    <result column="location" property="location"/>
+	    <result column="line" property="line"/>
+	</resultMap>
+
+	<select id="findAllStations" resultMap="StationResultMap">
+		select id, stationName, location, line from stations
+	</select>
+	
+	
+</mapper>

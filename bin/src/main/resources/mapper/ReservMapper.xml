@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.ReservMapper">
+	<insert id="addReserv" parameterType="com.example.demo.dto.ReservDto" useGeneratedKeys="true" keyProperty="reservid">
+		INSERT INTO reservlist
+		(routeid, routeDeparture, routeArrival, routeTime, routeArrivalTime, resnum, reservday, PNR, userid)
+		VALUES (#{routeid}, #{routeDeparture}, #{routeArrival}, #{routeTime}, #{routeArrivalTime}, #{resnum}, now(), #{PNR}, #{userid})
+	</insert>
+	<select id="getSeatid" parameterType="map" resultType="int">
+		SELECT seatid FROM trainseat WHERE seatnum = #{trim} and routeid=#{routeid}
+	</select>
+	<update id="upTrainSeatAvai" parameterType="com.example.demo.dto.ReservDto">
+		UPDATE trainseat SET reserv=0, resid= #{reservid} WHERE routeid = #{routeid} AND seatid = #{seatid}
+	</update>
+	<update id="upRouteSeat" parameterType="com.example.demo.dto.ReservDto">
+		UPDATE routes SET seat=(seat-#{resnum}) WHERE routeid = #{routeid}
+	</update>
+	
+	<select id="list" resultType="com.example.demo.dto.ReservDto">
+		select * from reservlist order by reservid desc limit 0,10
+	</select>    
+
+	<select id="getRsvanow" resultType="com.example.demo.dto.ReservDto">
+		SELECT r.*, ro.*, COUNT(r.reservid) AS reservCount FROM reservlist r JOIN routes ro
+		ON r.routeid = ro.routeid WHERE ro.departure_time >= NOW() GROUP BY r.routeid
+		ORDER BY ro.departure_time
+	</select>
+	<select id="getRsvByDate" resultType="com.example.demo.dto.ReservDto">
+		SELECT r.*, ro.*, COUNT(r.reservid) as reservCount FROM reservlist r JOIN routes ro
+		ON r.routeid = ro.routeid WHERE DATE(ro.departure_time) = #{selectedDate}
+		GROUP BY r.routeid ORDER BY ro.departure_time
+	</select>
+	<select id="getAvaiSeatCountByRouteid" resultType="map">
+		SELECT routeid, COUNT(*) AS availableSeats FROM trainseat WHERE reserv = 1 GROUP BY routeid
+	</select>
+	
+	
+</mapper>
+

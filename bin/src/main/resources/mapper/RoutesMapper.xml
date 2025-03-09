@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.RoutesMapper">
+	<select id="findRoutes" resultType="com.example.demo.dto.RoutesDto">
+		SELECT * from routes where seat > #{resnum}
+		<if test="departure != null and departure != ''">
+		and departure=#{departure}
+		</if>
+		<if test="arrival != null and arrival != ''">
+		AND arrival=#{arrival}
+		</if>
+		<if test="departureDate != null and departureDate != ''">
+		AND DATE(departure_time) = #{departureDate}
+		</if>
+	</select>
+	<select id="getAvaiSeats" resultType="com.example.demo.dto.SeatDto">
+		SELECT * FROM trainseat WHERE routeid = #{routeid} order by seatid asc LIMIT #{offset}, #{size}
+	</select>
+	<select id="getTotalSeat" resultType="int">
+		SELECT COUNT(*) FROM trainseat WHERE routeid = #{routeid}
+	</select>
+	<select id="getDepartureRoutes" resultType="com.example.demo.dto.RoutesDto">
+		SELECT * FROM routes WHERE departure_time >= '2025-01-01' AND departure IN ('서울역', '부산역')
+		ORDER BY departure_time desc LIMIT 5 
+	</select>
+	<select id="getArrivalRoutes" resultType="com.example.demo.dto.RoutesDto">
+		SELECT * FROM routes WHERE departure_time >= NOW() AND arrival IN ('서울역', '부산역')
+		ORDER BY departure_time LIMIT 5
+	</select>
+	
+	
+</mapper>
+

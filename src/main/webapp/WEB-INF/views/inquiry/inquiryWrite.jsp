@@ -6,14 +6,6 @@
     <meta charset="UTF-8">
     <title>고객센터 문의 등록</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <script>
-        window.onload = function () {
-            let userId = "${sessionScope.userid}";
-            if (userId) {
-                document.getElementById("passwordField").style.display = "none"; // ✅ 회원이면 비밀번호 입력칸 숨김
-            }
-        };
-    </script>
 </head>
 <body>
 
@@ -34,40 +26,34 @@
             </select>
         </div>
 
-        <!-- 이름 (회원이면 자동 입력) -->
+        <!-- 이름 -->
         <div class="mb-3">
             <label class="form-label">이름</label>
-            <input type="text" class="form-control" name="name" 
-                   value="${udto.name}" 
-                   <c:if test='${sessionScope.userid != null}'>readonly</c:if>
-                   placeholder="이름을 입력하세요" required>
+            <input type="text" class="form-control" name="name" value="${udto.name}" required>
         </div>
 
-        <!-- 연락처 (회원이면 자동 입력) -->
+        <!-- 연락처 -->
         <div class="mb-3">
             <label class="form-label">연락처</label>
-            <input type="text" class="form-control" name="phone" 
-                   value="${udto.phone}" 
-                   <c:if test='${sessionScope.userid != null}'>readonly</c:if>
-                   placeholder="예: 010-1234-5678" required>
+            <input type="text" class="form-control" name="phone" value="${udto.phone}" required>
         </div>
 
-        <!-- 제목 (필수 입력) -->
+        <!-- 제목 -->
         <div class="mb-3">
             <label class="form-label">제목</label>
-            <input type="text" class="form-control" name="title" placeholder="제목을 입력하세요" required>
+            <input type="text" class="form-control" name="title" required>
         </div>
 
-        <!-- 문의 내용 (회원/비회원 공통) -->
+        <!-- 문의 내용 -->
         <div class="mb-3">
             <label class="form-label">문의 내용</label>
-            <textarea class="form-control" name="content" rows="5" placeholder="문의 내용을 입력하세요" required></textarea>
+            <textarea class="form-control" name="content" rows="5" required></textarea>
         </div>
 
-        <!-- 비밀번호 (비회원만 입력) -->
-        <div class="mb-3" id="passwordField">
-            <label class="form-label">비밀번호 (비회원용)</label>
-            <input type="password" class="form-control" name="pwd" placeholder="비밀번호 입력 (비회원)">
+        <!-- 비밀번호 (모든 사용자 필수 입력) -->
+        <div class="mb-3">
+            <label class="form-label">비밀번호</label>
+            <input type="password" class="form-control" name="pwd" required>
         </div>
 
         <!-- 버튼 -->

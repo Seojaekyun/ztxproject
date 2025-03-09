@@ -4,7 +4,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>나의 문의 조회</title>
+<title>내 문의 조회</title>
 <style>
    body {
      font-family: 'Noto Sans KR', sans-serif;
@@ -69,7 +69,7 @@
 <body>
 
  <section>
-    <h3>나의 문의 조회</h3>
+    <h3>내 문의 조회</h3>
     <table>
         <thead>
             <tr>
@@ -78,7 +78,7 @@
                 <th>제목</th>
                 <th>게시일</th>
                 <th>상태</th>
-                <th>조회</th> <!-- 비회원 조회 시 비밀번호 입력 추가 -->
+                <th>조회</th>
             </tr>
         </thead>
         <tbody>
@@ -102,11 +102,11 @@
                             <c:when test="${inquiry.userid == 'guest'}">
                                 <form action="/inquiry/detail/${inquiry.id}" method="post">
                                     <input type="password" name="pwd" placeholder="비밀번호 입력" required>
-                                    <button type="submit" class="btn btn-primary btn-sm">조회</button>
+                                    <button type="submit" class="btn">조회</button>
                                 </form>
                             </c:when>
                             <c:otherwise>
-                                <a href="/inquiry/detail/${inquiry.id}" class="btn btn-primary btn-sm">조회</a>
+                                <a href="/inquiry/detail/${inquiry.id}" class="btn">조회</a>
                             </c:otherwise>
                         </c:choose>
                     </td>
