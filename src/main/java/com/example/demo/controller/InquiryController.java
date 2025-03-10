@@ -36,10 +36,14 @@ public class InquiryController {
         return service.inquiryWriteOk(idto, session, model);
     }
 
-    @GetMapping("/detail/{id}")
-    public String inquiryContent(@PathVariable("id") int id, HttpSession session, Model model) {
-        return service.inquiryContent(id, session, model);
+    @RequestMapping(value = "/detail/{id}", method = {RequestMethod.GET, RequestMethod.POST})
+    public String inquiryContent(@PathVariable("id") int id, 
+                                 @RequestParam(value = "pwd", required = false) String inputPwd, 
+                                 HttpSession session, Model model) {
+        return service.inquiryContent(id, inputPwd, session, model);
     }
+
+
 
     @PostMapping("/inquiryUpdateCheck")
     public String inquiryUpdateCheck(@RequestParam("id") int id, @RequestParam("pwd") String pwd, Model model) {
@@ -50,4 +54,5 @@ public class InquiryController {
     public String inquiryDeleteCheck(@RequestParam("id") int id, @RequestParam("pwd") String pwd, Model model) {
         return service.inquiryDeleteCheck(id, pwd, model);
     }
+    
 }

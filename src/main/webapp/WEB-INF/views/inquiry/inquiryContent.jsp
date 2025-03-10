@@ -65,6 +65,12 @@
      background-color: #005bb5;
    }
 </style>
+<script>
+function submitForm(actionUrl) 
+{
+    document.getElementById("inquiryForm").action = actionUrl;
+}
+</script>
 </head>
 <body>
 
@@ -74,16 +80,17 @@
         <tr><th>제목</th><td>${inquiry.title}</td></tr>
         <tr><th>작성자</th><td>${inquiry.name}</td></tr>
         <tr><th>작성일</th><td>${inquiry.writeday}</td></tr>
-        <tr><th>조회수</th><td>${inquiry.readnum}</td></tr>
         <tr><th>내용</th><td>${inquiry.content}</td></tr>
     </table>
     <br>
-    <form action="/inquiry/inquiryActionCheck" method="post">
-        <input type="hidden" name="id" value="${inquiry.id}">
-        <input type="password" name="pwd" placeholder="비밀번호 입력" required>
-        <button type="submit" name="action" value="update" class="btn">수정</button>
-        <button type="submit" name="action" value="delete" class="btn">삭제</button>
-    </form>
+    
+    <form id="inquiryForm" method="post">
+    <input type="hidden" name="id" value="${inquiry.id}">
+    <input type="password" name="pwd" placeholder="비밀번호 입력" required>
+    <button type="submit" onclick="submitForm('/inquiry/inquiryUpdateCheck')" class="btn">수정</button>
+    <button type="submit" onclick="submitForm('/inquiry/inquiryDeleteCheck')" class="btn">삭제</button>
+	</form>
+	
     <br>
     <a href="/inquiry/inquiryList" class="btn">목록으로</a>
  </section>

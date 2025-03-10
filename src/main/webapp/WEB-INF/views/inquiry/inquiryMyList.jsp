@@ -74,7 +74,7 @@
         <thead>
             <tr>
                 <th>순번</th>
-                <th>접수번호</th>
+                <th>이름</th>
                 <th>제목</th>
                 <th>게시일</th>
                 <th>상태</th>
@@ -82,10 +82,10 @@
             </tr>
         </thead>
         <tbody>
-            <c:forEach var="inquiry" items="${mapAll}">
+            <c:forEach var="inquiry" items="${myInquiries}">
                 <tr>
                     <td>${inquiry.id}</td>
-                    <td>${inquiry.ref}</td>
+                    <td>${inquiry.name}</td>
                     <td>${inquiry.title}</td>
                     <td>${inquiry.writeday}</td>
                     <td class="status-${inquiry.status}">
@@ -100,7 +100,7 @@
                     <td>
                         <c:choose>
                             <c:when test="${inquiry.userid == 'guest'}">
-                                <form action="/inquiry/detail/${inquiry.id}" method="post">
+                                <form action="/inquiry/inquiryContent/${inquiry.id}" method="post">
                                     <input type="password" name="pwd" placeholder="비밀번호 입력" required>
                                     <button type="submit" class="btn">조회</button>
                                 </form>

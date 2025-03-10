@@ -10,19 +10,20 @@
     </insert>
 
     <select id="inquiryList" resultType="com.example.demo.dto.InquiryDto">
-        SELECT * FROM inquiry
-        ORDER BY writeday DESC
-        LIMIT #{index}, 20;
-    </select>
-
-    <select id="inquiryMyList" resultType="com.example.demo.dto.InquiryDto">
     	SELECT * FROM inquiry
-    	WHERE (userid = #{userid} OR (#{userid} IS NULL AND userid = 'guest'))
+    	ORDER BY id DESC
+    	LIMIT #{index}, 10;
+	</select>
+
+	<select id="inquiryMyList" resultType="com.example.demo.dto.InquiryDto">
+    	SELECT * FROM inquiry
+    	WHERE userid = #{userid}
     	ORDER BY writeday DESC
-    	LIMIT #{index}, 20;
+    	LIMIT #{index}, 10;
 	</select>
 
 
+	
     <select id="getChong" resultType="Integer">
         SELECT COUNT(*) FROM inquiry;
     </select>

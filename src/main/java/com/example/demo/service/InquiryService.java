@@ -5,11 +5,12 @@ import com.example.demo.dto.InquiryDto;
 import jakarta.servlet.http.HttpSession;
 
 public interface InquiryService {
-    String inquiryList(int page, HttpSession session, Model model);
-    String inquiryMyList(int page, HttpSession session, Model model);
-    String inquiryWrite(HttpSession session, Model model);
-    String inquiryWriteOk(InquiryDto idto, HttpSession session, Model model);
-    String inquiryContent(int id, HttpSession session, Model model);
-    String inquiryUpdateCheck(int id, String pwd, Model model);
-    String inquiryDeleteCheck(int id, String pwd, Model model);
+	public String inquiryList(int page, HttpSession session, Model model);
+	public String inquiryMyList(int page, HttpSession session, Model model);
+	public String inquiryWrite(HttpSession session, Model model);
+	public String inquiryWriteOk(InquiryDto idto, HttpSession session, Model model);
+	public String inquiryContent(int id,String inputPwd, HttpSession session, Model model);
+	public String inquiryUpdateCheck(int id, String pwd, Model model);
+	public String inquiryDeleteCheck(int id, String pwd, Model model);
+	
 }

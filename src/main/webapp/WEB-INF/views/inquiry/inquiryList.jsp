@@ -82,7 +82,7 @@
             </tr>
         </thead>
         <tbody>
-            <c:forEach var="inquiry" items="${mapAll}">
+            <c:forEach var="inquiry" items="${inquiries}">
                 <tr>
                     <td>${inquiry.id}</td>
                     <td>${inquiry.name}</td>
