@@ -7,12 +7,12 @@ import java.util.List;
 
 @Mapper
 public interface InquiryMapper {
-    List<InquiryDto> inquiryList(@Param("index") int index);
-    List<InquiryDto> inquiryMyList(@Param("userid") String userid, @Param("index") int index);
-    void inquiryWriteOk(InquiryDto idto);
-    InquiryDto readnum(@Param("id") int id);
-    InquiryDto getInquiryById(@Param("id") int id);
-    void inquiryDelete(@Param("id") int id);
-    int getChong();
-    int getChongByUser(@Param("userid") String userid);
+	public List<InquiryDto> inquiryList(@Param("index") int index);
+	public List<InquiryDto> inquiryMyList(@Param("userid") String userid, @Param("index") int index);
+	public void inquiryWriteOk(InquiryDto idto);
+	public InquiryDto readnum(@Param("id") int id);
+	public InquiryDto getInquiryById(@Param("id") int id);
+	public void inquiryDelete(@Param("id") int id);
+	public int getChong();
+	public int getChongByUser(@Param("userid") String userid);
 }
