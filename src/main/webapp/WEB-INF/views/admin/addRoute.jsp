@@ -95,7 +95,7 @@
 		var arrivalSelect = document.getElementById("arrival");
 		
 		// 기존 옵션 제거
-		arrivalStationSelect.innerHTML = "";
+		arrivalSelect.innerHTML = "";
 		
 		// 공항 데이터를 JavaScript 배열로 전달
 		var stations = [
@@ -104,14 +104,14 @@
 			</c:forEach>
 		];
 		
-		if(departureStation === "ICN" || departureStation === "GMP") {
+		if(departure === "ICN" || departure === "GMP") {
 			// 출발 공항이 ICN 또는 GMP인 경우
 			Stations.forEach(function(Station) {
 				if (Station.code !== "ICN" && Station.code !== "GMP") {
 					var option = document.createElement("option");
 					option.value = Station.code;
 					option.text = Station.name;
-					arrivalStationSelect.appendChild(option);
+					arrivalSelect.appendChild(option);
 				}
 			});
 		}
@@ -124,7 +124,7 @@
 				var option = document.createElement("option");
 				option.value = Station.code;
 				option.text = Station.name;
-				arrivalStationSelect.appendChild(option);
+				arrivalSelect.appendChild(option);
 			});
 		}
 		
@@ -169,7 +169,7 @@
 		});
 		
 		// 초기화
-		updateArrivalStations();
+		updatearrivals();
 	};
 	
 </script>
@@ -180,19 +180,19 @@
 <body>
 <section>
 	<h2>항공편 추가</h2>
-	<form action="/admin/addroutes" method="post" onsubmit="combineTimes()">
+	<form action="/admin/addRoutes" method="post" onsubmit="combineTimes()">
 		<div class="flex-container">
 			<div class="flex-item">
 				<h3>출발편 정보</h3>
-				<label for="departureStation">출발역:</label>
-				<select id="departureStation" name="departureStation" required>
+				<label for="departure">출발역:</label>
+				<select id="departure" name="departure" required>
 					<option value="">선택</option>
 					<c:forEach var="Station" items="${Stations}">
 					<option value="${Station.Stationid}">${Station.depot}</option>
 					</c:forEach>
 				</select>
-				<label for="arrivalStation">도착역:</label>
-				<select id="arrivalStation" name="arrivalStation" required>
+				<label for="arrival">도착역:</label>
+				<select id="arrival" name="arrival" required>
 					<!-- Arrival Stations will be populated dynamically -->
 				</select>
 				<label for="departureDate">출발 날짜:</label>
@@ -238,7 +238,7 @@
 				<h3>귀국편 정보</h3>
 				<label for="returnDeparture">출발 공항:</label>
 				<input type="text" id="returnDeparture" name="returnDeparture" readonly>
-				<label for="returnArrivalStation">도착 공항:</label>
+				<label for="returnArrival">도착 공항:</label>
 				<input type="text" id="returnArrival" name="returnArrival" readonly>
 				<label for="returnDepartureDate">출발 날짜:</label>
 				<input type="date" id="returnDepartureDate" name="returnDepartureDate" required>
@@ -268,8 +268,8 @@
 				<label for="returnArrivalTime">도착 시간:</label>
 				<textarea id="returnArrivalTime" name="returnArrivalTime" readonly></textarea>
 				<input type="hidden" id="returnDepartureTime" name="returnDepartureTime">
-				<label for="returnTrainId">열차:</label>
-				<select id="returnTrainId" name="returnTrainId" required>
+				<label for="returnTrainid">열차:</label>
+				<select id="returnTrainid" name="returnTrainid" required>
 					<c:forEach var="train" items="${Traines}">
 					<option value="${train.Trainid}">${train.Trainid}. ${train.model} / ${train.capa}석</option>
 					</c:forEach>

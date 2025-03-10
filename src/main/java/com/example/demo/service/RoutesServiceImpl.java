@@ -3,13 +3,18 @@ package com.example.demo.service;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.dto.RoutesDto;
 import com.example.demo.dto.SeatDto;
+import com.example.demo.dto.StationsDto;
+import com.example.demo.dto.TrainesDto;
 import com.example.demo.mapper.RoutesMapper;
 
 import jakarta.servlet.http.HttpSession;
@@ -18,6 +23,14 @@ import jakarta.servlet.http.HttpSession;
 public class RoutesServiceImpl implements RoutesService {
 	@Autowired
 	private RoutesMapper mapper;
+	public RoutesServiceImpl(JdbcTemplate jdbcTemplate) {
+    }
+	
+	private static final Logger logger = LoggerFactory.getLogger(RoutesServiceImpl.class);
+	@Override
+	public List<StationsDto> getAllStations() { 
+		return mapper.AllStations();
+	}
 	
 	@Override
 	public String routeSearch(@RequestParam String departure, @RequestParam String arrival,
@@ -87,6 +100,40 @@ public class RoutesServiceImpl implements RoutesService {
 		model.addAttribute("goingSelectedSeats", seatArray);  // 가는편 좌석 배열
 		System.out.println("가는편 선택한 좌석: " + selectedSeats);
 		return "redirect:/routes/resCheck?resnum=" + resnum;
+	}
+	
+	@Override
+	public void addRoute(String departure, String arrival, String departureTime, String arrivalTime, String ftime,
+			int trainid, int unitPrice) {
+		RoutesDto route = new RoutesDto();
+		route.setDeparture(departure);
+		route.setArrival(arrival);
+		route.setDepartureTime(departureTime);
+		route.setArrivalTime(arrivalTime);
+		route.setTrainid(trainid);
+		route.setFtime(ftime);
+		route.setUnitPrice(unitPrice);
+		
+		mapper.addRoute(route);
+		
+	}
+	
+	@Override
+	public List<TrainesDto> getAllTraines() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int[] getRouteTime(String departure, String arrival) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void addSeatsForRoute() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	

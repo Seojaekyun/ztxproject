@@ -28,6 +28,36 @@
 		ORDER BY departure_time LIMIT 5
 	</select>
 	
+	<select id="AllStations" resultType="com.example.demo.dto.StationsDto">
+		SELECT * FROM stations
+	</select>
+	<insert id="addFlight" parameterType="com.example.demo.dto.RoutesDto">
+		INSERT INTO routes (departure, arrival, departure_time, arrival_time, trainid)
+		VALUES (#{departure}, #{arrival}, #{departureTime}, #{arrivalTime}, #{trainid})
+	</insert>
+	<select id="AllTraines" resultType="com.example.demo.dto.TrainesDto">
+		SELECT * FROM traines<!--  order by capacity desc, airplane_id asc --> 
+	</select>
+	<!-- 아직 좌석이 없는 flightId를 조회 -->
+	<select id="getRouteidForAddingSeats" resultType="int">
+		SELECT routeid FROM routes WHERE routeid NOT IN (SELECT routeid FROM trainseat) LIMIT 1
+	</select>
+	<!-- 해당 flightId의 capacity를 가져오는 쿼리 -->
+	<select id="getRouteCapacity" resultType="map">
+		SELECT f.flight_id, a.capacity FROM flights f JOIN airplanes a ON f.airplane_id = a.airplane_id WHERE f.flight_id = #{flightId}
+	</select>
+	<!-- 좌석을 추가하는 쿼리 -->
+	<insert id="addSeatsForFlight">
+		INSERT INTO flightseats (flight_id, seat_id, is_available, seat_class) VALUES
+		<foreach collection="seatNumbers" item="seatNum" separator=",">
+			(#{flightId}, #{seatNum}, 1, '')
+		</foreach>
+	</insert>
+	<!-- <select id="getFlightTime" parameterType="map" resultType="com.example.demo.dto.FlightTimeDto">
+		SELECT * FROM flight_times
+		WHERE (a = #{a} AND b = #{b}) OR (a = #{b} AND b = #{a})
+	</select> -->
+	
 	
 </mapper>
 
