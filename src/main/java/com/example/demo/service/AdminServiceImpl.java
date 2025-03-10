@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Collections;
@@ -190,5 +191,57 @@ public class AdminServiceImpl implements AdminService{
 	private int calculateTotalPages(int totalItems, int itemsPerPage) {
         return (int) Math.ceil((double) totalItems / itemsPerPage);
     }
+
+	@Override
+	public String rsvdList(HttpServletRequest request, Model model) {
+		String trainid = request.getParameter("trainid");
+		String routeTime = request.getParameter("routeTime");
+		
+		// 페이지 처리 관련 변수
+		int currentPage = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
+		int itemsPerPage = 10;  // 한 페이지에 표시할 항목 수
+		int start = (currentPage - 1) * itemsPerPage;
+		
+		// 필터링된 예약 리스트 가져오기
+		List<ReservDto> rsvList = rmapper.getRsvdetail(trainid, routeTime, start, itemsPerPage);
+		List<ReservDto> rsvfn = rmapper.getRsvdfn(trainid, routeTime);
+				
+		// 필터링된 데이터에 맞는 총 예약 수 가져오기
+		int totalReserv = rmapper.getTotalReserv(trainid, routeTime);
+		int totalPages = (int) Math.ceil((double) totalReserv / itemsPerPage);
+		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+	    // 각 예약번호별 좌석 수 계산 및 offerDay -1일 처리
+	    Map<Integer, Integer> seatCounts = new HashMap<>();
+	    for (ReservDto reserv : rsvList) {
+	        int seatCount = rmapper.getSeatCountByReservid(reserv.getReservid());
+	        seatCounts.put(reserv.getReservid(), seatCount);
+	        
+	        /*
+	        int reservid = reserv.getReservid();
+	        Integer payState = rmapper.getState(reservid);
+	        reserv.setState(payState);
+	        System.out.println("값:" + payState);
+	        */
+
+	        // offerDay +1일 처리
+	        String offerDay = reserv.getOfferDay();
+	        if (offerDay != null) {
+	            LocalDate parsedDate = LocalDate.parse(offerDay, formatter);
+	            LocalDate adjustedDate = parsedDate.plusDays(1); // +1일 처리
+	            reserv.setOfferDay(adjustedDate.format(formatter)); // 다시 저장
+	        }
+	    }
+		
+		// 모델에 추가
+		model.addAttribute("rsvList", rsvList);
+		model.addAttribute("rsvfn", rsvfn);
+		model.addAttribute("seatCounts", seatCounts);  // 좌석 수 맵 추가
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("totalPages", totalPages);
+		
+		return "/admin/rsvdList";
+	}
 
 }

@@ -9,5 +9,7 @@ public interface AdminService {
 	String adminIndex(HttpSession session, HttpServletRequest request, Model model);
 	String reservList(String selectedDate, Integer seoulPage, Integer pusanPage, Integer otherPage, Integer page,
 			Model model);
+	String rsvdList(HttpServletRequest request, Model model);
+	
 
 }

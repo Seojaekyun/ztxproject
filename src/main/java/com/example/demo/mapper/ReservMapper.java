@@ -20,6 +20,11 @@ public interface ReservMapper {
 	List<ReservDto> getRsvByDate(String selectedDate);
 	List<ReservDto> getRsvanow();
 	List<Map<String, Object>> getAvaiSeatCountByRouteid();
+	List<ReservDto> getRsvdetail(String trainid, String routeTime, int start, int itemsPerPage);
+	List<ReservDto> getRsvdfn(String trainid, String routeTime);
+	int getTotalReserv(String trainid, String routeTime);
+	int getSeatCountByReservid(int reservid);
+	Integer getState(int reservid);
 	
 	
 }

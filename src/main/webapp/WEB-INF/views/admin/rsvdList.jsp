@@ -156,21 +156,20 @@
 <section id="sec1">
 	<div id="tables">
 		<!-- 전체 항공편 테이블 -->
-		<div class="table-container" id="allFlights">
+		<div class="table-container" id="allRoutes">
 			<table>
 				<caption>예약 상세</caption>
 				<tr>
 					<c:forEach var="rfn" items="${rsvfn}">
-					<th colspan="2">항공편명</th>
-					<td colspan="2">${rfn.flightName}</td>
+					<th colspan="2">열차명</th>
+					<td colspan="2">${rfn.trainid}</td>
 					<th colspan="2">출항일시</th> 
-					<td colspan="2">${rfn.departureTime}</td>
+					<td colspan="2">${rfn.departure_time}</td>
 					</c:forEach>
 				</tr>
 				<tr>
 					<th>PNR</th>
 					<th>고객ID</th>
-					<th>좌석등급</th>
 					<th>예약인원</th>
 					<th>요금</th>
 					<th>결제여부</th>
@@ -179,58 +178,63 @@
 				</tr>
 				<c:forEach var="rsv" items="${rsvList}">
 				<tr>
-					<td>${rsv.pnr}</td>
+					<td>${rsv.PNR}</td>
 					<td>${rsv.userid}</td>
-					<td>${rsv.seatClass}</td>
-					<td>${seatCounts[rsv.reservationId]}</td>
+					<td>${seatCounts[rsv.reservid]}</td>
 					<td>${rsv.charge} 원</td>
 					<td>
+					<!-- 
 						<c:if test="${rsv.state == 0}">
-						<span id="badge1">결제완료</span> <!-- '필독' 배지 -->
+						<span id="badge1">결제완료</span> 
 						</c:if>
 						<c:if test="${rsv.state == 1}">
-						<span id="badge1">환불완료</span> <!-- '필독' 배지 -->
+						<span id="badge1">환불완료</span> 
 						</c:if>
 						<c:if test="${rsv.state!=0 && rsv.state!=1}">
-						<span id="badge1">미결제</span> <!-- '필독' 배지 -->
+						<span id="badge1">미결제</span> 
 						</c:if>
+					 -->
 					</td>
 					<td>
-						<c:if test="${rsv.chargePay == 0}">
+					<!-- 
+						<c:if test="${rsv.payment == 0}">
 						<span id="badge1"> - </span>
 						</c:if>
-						<c:if test="${rsv.chargePay == 1}">
+						<c:if test="${rsv.payment == 1}">
 						<span id="badge1"> - </span>
 						</c:if>
-						<c:if test="${rsv.chargePay == 2}">
-						<span id="badge1"> 취소요청 </span> <!-- '필독' 배지 -->
+						<c:if test="${rsv.payment == 2}">
+						<span id="badge1"> 취소요청 </span>
 						</c:if>
-						<c:if test="${rsv.chargePay == 3}">
+						<c:if test="${rsv.payment == 3}">
 						<span id="badge1"> 취소완료 </span>
 						</c:if>
-						<c:if test="${rsv.chargePay == 4}">
+						<c:if test="${rsv.payment == 4}">
 						<span id="badge1"> 취소불가 </span>
 						</c:if>
+					 -->
 					</td>
 					<td>
-						<c:if test="${rsv.chargePay==0||rsv.chargePay==1||(rsv.chargePay==3&&rsv.state!=0)||rsv.chargePay==4 }">
+					<!-- 
+						<c:if test="${rsv.payment==0||rsv.payment==1||(rsv.payment==3&&rsv.state!=0)||rsv.payment==4 }">
 						-
 						</c:if>
-						<c:if test="${rsv.chargePay==2 && (rsv.departureTime >= rsv.offerDay)}">
-						<a href="cancelConfirm?flightName=${rsv.flightName}&departureTime=${rsv.departureTime}&reservationId=${rsv.reservationId}&flightId=${rsv.flightId}">
+						<c:if test="${rsv.payment==2 && (rsv.departureTime >= rsv.offerDay)}">
+						<a href="cancelConfirm?trainid=${rsv.trainid}&departureTime=${rsv.departureTime}&reservid=${rsv.reservid}&routeid=${rsv.routeid}">
 							<input type="button" value="취소처리">
 						</a>
 						</c:if>
-						<c:if test="${rsv.chargePay==2 && (rsv.departureTime <= rsv.offerDay)}">
-						<a href="cancelRejection?flightName=${rsv.flightName}&departureTime=${rsv.departureTime}&reservationId=${rsv.reservationId}&flightId=${rsv.flightId}">
+						<c:if test="${rsv.payment==2 && (rsv.departureTime <= rsv.offerDay)}">
+						<a href="cancelRejection?trainid=${rsv.trainid}&departureTime=${rsv.departureTime}&reservid=${rsv.reservid}&routeid=${rsv.routeid}">
 							<input type="button" value="취소불가">
 						</a>
 						</c:if>
-						<c:if test="${rsv.chargePay==3 && rsv.state==0 }">
-						<a href="payReturn?flightName=${rsv.flightName}&departureTime=${rsv.departureTime}&reservationId=${rsv.reservationId}&flightId=${rsv.flightId}">
+						<c:if test="${rsv.payment==3 && rsv.state==0 }">
+						<a href="payReturn?trainid=${rsv.trainid}&departureTime=${rsv.departureTime}&reservid=${rsv.reservid}&routeid=${rsv.routeid}">
 							<input type="button" value="환불처리">
 						</a>
 						</c:if>
+					 -->
 					</td>
 				</tr>
 				</c:forEach>

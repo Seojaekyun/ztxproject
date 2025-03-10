@@ -32,4 +32,9 @@ public class AdminController {
 		return service.reservList(selectedDate, seoulPage, pusanPage, otherPage, page, model);
 	}
 	
+	@GetMapping("/admin/rsvdList")
+	public String rsvdList(HttpServletRequest request, Model model) {
+		return service.rsvdList(request, model);
+	}
+	
 }

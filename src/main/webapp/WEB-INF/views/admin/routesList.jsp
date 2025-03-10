@@ -5,7 +5,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title> 항공편 현황 </title>
+<title> 열차편 현황 </title>
 <style>
 	body {
 		font-family: 'Noto Sans KR', sans-serif;
@@ -187,28 +187,28 @@
 	</div>
 	<div class="table-container">
 		<table id="otherTable">
-			<caption>해외 항공편</caption>
+			<caption>기타 출발편</caption>
 			<tr>
-				<th>항공편명</th>
-				<th>출발 공항</th>
-				<th>도착 공항</th>
-				<th>출발 시간</th>
-				<th>도착 시간</th>
+				<th>열차명</th>
+				<th>출발역</th>
+				<th>도착역</th>
+				<th>출발시간</th>
+				<th>도착시간</th>
 				<th>잔여석</th>
 			</tr>
-			<c:forEach var="flight" items="${pagedOtherFlights}">
+			<c:forEach var="route" items="${pagedOtherRoutes}">
 				<tr>
-					<td>${flight.flightName}</td>
-					<td>${flight.departureAirport}</td>
-					<td>${flight.arrivalAirport}</td>
-					<td>${flight.departureTime}</td>
-					<td>${flight.arrivalTime}</td>
-					<td>${flight.totalSeats}</td>
+					<td>${route.trainid}</td>
+					<td>${route.departure}</td>
+					<td>${route.arrival}</td>
+					<td>${route.departure_time}</td>
+					<td>${route.arrival_time}</td>
+					<td>${route.totalSeats}</td>
 				</tr>
 			</c:forEach>
-			<c:if test="${empty pagedOtherFlights}">
+			<c:if test="${empty pagedOtherRoutes}">
 				<tr>
-					<td colspan="6">기타 항공편 데이터가 없습니다.</td>
+					<td colspan="6">기타 출발편 데이터가 없습니다.</td>
 				</tr>
 			</c:if>
 		</table>
@@ -254,53 +254,53 @@
 <section id="sec2">
 	<div class="table-container">
 		<table id="gmpTable">
-			<caption>GMP 출발 항공편</caption>
+			<caption>서울역 출발 열차편</caption>
 			<tr>
-				<th>항공편명</th>
-				<th>도착 공항</th>
-				<th>출발 시간</th>
-				<th>도착 시간</th>
+				<th>열차명</th>
+				<th>도착역</th>
+				<th>출발시간</th>
+				<th>도착시간</th>
 				<th>잔여석</th>
 			</tr>
-			<c:forEach var="flight" items="${pagedGmpFlights}">
+			<c:forEach var="route" items="${pagedSeoulRoutes}">
 				<tr>
-					<td>${flight.flightName}</td>
-					<td>${flight.arrivalAirport}</td>
-					<td>${flight.departureTime}</td>
-					<td>${flight.arrivalTime}</td>
-					<td>${flight.totalSeats}</td>
+					<td>${route.trainid}</td>
+					<td>${route.arrival}</td>
+					<td>${route.departure_time}</td>
+					<td>${route.arrival_time}</td>
+					<td>${route.totalSeats}</td>
 				</tr>
 			</c:forEach>
-			<c:if test="${empty pagedGmpFlights}">
+			<c:if test="${empty pagedSeoulRoutes}">
 				<tr>
-					<td colspan="6">GMP 항공편 데이터가 없습니다.</td>
+					<td colspan="6">서울역 열차편 데이터가 없습니다.</td>
 				</tr>
 			</c:if>
 		</table>
 		<!-- GMP 페이지네이션 -->
-		<div id="gmpPagination" class="pagination">
+		<div id="seoulPagination" class="pagination">
 			<c:if test="${totalGmpPages > 1}">
 				<!-- 이전 페이지 버튼 -->
-				<c:if test="${currentGmpPage > 10}">
-					<a href="javascript:void(0);" onclick="loadPage(${currentGmpPage - 10}, 'gmp');">이전10</a>
+				<c:if test="${currentSeoulPage > 10}">
+					<a href="javascript:void(0);" onclick="loadPage(${currentSeoulPage - 10}, 'seoul');">이전10</a>
 				</c:if>
 				<!-- 페이지 번호 표시 -->
-				<c:set var="startPage" value="${currentGmpPage - 5}" />
-				<c:set var="endPage" value="${currentGmpPage + 4}" />
+				<c:set var="startPage" value="${currentSeoulPage - 5}" />
+				<c:set var="endPage" value="${currentSeoulPage + 4}" />
 				<c:if test="${startPage < 1}">
 					<c:set var="startPage" value="1" />
 					<c:set var="endPage" value="10" />
 				</c:if>
-				<c:if test="${endPage > totalGmpPages}">
-					<c:set var="endPage" value="${totalGmpPages}" />
-					<c:set var="startPage" value="${totalGmpPages - 9}" />
+				<c:if test="${endPage > totalSeoulPages}">
+					<c:set var="endPage" value="${totalSeoulPages}" />
+					<c:set var="startPage" value="${totalSeoulPages - 9}" />
 					<c:if test="${startPage < 1}">
 						<c:set var="startPage" value="1" />
 					</c:if>
 				</c:if>
 				<c:forEach begin="${startPage}" end="${endPage}" var="i">
 					<c:choose>
-						<c:when test="${i == currentGmpPage}">
+						<c:when test="${i == currentSeoulPage}">
 							<span class="active">${i}</span>
 						</c:when>
 						<c:otherwise>
@@ -309,8 +309,8 @@
 					</c:choose>
 				</c:forEach>
 				<!-- 다음 페이지 버튼 -->
-				<c:if test="${currentGmpPage + 10 < totalGmpPages}">
-					<a href="javascript:void(0);" onclick="loadPage(${currentGmpPage + 10}, 'gmp');">다음10</a>
+				<c:if test="${currentSeoulPage + 10 < totalSeoulPages}">
+					<a href="javascript:void(0);" onclick="loadPage(${currentSeoulPage + 10}, 'gmp');">다음10</a>
 				</c:if>
 			</c:if>
 		</div>

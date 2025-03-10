@@ -218,7 +218,7 @@
 				<button onclick="location.href='gongjiList'">공지사항</button>
 				<button onclick="location.href='inquiryList'">고객문의</button>
 				<button onclick="location.href='memberList'">회원관리</button>
-				<button onclick="location.href='flightsList'">운행일정</button>
+				<button onclick="location.href='routesList'">운행일정</button>
 				<button onclick="location.href='promotList'">프로모션</button>
 				<button onclick="location.href='rsvChart'">예약통계</button>
 			</div>

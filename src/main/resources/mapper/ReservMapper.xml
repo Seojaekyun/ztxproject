@@ -34,6 +34,28 @@
 		SELECT routeid, COUNT(*) AS availableSeats FROM trainseat WHERE reserv = 1 GROUP BY routeid
 	</select>
 	
+	<select id="getSeatCountByReservid" resultType="int" parameterType="int">
+		SELECT COUNT(*) FROM trainseat WHERE resid = #{reservid}
+	</select>
+	<select id="getRsvdetail" resultType="com.example.demo.dto.ReservDto">
+		SELECT r.*, ro.* FROM reservlist r JOIN routes ro ON r.routeid = ro.routeid
+		WHERE ro.departure_time = #{routeTime} AND ro.trainid = #{trainid}
+		ORDER BY ro.departure_time LIMIT #{start}, #{itemsPerPage}
+	</select>
+	<select id="getRsvdfn" resultType="com.example.demo.dto.ReservDto">
+		SELECT r.*, ro.* FROM reservlist r JOIN routes ro ON r.routeid = ro.routeid
+		WHERE ro.departure_time = #{routeTime} AND ro.trainid = #{trainid}
+		GROUP BY ro.routeid ORDER BY ro.departure_time
+	</select>
+	<!-- <select id="getState" resultType="Integer">
+		SELECT COALESCE((SELECT state FROM payments WHERE reservid = #{reservid}), 2);
+	</select> -->
+	<select id="getTotalReserv" resultType="int">
+		SELECT COUNT(*) FROM (SELECT r.reservid FROM reservlist r JOIN routes ro
+		ON r.routeid = ro.routeid WHERE ro.departure_time = #{routeTime}
+		AND ro.trainid = #{trainid} GROUP BY r.userid) AS grouped_reservations
+	</select>
+	
 	
 </mapper>
 
