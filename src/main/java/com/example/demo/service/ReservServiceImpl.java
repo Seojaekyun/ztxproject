@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import com.example.demo.dto.ReservDto;
 import com.example.demo.mapper.ReservMapper;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @Service("ress")
@@ -96,10 +97,33 @@ public class ReservServiceImpl implements ReservService {
 	}
 
 	@Override
-	public String list(Model model) {
-		ArrayList<ReservDto> reslist=resMapper.list();
+	public String list(Model model, HttpServletRequest request)
+	{
+		int page=1;
+		if(request.getParameter("page") != null)
+			page=Integer.parseInt(request.getParameter("page"));
+		
+		int pstart,pend,chong;
+		pstart=page/10;
+		if(page%10 == 0)
+			pstart=pstart-1;
+		
+		pstart=(pstart*10)+1;
+		pend=pstart+9;
+		
+		chong=resMapper.getChong();
+		
+		if(pend > chong)
+			pend=chong;
+		
+		int index=(page-1)*10;
+		ArrayList<ReservDto> reslist=resMapper.list(index);
 		
 		model.addAttribute("reslist", reslist);
+		model.addAttribute("page", page);
+		model.addAttribute("pstart", pstart);
+		model.addAttribute("pend", pend);
+		model.addAttribute("chong", chong);
 		
 		return "/reserv/list";
 	}

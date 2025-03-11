@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.service.ReservService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,8 +40,9 @@ public class ReservController {
 	}
 	
 	@GetMapping("/reserv/list")
-	public String list(Model model) {
-		return resService.list(model);
+	public String list(Model model, HttpServletRequest request)
+	{
+		return resService.list(model, request);
 	}
 	
 	

@@ -16,7 +16,8 @@ public interface ReservMapper {
 	void upTrainSeatAvai(@Param("routeid") int routeid, @Param("seatid") int seatid,
 			@Param("reservid") int reservid);
 	void upRouteSeat(int routeid, int resnum);
-	ArrayList<ReservDto> list();
+	ArrayList<ReservDto> list(int index);
+	int getChong();
 	List<ReservDto> getRsvByDate(String selectedDate);
 	List<ReservDto> getRsvanow();
 	List<Map<String, Object>> getAvaiSeatCountByRouteid();
