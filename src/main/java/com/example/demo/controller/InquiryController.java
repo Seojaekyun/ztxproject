@@ -37,7 +37,7 @@ public class InquiryController {
     }
 
     @RequestMapping(value = "/detail/{id}", method = {RequestMethod.GET, RequestMethod.POST})
-    public String inquiryContent(@PathVariable("id") int id, 
+    public String inquiryContent(@PathVariable int id, 
                                  @RequestParam(value = "pwd", required = false) String inputPwd, 
                                  HttpSession session, Model model) {
         return service.inquiryContent(id, inputPwd, session, model);
@@ -46,12 +46,12 @@ public class InquiryController {
 
 
     @PostMapping("/inquiryUpdateCheck")
-    public String inquiryUpdateCheck(@RequestParam("id") int id, @RequestParam("pwd") String pwd, Model model) {
+    public String inquiryUpdateCheck(@RequestParam int id, @RequestParam String pwd, Model model) {
         return service.inquiryUpdateCheck(id, pwd, model);
     }
 
     @PostMapping("/inquiryDeleteCheck")
-    public String inquiryDeleteCheck(@RequestParam("id") int id, @RequestParam("pwd") String pwd, Model model) {
+    public String inquiryDeleteCheck(@RequestParam int id, @RequestParam String pwd, Model model) {
         return service.inquiryDeleteCheck(id, pwd, model);
     }
     
