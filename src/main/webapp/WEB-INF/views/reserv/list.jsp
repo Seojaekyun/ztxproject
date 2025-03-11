@@ -38,6 +38,14 @@
       background-color:#e9ecef;
       transition:background-color 0.3s ease-in-out;
     }
+    a {
+      text-decoration:none;
+      color:black;
+    }
+    a:hover {
+      text-decoration:underline;
+      color:red;
+    }
     
     #paging {
       margin-top:20px;
@@ -63,7 +71,6 @@
       background:none;
       border:none;
     }
-
   </style>
 </head>
 <body> <!-- reserv/list.jsp -->
@@ -72,6 +79,7 @@
     <tr>
       <th> 예약코드 </th>
       <th> 예약날짜 </th>
+      <th> 출발지 </th>
       <th> 도착지 </th>
       <th> 출발시간 </th>
       <th> 도착시간 </th>
@@ -79,11 +87,12 @@
       <th> 결제여부 </th>
     </tr>
    <c:forEach items="${reslist}" var="resdto">
-    <tr align="center">
-      <td> ${resdto.PNR} </td>
+    <tr>
+      <td> <a href=""> ${resdto.PNR} </a> </td>
       <td> ${resdto.reservday} </td>
       <td> ${resdto.routeDeparture} </td>
-      <td> ${resdto.routeTime} </th>
+      <td> ${resdto.routeArrival} </td>
+      <td> ${resdto.routeTime} </td>
       <td> ${resdto.routeArrivalTime} </td>
       <td> ${resdto.payment} </td>
       <td> ${resdto.state} </td>
