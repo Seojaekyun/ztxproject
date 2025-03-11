@@ -17,8 +17,12 @@
 	</update>
 	
 	<select id="list" resultType="com.example.demo.dto.ReservDto">
-		select * from reservlist order by reservid desc limit 0,10
-	</select>    
+		select * from reservlist order by reservid desc limit ${index},10
+	</select>
+	
+	<select id="getChong" resultType="Integer">
+	  select ceil( count(*)/10 ) from reservlist
+	</select>
 
 	<select id="getRsvanow" resultType="com.example.demo.dto.ReservDto">
 		SELECT r.*, ro.*, COUNT(r.reservid) AS reservCount FROM reservlist r JOIN routes ro
