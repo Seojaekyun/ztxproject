@@ -9,15 +9,67 @@
   <style>
     table {
       width:100%;
-      border-spacing:0px;
-      margin-top:10px;
+      border-collapse:collapse;
+      margin-top:20px;
+      background-color:#ffffff;
+      box-shadow:0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius:8px;
+      overflow:hidden;
     }
+    th, td {
+      border:1px solid #ddd;
+      padding:12px;
+      font-size:16px;
+    }
+    th {
+      background-color:#007BFF;
+      color:white;
+      font-weight:bold;
+      text-transform:uppercase;
+    }
+    td {
+      text-align:center;
+      color:#333;
+    }
+    tr:nth-child(even) {
+      background-color:#f8f9fa;
+    }
+    tr:hover {
+      background-color:#e9ecef;
+      transition:background-color 0.3s ease-in-out;
+    }
+    
+    #paging {
+      margin-top:20px;
+      text-align:center;
+    }
+    #paging a {
+      display:inline;
+      padding:0;
+      margin:0 8px;
+      text-decoration:none;
+      color:#007BFF;
+      font-size:16px;
+      transition:color 0.3s;
+      border:none;
+      background:none;
+    }
+    #paging a:hover {
+      color:#0056b3;
+    }
+    #paging a[style="color:red;"] {
+      font-weight:bold;
+      color:red;
+      background:none;
+      border:none;
+    }
+
   </style>
 </head>
 <body> <!-- reserv/list.jsp -->
  <section>
   <table>
-    <tr align="center">
+    <tr>
       <th> 예약코드 </th>
       <th> 예약날짜 </th>
       <th> 도착지 </th>
@@ -39,7 +91,7 @@
    </c:forEach>
   </table>
   
-    <div>
+    <div id="paging">
      <c:if test="${pstart != 1}">
       <a href="list?page=${pstart-1}"> « </a>
      </c:if>
