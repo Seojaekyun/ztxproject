@@ -115,18 +115,29 @@
     }
     function newPwd()
     {
+    	var oPwd=document.vform.oPwd.value;
 		var nPwd=document.vform.nPwd.value;
 		var nPwd2=document.vform.nPwd2.value;
 		
 		if(nPwd != 0)
 		{
-			if(nPwd == nPwd2)
+			if(oPwd == nPwd)
 			{
-				document.getElementById("pmsg")
+				document.getElementById("pmsg2").innerText="이전과 같은 비밀번호 입니다.";
+				document.getElementById("pmsg2").style.color="red";
 			}
 			else
 			{
-				
+				if(nPwd == nPwd2)
+				{
+					document.getElementById("pmsg3").innerText="비밀번호가 일치합니다.";
+					document.getElementById("pmsg3").style.color="blue";
+				}
+				else
+				{
+					document.getElementById("pmsg3").innerText="비밀번호가 일치하지 않습니다.";
+					document.getElementById("pmsg3").style.color="red";
+				}
 			}
 		}
 		else
