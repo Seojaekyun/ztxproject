@@ -79,7 +79,7 @@
     }
     
     // 귀향편 역 설정 함수
-    function setReturnRoutesStations() {
+    function setreturnRoutesStations() {
         var departure = document.getElementById("departure").value;
         var arrival = document.getElementById("arrival").value;
         document.getElementById("returnDeparture").value = arrival || "";
@@ -143,13 +143,136 @@
         
         // 도착역 선택 시, 귀향편 역 설정
         document.getElementById("arrival").addEventListener("change", function() {
-            setReturnRoutesStations();  // 귀향편 역 설정
+            setreturnRoutesStations();  // 귀향편 역 설정
+            fetchRouteTime();
         });
-
-        // 초기화 시 도착역 목록 갱신 및 열차 목록 필터링
+        
         updateArrival();
         filterTrains();
+
+        // 초기화 시 도착역 목록 갱신 및 열차 목록 필터링
+        const departureDate = document.getElementById("departureDate");
+	    const departureHour = document.getElementById("departureHour");
+	    const departureMinute = document.getElementById("departureMinute");
+	
+	    // 귀환 날짜 요소 찾기
+	    const returnDate = document.getElementById("returnDate");
+	    const returnHour = document.getElementById("returnHour");
+	    const returnMinute = document.getElementById("returnMinute");
+	
+	    // 요소가 존재할 경우에만 이벤트 리스너 추가
+	    if (departureDate) departureDate.addEventListener("change", calculateDepartureArrivalTime);
+	    if (departureHour) departureHour.addEventListener("change", calculateDepartureArrivalTime);
+	    if (departureMinute) departureMinute.addEventListener("change", calculateDepartureArrivalTime);
+	
+	    if (returnDepartureDate) returnDepartureDate.addEventListener("change", calculateReturnArrivalTime);
+	    if (returnDepartureHour) returnDepartureHour.addEventListener("change", calculateReturnArrivalTime);
+	    if (returnDepartureMinute) returnDepartureMinute.addEventListener("change", calculateReturnArrivalTime);
+        
+        
     };
+    
+ // fetchRouteTime 함수 내에 도착 시간 계산 호출을 추가합니다.
+    function fetchRouteTime() {
+	    console.log("fetchRouteTime 함수 실행됨"); // 실행 여부 확인
+	
+	    var departure = document.getElementById("departure").value;
+	    var arrival = document.getElementById("arrival").value;
+	
+	    console.log("출발역:", departure, "도착역:", arrival); // 값 확인
+	
+	    if (!departure || !arrival) {
+	        console.log("출발역 또는 도착역이 설정되지 않음");
+	        return;
+	    }
+	
+	    var xhr = new XMLHttpRequest();
+	    xhr.open("GET", "/admin/getRouteTime?departure=" + departure + "&arrival=" + arrival, true);
+	    xhr.onreadystatechange = function () {
+	        if (xhr.readyState === 4) {
+	            console.log("AJAX 응답 상태:", xhr.status);
+	            if (xhr.status === 200) {
+	                console.log("서버 응답:", xhr.responseText);
+	                var response = JSON.parse(xhr.responseText);
+	                console.log("파싱된 응답 데이터:", response);
+	
+	                var routeHour = response.hour;
+	                var routeMinute = response.minute;
+	                var unitPrice = response.unitPrice;
+	
+	                document.getElementById("routeHour").value = routeHour;
+	                document.getElementById("routeMinute").value = routeMinute;
+	                document.getElementById("routeTimeDisplay").value = padZero(routeHour) + "시간 " + padZero(routeMinute) + "분";
+	                document.getElementById("routeTime").value = padZero(routeHour) + ":" + padZero(routeMinute) + ":00";
+	                document.getElementById("unitPrice").value = unitPrice;
+	                
+	                document.getElementById("returnRouteHour").value = routeHour;
+	                document.getElementById("returnRouteMinute").value = routeMinute;
+	                document.getElementById("returnRouteTimeDisplay").value = padZero(routeHour) + "시간 " + padZero(routeMinute) + "분";
+	                document.getElementById("returnRouteTime").value = padZero(routeHour) + ":" + padZero(routeMinute) + ":00";
+	                document.getElementById("returnUnitPrice").value = unitPrice;
+	
+	                
+	            } else {
+	                console.log("AJAX 요청 실패: ", xhr.status);
+	            }
+	        }
+	    };
+	    xhr.send();
+	}
+ 	
+    function calculateArrivalTime(departureDateId, departureHourId, departureMinuteId, routeHourId, routeMinuteId, arrivalTimeId) {
+        var departureDate = document.getElementById(departureDateId).value;
+        var departureHour = parseInt(document.getElementById(departureHourId).value);
+        var departureMinute = parseInt(document.getElementById(departureMinuteId).value);
+        var routeHour = parseInt(document.getElementById(routeHourId).value);
+        var routeMinute = parseInt(document.getElementById(routeMinuteId).value);
+
+        console.log("출발 날짜:", departureDate, "출발 시:", departureHour, "출발 분:", departureMinute);
+        console.log("경로 시:", routeHour, "경로 분:", routeMinute);
+
+        if (!departureDate || isNaN(departureHour) || isNaN(departureMinute) || isNaN(routeHour) || isNaN(routeMinute)) {
+            console.log("시간 계산에 필요한 값이 부족합니다.");
+            return;
+        }
+
+        var departureDateTime = departureDate + " " + padZero(departureHour) + ":" + padZero(departureMinute);
+        var departureMoment = moment(departureDateTime, "YYYY-MM-DD HH:mm");
+
+        departureMoment.add(routeHour, 'hours').add(routeMinute, 'minutes');
+
+        var arrivalMoment = departureMoment.clone();
+        var arrivalTimeStr = arrivalMoment.format('YYYY-MM-DD HH:mm');
+
+        console.log("계산된 도착 시간:", arrivalTimeStr);
+        document.getElementById(arrivalTimeId).value = arrivalTimeStr;
+    }
+	
+	// 출발편 도착 시간 계산 함수
+	function calculateDepartureArrivalTime() {
+		calculateArrivalTime("departureDate", "departureHour", "departureMinute", "routeHour", "routeMinute", "arrivalTime");
+	}
+	
+	// 귀국편 도착 시간 계산 함수
+	function calculateReturnArrivalTime() {
+		console.log("🚀 귀환 도착 시간 계산 함수 실행됨!");
+		calculateArrivalTime("returnDepartureDate", "returnDepartureHour", "returnDepartureMinute", "returnRouteHour", "returnRouteMinute", "returnArrivalTime");
+	}
+	
+	// 폼 제출 전에 시간 결합
+	function combineTimes() {
+		var departureDate = document.getElementById("departureDate").value;
+		var departureHour = padZero(document.getElementById("departureHour").value);
+		var departureMinute = padZero(document.getElementById("departureMinute").value);
+		document.getElementById("departureTime").value = departureDate + " " + departureHour + ":" + departureMinute + ":00";
+		
+		var returnDepartureDate = document.getElementById("returnDepartureDate").value;
+		var returnDepartureHour = padZero(document.getElementById("returnDepartureHour").value);
+		var returnDepartureMinute = padZero(document.getElementById("returnDepartureMinute").value);
+		document.getElementById("returnDepartureTime").value = returnDepartureDate + " " + returnDepartureHour + ":" + returnDepartureMinute + ":00";
+	}
+	
+	
 
 </script>
 
@@ -159,11 +282,11 @@
 </head>
 <body>
 <section>
-	<h2>항공편 추가</h2>
+	<h2>열차편 추가</h2>
 	<form action="/admin/addRoutes" method="post" onsubmit="combineTimes()">
 		<div class="flex-container">
 			<div class="flex-item">
-				<h3>출발편 정보</h3>
+				<h3>행선 정보</h3>
 				<label for="departure">출발역:</label>
 				<select id="departure" name="departure" required>
 					<option value="">선택</option>
@@ -215,7 +338,7 @@
 			</div>
 			
 			<div class="flex-item">
-				<h3>귀향편 정보</h3>
+				<h3>귀편 정보</h3>
 				<label for="returnDeparture">출발역:</label>
 				<input type="text" id="returnDeparture" name="returnDeparture" readonly>
 				<label for="returnArrival">도착역:</label>
@@ -238,13 +361,13 @@
 					<option value="50">50</option>
 				</select>
 				<!-- Hidden return route time inputs -->
-				<input type="hidden" id="returnrouteHour" name="returnrouteHour">
-				<input type="hidden" id="returnrouteMinute" name="returnrouteMinute">
+				<input type="hidden" id="returnRouteHour" name="returnRouteHour">
+				<input type="hidden" id="returnRouteMinute" name="returnRouteMinute">
 				<!-- Display return route time -->
-				<label for="returnrouteTimeDisplay">여객시간:</label>
-				<input type="text" id="returnrouteTimeDisplay" name="returnFtime" readonly>
+				<label for="returnRouteTimeDisplay">여객시간:</label>
+				<input type="text" id="returnRouteTimeDisplay" name="returnFtime" readonly>
 				<!-- 귀국편 비행 시간 저장을 위한 숨겨진 필드 -->
-				<input type="hidden" id="returnrouteTime" name="returnFtimeValue">
+				<input type="hidden" id="returnRouteTime" name="returnFtimeValue">
 				<label for="returnArrivalTime">도착 시간:</label>
 				<textarea id="returnArrivalTime" name="returnArrivalTime" readonly></textarea>
 				<input type="hidden" id="returnDepartureTime" name="returnDepartureTime">

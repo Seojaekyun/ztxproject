@@ -77,9 +77,7 @@ public class AdminController {
 			Model model) {
 		
 		try {
-			// 출발편 추가
 			rservice.addRoute(departure, arrival, departureTime, arrivalTime, ftime, trainid, unitPrice);
-			// 귀국편 추가
 			rservice.addRoute(returnDeparture, returnArrival, returnDepartureTime, returnArrivalTime, returnFtime, returnTrainid, returnUnitPrice);
 			
 			model.addAttribute("message", "성공적으로 추가되었습니다.");
@@ -91,6 +89,19 @@ public class AdminController {
 		
 		// 항공편 목록 페이지로 리다이렉트
 		return "redirect:/admin/routesList";
+	}
+	
+	@GetMapping("/admin/getRouteTime")
+	@ResponseBody
+	public Map<String, Integer> getRouteTime(@RequestParam String departure, @RequestParam String arrival) {
+		int[] routeTime = rservice.getRouteTime(departure, arrival);
+		
+		Map<String, Integer> response = new HashMap<>();
+		response.put("hour", routeTime[0]);
+		response.put("minute", routeTime[1]);
+		response.put("unitPrice", routeTime[2]);
+		
+		return response;
 	}
 	
 	@PostMapping("/admin/addSeats")

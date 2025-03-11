@@ -44,15 +44,8 @@
 	</select>
 	<!-- 해당 routeid의 capa를 가져오는 쿼리 -->
 	<select id="getRouteCapa" resultType="map">
-		SELECT r.routeid, t.capa FROM routes r JOIN traines t ON r.trainid = t.trainid WHERE r.routeid = #{routeid}
+		SELECT seat FROM routes WHERE routeid = #{routeid}
 	</select>
-	<!-- 좌석을 추가하는 쿼리 -->
-	<insert id="addSeatsForRoute">
-		INSERT INTO trainseat (routeid, seatid, seatnum) VALUES
-		<foreach collection="seatNumbers" item="seatNum" separator=",">
-			(#{routeid}, #{seatid}, '')
-		</foreach>
-	</insert>
 	
 	<select id="getAllRoutes" resultType="com.example.demo.dto.RoutesDto">
 		SELECT * FROM routes WHERE departure_time >= NOW() ORDER BY departure_time 
@@ -76,8 +69,25 @@
 	</select>
 	<select id="getTotalSeatsByRouteid" resultType="map">
 		SELECT routeid, CAST(SUM(CASE WHEN reserv = 1 THEN 1 ELSE 0 END) AS SIGNED)
-		AS totalSeats FROM trainseat GROUP BY routeid
+		AS avaiSeats FROM trainseat GROUP BY routeid
 	</select>
+	
+	<select id="getRouteTime" parameterType="map" resultType="com.example.demo.dto.RouteTimeDto">
+		SELECT * FROM routeTimes
+		WHERE (dep = #{a} AND arr = #{b}) OR (dep = #{b} AND arr = #{a})
+	</select>
+	
+	<select id="getSeatsForRoute" resultType="com.example.demo.dto.SeatDto">
+	    SELECT * FROM seates
+	</select>
+	
+	
+	<insert id="addSeatsForRoute">
+		INSERT INTO trainseat (routeid, seatid, seatnum) VALUES
+		<foreach collection="seatNumbers" item="seat" separator=",">
+			(#{routeid}, #{seat.seatid}, #{seat.seatnum})
+		</foreach>
+	</insert>
 	
 	
 </mapper>

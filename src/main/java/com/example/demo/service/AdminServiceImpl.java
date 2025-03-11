@@ -34,7 +34,7 @@ public class AdminServiceImpl implements AdminService{
 
 	@Override
 	public String adminIndex(HttpSession session, HttpServletRequest request, Model model) {
-		Object useridObj = session.getAttribute("adminid");
+		Object useridObj = session.getAttribute("userid");
 		
 		if (useridObj == null) {
 			return "redirect:/main/index";  // userid가 null이면 메인 페이지로 리다이렉트
@@ -259,28 +259,22 @@ public class AdminServiceImpl implements AdminService{
 		}
 		
 		// 각 열차편의 총 좌석 수를 가져오기
-		List<Map<String, Object>> totalSeatsList = romapper.getTotalSeatsByRouteid();
+		List<Map<String, Object>> avaiSeatsList = romapper.getTotalSeatsByRouteid();
 		
-		System.out.println("TotalSeatsList: " + totalSeatsList);
+		System.out.println("avaiSeatsList: " + avaiSeatsList);
 		
-		Map<Integer, Long> totalSeatsMap = new HashMap<>();  // Long 타입으로 변경
+		Map<Integer, Long> avaiSeatsMap = new HashMap<>();  // Long 타입으로 변경
 		
-		for (Map<String, Object> seatInfo : totalSeatsList) {
-			Integer Routeid = (Integer) seatInfo.get("Routeid");
-			Long totalSeats = (Long) seatInfo.get("totalSeats");  // Long으로 변경
-			totalSeatsMap.put(Routeid, totalSeats);
+		for (Map<String, Object> seatInfo : avaiSeatsList) {
+			Integer Routeid = (Integer) seatInfo.get("routeid");
+			Long avaiSeats = (Long) seatInfo.get("avaiSeats");  // Long으로 변경
+			avaiSeatsMap.put(Routeid, avaiSeats);
 		}
 		
-		// 디버깅을 위해 출력
-		totalSeatsMap.forEach((Routeid, totalSeats) -> {
-			System.out.println("Routeid: " + Routeid + ", Total Seats: " + totalSeats);
-		});
-		
-		// 각 FlightDto에 총 좌석 수 설정
+		// 각 Dto에 총 좌석 수 설정
 		routesList.forEach(routes -> {
-			Long totalSeats = totalSeatsMap.get(routes.getRouteid());
-			routes.setTotalSeats(totalSeats != null ? totalSeats.intValue() : 0);  // int로 변환
-			System.out.println("Routeid: "+routes.getRouteid()+" has "+routes.getTotalSeats()+" total seats.");
+			Long avaiSeats = avaiSeatsMap.get(routes.getRouteid());
+			routes.setAvaiSeats(avaiSeats != null ? avaiSeats.intValue() : 0);  // int로 변환
 		});
 		
 		// 출발 공항에 따라 분류 (기존 로직 유지)

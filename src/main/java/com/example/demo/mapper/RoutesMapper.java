@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
+import com.example.demo.dto.RouteTimeDto;
 import com.example.demo.dto.RoutesDto;
 import com.example.demo.dto.SeatDto;
 import com.example.demo.dto.StationsDto;
@@ -23,9 +25,11 @@ public interface RoutesMapper {
 	List<RoutesDto> getAllRoutes();
 	List<Map<String, Object>> getTotalSeatsByRouteid();
 	List<TrainesDto> AllTraines();
-	Integer getRouteiddForAddingSeats();
+	Integer getRouteidForAddingSeats();
 	Map<String, Object> getRouteCapa(Integer routeid);
 	void addSeatsForRoute(Map<String, Object> params);
+	RouteTimeDto getRouteTime(@Param("a") String a, @Param("b") String b);
+	List<SeatDto> getSeatsForRoute(Integer routeid);
 	
 	
 }

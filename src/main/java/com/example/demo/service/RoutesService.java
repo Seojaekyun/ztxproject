@@ -20,6 +20,7 @@ public interface RoutesService {
 	void addRoute(String departure, String arrival, String departureTime, String arrivalTime, String ftime, int trainid,
 			int unitPrice);
 	void addSeatsForRoute();
+	int[] getRouteTime(String departure, String arrival);
 	
 	
 }

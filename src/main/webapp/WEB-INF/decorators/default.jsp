@@ -509,7 +509,7 @@
 				<c:if test="${userid==null}">
 					<a href="../login/login"> 로그인 </a>&nbsp;&nbsp;|&nbsp;&nbsp;
 				</c:if>
-				<c:if test="${userid!=null&&userid!='admin'}">
+				<c:if test="${userid!=null&&userid!='administrator'}">
 				<div id="myInfo" onmouseover="viewMmenu(0)" onmouseout="hideMmenu(0)">
 					<span> ${name}님 &nbsp;|&nbsp; </span>
 					<ul class="mmenu">
