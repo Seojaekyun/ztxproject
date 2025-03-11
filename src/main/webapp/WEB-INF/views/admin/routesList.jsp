@@ -164,17 +164,17 @@
 
 <div style="text-align: right; margin-bottom: 20px;">
 	<!-- 항공편 추가 버튼 -->
-	<button class="button" onclick="location.href='/admin/addFlight'">항공편 추가</button>
+	<button class="button" onclick="location.href='/admin/addRoute'">열차편 추가</button>
 	
 	<!-- 좌석 추가 버튼 -->
 	<form action="/admin/addSeats" method="post" style="display:inline;">
-		<input type="hidden" name="flightId" value="${flightId}">
+		<input type="hidden" name="routeid" value="${routeid}">
 		<button type="submit" class="button">좌석 추가</button>
 	</form>
 </div>
 
 <!-- 항공편 리스트 -->
-<div style="width: 100%; text-align: center"><h2>항공편 리스트</h2></div>
+<div style="width: 100%; text-align: center"><h2>열차편 리스트</h2></div>
 <section id="sec1">
 	<div class="date-container">
 		<button id="clsd" onclick="clearDate()">날짜 선택 해제</button><br>    
@@ -201,8 +201,8 @@
 					<td>${route.trainid}</td>
 					<td>${route.departure}</td>
 					<td>${route.arrival}</td>
-					<td>${route.departure_time}</td>
-					<td>${route.arrival_time}</td>
+					<td>${route.departureTime}</td>
+					<td>${route.arrivalTime}</td>
 					<td>${route.totalSeats}</td>
 				</tr>
 			</c:forEach>
@@ -253,7 +253,7 @@
 </section>
 <section id="sec2">
 	<div class="table-container">
-		<table id="gmpTable">
+		<table id="seoulTable">
 			<caption>서울역 출발 열차편</caption>
 			<tr>
 				<th>열차명</th>
@@ -266,8 +266,8 @@
 				<tr>
 					<td>${route.trainid}</td>
 					<td>${route.arrival}</td>
-					<td>${route.departure_time}</td>
-					<td>${route.arrival_time}</td>
+					<td>${route.departureTime}</td>
+					<td>${route.arrivalTime}</td>
 					<td>${route.totalSeats}</td>
 				</tr>
 			</c:forEach>
@@ -277,12 +277,12 @@
 				</tr>
 			</c:if>
 		</table>
-		<!-- GMP 페이지네이션 -->
+		<!-- seoul 페이지네이션 -->
 		<div id="seoulPagination" class="pagination">
-			<c:if test="${totalGmpPages > 1}">
+			<c:if test="${totalSeoulpPages > 1}">
 				<!-- 이전 페이지 버튼 -->
 				<c:if test="${currentSeoulPage > 10}">
-					<a href="javascript:void(0);" onclick="loadPage(${currentSeoulPage - 10}, 'seoul');">이전10</a>
+					<a href="javascript:void(0);" onclick="loadPage(${currentSeoulPage - 10}, '서울역');">이전10</a>
 				</c:if>
 				<!-- 페이지 번호 표시 -->
 				<c:set var="startPage" value="${currentSeoulPage - 5}" />
@@ -304,76 +304,76 @@
 							<span class="active">${i}</span>
 						</c:when>
 						<c:otherwise>
-							<a href="javascript:void(0);" onclick="loadPage(${i}, 'gmp');">${i}</a>
+							<a href="javascript:void(0);" onclick="loadPage(${i}, '서울역');">${i}</a>
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
 				<!-- 다음 페이지 버튼 -->
 				<c:if test="${currentSeoulPage + 10 < totalSeoulPages}">
-					<a href="javascript:void(0);" onclick="loadPage(${currentSeoulPage + 10}, 'gmp');">다음10</a>
+					<a href="javascript:void(0);" onclick="loadPage(${currentSeoulPage + 10}, '서울역');">다음10</a>
 				</c:if>
 			</c:if>
 		</div>
 	</div>
 	<div class="table-container">
-		<table id="icnTable">
-			<caption>ICN 출발 항공편</caption>
+		<table id="pusanTable">
+			<caption>부산역 출발 열차편</caption>
 			<tr>
-				<th>항공편명</th>
-				<th>도착 공항</th>
-				<th>출발 시간</th>
-				<th>도착 시간</th>
+				<th>열차명</th>
+				<th>도착역</th>
+				<th>출발시간</th>
+				<th>도착시간</th>
 				<th>잔여석</th>
 			</tr>
-			<c:forEach var="flight" items="${pagedIcnFlights}">
-					<tr>
-					<td>${flight.flightName}</td>
-					<td>${flight.arrivalAirport}</td>
-					<td>${flight.departureTime}</td>
-					<td>${flight.arrivalTime}</td>
-					<td>${flight.totalSeats}</td>
+			<c:forEach var="route" items="${pagedPusanRoutes}">
+				<tr>
+					<td>${route.trainid}</td>
+					<td>${route.arrival}</td>
+					<td>${route.departureTime}</td>
+					<td>${route.arrivalTime}</td>
+					<td>${route.totalSeats}</td>
 				</tr>
 			</c:forEach>
-			<c:if test="${empty pagedIcnFlights}">
+			<c:if test="${empty pagedPusanRoutes}">
 				<tr>
-					<td colspan="6">ICN 항공편 데이터가 없습니다.</td>
+					<td colspan="6">부산역 출발편 데이터가 없습니다.</td>
 				</tr>
 			</c:if>
 		</table>
-		<!-- ICN 페이지네이션 -->
-		<div id="icnPagination" class="pagination">
-			<c:if test="${totalIcnPages > 1}">
+		<!-- pusan 페이지네이션 -->
+		<div id="pusanPagination" class="pagination">
+			<c:if test="${totalPusanPages > 1}">
 				<!-- 이전 페이지 버튼 -->
-				<c:if test="${currentIcnPage > 10}">
-					<a href="javascript:void(0);" onclick="loadPage(${currentIcnPage - 10}, 'icn');">이전10</a>
+				<c:if test="${currentPusanPage > 10}">
+					<a href="javascript:void(0);" onclick="loadPage(${currentPusanPage - 10}, '부산역');">이전10</a>
 				</c:if>
 				<!-- 페이지 번호 표시 -->
-				<c:set var="startPage" value="${currentIcnPage - 5}" />
-				<c:set var="endPage" value="${currentIcnPage + 4}" />
+				<c:set var="startPage" value="${currentPusanPage - 5}" />
+				<c:set var="endPage" value="${currentPusanPage + 4}" />
 				<c:if test="${startPage < 1}">
 					<c:set var="startPage" value="1" />
 					<c:set var="endPage" value="10" />
 				</c:if>
-				<c:if test="${endPage > totalIcnPages}">
-					<c:set var="endPage" value="${totalIcnPages}" />
-					<c:set var="startPage" value="${totalIcnPages - 9}" />
+				<c:if test="${endPage > totalPusanPages}">
+					<c:set var="endPage" value="${totalPusanPages}" />
+					<c:set var="startPage" value="${totalPusanPages - 9}" />
 					<c:if test="${startPage < 1}">
 						<c:set var="startPage" value="1" />
 					</c:if>
 				</c:if>
 				<c:forEach begin="${startPage}" end="${endPage}" var="i">
 					<c:choose>
-						<c:when test="${i == currentIcnPage}">
+						<c:when test="${i == currentPusanPage}">
 							<span class="active">${i}</span>
 						</c:when>
 						<c:otherwise>
-							<a href="javascript:void(0);" onclick="loadPage(${i}, 'icn');">${i}</a>
+							<a href="javascript:void(0);" onclick="loadPage(${i}, '부산역');">${i}</a>
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
 				<!-- 다음 페이지 버튼 -->
-				<c:if test="${currentIcnPage +10 < totalIcnPages}">
-					<a href="javascript:void(0);" onclick="loadPage(${currentIcnPage + 10}, 'icn');">다음10</a>
+				<c:if test="${currentPusanPage +10 < totalPusanPages}">
+					<a href="javascript:void(0);" onclick="loadPage(${currentPusanPage + 10}, '부산역');">다음10</a>
 				</c:if>
 			</c:if>
 		</div>
@@ -381,29 +381,29 @@
 </section>
 <section id="sec3">
 	<div class="table-container">
-		<table id="flightTable">
-			<caption>항공편 전체</caption>
+		<table id="routeTable">
+			<caption>열차편 전체</caption>
 			<tr>
-				<th>항공편명</th>
-				<th>출발 공항</th>
-				<th>도착 공항</th>
-				<th>출발 시간</th>
-				<th>도착 시간</th>
+				<th>열차명</th>
+				<th>출발역</th>
+				<th>도착역</th>
+				<th>출발시간</th>
+				<th>도착시간</th>
 				<th>잔여석</th>
 			</tr>
-			<c:forEach var="flight" items="${flightList}">
+			<c:forEach var="route" items="${routesList}">
 				<tr>
-					<td>${flight.flightName}</td>
-					<td>${flight.departureAirport}</td>
-					<td>${flight.arrivalAirport}</td>
-					<td>${flight.departureTime}</td>
-					<td>${flight.arrivalTime}</td>
-					<td>${flight.totalSeats}</td>
+					<td>${route.trainid}</td>
+					<td>${route.departure}</td>
+					<td>${route.arrival}</td>
+					<td>${route.departureTime}</td>
+					<td>${route.arrivalTime}</td>
+					<td>${route.totalSeats}</td>
 				</tr>
 			</c:forEach>
-			<c:if test="${empty flightList}">
+			<c:if test="${empty routesList}">
 				<tr>
-					<td colspan="6">항공편 데이터가 없습니다.</td>
+					<td colspan="6">열차편 데이터가 없습니다.</td>
 				</tr>
 			</c:if>
 		</table>
@@ -462,8 +462,8 @@
 				
 				// 모든 테이블 업데이트
 				loadPage(1, 'all');
-				loadPage(1, 'gmp');
-				loadPage(1, 'icn');
+				loadPage(1, '서울역');
+				loadPage(1, '부산역');
 				loadPage(1, 'other');
 			}
 		});
@@ -475,8 +475,8 @@
 			
 			// 모든 테이블 업데이트
 			loadPage(1, 'all');
-			loadPage(1, 'gmp');
-			loadPage(1, 'icn');
+			loadPage(1, '서울역');
+			loadPage(1, '부산역');
 			loadPage(1, 'other');
 		}
 		else {
@@ -485,8 +485,8 @@
 			
 			// 모든 테이블 업데이트
 			loadPage(1, 'all');
-			loadPage(1, 'gmp');
-			loadPage(1, 'icn');
+			loadPage(1, '서울역');
+			loadPage(1, '부산역');
 			loadPage(1, 'other');
 		}
 	});
@@ -498,34 +498,34 @@
 		
 		// 모든 테이블 업데이트
 		loadPage(1, 'all');
-		loadPage(1, 'gmp');
-		loadPage(1, 'icn');
+		loadPage(1, '서울역');
+		loadPage(1, '부산역');
 		loadPage(1, 'other');
 	}
 	
-	function loadPage(page, flightType) {
+	function loadPage(page, routeType) {
 		var selectedDate = sessionStorage.getItem("selectedDate");
 		
 		$.ajax({
-			url: "/admin/flightsList",
+			url: "/admin/routesList",
 			type: "GET",
 			data: {
 				page: page,
 				selectedDate: selectedDate,
-				flightType: flightType  // 'gmp', 'icn', 'other', 'all'
+				routeType: routeType  // '서울역', '부산역', 'other', 'all'
 			},
 			success: function(data) {
-				if (flightType === 'gmp') {
-					$("#gmpTable").html($(data).find("#gmpTable").html());
-					$("#gmpPagination").html($(data).find("#gmpPagination").html());
-				} else if (flightType === 'icn') {
-					$("#icnTable").html($(data).find("#icnTable").html());
-					$("#icnPagination").html($(data).find("#icnPagination").html());
-				} else if (flightType === 'other') {
+				if (routeType === '서울역') {
+					$("#seoulTable").html($(data).find("#seoulTable").html());
+					$("#seoulPagination").html($(data).find("#seoulPagination").html());
+				} else if (routeType === '부산역') {
+					$("#pusanTable").html($(data).find("#pusanTable").html());
+					$("#pusanPagination").html($(data).find("#pusanPagination").html());
+				} else if (routeType === 'other') {
 					$("#otherTable").html($(data).find("#otherTable").html());
 					$("#otherPagination").html($(data).find("#otherPagination").html());
 				} else {
-					$("#flightTable").html($(data).find("#flightTable").html());
+					$("#routeTable").html($(data).find("#routeTable").html());
 					$("#mainPagination").html($(data).find("#mainPagination").html());
 				}
 			},

@@ -1,7 +1,12 @@
 package com.example.demo.service;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -120,20 +125,33 @@ public class RoutesServiceImpl implements RoutesService {
 	
 	@Override
 	public List<TrainesDto> getAllTraines() {
-		// TODO Auto-generated method stub
-		return null;
+		return mapper.AllTraines();
 	}
-
-	@Override
-	public int[] getRouteTime(String departure, String arrival) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 	@Override
 	public void addSeatsForRoute() {
-		// TODO Auto-generated method stub
+		Integer routeid = mapper.getRouteiddForAddingSeats();
 		
+		if (routeid != null) {
+			// capa 가져오기
+			Map<String, Object> trainData = mapper.getRouteCapa(routeid);
+			
+			if (trainData != null) {
+				int capacity = (int) trainData.get("capa");
+				
+				// 좌석 번호 리스트 생성 (1부터 capacity까지)
+				List<Integer> seatNumbers = IntStream.rangeClosed(1, capacity)
+						.boxed()
+						.collect(Collectors.toList());
+				
+				// MyBatis에 flightId와 seatNumbers 전달하여 좌석 추가
+				Map<String, Object> params = new HashMap<>();
+				params.put("routeid", routeid);
+				params.put("seatNumbers", seatNumbers);
+				
+				mapper.addSeatsForRoute(params);
+			}
+		}
 	}
 	
 	

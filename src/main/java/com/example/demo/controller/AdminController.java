@@ -51,6 +51,13 @@ public class AdminController {
 		return service.rsvdList(request, model);
 	}
 	
+	@GetMapping("/admin/routesList")
+	public String routesList(@RequestParam(required=false, defaultValue="1") Integer page,
+			@RequestParam(required=false) String selectedDate,
+			@RequestParam(required=false, defaultValue="all") String routeType, Model model) {
+		return service.routesList(page, selectedDate, routeType, model);
+	}
+	
 	@GetMapping("/admin/addRoute")
 	public String showAddRouteForm(Model model) {
 		List<StationsDto> Stations = rservice.getAllStations();
@@ -58,19 +65,6 @@ public class AdminController {
 		model.addAttribute("Stations", Stations);
 		model.addAttribute("traines", traines);
 		return "admin/addFlight";
-	}
-	
-	@GetMapping("/admin/getRouteTime")
-	@ResponseBody
-	public Map<String, Integer> getRouteTime(@RequestParam String departure, @RequestParam String arrival) {
-		int[] routeTime = rservice.getRouteTime(departure, arrival);
-		
-		Map<String, Integer> response = new HashMap<>();
-		response.put("hour", routeTime[0]);
-		response.put("minute", routeTime[1]);
-		response.put("unitPrice", routeTime[2]);
-		
-		return response;
 	}
 	
 	@PostMapping("/admin/addFlights")
@@ -88,15 +82,15 @@ public class AdminController {
 			// 귀국편 추가
 			rservice.addRoute(returnDeparture, returnArrival, returnDepartureTime, returnArrivalTime, returnFtime, returnTrainid, returnUnitPrice);
 			
-			model.addAttribute("message", "출발편과 귀국편이 성공적으로 추가되었습니다.");
+			model.addAttribute("message", "성공적으로 추가되었습니다.");
 		}
 		catch (Exception e) {
-			model.addAttribute("message", "항공편 추가 중 오류가 발생했습니다: " + e.getMessage());
+			model.addAttribute("message", "오류가 발생했습니다: " + e.getMessage());
 			return "admin/addFlight";  // 오류 발생 시 다시 항공편 추가 페이지로
 		}
 		
 		// 항공편 목록 페이지로 리다이렉트
-		return "redirect:/admin/flightsList";
+		return "redirect:/admin/routesList";
 	}
 	
 	@PostMapping("/admin/addSeats")

@@ -31,32 +31,53 @@
 	<select id="AllStations" resultType="com.example.demo.dto.StationsDto">
 		SELECT * FROM stations
 	</select>
-	<insert id="addFlight" parameterType="com.example.demo.dto.RoutesDto">
+	<insert id="addRoute" parameterType="com.example.demo.dto.RoutesDto">
 		INSERT INTO routes (departure, arrival, departure_time, arrival_time, trainid)
 		VALUES (#{departure}, #{arrival}, #{departureTime}, #{arrivalTime}, #{trainid})
 	</insert>
 	<select id="AllTraines" resultType="com.example.demo.dto.TrainesDto">
-		SELECT * FROM traines<!--  order by capacity desc, airplane_id asc --> 
+		SELECT * FROM traines<!--  order by capa desc, trainid asc --> 
 	</select>
-	<!-- 아직 좌석이 없는 flightId를 조회 -->
+	<!-- 아직 좌석이 없는 routeid를 조회 -->
 	<select id="getRouteidForAddingSeats" resultType="int">
 		SELECT routeid FROM routes WHERE routeid NOT IN (SELECT routeid FROM trainseat) LIMIT 1
 	</select>
-	<!-- 해당 flightId의 capacity를 가져오는 쿼리 -->
-	<select id="getRouteCapacity" resultType="map">
-		SELECT f.flight_id, a.capacity FROM flights f JOIN airplanes a ON f.airplane_id = a.airplane_id WHERE f.flight_id = #{flightId}
+	<!-- 해당 routeid의 capa를 가져오는 쿼리 -->
+	<select id="getRouteCapa" resultType="map">
+		SELECT r.routeid, t.capa FROM routes r JOIN traines t ON r.trainid = t.trainid WHERE r.routeid = #{routeid}
 	</select>
 	<!-- 좌석을 추가하는 쿼리 -->
-	<insert id="addSeatsForFlight">
-		INSERT INTO flightseats (flight_id, seat_id, is_available, seat_class) VALUES
+	<insert id="addSeatsForRoute">
+		INSERT INTO trainseat (routeid, seatid, seatnum) VALUES
 		<foreach collection="seatNumbers" item="seatNum" separator=",">
-			(#{flightId}, #{seatNum}, 1, '')
+			(#{routeid}, #{seatid}, '')
 		</foreach>
 	</insert>
-	<!-- <select id="getFlightTime" parameterType="map" resultType="com.example.demo.dto.FlightTimeDto">
-		SELECT * FROM flight_times
-		WHERE (a = #{a} AND b = #{b}) OR (a = #{b} AND b = #{a})
+	
+	<select id="getAllRoutes" resultType="com.example.demo.dto.RoutesDto">
+		SELECT * FROM routes WHERE departure_time >= NOW() ORDER BY departure_time 
+	</select>
+	<select id="getRoutesWithPagination" resultType="com.example.demo.dto.RoutesDto">
+		SELECT * FROM routes ORDER BY departure_time ASC LIMIT #{limit} OFFSET #{offset}
+	</select>
+	<select id="getTotalRoutesCount" resultType="int">
+		SELECT COUNT(*) FROM routes
+	</select>
+	<!-- <select id="getDepartureRoutes" resultType="com.example.demo.dto.RoutesDto">
+		SELECT * FROM routes WHERE departure_time >= NOW() AND departure IN ('서울역', '부산역')
+		ORDER BY departure_time LIMIT 5
+	</select>
+	<select id="getArrivalRoutes" resultType="com.example.demo.dto.RoutesDto">
+		SELECT * FROM routes WHERE departure_time >= NOW() AND arrival IN ('서울역', '부산역')
+		ORDER BY departure_time LIMIT 5
 	</select> -->
+	<select id="getRoutesByDate" parameterType="String" resultType="com.example.demo.dto.RoutesDto">
+		SELECT * FROM routes WHERE DATE(departure_time) = #{date}
+	</select>
+	<select id="getTotalSeatsByRouteid" resultType="map">
+		SELECT routeid, CAST(SUM(CASE WHEN reserv = 1 THEN 1 ELSE 0 END) AS SIGNED)
+		AS totalSeats FROM trainseat GROUP BY routeid
+	</select>
 	
 	
 </mapper>

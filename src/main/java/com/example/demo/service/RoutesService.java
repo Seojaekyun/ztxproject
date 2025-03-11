@@ -17,7 +17,6 @@ public interface RoutesService {
 	String confirmSeats(int routeid, String selectedSeats, int resnum, HttpSession session, Model model);
 	List<StationsDto> getAllStations();
 	List<TrainesDto> getAllTraines();
-	int[] getRouteTime(String departure, String arrival);
 	void addRoute(String departure, String arrival, String departureTime, String arrivalTime, String ftime, int trainid,
 			int unitPrice);
 	void addSeatsForRoute();

@@ -244,4 +244,92 @@ public class AdminServiceImpl implements AdminService{
 		return "/admin/rsvdList";
 	}
 
+	@Override
+	public String routesList(Integer page, String selectedDate, String routeType, Model model) {
+		int itemsPerPage = 5;
+		int start = (page - 1) * itemsPerPage;
+		
+		// 항공편 목록 가져오기 (기존 로직 유지)
+		List<RoutesDto> routesList;
+		if (selectedDate != null && !selectedDate.isEmpty()) {
+			routesList = romapper.getRoutesByDate(selectedDate);
+		}
+		else {
+			routesList = romapper.getAllRoutes();
+		}
+		
+		// 각 열차편의 총 좌석 수를 가져오기
+		List<Map<String, Object>> totalSeatsList = romapper.getTotalSeatsByRouteid();
+		
+		System.out.println("TotalSeatsList: " + totalSeatsList);
+		
+		Map<Integer, Long> totalSeatsMap = new HashMap<>();  // Long 타입으로 변경
+		
+		for (Map<String, Object> seatInfo : totalSeatsList) {
+			Integer Routeid = (Integer) seatInfo.get("Routeid");
+			Long totalSeats = (Long) seatInfo.get("totalSeats");  // Long으로 변경
+			totalSeatsMap.put(Routeid, totalSeats);
+		}
+		
+		// 디버깅을 위해 출력
+		totalSeatsMap.forEach((Routeid, totalSeats) -> {
+			System.out.println("Routeid: " + Routeid + ", Total Seats: " + totalSeats);
+		});
+		
+		// 각 FlightDto에 총 좌석 수 설정
+		routesList.forEach(routes -> {
+			Long totalSeats = totalSeatsMap.get(routes.getRouteid());
+			routes.setTotalSeats(totalSeats != null ? totalSeats.intValue() : 0);  // int로 변환
+			System.out.println("Routeid: "+routes.getRouteid()+" has "+routes.getTotalSeats()+" total seats.");
+		});
+		
+		// 출발 공항에 따라 분류 (기존 로직 유지)
+		List<RoutesDto> seoulRoutes = routesList.stream()
+				.filter(routes -> routes.getDeparture().equals("서울역")).collect(Collectors.toList());
+		
+		List<RoutesDto> pusanRoutes = routesList.stream()
+				.filter(routes -> routes.getDeparture().equals("부산역")).collect(Collectors.toList());
+		
+		List<RoutesDto> otherRoutes = routesList.stream()
+				.filter(routes -> !routes.getDeparture().equals("서울역") && !routes.getDeparture().equals("부산역"))
+				.collect(Collectors.toList());
+		
+		// 각 항공편 분류에 따라 페이지네이션 처리 및 JSP에 데이터 전달
+		if ("all".equals(routeType)) {
+			List<RoutesDto> pagedRoutes=routesList.subList(start, Math.min(start+itemsPerPage, routesList.size()));
+			int totalPages=(int) Math.ceil((double)routesList.size()/itemsPerPage);
+			model.addAttribute("routesList", pagedRoutes);
+			model.addAttribute("totalPages", totalPages);
+			model.addAttribute("currentPage", page);
+		}
+		else if ("서울역".equals(routeType)) {
+			List<RoutesDto> pagedSeoulRoutes = seoulRoutes.stream()
+					.skip(start).limit(itemsPerPage).collect(Collectors.toList());
+			int totalSeoulPages = (int) Math.ceil((double) seoulRoutes.size() / itemsPerPage);
+			model.addAttribute("pagedSeoulRoutes", pagedSeoulRoutes);
+			model.addAttribute("totalSeoulPages", totalSeoulPages);
+			model.addAttribute("currentSeoulPage", page);
+		}
+		else if ("부산역".equals(routeType)) {
+			List<RoutesDto> pagedPusanRoutes = pusanRoutes.stream()
+					.skip(start).limit(itemsPerPage).collect(Collectors.toList());
+			int totalPusanPages = (int) Math.ceil((double) pusanRoutes.size() / itemsPerPage);
+			model.addAttribute("pagedPusanRoutes", pagedPusanRoutes);
+			model.addAttribute("totalPusanPages", totalPusanPages);
+			model.addAttribute("currentPusanPage", page);
+		}
+		else if ("other".equals(routeType)) {
+			List<RoutesDto> pagedOtherRoutes = otherRoutes.stream()
+					.skip(start).limit(itemsPerPage).collect(Collectors.toList());
+			int totalOtherPages = (int) Math.ceil((double) otherRoutes.size() / itemsPerPage);
+			model.addAttribute("pagedOtherRoutes", pagedOtherRoutes);
+			model.addAttribute("totalOtherPages", totalOtherPages);
+			model.addAttribute("currentOtherPage", page);
+		}
+		
+		model.addAttribute("selectedDate", selectedDate);
+		
+		return "/admin/routesList";  // 전체 페이지를 반환합니다.
+	}
+
 }

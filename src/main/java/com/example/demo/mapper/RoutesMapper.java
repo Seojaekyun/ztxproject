@@ -1,11 +1,14 @@
 package com.example.demo.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
+
 import com.example.demo.dto.RoutesDto;
 import com.example.demo.dto.SeatDto;
 import com.example.demo.dto.StationsDto;
+import com.example.demo.dto.TrainesDto;
 
 @Mapper
 public interface RoutesMapper {
@@ -16,6 +19,13 @@ public interface RoutesMapper {
 	List<RoutesDto> getArrivalRoutes();
 	void addRoute(RoutesDto route);
 	List<StationsDto> AllStations();
+	List<RoutesDto> getRoutesByDate(String selectedDate);
+	List<RoutesDto> getAllRoutes();
+	List<Map<String, Object>> getTotalSeatsByRouteid();
+	List<TrainesDto> AllTraines();
+	Integer getRouteiddForAddingSeats();
+	Map<String, Object> getRouteCapa(Integer routeid);
+	void addSeatsForRoute(Map<String, Object> params);
 	
 	
 }

@@ -10,6 +10,7 @@ public interface AdminService {
 	String reservList(String selectedDate, Integer seoulPage, Integer pusanPage, Integer otherPage, Integer page,
 			Model model);
 	String rsvdList(HttpServletRequest request, Model model);
+	String routesList(Integer page, String selectedDate, String routeType, Model model);
 	
 
 }
