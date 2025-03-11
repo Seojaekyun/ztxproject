@@ -72,107 +72,87 @@
 	}
 </style>
 <script type="text/javascript">
-	// 출발지와 도착지의 시간대 정보를 저장할 변수
-	var departureTimezone = "";
-	var arrivalTimezone = "";
-	
-	// 패드 제로 함수
-	function padZero(value) {
-		return ("0" + value).slice(-2);
-	}
-	
-	// 귀국편 공항 설정 함수
-	function setReturnRoutesStations() {
-		var departure = document.getElementById("departure").value;
-		var arrival = document.getElementById("arrival").value;
-		document.getElementById("returnDeparture").value = arrival || "";
-		document.getElementById("returnArrival").value = departure || "";
-	}
-	
-	// 도착 공항 목록 갱신 함수
-	function updateArrival() {
-		var departure = document.getElementById("departure").value;
-		var arrivalSelect = document.getElementById("arrival");
-		
-		// 기존 옵션 제거
-		arrivalSelect.innerHTML = "";
-		
-		// 공항 데이터를 JavaScript 배열로 전달
-		var stations = [
-			<c:forEach var="station" items="${stations}" varStatus="status">
-			{ code: '${station.line}', name: '${station.stationName}' }<c:if test="${!status.last}">,</c:if>
-			</c:forEach>
-		];
-		
-		if(departure === "ICN" || departure === "GMP") {
-			// 출발 공항이 ICN 또는 GMP인 경우
-			Stations.forEach(function(Station) {
-				if (Station.code !== "ICN" && Station.code !== "GMP") {
-					var option = document.createElement("option");
-					option.value = Station.code;
-					option.text = Station.name;
-					arrivalSelect.appendChild(option);
-				}
-			});
-		}
-		else {
-			// 출발 공항이 ICN 또는 GMP가 아닌 경우
-			var options = [
-				{ code: "ICN", name: "인천 국제공항" }, { code: "GMP", name: "김포 국제공항" }
-			];
-			options.forEach(function(Station) {
-				var option = document.createElement("option");
-				option.value = Station.code;
-				option.text = Station.name;
-				arrivalSelect.appendChild(option);
-			});
-		}
-		
-		
-	}
-	
-	// 폼 제출 전에 시간 결합
-	function combineTimes() {
-		var departureDate = document.getElementById("departureDate").value;
-		var departureHour = padZero(document.getElementById("departureHour").value);
-		var departureMinute = padZero(document.getElementById("departureMinute").value);
-		document.getElementById("departureTime").value = departureDate + " " + departureHour + ":" + departureMinute + ":00";
-		
-		var returnDepartureDate = document.getElementById("returnDepartureDate").value;
-		var returnDepartureHour = padZero(document.getElementById("returnDepartureHour").value);
-		var returnDepartureMinute = padZero(document.getElementById("returnDepartureMinute").value);
-		document.getElementById("returnDepartureTime").value = returnDepartureDate + " " + returnDepartureHour + ":" + returnDepartureMinute + ":00";
-	}
-	
-	// 이벤트 리스너 등록
-	window.onload = function() {
-		// 출발 공항 변경 시
-		document.getElementById("departure").addEventListener("change", function() {
-			updateArrival();
-		});
-		
-		// 도착 공항 변경 시
-		document.getElementById("arrival").addEventListener("change", function() {
-			setReturnRouteStations();
-		});
-		
-		// 출발편 날짜 및 시간 변경 시
-		var departureFields = ["departureDate", "departureHour", "departureMinute"];
-		departureFields.forEach(function(field) {
-			document.getElementById(field).addEventListener("change", calculateDepartureArrivalTime);
-		});
-		
-		// 귀국편 날짜 및 시간 변경 시
-		var returnFields = ["returnDepartureDate", "returnDepartureHour", "returnDepartureMinute"];
-		returnFields.forEach(function(field) {
-			document.getElementById(field).addEventListener("change", calculateReturnArrivalTime);
-		});
-		
-		// 초기화
-		updatearrivals();
-	};
-	
+
+    // 패드 제로 함수
+    function padZero(value) {
+        return ("0" + value).slice(-2);
+    }
+    
+    // 귀향편 역 설정 함수
+    function setReturnRoutesStations() {
+        var departure = document.getElementById("departure").value;
+        var arrival = document.getElementById("arrival").value;
+        document.getElementById("returnDeparture").value = arrival || "";
+        document.getElementById("returnArrival").value = departure || "";
+    }
+    
+    // 도착역 목록 갱신 함수
+    function updateArrival() {
+        var departure = document.getElementById("departure").value;
+        var arrivalSelect = document.getElementById("arrival");
+        
+        // 기존 옵션 제거
+        arrivalSelect.innerHTML = "";
+        
+        // 역 데이터 JavaScript 배열로 전달
+        var stations = [
+            <c:forEach var="station" items="${stations}" varStatus="status">
+                { code: '${station.line}', name: '${station.stationName}', id: '${station.id}' }
+                <c:if test="${!status.last}">,</c:if>
+            </c:forEach>
+        ];
+        
+        // 출발역과 같은 id를 가진 역을 제외하고 도착지 목록에 추가
+        stations.forEach(function(station) {
+            if (station.name !== departure) {  // 출발역과 도착역이 다를 경우
+                var option = document.createElement("option");
+                option.value = station.name;  // 도착역의 id 값으로 설정
+                option.text = station.name; // 도착역의 이름으로 설정
+                arrivalSelect.appendChild(option);
+            }
+        });
+    }
+
+    // 열차 목록 필터링 함수
+    function filterTrains() {
+        var departureSelect = document.getElementById("departure");
+        var selectedDeparture = departureSelect.options[departureSelect.selectedIndex].text;  // 선택된 출발역의 이름
+        var trainSelect = document.getElementById("trainid");
+        var trainOptions = trainSelect.getElementsByTagName("option");
+
+        // 모든 열차 옵션을 순회하면서, train.depot과 선택된 출발역이 일치하는 경우만 표시
+        for (var i = 0; i < trainOptions.length; i++) {
+            var trainDepot = trainOptions[i].getAttribute("data-depot");
+
+            // 출발역이 train.depot과 일치하면 옵션을 보여주고, 아니면 숨깁니다.
+            if (trainDepot === selectedDeparture) {
+                trainOptions[i].style.display = "block";  // 해당 열차 보이기
+            } else {
+                trainOptions[i].style.display = "none";   // 해당 열차 숨기기
+            }
+        }
+    }
+
+    // 이벤트 리스너 등록
+    window.onload = function() {
+        // 출발역 선택 시, 도착역 목록을 갱신하고, 열차 목록 필터링
+        document.getElementById("departure").addEventListener("change", function() {
+            updateArrival();  // 도착역 목록 갱신
+            filterTrains();   // 열차 목록 필터링
+        });
+        
+        // 도착역 선택 시, 귀향편 역 설정
+        document.getElementById("arrival").addEventListener("change", function() {
+            setReturnRoutesStations();  // 귀향편 역 설정
+        });
+
+        // 초기화 시 도착역 목록 갱신 및 열차 목록 필터링
+        updateArrival();
+        filterTrains();
+    };
+
 </script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.40/moment-timezone-with-data.min.js"></script>
 </head>
@@ -187,8 +167,8 @@
 				<label for="departure">출발역:</label>
 				<select id="departure" name="departure" required>
 					<option value="">선택</option>
-					<c:forEach var="Station" items="${Stations}">
-					<option value="${Station.Stationid}">${Station.depot}</option>
+					<c:forEach var="Station" items="${stations}">
+					<option value="${Station.stationName}">${Station.stationName}</option>
 					</c:forEach>
 				</select>
 				<label for="arrival">도착역:</label>
@@ -216,17 +196,17 @@
 				<input type="hidden" id="routeHour" name="routeHour">
 				<input type="hidden" id="routeMinute" name="routeMinute">
 				<!-- Display route time -->
-				<label for="routeTimeDisplay">비행 시간:</label>
+				<label for="routeTimeDisplay">여객 시간:</label>
 				<input type="text" id="routeTimeDisplay" name="ftime" readonly>
 				<!-- 비행 시간 저장을 위한 숨겨진 필드 -->
 				<input type="hidden" id="routeTime" name="ftimeValue">
 				<label for="arrivalTime">도착 시간:</label>
 				<textarea id="arrivalTime" name="arrivalTime" readonly></textarea>
 				<input type="hidden" id="departureTime" name="departureTime">
-				<label for="TrainId">비행기:</label>
-				<select id="TrainId" name="TrainId" required>
-					<c:forEach var="train" items="${Traines}">
-					<option value="${train.Trainid}">${train.Trainid}. ${train.model} / ${train.capa}석</option>
+				<label for="trainid">열차:</label>
+				<select id="trainid" name="trainid" required>
+					<c:forEach var="train" items="${traines}">
+					<option value="${train.trainid}" data-depot="${train.depot}">${train.model} / ${train.capa}석</option>
 					</c:forEach>
 				</select>
 				<label for="unitPrice">금액:</label>
@@ -235,10 +215,10 @@
 			</div>
 			
 			<div class="flex-item">
-				<h3>귀국편 정보</h3>
-				<label for="returnDeparture">출발 공항:</label>
+				<h3>귀향편 정보</h3>
+				<label for="returnDeparture">출발역:</label>
 				<input type="text" id="returnDeparture" name="returnDeparture" readonly>
-				<label for="returnArrival">도착 공항:</label>
+				<label for="returnArrival">도착역:</label>
 				<input type="text" id="returnArrival" name="returnArrival" readonly>
 				<label for="returnDepartureDate">출발 날짜:</label>
 				<input type="date" id="returnDepartureDate" name="returnDepartureDate" required>
@@ -261,7 +241,7 @@
 				<input type="hidden" id="returnrouteHour" name="returnrouteHour">
 				<input type="hidden" id="returnrouteMinute" name="returnrouteMinute">
 				<!-- Display return route time -->
-				<label for="returnrouteTimeDisplay">비행 시간:</label>
+				<label for="returnrouteTimeDisplay">여객시간:</label>
 				<input type="text" id="returnrouteTimeDisplay" name="returnFtime" readonly>
 				<!-- 귀국편 비행 시간 저장을 위한 숨겨진 필드 -->
 				<input type="hidden" id="returnrouteTime" name="returnFtimeValue">
@@ -270,15 +250,15 @@
 				<input type="hidden" id="returnDepartureTime" name="returnDepartureTime">
 				<label for="returnTrainid">열차:</label>
 				<select id="returnTrainid" name="returnTrainid" required>
-					<c:forEach var="train" items="${Traines}">
-					<option value="${train.Trainid}">${train.Trainid}. ${train.model} / ${train.capa}석</option>
+					<c:forEach var="train" items="${traines}">
+					<option value="${train.trainid}" data-depot="${train.depot}">${train.trainid}. ${train.model} / ${train.capa}석</option>
 					</c:forEach>
 				</select>
 				<label for="returnUnitPrice">금액:</label>
 				<input type="text" id="returnUnitPrice" name="returnUnitPrice" readonly>
 			</div>
 		</div>
-		<button type="submit">항공편 추가</button>
+		<button type="submit">열차편 추가</button>
 	</form>
 </section>
 </body>

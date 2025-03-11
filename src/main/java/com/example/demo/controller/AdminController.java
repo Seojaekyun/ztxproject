@@ -60,15 +60,15 @@ public class AdminController {
 	
 	@GetMapping("/admin/addRoute")
 	public String showAddRouteForm(Model model) {
-		List<StationsDto> Stations = rservice.getAllStations();
+		List<StationsDto> stations = rservice.getAllStations();
 		List<TrainesDto> traines = rservice.getAllTraines();
-		model.addAttribute("Stations", Stations);
+		model.addAttribute("stations", stations);
 		model.addAttribute("traines", traines);
-		return "admin/addFlight";
+		return "admin/addRoute";
 	}
 	
-	@PostMapping("/admin/addFlights")
-	public String addFlights(
+	@PostMapping("/admin/addRoutes")
+	public String addRoutes(
 			@RequestParam String departure, @RequestParam String arrival, @RequestParam String departureTime,
 			@RequestParam String arrivalTime, @RequestParam("ftimeValue") String ftime, @RequestParam int trainid,
 			@RequestParam int unitPrice, @RequestParam String returnDeparture, @RequestParam String returnArrival,
@@ -86,7 +86,7 @@ public class AdminController {
 		}
 		catch (Exception e) {
 			model.addAttribute("message", "오류가 발생했습니다: " + e.getMessage());
-			return "admin/addFlight";  // 오류 발생 시 다시 항공편 추가 페이지로
+			return "admin/addRoute";  // 오류 발생 시 다시 항공편 추가 페이지로
 		}
 		
 		// 항공편 목록 페이지로 리다이렉트
