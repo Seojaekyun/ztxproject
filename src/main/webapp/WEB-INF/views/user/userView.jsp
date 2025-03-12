@@ -116,7 +116,7 @@
     function newPwd()
     {
     	var oPwd=document.vform.oPwd.value.trim();
-		var nPwd=document.vform.nPwd.value.trim();
+		var nPwd=document.vform.pwd.value.trim();
 		var nPwd2=document.vform.nPwd2.value.trim();
 		
 		if(nPwd.length == 0)
@@ -165,24 +165,24 @@
     <tr>
       <td> 이메일 </td>
       <td>
-        <input type="text" id="email" value="${udto.email}">
+        <input type="text" id="email" name="email" value="${udto.email}">
       </td>
     </tr>
     <tr>
       <td> 비밀번호 변경 </td>
       <td>
-        <input type="password" name="oPwd" id="pwd" onblur="pwdCheck()" placeholder="현재 비밀번호">
+        <input type="password" name="oPwd" onblur="pwdCheck()" placeholder="현재 비밀번호">
         <span id="pmsg"> </span>
-        <input type="password" name="nPwd" id="pwd" onkeyup="newPwd()" placeholder="새 비밀번호">
+        <input type="password" name="pwd" onkeyup="newPwd()" placeholder="새 비밀번호">
         <span id="pmsg2"> </span> 
-        <input type="password" name="nPwd2" id="pwd" onkeyup="newPwd()" placeholder="비밀번호 확인">
+        <input type="password" name="nPwd2" onkeyup="newPwd()" placeholder="비밀번호 확인">
         <span id="pmsg3"> </span>
       </td>
     </tr>
     <tr>
       <td> 전화번호 </td>
       <td>
-        <input type="text" id="phone" value="${udto.phone}">
+        <input type="text" id="phone" name="phone" value="${udto.phone}">
       </td>
     </tr>
   </table>

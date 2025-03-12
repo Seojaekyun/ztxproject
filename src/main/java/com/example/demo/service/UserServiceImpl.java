@@ -75,8 +75,23 @@ public class UserServiceImpl implements UserService {
 			return "redirect:/login/login";
 		}
 		else
-		{		
-			return "";
+		{	
+			String userid=session.getAttribute("userid").toString();
+			udto.setUserid(userid);
+			
+			//System.out.println(udto.getPhone());
+			//System.out.println("비밀번호:"+udto.getPwd());
+			if(udto.getPwd() == null)
+			{
+				mapper.updateOk1(udto);
+			}
+			else
+			{
+				mapper.updateOk2(udto);
+			}
+			
+			
+			return "redirect:/main/index";
 		}
 	}
 
