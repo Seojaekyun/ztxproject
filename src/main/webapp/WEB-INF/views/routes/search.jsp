@@ -49,6 +49,7 @@
                 <th>출발시간</th>
                 <th>도착시간</th>
                 <th>잔여석</th>
+                <th>요금</th>
                 <th>선택</th>
             </tr>
         </thead>
@@ -64,6 +65,7 @@
                 <td><fmt:formatDate value="${departureDate}" pattern="HH:mm" /></td>
                 <td><fmt:formatDate value="${arrivalDate}" pattern="HH:mm" /></td>
                 <td>${route.seat}</td>
+                <td>${route.charge}</td>
                 <td>
                     <form action="${pageContext.request.contextPath}/routes/resCheck" method="post">
                         <input type="hidden" name="routeid" value="${route.routeid}">
@@ -72,6 +74,7 @@
                         <input type="hidden" name="routeTime" value="${route.departureTime}">
                         <input type="hidden" name="routeArrivalTime" value="${route.arrivalTime}">
                         <input type="hidden" name="resnum" value="${resnum}">
+                        <input type="hidden" name="charge" value="${route.charge}">
                         <button type="submit" class="btn btn-select">선택</button>
                     </form>
                 </td>

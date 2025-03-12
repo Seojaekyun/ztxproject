@@ -11,6 +11,7 @@ public interface AdminService {
 			Model model);
 	String rsvdList(HttpServletRequest request, Model model);
 	String routesList(Integer page, String selectedDate, String routeType, Model model);
+	String rsvChart(Model model);
 	
 
 }

@@ -151,10 +151,17 @@
 		max-width: 1900px;
 		margin: auto;
 	}
+	#section2 #nav {
+		background: rgba(68,87,98,0.8);
+		z-index:5;
+	}
+	
 	#section2 nav #main {
 		line-height:70px;
 		margin: auto; /* Adjusted to align properly */
 		text-align: center;
+		
+		
 	}
 	#section2 nav #main > li {
 		display: inline-block;
@@ -168,6 +175,8 @@
 		font-weight: 750;
 		position: relative;
 		z-index: 5;
+		color: white;
+		background: rgba(68,87,98,0.8);
 	}
 	#section2 nav #main > li > .menu {
 		padding-left: 0px;
@@ -182,7 +191,7 @@
 	}
 	#section2 nav #main > li > a{
 		text-decoration: none;
-		color: black;
+		color: white;
 	}
 	#section2 nav #main > li > .menu > li {
 		list-style-type: none;

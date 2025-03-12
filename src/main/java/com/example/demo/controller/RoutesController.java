@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.service.RoutesService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -20,9 +21,9 @@ public class RoutesController {
 	
 	@GetMapping("/routes/search")
 	public String routeSearch(@RequestParam String departure, @RequestParam String arrival,
-			@RequestParam(required = false) String departureDate,
-			@RequestParam(required = false) Integer resnum, Model model) {
-		return service.routeSearch(departure, arrival, departureDate, resnum, model);
+			@RequestParam(required = false) String departureDate, @RequestParam(required = false) Integer resnum,
+			@RequestParam(required = false) Integer charge, HttpSession session, Model model) {
+		return service.routeSearch(departure, arrival, departureDate, resnum, charge, session, model);
 	}
 	
 	@PostMapping("/routes/resCheck")
@@ -30,9 +31,9 @@ public class RoutesController {
 			@RequestParam String routeArrival, @RequestParam String routeTime,
 			@RequestParam String routeArrivalTime, @RequestParam Integer resnum, // 선택된 인원
 			@RequestParam(required = false, defaultValue = "") String[] goingSelectedSeats,  // 가는편 좌석 배열 기본값
-			HttpSession session, Model model) {
+			@RequestParam Integer charge, HttpServletRequest request, HttpSession session, Model model) {
 		return service.resCheck(routeid, routeDeparture, routeArrival, routeTime,
-				routeArrivalTime, resnum, goingSelectedSeats, session, model);
+				routeArrivalTime, resnum, goingSelectedSeats, charge, request, session, model);
 	}
 	
 	@GetMapping("routes/seats")

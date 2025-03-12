@@ -15,7 +15,6 @@ import com.example.demo.dto.TrainesDto;
 import com.example.demo.service.AdminService;
 import com.example.demo.service.GongjiService;
 import com.example.demo.service.RoutesService;
-
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
@@ -115,11 +114,16 @@ public class AdminController {
 		rservice.addSeatsForRoute();
 		return "redirect:/admin/routesList";  // 완료 후 항공편 목록 페이지로 이동
 	}
-	
-	@GetMapping("/admin/gongjiList")
-	public String gongjiList(GongjiDto gdto, Model model)
-	{
-		return gservice.gongjiList(gdto, model);
+  
+  @GetMapping("/admin/rsvChart")
+	public String rsvChart(Model model) {
+		return service.rsvChart(model);
 	}
 	
+	@GetMapping("/admin/gongjiList")
+	public String gongjiList(GongjiDto gdto, Model model) {
+		return gservice.gongjiList(gdto, model);
+  }
+  
+  
 }

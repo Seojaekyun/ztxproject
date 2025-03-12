@@ -105,7 +105,7 @@
 			<div class="details-item">도착지: ${routeArrival}</div>
 			<div class="details-item">소요 시간: </div>
 			<div class="details-item">탑승 인원: ${resnum}명</div>
-			<div class="details-item">총 결제 금액: <fmt:formatNumber value="" type="number"/>원</div>
+			<div class="details-item">총 결제 금액: <fmt:formatNumber value="${charge}" type="number"/>원</div>
 		</div>
 	</div>
 		

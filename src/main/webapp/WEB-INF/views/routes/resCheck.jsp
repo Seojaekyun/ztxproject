@@ -109,6 +109,7 @@
 					<th>도착역</th>
 					<th>출발시간</th>
 					<th>도착시간</th>
+					<th>요금</th>
 					<th>좌석</th>
 				</tr>
 			</thead>
@@ -119,6 +120,7 @@
 				<td>${routeArrival}</td>
 				<td>${routeTime}</td>
 				<td>${routeArrivalTime}</td>
+				<td>${charge}</td>
 				<td>
 					<span id="goingSeatsDisplay"></span>
 					<div id="goingSeatButtonContainer">
@@ -152,6 +154,7 @@
 			<input type="hidden" name="routeTime" value="${routeTime}">
 			<input type="hidden" name="routeArrivalTime" value="${routeArrivalTime}">
 			<input type="hidden" name="resnum" value="${resnum}">
+			<input type="hidden" name="charge" value="${charge}">
 			<input type="hidden" name="selectedSeats" id="selectedSeats">
 			<button type="submit" class="btn btn-success btn-reservation">예약하기</button>
 		</form>

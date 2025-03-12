@@ -16,9 +16,7 @@
 		font-family: Arial, sans-serif;
 		background-color: #f4f4f4;
 	}
-	.main_content {
-		display: none;
-	}
+	
 	.train_service {
 		position: relative;
 		background-image: url('../static/resources/t0.jpg');
@@ -29,6 +27,7 @@
 		background-repeat: no-repeat;
 		z-index: 2;
 		margin: auto;
+		top:-60px;
 	}
 	.booking_contents {
 		position: relative;
@@ -681,7 +680,7 @@
 			}
 		});
 	}
-	window.addEventListener('scroll', revealSections);
+	/* window.addEventListener('scroll', revealSections);
 	window.addEventListener('load', revealSections);
 	$(function() {
 		var currentURL = window.location.pathname;
@@ -701,7 +700,7 @@
 		else {
 			$('.main_content').show();
 		}
-	});
+	}); */
 	function selectDeparture(stationName, stationName) {
 		document.getElementById('from-text').textContent = stationName;
 		document.getElementById('from-hidden').value = stationName;
