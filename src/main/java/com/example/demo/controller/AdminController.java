@@ -9,9 +9,11 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
+import com.example.demo.dto.GongjiDto;
 import com.example.demo.dto.StationsDto;
 import com.example.demo.dto.TrainesDto;
 import com.example.demo.service.AdminService;
+import com.example.demo.service.GongjiService;
 import com.example.demo.service.RoutesService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -30,6 +32,10 @@ public class AdminController {
 	@Autowired
 	@Qualifier("rs")
 	private RoutesService rservice;
+	
+	@Autowired
+	@Qualifier("gs")
+	private GongjiService gservice;
 	
 	@GetMapping("/admin/index")
 	public String adminIndex(HttpSession session, HttpServletRequest request, Model model) {
@@ -108,10 +114,16 @@ public class AdminController {
 		rservice.addSeatsForRoute();
 		return "redirect:/admin/routesList";  // 완료 후 항공편 목록 페이지로 이동
 	}
-	
-	@GetMapping("/admin/rsvChart")
+  
+  @GetMapping("/admin/rsvChart")
 	public String rsvChart(Model model) {
 		return service.rsvChart(model);
 	}
 	
+	@GetMapping("/admin/gongjiList")
+	public String gongjiList(GongjiDto gdto, Model model) {
+		return gservice.gongjiList(gdto, model);
+  }
+  
+  
 }

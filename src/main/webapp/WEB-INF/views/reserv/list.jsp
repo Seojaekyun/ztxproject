@@ -146,7 +146,7 @@
   
     <div id="paging">
      <c:if test="${pstart != 1}">
-      <a href="list?page=${pstart-1}"> « </a>
+      <a href="list?page=${pstart-1}"> &laquo; 이전10 </a>
      </c:if>
      <c:if test="${pstart == 1}">
       «

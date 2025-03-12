@@ -13,12 +13,13 @@
 		padding: 0;
 		background-color: #f4f6f9;
 	}
-	h2 {
-		font-size: 24px;
-		font-weight: 700;
-		margin-top: 20px;
-		text-align: center;
-	}
+	h3 {
+      font-size:24px;
+      font-weight:bold;
+      color:#333;
+      text-align:center;
+      margin-bottom:20px;
+    }
 	section {
 		max-width: 800px;
 		margin: 30px auto;
@@ -113,28 +114,11 @@
 	.pagination a:hover {
 		background-color: #f4f4f4;
 	}
-	/* 반응형 디자인 */
-	@media (max-width: 768px) {
-		h2 {
-		font-size: 20px;
-		}
-		th, td {
-			font-size: 14px;
-			padding: 10px;
-		}
-		#write {
-			font-size: 12px;
-			padding: 8px 15px;
-		}
-	}
 </style>
 </head>
 <body>
-
-<div>
-    <h2>공지사항 관리</h2>
-</div>
-<section>
+ <section>
+  <h3> 공지사항 관리 </h3>
     <div align="right"><a href="gongjiWrite" id="write">작성하기</a></div>
     <table>
         <tr>
@@ -146,10 +130,10 @@
         <c:forEach items="${glist}" var="gdto">
             <tr>
                 <td width="100">
-                    <c:if test="${gdto.state == 2}">
+                    <c:if test="${gdto.state == 1}">
                         <span id="badge1">필독</span>
                     </c:if>
-                    <c:if test="${gdto.state == 1}">
+                    <c:if test="${gdto.state == 0}">
                         <span id="badge2">공지</span>
                     </c:if>
                 </td>
