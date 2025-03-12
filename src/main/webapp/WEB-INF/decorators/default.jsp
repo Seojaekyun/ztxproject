@@ -23,25 +23,43 @@
 	header {
 		width: 100%;
 		margin: auto;
+		z-index:100;
 	}
 	#section1 {
 		width: 1450px;
 		min-width: 1000px;
-		height: 30px; /* Adjust the height as needed */
-		position: relative;
+		height: 40px; /* Adjust the height as needed */
+		position: flex;
 		max-width: 1900px;
 		margin: auto;
+		justify-content: space-evenly;
 	}
-	#section1 #loginMenu {
-		position: absolute ;
+	#titleMenu {
 		top: 0;
 		right: 0;
-		margin-right: 9%; /* Adjust if necessary */
+		width: 330px;
+		display: flex;
+		text-align: left;
+		font-size: 14px;
+		font-weight: 600;
+		line-height: 40px;
+		margin-left:9%;
+	}
+	#titleMenu div {
+		width: 100px;
+		text-align: center;
+		border: 1px solid black;
+	}
+	#section1 #loginMenu {
+		position: absolute;
+		margin-right: 20%;
+		top: 0;
+		right: 0;
 		display: flex;
 		text-align: right;
 		font-size: 14px;
 		font-weight: 600;
-		line-height: 30px;
+		line-height: 40px;
 	}
 	#section1 #loginMenu a {
 		text-decoration: none;
@@ -69,7 +87,7 @@
 		background: white;
 		display: none;
 		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-		z-index: 10;
+		z-index: 12;
 		border-radius:5px;
 	}
 	#section1 #loginMenu .cmenu > li, #section1 #loginMenu .mmenu > li {
@@ -110,34 +128,30 @@
 		text-decoration: none;
 		color: #00467F;
 	}
-	#logo {
-		width: 100%;
-		min-width: 1000px;
-		height: 50px;
-		background: #083B82;
-		align-items: center;
-	}
 	#logocontainer {
 		margin: auto;
-		max-width: 1200px;
-		min-width: 1000px;
+		max-width: 260px;
+		min-width: 260px;
 		height: 50px;
 		background: none;
-		align-items: left;
+		align-items: center;
 		display: flex;
+    	justify-content: space-between;
 	}
-	#logo > #logocontainer > #logoimg {
+	#logocontainer > #logoimg {
 		width: 50px;
 		height: 50px;
-		background: #083B82;
+		background: none;
+		display: inline-block;
 	}
-	#logo > #logocontainer > #logotext {
-		height: 50px;
+	#logocontainer > #logotext {
+		height: 90px;
 		width: 200px;
-		background: #083B82;
+		background: none;
 		font-size: 25px;
 		font-weight: 900;
-		line-height: 50px;
+		line-height: 90px;
+		display: inline-block;
 	}
 	#logotext a {
 		text-decoration: none;
@@ -145,25 +159,28 @@
 	}
 	#section2 {
 		width: 100%;
-		min-width: 1000px;
-		height: 60px; /* Adjust the height as needed */
+		height: 90px;
+		z-index: 10;
+		background: rgba(0,0,0,0.6);
 		position: relative;
-		max-width: 1900px;
+	}
+	#s2container {
+		width: 1450px;
+		min-width: 1000px;
+		height: 90px; /* Adjust the height as needed */
 		margin: auto;
+		display: flex;
+		justify-content: space-evenly;
 	}
-	#section2 #nav {
-		background: rgba(68,87,98,0.8);
-		z-index:5;
+	#s2container > #nav {
+		display: inline-block;
 	}
-	
-	#section2 nav #main {
-		line-height:70px;
+	#s2container nav #main {
+		line-height:90px;
 		margin: auto; /* Adjusted to align properly */
 		text-align: center;
-		
-		
 	}
-	#section2 nav #main > li {
+	#s2container nav #main > li {
 		display: inline-block;
 		list-style-type: none;
 		width: 180px;
@@ -176,9 +193,8 @@
 		position: relative;
 		z-index: 5;
 		color: white;
-		background: rgba(68,87,98,0.8);
 	}
-	#section2 nav #main > li > .menu {
+	#s2container nav #main > li > .menu {
 		padding-left: 0px;
 		position: absolute;
 		left: 0px;
@@ -189,11 +205,11 @@
 		border-radius:5px;
 		z-index: 2000;
 	}
-	#section2 nav #main > li > a{
+	#s2container nav #main > li > a{
 		text-decoration: none;
 		color: white;
 	}
-	#section2 nav #main > li > .menu > li {
+	#s2container nav #main > li > .menu > li {
 		list-style-type: none;
 		width: 150px;
 		height: 40px;
@@ -203,9 +219,13 @@
 		font-weight: 600;
 		z-index: 2000;
 	}
-	#section2 nav #main > li > .menu > li > a{
+	#s2container nav #main > li > .menu > li > a{
 		text-decoration: none;
 		color: black;
+	}
+	#menuicon {
+		width: 150px;
+		line-height: 100px;
 	}
 	hr {
 		color: blue;
@@ -507,6 +527,11 @@
 <body>
 	<header>
 		<div id="section1">
+			<div id="titleMenu">
+				<div>🛤️은하철도</div>
+				<div style="background: #078EB9; color: white;">승차권예매</div>
+				<div>기차여행</div>
+			</div>
 			<div id="loginMenu">
 				<c:if test="${userid!=null&&userid=='administrator'}">
 					<a href="../admin/index" style="color: orange;"> 관리자 홈 </a>&nbsp;|&nbsp;
@@ -541,64 +566,62 @@
 				</div>
 			</div>
 		</div>
-		<div id="logo">
-			<div id="logocontainer">
-				<div id="logoimg">
-					<a href="../main/index">
-						<img src="../static/resources/train(white).png" height="50px" align="middle">
-					</a>
-				</div>
-				<div id="logotext">
-					<a href="../main/index">
-						Let's GGoRail
-					</a>
-				</div>
-			</div>
-		</div>
 		<div id="section2">
-			<div id="nav">
-				<nav>
-					<ul id="main">
-						<li id="main1" onmouseover="viewMenu(0)" onmouseout="hideMenu(0)">
-							<span class="icona">🚄</span>승차권
-							<ul class="menu">
-								<li><a href="../reserv/reservation">예약</a></li>
-								<li><a href="../reserv/reserveInfo">예약 조회</a></li>
-								<li><a href="../reserv/routeList">운행 정보</a></li>
-							</ul>
-						</li>
-						<li id="main2" onmouseover="viewMenu(1)" onmouseout="hideMenu(1)">
-							<a href="../guide/checkinGuide"><span class="iconb">🚄</span>철도역·열차</a>
-							<ul class="menu">
-								<li><a href="../guide/boardingGuide">탑승 안내</a></li>
-								<li><a href="../guide/seatGuide">좌석 안내</a></li>
-								<li><a href="../guide/baggageGuide">수하물 안내</a></li>
-							</ul>
-						</li>
-						<li id="main3" onmouseover="viewMenu(2)" onmouseout="hideMenu(2)">
-							<a href="../guide/travel"><span class="iconc">🚄</span>여행상품</a>
-							<ul class="menu">
-								<li><a href="">여행 명소</a></li>
-								<li><a href="">테마 여행</a></li>
-							</ul>
-						</li>
-						<li id="main4" onmouseover="viewMenu(3)" onmouseout="hideMenu(3)">
-							<a href="../guide/travel"><span class="icond">🚄</span>고객서비스</a>
-							<ul class="menu">
-								<li><a href="">고객센터</a></li>
-								<li><a href="">유실물</a></li>
-								<li><a href="">열차 서비스</a></li>
-							</ul>
-						</li>
-						<li id="main5" onmouseover="viewMenu(4)" onmouseout="hideMenu(4)">
-							<span class="icone">🚄</span>꼬레일 멤버십
-							<ul class="menu">
-								<li><a href="">멤버십 소개</a></li>
-								<li><a href="">멤버십 가입신청</a></li>
-							</ul>
-						</li>
-					</ul>
-				</nav>
+			<div id="s2container">
+				<div id="logocontainer">
+					<div id="logoimg">
+						<a href="../main/index">
+							<img src="../static/resources/train(white).png" height="50px" align="middle">
+						</a>
+					</div>
+					<div id="logotext">
+						<a href="../main/index">
+							Let's GGoRail
+						</a>
+					</div>
+				</div>
+				<div id="nav">
+					<nav>
+						<ul id="main">
+							<li id="main1" onmouseover="viewMenu(0)" onmouseout="hideMenu(0)">
+								<span class="icona">🚄</span>승차권
+								<ul class="menu">
+									<li><a href="../reserv/reservation">예약</a></li>
+									<li><a href="../reserv/reserveInfo">예약 조회</a></li>
+									<li><a href="../reserv/routeList">운행 정보</a></li>
+								</ul>
+							</li>
+							<li id="main2" onmouseover="viewMenu(1)" onmouseout="hideMenu(1)">
+								<a href="../guide/checkinGuide"><span class="iconb">🚄</span>철도역·열차</a>
+								<ul class="menu">
+									<li><a href="../guide/boardingGuide">탑승 안내</a></li>
+									<li><a href="../guide/seatGuide">좌석 안내</a></li>
+									<li><a href="../guide/baggageGuide">수하물 안내</a></li>
+								</ul>
+							</li>
+							<li id="main3" onmouseover="viewMenu(2)" onmouseout="hideMenu(2)">
+								<a href="../guide/travel"><span class="iconc">🚄</span>고객서비스</a>
+								<ul class="menu">
+									<li><a href="">고객센터</a></li>
+									<li><a href="">유실물</a></li>
+									<li><a href="">열차 서비스</a></li>
+									<li><a href="">여행 명소</a></li>
+									<li><a href="">테마 여행</a></li>
+								</ul>
+							</li>
+							<li id="main4" onmouseover="viewMenu(3)" onmouseout="hideMenu(3)">
+								<span class="icond">🚄</span>꼬레일 멤버십
+								<ul class="menu">
+									<li><a href="">멤버십 소개</a></li>
+									<li><a href="">멤버십 가입신청</a></li>
+								</ul>
+							</li>
+						</ul>
+					</nav>
+				</div>
+				<div id="menuicon">
+					<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg>
+				</div>
 			</div>
 		</div>
 	</header>

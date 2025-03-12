@@ -16,22 +16,23 @@
 		font-family: Arial, sans-serif;
 		background-color: #f4f4f4;
 	}
-	
+	.main_content {
+		height: 690px;
+	}
 	.train_service {
 		position: relative;
 		background-image: url('../static/resources/t0.jpg');
 		background-position: bottom;
 		background-size: cover;
 		width: 100%;
-		height: 700px;
+		height: 800px;
 		background-repeat: no-repeat;
-		z-index: 2;
 		margin: auto;
-		top:-60px;
+		top: -90px;
 	}
 	.booking_contents {
 		position: relative;
-		top: 36.3rem;
+		top: 42.5rem;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -40,7 +41,7 @@
 		border: none;
 		width: 100%;
 		height: 120px;
-		z-index: 3;
+		z-index: 1;
 		margin: auto;
 	}
 	.active-button  {
