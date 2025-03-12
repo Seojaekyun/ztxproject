@@ -6,6 +6,54 @@
     <meta charset="UTF-8">
     <title>고객센터 문의 등록</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 50%;
+            margin: 40px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            font-weight: bold;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: #0078d7;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+            text-decoration: none;
+            width: 100%;
+        }
+
+        .btn:hover {
+            background-color: #005bb5;
+        }
+
+        .readonly-input {
+            background-color: #e9ecef;
+            cursor: not-allowed;
+        }
+    </style>
 </head>
 <body>
 
@@ -29,13 +77,31 @@
         <!-- 이름 -->
         <div class="mb-3">
             <label class="form-label">이름</label>
-            <input type="text" class="form-control" name="name" value="${udto.name}" required>
+            <c:choose>
+                <c:when test="${not empty userInfo}">
+                    <!-- 회원인 경우 자동 입력 -->
+                    <input type="text" class="form-control readonly-input" name="name" value="${userInfo.name}" readonly>
+                </c:when>
+                <c:otherwise>
+                    <!-- 비회원인 경우 직접 입력 -->
+                    <input type="text" class="form-control" name="name" required>
+                </c:otherwise>
+            </c:choose>
         </div>
 
         <!-- 연락처 -->
         <div class="mb-3">
             <label class="form-label">연락처</label>
-            <input type="text" class="form-control" name="phone" value="${udto.phone}" required>
+            <c:choose>
+                <c:when test="${not empty userInfo}">
+                    <!-- 회원인 경우 자동 입력 -->
+                    <input type="text" class="form-control readonly-input" name="phone" value="${userInfo.phone}" readonly>
+                </c:when>
+                <c:otherwise>
+                    <!-- 비회원인 경우 직접 입력 -->
+                    <input type="text" class="form-control" name="phone" required>
+                </c:otherwise>
+            </c:choose>
         </div>
 
         <!-- 제목 -->
@@ -50,10 +116,20 @@
             <textarea class="form-control" name="content" rows="5" required></textarea>
         </div>
 
-        <!-- 비밀번호 (모든 사용자 필수 입력) -->
+        <!-- 비밀번호 (비회원만 입력) -->
         <div class="mb-3">
             <label class="form-label">비밀번호</label>
-            <input type="password" class="form-control" name="pwd" required>
+            <c:choose>
+                <c:when test="${not empty userInfo}">
+                    <!-- 회원인 경우 비밀번호 자동 설정 -->
+                    <input type="hidden" name="pwd" value="회원문의">
+                    <input type="text" class="form-control readonly-input" value="회원 문의 (자동 저장)" readonly>
+                </c:when>
+                <c:otherwise>
+                    <!-- 비회원인 경우 비밀번호 입력 -->
+                    <input type="password" class="form-control" name="pwd" required>
+                </c:otherwise>
+            </c:choose>
         </div>
 
         <!-- 버튼 -->

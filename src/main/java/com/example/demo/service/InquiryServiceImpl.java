@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import com.example.demo.dto.InquiryDto;
 import com.example.demo.mapper.InquiryMapper;
+
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 import java.util.ArrayList;
@@ -52,7 +54,7 @@ public class InquiryServiceImpl implements InquiryService {
         model.addAttribute("myInquiries", myInquiries);
         model.addAttribute("page", page);
         model.addAttribute("totalPage", totalPage);
-        return "inquiry/inquiryMyList";
+        return "/inquiry/inquiryMyList";
     }
 
 
@@ -88,6 +90,9 @@ public class InquiryServiceImpl implements InquiryService {
 
     @Override
     public String inquiryContent(int id, String inputPwd, HttpSession session, Model model) {
+        // ✅ 조회수 증가
+        mapper.increaseReadnum(id);
+
         InquiryDto inquiry = mapper.readnum(id);
         String sessionUserId = (session.getAttribute("userid") != null) 
                                ? session.getAttribute("userid").toString() 
@@ -98,16 +103,14 @@ public class InquiryServiceImpl implements InquiryService {
             return "redirect:/inquiry/inquiryList";
         }
 
-        // ✅ 비회원이 작성한 문의는 비밀번호 확인 후 조회 가능하도록 수정
+        // ✅ 비회원 문서는 비밀번호 확인 없이 조회 가능
         if ("guest".equals(inquiry.getUserid())) {
-            if (inputPwd == null || inquiry.getPwd() == null || !inputPwd.trim().equals(inquiry.getPwd().trim())) {
-                model.addAttribute("error", "비밀번호가 일치하지 않습니다.");
-                return "redirect:/inquiry/inquiryList";
-            }
+            model.addAttribute("inquiry", inquiry);
+            return "/inquiry/inquiryContent";
         }
 
-        // ✅ 회원이 작성한 문의인데 본인이 아니면 로그인 페이지로 이동
-        if (!"guest".equals(inquiry.getUserid()) && (sessionUserId == null || !sessionUserId.equals(inquiry.getUserid()))) {
+        // ✅ 회원 문서는 본인만 조회 가능
+        if (sessionUserId == null || !sessionUserId.equals(inquiry.getUserid())) {
             return "redirect:/login/login";
         }
 
@@ -117,25 +120,92 @@ public class InquiryServiceImpl implements InquiryService {
 
 
     @Override
-    public String inquiryUpdateCheck(int id, String pwd, Model model) {
-        InquiryDto inquiry = mapper.getInquiryById(id);
-        if (inquiry == null || !inquiry.getPwd().equals(pwd)) {
-            model.addAttribute("error", "비밀번호가 올바르지 않습니다.");
-            model.addAttribute("inquiry", inquiry);
-            return "inquiry/inquiryContent";
-        }
-        return "redirect:/inquiry/inquiryUpdate?id=" + id;
-    }
+    public String inquiryDelete(int id, String pwd, HttpSession session, Model model) {
+        InquiryDto existingInquiry = mapper.getInquiryById(id);
 
-    @Override
-    public String inquiryDeleteCheck(int id, String pwd, Model model) {
-        InquiryDto inquiry = mapper.getInquiryById(id);
-        if (inquiry == null || !inquiry.getPwd().equals(pwd)) {
-            model.addAttribute("error", "비밀번호가 올바르지 않습니다.");
-            model.addAttribute("inquiry", inquiry);
-            return "inquiry/inquiryContent";
+        if (existingInquiry == null) {
+            model.addAttribute("error", "존재하지 않는 문의입니다.");
+            return "redirect:/inquiry/inquiryList";
         }
+
+        String sessionUserId = (session.getAttribute("userid") != null) 
+                               ? session.getAttribute("userid").toString() 
+                               : null;
+
+        // ✅ 회원이 본인의 글을 삭제할 경우 비밀번호 검증 없이 삭제 가능
+        if (!"guest".equals(existingInquiry.getUserid())) {
+            if (sessionUserId == null || !sessionUserId.equals(existingInquiry.getUserid())) {
+                return "redirect:/login/login";
+            }
+        } else {
+            // ✅ 비회원 검증 - 비밀번호 확인
+            if (pwd == null || !pwd.equals(existingInquiry.getPwd())) {
+                model.addAttribute("error", "비밀번호가 일치하지 않습니다.");
+                return "redirect:/inquiry/detail/" + id;
+            }
+        }
+
         mapper.inquiryDelete(id);
         return "redirect:/inquiry/inquiryList";
     }
+
+
+    @Override
+    public String inquiryUpdate(int id, Model model, HttpSession session) {
+        InquiryDto inquiry = mapper.getInquiryById(id);
+        if (inquiry == null) {
+            model.addAttribute("error", "존재하지 않는 문의입니다.");
+            return "redirect:/inquiry/inquiryList";
+        }
+
+        // 로그인 사용자 확인
+        String userid = (session.getAttribute("userid") != null) 
+                        ? session.getAttribute("userid").toString() 
+                        : null;
+
+        // 회원 검증
+        if (!"guest".equals(inquiry.getUserid()) && (userid == null || !userid.equals(inquiry.getUserid()))) {
+            return "redirect:/login/login";
+        }
+
+        model.addAttribute("inquiry", inquiry);
+        return "inquiry/inquiryUpdate";  // 수정 JSP로 이동
+    }
+    
+    @Override
+    public String inquiryUpdateOk(InquiryDto idto, HttpSession session, HttpServletRequest request) {
+        String userid = (session.getAttribute("userid") != null) 
+                        ? session.getAttribute("userid").toString() 
+                        : null;
+
+        InquiryDto existingInquiry = mapper.getInquiryById(idto.getId());
+        if (existingInquiry == null) {
+            request.setAttribute("error", "존재하지 않는 문의입니다.");
+            return "redirect:/inquiry/inquiryList";
+        }
+
+        // ✅ 회원이면 비밀번호 검증 없이 수정 가능
+        if (!"guest".equals(existingInquiry.getUserid())) {
+            if (userid == null || !userid.equals(existingInquiry.getUserid())) {
+                return "redirect:/login/login";
+            }
+        } else {
+            // ✅ 비회원이면 비밀번호 검증 필요
+            if (idto.getPwd() == null || !idto.getPwd().equals(existingInquiry.getPwd())) {
+                request.setAttribute("error", "비밀번호가 일치하지 않습니다.");
+                return "redirect:/inquiry/inquiryUpdate?id=" + idto.getId();
+            }
+        }
+
+        // ✅ 업데이트 실행
+        mapper.inquiryUpdate(idto);
+        return "redirect:/inquiry/detail/" + idto.getId();
+    }
+
+	@Override
+	public InquiryDto getUserInfo(String userid) {
+		
+		return mapper.getUserInfo(userid);
+	}
+
 }

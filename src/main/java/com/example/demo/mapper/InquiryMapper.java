@@ -2,6 +2,8 @@ package com.example.demo.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+
 import com.example.demo.dto.InquiryDto;
 import java.util.List;
 
@@ -11,8 +13,12 @@ public interface InquiryMapper {
 	public List<InquiryDto> inquiryMyList(@Param("userid") String userid, @Param("index") int index);
 	public void inquiryWriteOk(InquiryDto idto);
 	public InquiryDto readnum(@Param("id") int id);
+	public void increaseReadnum(@Param("id") int id);
 	public InquiryDto getInquiryById(@Param("id") int id);
 	public void inquiryDelete(@Param("id") int id);
 	public int getChong();
 	public int getChongByUser(@Param("userid") String userid);
+	public void inquiryUpdate(InquiryDto idto);
+	public @Select("SELECT name, phone FROM user WHERE userid = #{userid}")
+			InquiryDto getUserInfo(@Param("userid") String userid);
 }
