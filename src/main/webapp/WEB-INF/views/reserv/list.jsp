@@ -88,7 +88,7 @@
     </tr>
    <c:forEach items="${reslist}" var="resdto">
     <tr>
-      <td> <a href=""> ${resdto.PNR} </a> </td>
+      <td> <a href="myReservDetail"> ${resdto.PNR} </a> </td>
       <td> ${resdto.reservday} </td>
       <td> ${resdto.routeDeparture} </td>
       <td> ${resdto.routeArrival} </td>
