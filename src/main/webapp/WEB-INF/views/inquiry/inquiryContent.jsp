@@ -65,12 +65,21 @@
      background-color: #005bb5;
    }
 </style>
+
 <script>
-function submitForm(actionUrl) 
-{
-    document.getElementById("inquiryForm").action = actionUrl;
+function validatePassword(actionUrl, correctPwd) {
+    let inputPwd = document.getElementById("inputPwd").value;
+
+    if (inputPwd !== correctPwd) {
+        alert("비밀번호가 일치하지 않습니다.");
+        return false; // 🚫 이동 차단
+    }
+
+    document.getElementById("actionForm").action = actionUrl;
+    document.getElementById("actionForm").submit(); // ✅ 이동 허용
 }
 </script>
+
 </head>
 <body>
 
@@ -84,13 +93,29 @@ function submitForm(actionUrl)
     </table>
     <br>
     
-    <form id="inquiryForm" method="post">
-    <input type="hidden" name="id" value="${inquiry.id}">
-    <input type="password" name="pwd" placeholder="비밀번호 입력" required>
-    <button type="submit" onclick="submitForm('/inquiry/inquiryUpdateCheck')" class="btn">수정</button>
-    <button type="submit" onclick="submitForm('/inquiry/inquiryDeleteCheck')" class="btn">삭제</button>
-	</form>
-	
+    <!-- 🚀 비회원일 경우 비밀번호 입력 후 수정/삭제 가능 -->
+    <c:if test="${inquiry.userid eq 'guest'}">
+        <form id="actionForm" method="POST">
+            <input type="hidden" name="id" value="${inquiry.id}">
+            
+            <!-- 비밀번호 입력 -->
+            <label>비밀번호 입력: </label>
+            <input type="password" id="inputPwd" name="pwd" required>
+
+            <!-- 수정 버튼 -->
+            <button type="button" onclick="validatePassword('/inquiry/inquiryUpdate', '${inquiry.pwd}')">수정</button>
+
+            <!-- 삭제 버튼 -->
+            <button type="button" onclick="validatePassword('/inquiry/inquiryDelete', '${inquiry.pwd}')">삭제</button>
+        </form>
+    </c:if>
+
+    <!-- 🚀 회원일 경우 비밀번호 없이 수정 가능 -->
+    <c:if test="${inquiry.userid ne 'guest'}">
+        <a href="/inquiry/inquiryUpdate?id=${inquiry.id}" class="btn">수정</a>
+        <a href="/inquiry/inquiryDelete?id=${inquiry.id}" class="btn">삭제</a>
+    </c:if>
+    
     <br>
     <a href="/inquiry/inquiryList" class="btn">목록으로</a>
  </section>

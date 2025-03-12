@@ -74,29 +74,38 @@
         <thead>
             <tr>
                 <th>순번</th>
+                <th>조회수</th>
                 <th>이름</th>
                 <th>제목</th>
-                <th>게시일</th>
+                <th>문의 유형</th>
                 <th>상태</th>
                 <th>조회</th>
+                <th>게시일</th>
             </tr>
         </thead>
         <tbody>
             <c:forEach var="inquiry" items="${myInquiries}">
                 <tr>
                     <td>${inquiry.id}</td>
+                    <td>${inquiry.readnum}</td>
                     <td>${inquiry.name}</td>
                     <td>${inquiry.title}</td>
-                    <td>${inquiry.writeday}</td>
                     <td class="status-${inquiry.status}">
-                        <c:choose>
-                            <c:when test="${inquiry.status == 1}">접수됨</c:when>
-                            <c:when test="${inquiry.status == 2}">처리중</c:when>
-                            <c:when test="${inquiry.status == 3}">완료됨</c:when>
-                            <c:when test="${inquiry.status == 4}">반려됨</c:when>
-                            <c:otherwise>알수없음</c:otherwise>
-                        </c:choose>
-                    </td>
+    					<c:choose>
+        					<c:when test="${inquiry.category == 1}">불편/개선</c:when>
+        					<c:when test="${inquiry.category == 2}">단순 문의</c:when>
+        					<c:when test="${inquiry.category == 3}">친절 제보</c:when>
+        					<c:when test="${inquiry.category == 4}">서식 VOC</c:when>
+        					<c:when test="${inquiry.category == 5}">시민 재해 예방</c:when>
+        					<c:otherwise>알 수 없음</c:otherwise>
+    					</c:choose>
+				    </td>
+				    <td class="ref-${inquiry.ref}">
+				    	<c:choose>
+				    		<c:when test="${inquiry.ref == 0 }">미답변</c:when>
+				    		<c:when test="${inquiry.ref == 1 }">답변완료</c:when>
+				    	</c:choose>
+				    </td>
                     <td>
                         <c:choose>
                             <c:when test="${inquiry.userid == 'guest'}">
@@ -110,6 +119,7 @@
                             </c:otherwise>
                         </c:choose>
                     </td>
+                    <td>${inquiry.writeday}</td>
                 </tr>
             </c:forEach>
         </tbody>

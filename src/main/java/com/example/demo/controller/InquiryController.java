@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import com.example.demo.dto.InquiryDto;
 import com.example.demo.service.InquiryService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -28,8 +29,17 @@ public class InquiryController {
 
     @GetMapping("/inquiryWrite")
     public String inquiryWrite(HttpSession session, Model model) {
-        return service.inquiryWrite(session, model);
+        String userid = (String) session.getAttribute("userid");
+
+        if (userid != null) {
+            // ✅ 회원 정보 조회 후 model에 저장
+            InquiryDto userInfo = service.getUserInfo(userid);
+            model.addAttribute("userInfo", userInfo);
+        }
+
+        return "/inquiry/inquiryWrite";
     }
+
 
     @PostMapping("/inquiryWriteOk")
     public String inquiryWriteOk(InquiryDto idto, HttpSession session, Model model) {
@@ -42,17 +52,24 @@ public class InquiryController {
                                  HttpSession session, Model model) {
         return service.inquiryContent(id, inputPwd, session, model);
     }
-
-
-
-    @PostMapping("/inquiryUpdateCheck")
-    public String inquiryUpdateCheck(@RequestParam int id, @RequestParam String pwd, Model model) {
-        return service.inquiryUpdateCheck(id, pwd, model);
+    
+    @RequestMapping("/inquiryUpdate")
+    public String inquiryUpdate(@RequestParam("id") int id, Model model , HttpSession session) {
+    	return service.inquiryUpdate(id,model,session);
+    } 
+    
+    @RequestMapping("/inquiryUpdateOk")
+    public String inquiryUpdateCheckOk(InquiryDto idto,HttpSession session,HttpServletRequest request) {
+        return service.inquiryUpdateOk(idto,session,request);
     }
 
-    @PostMapping("/inquiryDeleteCheck")
-    public String inquiryDeleteCheck(@RequestParam int id, @RequestParam String pwd, Model model) {
-        return service.inquiryDeleteCheck(id, pwd, model);
+    @RequestMapping("/inquiryDelete")
+    public String inquiryDelete(@RequestParam int id, 
+                                     @RequestParam(required = false) String pwd, 
+                                     HttpSession session, Model model) {
+        return service.inquiryDelete(id, pwd, session, model);
     }
+
+    
     
 }

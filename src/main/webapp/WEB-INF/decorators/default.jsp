@@ -516,7 +516,7 @@
 					<!-- <a href="../login/login"> 로그인 </a>&nbsp;|&nbsp; -->
 				</c:if>
 				<c:if test="${userid==null}">
-					<a href="../login/login"> 로그인 </a>&nbsp;&nbsp;|&nbsp;&nbsp;
+					<a href="/login/login"> 로그인 </a>&nbsp;&nbsp;|&nbsp;&nbsp;
 				</c:if>
 				<c:if test="${userid!=null&&userid!='administrator'}">
 				<div id="myInfo" onmouseover="viewMmenu(0)" onmouseout="hideMmenu(0)">
@@ -528,7 +528,7 @@
 						<li><a href="../member/myRev">나의후기</a></li>
 					</ul>
 				</div>
-				<a href="../login/logout">로그아웃</a>&nbsp;|&nbsp;
+				<a href="/login/logout">로그아웃</a>&nbsp;|&nbsp;
 				</c:if>
 				<div id="supMenu" onmouseover="viewCmenu(0)" onmouseout="hideCmenu(0)">
 					<span>고객센터</span>
