@@ -83,10 +83,15 @@
     	display: inline-block;
     	width: 100px;
     	height: 35px;
+    	border: none;
     	border-radius: 5px;
     	background: #007BFF;
     	color: white;
     	font-size: 12px;
+    	font-weight: 600;
+    }
+    input[type="submit"]:hover {
+    	background: lightblue;
     }
     
   </style>
