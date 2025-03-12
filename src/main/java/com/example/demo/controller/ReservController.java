@@ -24,19 +24,19 @@ public class ReservController {
 	public String reservCheck(@RequestParam int routeid, @RequestParam String routeDeparture,
 			@RequestParam String routeArrival, @RequestParam String routeTime,
 			@RequestParam String routeArrivalTime, @RequestParam String selectedSeats,
-			@RequestParam int resnum, Model model, HttpSession session) {
+			@RequestParam int resnum, @RequestParam int charge, HttpServletRequest request, Model model, HttpSession session) {
 		// 예약 처리 로직 추가
-		return resService.reservCheck(routeid, routeDeparture, routeArrival, routeTime, routeArrivalTime, resnum, selectedSeats, model, session);
+		return resService.reservCheck(routeid, routeDeparture, routeArrival, routeTime, routeArrivalTime, resnum, charge, selectedSeats, request, model, session);
 	}
 	
 	@PostMapping("/reserv/reservConfirm")
 	public String reservConfirm(@RequestParam String userid, @RequestParam int routeid,
 			@RequestParam String routeDeparture, @RequestParam String routeArrival,
 			@RequestParam String routeTime, @RequestParam String routeArrivalTime,
-			@RequestParam String selectedSeats, @RequestParam int resnum,
+			@RequestParam String selectedSeats, @RequestParam int resnum, @RequestParam int charge,
 			Model model, HttpSession session) {
 		// 예약 처리 로직 추가
-		return resService.reservConfirm(userid, routeid, routeDeparture, routeArrival, routeTime, routeArrivalTime, resnum, selectedSeats, model, session);
+		return resService.reservConfirm(userid, routeid, routeDeparture, routeArrival, routeTime, routeArrivalTime, resnum, charge, selectedSeats, model, session);
 	}
 	
 	@GetMapping("/reserv/list")

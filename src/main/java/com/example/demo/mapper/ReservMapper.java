@@ -26,6 +26,10 @@ public interface ReservMapper {
 	int getTotalReserv(String trainid, String routeTime);
 	int getSeatCountByReservid(int reservid);
 	Integer getState(int reservid);
+	List<String> getMonthLabels();
+	List<Integer> getMonthRsv();
+	List<String> getRouteLabels();
+	List<Integer> getRouteRsv();
 	
 	
 }

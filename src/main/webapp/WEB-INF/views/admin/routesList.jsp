@@ -263,7 +263,6 @@
 				<th>출발시간</th>
 				<th>도착시간</th>
 				<th>잔여석</th>
-				<th>비고</th>
 			</tr>
 			<c:forEach var="route" items="${pagedSeoulRoutes}">
 				<tr>
@@ -272,7 +271,6 @@
 					<td>${route.departureTime}</td>
 					<td>${route.arrivalTime}</td>
 					<td>${route.avaiSeats}</td>
-					<td>${route.routeid}</td>
 				</tr>
 			</c:forEach>
 			<c:if test="${empty pagedSeoulRoutes}">

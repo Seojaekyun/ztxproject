@@ -32,8 +32,8 @@
 		SELECT * FROM stations
 	</select>
 	<insert id="addRoute" parameterType="com.example.demo.dto.RoutesDto">
-		INSERT INTO routes (departure, arrival, departure_time, arrival_time, trainid)
-		VALUES (#{departure}, #{arrival}, #{departureTime}, #{arrivalTime}, #{trainid})
+		INSERT INTO routes (departure, arrival, departure_time, arrival_time, trainid, charge)
+		VALUES (#{departure}, #{arrival}, #{departureTime}, #{arrivalTime}, #{trainid}, #{unitPrice})
 	</insert>
 	<select id="AllTraines" resultType="com.example.demo.dto.TrainesDto">
 		SELECT * FROM traines<!--  order by capa desc, trainid asc --> 
@@ -76,12 +76,9 @@
 		SELECT * FROM routeTimes
 		WHERE (dep = #{a} AND arr = #{b}) OR (dep = #{b} AND arr = #{a})
 	</select>
-	
 	<select id="getSeatsForRoute" resultType="com.example.demo.dto.SeatDto">
 	    SELECT * FROM seates
 	</select>
-	
-	
 	<insert id="addSeatsForRoute">
 		INSERT INTO trainseat (routeid, seatid, seatnum) VALUES
 		<foreach collection="seatNumbers" item="seat" separator=",">

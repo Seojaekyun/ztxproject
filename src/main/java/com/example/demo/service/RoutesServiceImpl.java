@@ -18,6 +18,7 @@ import com.example.demo.dto.StationsDto;
 import com.example.demo.dto.TrainesDto;
 import com.example.demo.mapper.RoutesMapper;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @Service("rs")
@@ -34,19 +35,24 @@ public class RoutesServiceImpl implements RoutesService {
 	
 	@Override
 	public String routeSearch(@RequestParam String departure, @RequestParam String arrival,
-			@RequestParam(required = false) String departureDate,
-			@RequestParam(required = false) Integer resnum, Model model) {
+			@RequestParam(required = false) String departureDate, @RequestParam(required = false) Integer resnum,
+			@RequestParam(required = false) Integer charge, HttpSession session, Model model) {
 		LocalDate today = LocalDate.now();
+		String userid=(String)session.getAttribute("userid");
 		
-		List<RoutesDto> departingRoutes=mapper.findRoutes(
-				departure, arrival, departureDate, resnum);
-		
-		model.addAttribute("today", today);
-		model.addAttribute("routes", departingRoutes);
-		model.addAttribute("resnum", resnum);
-		
-		// 검색 결과를 보여줄 JSP 파일로 이동
-		return "routes/search";
+		if(userid==null) {
+			return "redirect:/login/login";
+		}
+		else {
+			List<RoutesDto> departingRoutes=mapper.findRoutes(departure, arrival, departureDate, resnum);
+			
+			model.addAttribute("today", today);
+			model.addAttribute("routes", departingRoutes);
+			model.addAttribute("resnum", resnum);
+			model.addAttribute("charge", charge);
+			// 검색 결과를 보여줄 JSP 파일로 이동
+			return "routes/search";
+		}
 	}
 	
 	@Override
@@ -54,7 +60,7 @@ public class RoutesServiceImpl implements RoutesService {
 			@RequestParam String routeArrival, @RequestParam String routeTime,
 			@RequestParam String routeArrivalTime, @RequestParam Integer resnum, // 선택된 인원
 			@RequestParam(required = false, defaultValue = "") String[] goingSelectedSeats,
-			HttpSession session, Model model) {
+			@RequestParam Integer charge, HttpServletRequest request, HttpSession session, Model model) {
 		
 		// 가는편 정보를 모델에 추가
 		model.addAttribute("routeid", routeid);
@@ -63,6 +69,7 @@ public class RoutesServiceImpl implements RoutesService {
 		model.addAttribute("routeTime", routeTime);
 		model.addAttribute("routeArrivalTime", routeArrivalTime);
 		model.addAttribute("resnum", resnum);
+		model.addAttribute("charge", charge);
 		session.setAttribute("routeid", routeid);
 		model.addAttribute("goingSelectedSeats", goingSelectedSeats);
 		
@@ -115,7 +122,6 @@ public class RoutesServiceImpl implements RoutesService {
 		route.setUnitPrice(unitPrice);
 		
 		mapper.addRoute(route);
-		
 	}
 	
 	@Override

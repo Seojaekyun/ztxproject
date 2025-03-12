@@ -60,7 +60,7 @@
 				</tr>
 				<tr>
 					<th>금액</th>
-					<td><fmt:formatNumber value="" type="number"/>원</td>
+					<td><fmt:formatNumber value="${charge}" type="number"/>원</td>
 				</tr>
 			</table>
 		</div>
@@ -93,7 +93,7 @@
 				<input type="hidden" name="routeArrival" value="${routeArrival}">
 				<input type="hidden" name="routeTime" value="${routeTime}">
 				<input type="hidden" name="routeArrivalTime" value="${routeArrivalTime}">
-				<input type="hidden" name="totalPrice" value="">
+				<input type="hidden" name="charge" value="${charge}">
 				<button type="submit" class="btn btn-success">예약하기</button>
 			</form>
 			<button class="btn btn-secondary" onclick="history.back()">이전으로</button>

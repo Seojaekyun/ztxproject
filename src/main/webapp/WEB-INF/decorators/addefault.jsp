@@ -222,7 +222,6 @@
 				<button onclick="location.href='promotList'">프로모션</button>
 				<button onclick="location.href='rsvChart'">예약통계</button>
 			</div>
-
 		</div>
 	</header>
 

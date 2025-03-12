@@ -20,10 +20,11 @@ public class ReservServiceImpl implements ReservService {
 
 	@Override
 	public String reservCheck(int routeid, String routeDeparture, String routeArrival, String routeTime,
-			String routeArrivalTime, int resnum, String selectedSeats, Model model, HttpSession session) {
+			String routeArrivalTime, int resnum, int charge, String selectedSeats, HttpServletRequest request, Model model, HttpSession session) {
 		
 		String userid=(String) session.getAttribute("userid");
 		String name=(String) session.getAttribute("name");
+		int charges=(Integer.parseInt(request.getParameter("charge")))*resnum;
 		
 		model.addAttribute("userid", userid);
 		model.addAttribute("name", name);
@@ -32,6 +33,7 @@ public class ReservServiceImpl implements ReservService {
 		model.addAttribute("routeTime", routeTime);
 		model.addAttribute("routeArrivalTime", routeArrivalTime);
 		model.addAttribute("resnum", resnum);
+		model.addAttribute("charge", charges);
 		model.addAttribute("selectedSeats", selectedSeats);
 		
 		return "/reserv/reservCheck";
@@ -50,13 +52,13 @@ public class ReservServiceImpl implements ReservService {
 
 	@Override
 	public String reservConfirm(String userid, int routeid, String routeDeparture, String routeArrival, String routeTime,
-            String routeArrivalTime, int resnum, String selectedSeats, Model model, HttpSession session) {
+            String routeArrivalTime, int resnum, int charge, String selectedSeats, Model model, HttpSession session) {
 		String PNR = generatePNR();
 		String[] seatsArray = selectedSeats.split(",");
 		
 		// DTO 객체 생성 후 MyBatis에 전달
 		ReservDto resDto = new ReservDto(userid, routeid, routeDeparture, routeArrival, routeTime,
-				routeArrivalTime, resnum, PNR);
+				routeArrivalTime, resnum, charge, PNR);
 		
 		try {
 		    resMapper.addReserv(resDto);
@@ -88,6 +90,7 @@ public class ReservServiceImpl implements ReservService {
 		model.addAttribute("routeid", routeid);
 		model.addAttribute("selectedSeats", selectedSeats);
 		model.addAttribute("resnum", resnum);
+		model.addAttribute("charge", charge);
 		model.addAttribute("routeDeparture", routeDeparture);
 		model.addAttribute("routeArrival", routeArrival);
 		model.addAttribute("routeTime", routeTime);
@@ -97,8 +100,7 @@ public class ReservServiceImpl implements ReservService {
 	}
 
 	@Override
-	public String list(Model model, HttpServletRequest request)
-	{
+	public String list(Model model, HttpServletRequest request) {
 		int page=1;
 		if(request.getParameter("page") != null)
 			page=Integer.parseInt(request.getParameter("page"));
@@ -127,7 +129,6 @@ public class ReservServiceImpl implements ReservService {
 		
 		return "/reserv/list";
 	}
-	
 	
 	
 }

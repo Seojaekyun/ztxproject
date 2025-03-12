@@ -13,7 +13,6 @@ import com.example.demo.dto.StationsDto;
 import com.example.demo.dto.TrainesDto;
 import com.example.demo.service.AdminService;
 import com.example.demo.service.RoutesService;
-
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
@@ -108,6 +107,11 @@ public class AdminController {
 	public String addSeats() { // flightId는 내부에서 처리되므로 전달하지 않음
 		rservice.addSeatsForRoute();
 		return "redirect:/admin/routesList";  // 완료 후 항공편 목록 페이지로 이동
+	}
+	
+	@GetMapping("/admin/rsvChart")
+	public String rsvChart(Model model) {
+		return service.rsvChart(model);
 	}
 	
 }

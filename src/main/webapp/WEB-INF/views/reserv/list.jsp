@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
@@ -8,7 +7,9 @@
 <title>Insert title here</title>
   <style>
     table {
+      margin: auto;
       width:100%;
+      max-width: 1000px;
       border-collapse:collapse;
       margin-top:20px;
       background-color:#ffffff;
@@ -19,7 +20,7 @@
     th, td {
       border:1px solid #ddd;
       padding:12px;
-      font-size:16px;
+      font-size:14px;
     }
     th {
       background-color:#007BFF;
@@ -94,8 +95,24 @@
       <td> ${resdto.routeArrival} </td>
       <td> ${resdto.routeTime} </td>
       <td> ${resdto.routeArrivalTime} </td>
-      <td> ${resdto.payment} </td>
-      <td> ${resdto.state} </td>
+      <td> ${resdto.charge} </td>
+      <td>
+		<c:if test="${resdto.payment == 0}">
+			결제전
+		</c:if>
+		<c:if test="${resdto.payment == 1}">
+			결제 완료
+		</c:if>
+		<c:if test="${resdto.payment == 2}">
+			취소요청중
+		</c:if>
+		<c:if test="${resdto.payment == 3}">
+			취소
+		</c:if>
+		<c:if test="${resdto.payment == 4}">
+			취소 불가
+		</c:if>
+	</td>
     </tr>
    </c:forEach>
   </table>
