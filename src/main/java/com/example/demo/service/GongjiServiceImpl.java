@@ -26,4 +26,14 @@ public class GongjiServiceImpl implements GongjiService{
 		
 		return "/admin/gongjiList";
 	}
+
+	@Override
+	public String list(GongjiDto gdto, Model model)
+	{	
+		ArrayList<GongjiDto> glist=mapper.list();
+		
+		model.addAttribute("glist", glist);
+		
+		return "/gongji/list";
+	}
 }

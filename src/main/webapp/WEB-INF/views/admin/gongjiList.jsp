@@ -13,12 +13,13 @@
 		padding: 0;
 		background-color: #f4f6f9;
 	}
-	h2 {
-		font-size: 24px;
-		font-weight: 700;
-		margin-top: 20px;
-		text-align: center;
-	}
+	h3 {
+      font-size:24px;
+      font-weight:bold;
+      color:#333;
+      text-align:center;
+      margin-bottom:20px;
+    }
 	section {
 		max-width: 800px;
 		margin: 30px auto;

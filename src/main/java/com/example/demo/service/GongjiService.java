@@ -6,5 +6,6 @@ import com.example.demo.dto.GongjiDto;
 
 public interface GongjiService {
 	String gongjiList(GongjiDto gdto, Model model);
+	String list(GongjiDto gdto, Model model);
 	
 }

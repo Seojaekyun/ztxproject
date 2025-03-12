@@ -119,7 +119,6 @@ public class AdminController {
 	@GetMapping("/admin/gongjiList")
 	public String gongjiList(GongjiDto gdto, Model model)
 	{
-		
 		return gservice.gongjiList(gdto, model);
 	}
 	
