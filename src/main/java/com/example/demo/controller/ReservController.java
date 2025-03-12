@@ -40,8 +40,7 @@ public class ReservController {
 	}
 	
 	@GetMapping("/reserv/list")
-	public String list(Model model, HttpServletRequest request)
-	{
+	public String list(Model model, HttpServletRequest request) {
 		return resService.list(model, request);
 	}
 	
