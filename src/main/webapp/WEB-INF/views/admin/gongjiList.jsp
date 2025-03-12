@@ -114,20 +114,6 @@
 	.pagination a:hover {
 		background-color: #f4f4f4;
 	}
-	/* 반응형 디자인 */
-	@media (max-width: 768px) {
-		h2 {
-		font-size: 20px;
-		}
-		th, td {
-			font-size: 14px;
-			padding: 10px;
-		}
-		#write {
-			font-size: 12px;
-			padding: 8px 15px;
-		}
-	}
 </style>
 </head>
 <body>
