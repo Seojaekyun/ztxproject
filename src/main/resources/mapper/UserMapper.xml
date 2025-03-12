@@ -15,8 +15,13 @@
     select * from user where userid=#{userid}
   </select>
 
-  <update id="updateOk">
-    update user set email=#{email} pwd=#{pwd} phone=#{phone}
+  <update id="updateOk1" parameterType="com.example.demo.dto.UserDto">
+    update user set phone=#{phone}, email=#{email}
+    where userid=#{userid}
+  </update>
+  
+  <update id="updateOk2" parameterType="com.example.demo.dto.UserDto">
+    update user set phone=#{phone}, email=#{email} , pwd=#{pwd}  
     where userid=#{userid}
   </update>
   

@@ -94,7 +94,7 @@
   <script>
     function pwdCheck()
     {
-    	var oPwd=document.vform.oPwd.value;
+    	var oPwd=document.vform.oPwd.value.trim();
     	
     	var chk=new XMLHttpRequest();
     	chk.onload=function()
@@ -115,34 +115,36 @@
     }
     function newPwd()
     {
-    	var oPwd=document.vform.oPwd.value;
-		var nPwd=document.vform.nPwd.value;
-		var nPwd2=document.vform.nPwd2.value;
+    	var oPwd=document.vform.oPwd.value.trim();
+		var nPwd=document.vform.pwd.value.trim();
+		var nPwd2=document.vform.nPwd2.value.trim();
 		
-		if(nPwd != 0)
+		if(nPwd.length == 0)
 		{
-			if(oPwd == nPwd)
-			{
-				document.getElementById("pmsg2").innerText="이전과 같은 비밀번호 입니다.";
-				document.getElementById("pmsg2").style.color="red";
-			}
-			else
-			{
-				if(nPwd == nPwd2)
-				{
-					document.getElementById("pmsg3").innerText="비밀번호가 일치합니다.";
-					document.getElementById("pmsg3").style.color="blue";
-				}
-				else
-				{
-					document.getElementById("pmsg3").innerText="비밀번호가 일치하지 않습니다.";
-					document.getElementById("pmsg3").style.color="red";
-				}
-			}
+			document.getElementById("pmsg2").innerText="";
+			document.getElementById("pmsg3").innerText="";
+			return;
+		}
+		
+		if(oPwd == nPwd)
+		{
+			document.getElementById("pmsg2").innerText="이전과 같은 비밀번호입니다.";
+			document.getElementById("pmsg2").style.color="red";
 		}
 		else
 		{
-			
+			document.getElementById("pmsg2").innerText="";
+		}
+		
+		if(nPwd == nPwd2)
+		{
+			document.getElementById("pmsg3").innerText="비밀번호가 일치합니다";
+			document.getElementById("pmsg3").style.color="blue";
+		}
+		else
+		{
+			document.getElementById("pmsg3").innerText="비밀번호가 일치하지 않습니다.";
+			document.getElementById("pmsg3").style.color="red";
 		}
 	}
   </script>
@@ -163,24 +165,24 @@
     <tr>
       <td> 이메일 </td>
       <td>
-        <input type="text" id="email" value="${udto.email}">
+        <input type="text" id="email" name="email" value="${udto.email}">
       </td>
     </tr>
     <tr>
       <td> 비밀번호 변경 </td>
       <td>
-        <input type="password" name="oPwd" id="pwd" onblur="pwdCheck()" placeholder="현재 비밀번호">
+        <input type="password" name="oPwd" onblur="pwdCheck()" placeholder="현재 비밀번호">
         <span id="pmsg"> </span>
-        <input type="password" name="nPwd" id="pwd" onkeyup="newPwd()" placeholder="새 비밀번호">
+        <input type="password" name="pwd" onkeyup="newPwd()" placeholder="새 비밀번호">
         <span id="pmsg2"> </span> 
-        <input type="password" name="nPwd2" id="pwd" onkeyup="newPwd()" placeholder="비밀번호 확인">
+        <input type="password" name="nPwd2" onkeyup="newPwd()" placeholder="비밀번호 확인">
         <span id="pmsg3"> </span>
       </td>
     </tr>
     <tr>
       <td> 전화번호 </td>
       <td>
-        <input type="text" id="phone" value="${udto.phone}">
+        <input type="text" id="phone" name="phone" value="${udto.phone}">
       </td>
     </tr>
   </table>
