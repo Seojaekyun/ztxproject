@@ -152,7 +152,8 @@
 		margin: auto;
 	}
 	#section2 #nav {
-	background: rgba(68,87,98,0.8);
+		background: rgba(68,87,98,0.8);
+		z-index:5;
 	}
 	
 	#section2 nav #main {
@@ -160,7 +161,7 @@
 		margin: auto; /* Adjusted to align properly */
 		text-align: center;
 		
-		z-index:5;
+		
 	}
 	#section2 nav #main > li {
 		display: inline-block;
