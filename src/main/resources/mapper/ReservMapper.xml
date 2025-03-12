@@ -76,5 +76,22 @@
 		SELECT COUNT(*) FROM reservlist r JOIN routes ro ON r.routeid = ro.routeid GROUP BY ro.arrival;
 	</select>
 	
+	<select id="getRsvcPay" resultType="map">
+		SELECT r.*, ro.*, DATE_FORMAT(ro.departure_time, '%Y-%m-%d %H:%i:%s') AS departureTime,
+		DATE_FORMAT(ro.arrival_time, '%Y-%m-%d %H:%i:%s') as arrivalTime,
+		DATE_FORMAT(r.reservday, '%Y-%m-%d %H:%i:%s') AS reservationDate, r.charge
+		FROM reservlist r JOIN routes ro ON r.routeid = ro.routeid WHERE r.PNR = #{PNR}
+	</select>
+	<select id="getReservSeatInfo" resultType="map" parameterType="map">
+		SELECT ts.seatnum FROM reservlist r JOIN trainseat ts ON r.reservid = ts.resid WHERE r.PNR = #{PNR}
+	</select>
+	<update id="chargeOk" parameterType="com.example.demo.dto.ReservDto">
+		update reservlist set payment=1 where PNR=#{PNR}
+	</update>
+	<insert id="payOk" parameterType="com.example.demo.dto.ReservDto">
+		insert into payments (resid, amount, paydate, paymethod)
+		values(#{reservid}, #{charge}, now(), #{sudan})
+	</insert>
+	
 	
 </mapper>

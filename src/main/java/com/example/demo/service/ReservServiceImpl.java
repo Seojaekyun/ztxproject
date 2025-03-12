@@ -1,6 +1,8 @@
 package com.example.demo.service;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -128,6 +130,34 @@ public class ReservServiceImpl implements ReservService {
 		model.addAttribute("chong", chong);
 		
 		return "/reserv/list";
+	}
+
+	@Override
+	public String payment(HttpSession session, HttpServletRequest request, Model model) {
+		// URL 파라미터로 넘어온 pnr 값을 받음
+		String PNR = request.getParameter("PNR");
+				
+		// 예약 리스트 가져오기
+		List<Map<String, Object>> rsvClist;
+		rsvClist = resMapper.getRsvcPay(PNR);
+		List<Map<String, Object>> rsvSeatInfo;
+		rsvSeatInfo = resMapper.getReservSeatInfo(PNR);
+		int scount = rsvSeatInfo.size();
+		
+		// JSP로 데이터 전달
+		model.addAttribute("rsvClist", rsvClist);
+		model.addAttribute("rsvSeatInfo", rsvSeatInfo);
+		model.addAttribute("scount", scount);
+		//System.out.println("값:"+rsvClist);
+		//System.out.println("값:"+rsvSeatInfo);
+		return "/reserv/payment";
+	}
+	
+	@Override
+	public String chargeOk(ReservDto rdto) {
+		resMapper.payOk(rdto);
+		resMapper.chargeOk(rdto);
+		return "redirect:/reserv/list";
 	}
 	
 	

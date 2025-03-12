@@ -72,12 +72,31 @@
       background:none;
       border:none;
     }
+    #paybtn {
+      margin: auto;
+      width:100%;
+      max-width: 1000px;
+      text-align: right;
+      padding: 5px;
+    }
+    input[type="submit"] {
+    	display: inline-block;
+    	width: 100px;
+    	height: 35px;
+    	border-radius: 5px;
+    	background: #007BFF;
+    	color: white;
+    	font-size: 12px;
+    }
+    
   </style>
 </head>
 <body> <!-- reserv/list.jsp -->
  <section>
+ <form action="/reserv/payment?" method="get">
   <table>
     <tr>
+      <th>  </th>
       <th> 예약코드 </th>
       <th> 예약날짜 </th>
       <th> 출발지 </th>
@@ -89,6 +108,7 @@
     </tr>
    <c:forEach items="${reslist}" var="resdto">
     <tr>
+      <td> <input type="checkbox" name="PNR" value="${resdto.PNR }"></td>
       <td> <a href="myReservDetail"> ${resdto.PNR} </a> </td>
       <td> ${resdto.reservday} </td>
       <td> ${resdto.routeDeparture} </td>
@@ -116,6 +136,8 @@
     </tr>
    </c:forEach>
   </table>
+  <div id="paybtn"><input type="submit" value="선택결제"></div>
+  </form>
   
     <div id="paging">
      <c:if test="${pstart != 1}">

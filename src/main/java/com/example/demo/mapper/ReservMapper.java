@@ -30,6 +30,10 @@ public interface ReservMapper {
 	List<Integer> getMonthRsv();
 	List<String> getRouteLabels();
 	List<Integer> getRouteRsv();
+	List<Map<String, Object>> getRsvcPay(String pnr);
+	List<Map<String, Object>> getReservSeatInfo(String pnr);
+	void payOk(ReservDto rdto);
+	void chargeOk(ReservDto rdto);
 	
 	
 }

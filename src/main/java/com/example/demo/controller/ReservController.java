@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.ReservDto;
 import com.example.demo.service.ReservService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -42,6 +43,16 @@ public class ReservController {
 	@GetMapping("/reserv/list")
 	public String list(Model model, HttpServletRequest request) {
 		return resService.list(model, request);
+	}
+	
+	@GetMapping("/reserv/payment")
+	public String payment(HttpSession session, HttpServletRequest request, Model model) {
+		return resService.payment(session, request, model);
+	}
+	
+	@PostMapping("/reserv/chargeOk")
+	public String chargeOk(ReservDto rdto) {
+		return resService.chargeOk(rdto);
 	}
 	
 	
