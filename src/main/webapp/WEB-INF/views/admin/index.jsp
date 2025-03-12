@@ -120,7 +120,7 @@
 	            <c:forEach items="${seoulRsv}" var="srsv">
 	                <tr>
 	                    <td>${srsv.trainid}</td>
-	                    <td>${srsv.departureTime}</td>
+	                    <td>${srsv.routeTime}</td>
 	                    <td>${srsv.reservCount}</td>
 	                </tr>
 	            </c:forEach>
@@ -142,7 +142,7 @@
 	            <c:forEach items="${pusanRsv}" var="prsv">
 	                <tr>
 	                    <td>${prsv.trainid}</td>
-	                    <td>${prsv.departureTime}</td>
+	                    <td>${prsv.routeTime}</td>
 	                    <td>${prsv.reservCount}</td>
 	                </tr>
 	            </c:forEach>
@@ -164,7 +164,7 @@
 	            <c:forEach items="${otherRsv}" var="orsv">
 	                <tr>
 	                    <td>${orsv.trainid}</td>
-	                    <td>${orsv.departureTime}</td>
+	                    <td>${orsv.routeTime}</td>
 	                    <td>${orsv.reservCount}</td>
 	                </tr>
 	            </c:forEach>

@@ -1,6 +1,8 @@
 package com.example.demo.service;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +22,11 @@ public class ReservServiceImpl implements ReservService {
 
 	@Override
 	public String reservCheck(int routeid, String routeDeparture, String routeArrival, String routeTime,
-			String routeArrivalTime, int resnum, String selectedSeats, Model model, HttpSession session) {
+			String routeArrivalTime, int resnum, int charge, String selectedSeats, HttpServletRequest request, Model model, HttpSession session) {
 		
 		String userid=(String) session.getAttribute("userid");
 		String name=(String) session.getAttribute("name");
+		int charges=(Integer.parseInt(request.getParameter("charge")))*resnum;
 		
 		model.addAttribute("userid", userid);
 		model.addAttribute("name", name);
@@ -32,6 +35,7 @@ public class ReservServiceImpl implements ReservService {
 		model.addAttribute("routeTime", routeTime);
 		model.addAttribute("routeArrivalTime", routeArrivalTime);
 		model.addAttribute("resnum", resnum);
+		model.addAttribute("charge", charges);
 		model.addAttribute("selectedSeats", selectedSeats);
 		
 		return "/reserv/reservCheck";
@@ -50,13 +54,13 @@ public class ReservServiceImpl implements ReservService {
 
 	@Override
 	public String reservConfirm(String userid, int routeid, String routeDeparture, String routeArrival, String routeTime,
-            String routeArrivalTime, int resnum, String selectedSeats, Model model, HttpSession session) {
+            String routeArrivalTime, int resnum, int charge, String selectedSeats, Model model, HttpSession session) {
 		String PNR = generatePNR();
 		String[] seatsArray = selectedSeats.split(",");
 		
 		// DTO 객체 생성 후 MyBatis에 전달
 		ReservDto resDto = new ReservDto(userid, routeid, routeDeparture, routeArrival, routeTime,
-				routeArrivalTime, resnum, PNR);
+				routeArrivalTime, resnum, charge, PNR);
 		
 		try {
 		    resMapper.addReserv(resDto);
@@ -88,6 +92,7 @@ public class ReservServiceImpl implements ReservService {
 		model.addAttribute("routeid", routeid);
 		model.addAttribute("selectedSeats", selectedSeats);
 		model.addAttribute("resnum", resnum);
+		model.addAttribute("charge", charge);
 		model.addAttribute("routeDeparture", routeDeparture);
 		model.addAttribute("routeArrival", routeArrival);
 		model.addAttribute("routeTime", routeTime);
@@ -97,8 +102,7 @@ public class ReservServiceImpl implements ReservService {
 	}
 
 	@Override
-	public String list(Model model, HttpServletRequest request)
-	{
+	public String list(Model model, HttpServletRequest request) {
 		int page=1;
 		if(request.getParameter("page") != null)
 			page=Integer.parseInt(request.getParameter("page"));
@@ -127,7 +131,34 @@ public class ReservServiceImpl implements ReservService {
 		
 		return "/reserv/list";
 	}
+
+	@Override
+	public String payment(HttpSession session, HttpServletRequest request, Model model) {
+		// URL 파라미터로 넘어온 pnr 값을 받음
+		String PNR = request.getParameter("PNR");
+				
+		// 예약 리스트 가져오기
+		List<Map<String, Object>> rsvClist;
+		rsvClist = resMapper.getRsvcPay(PNR);
+		List<Map<String, Object>> rsvSeatInfo;
+		rsvSeatInfo = resMapper.getReservSeatInfo(PNR);
+		int scount = rsvSeatInfo.size();
+		
+		// JSP로 데이터 전달
+		model.addAttribute("rsvClist", rsvClist);
+		model.addAttribute("rsvSeatInfo", rsvSeatInfo);
+		model.addAttribute("scount", scount);
+		//System.out.println("값:"+rsvClist);
+		//System.out.println("값:"+rsvSeatInfo);
+		return "/reserv/payment";
+	}
 	
+	@Override
+	public String chargeOk(ReservDto rdto) {
+		resMapper.payOk(rdto);
+		resMapper.chargeOk(rdto);
+		return "redirect:/reserv/list";
+	}
 	
 	
 }

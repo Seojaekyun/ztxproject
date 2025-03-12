@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.ReservDto;
 import com.example.demo.service.ReservService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -24,25 +25,34 @@ public class ReservController {
 	public String reservCheck(@RequestParam int routeid, @RequestParam String routeDeparture,
 			@RequestParam String routeArrival, @RequestParam String routeTime,
 			@RequestParam String routeArrivalTime, @RequestParam String selectedSeats,
-			@RequestParam int resnum, Model model, HttpSession session) {
+			@RequestParam int resnum, @RequestParam int charge, HttpServletRequest request, Model model, HttpSession session) {
 		// 예약 처리 로직 추가
-		return resService.reservCheck(routeid, routeDeparture, routeArrival, routeTime, routeArrivalTime, resnum, selectedSeats, model, session);
+		return resService.reservCheck(routeid, routeDeparture, routeArrival, routeTime, routeArrivalTime, resnum, charge, selectedSeats, request, model, session);
 	}
 	
 	@PostMapping("/reserv/reservConfirm")
 	public String reservConfirm(@RequestParam String userid, @RequestParam int routeid,
 			@RequestParam String routeDeparture, @RequestParam String routeArrival,
 			@RequestParam String routeTime, @RequestParam String routeArrivalTime,
-			@RequestParam String selectedSeats, @RequestParam int resnum,
+			@RequestParam String selectedSeats, @RequestParam int resnum, @RequestParam int charge,
 			Model model, HttpSession session) {
 		// 예약 처리 로직 추가
-		return resService.reservConfirm(userid, routeid, routeDeparture, routeArrival, routeTime, routeArrivalTime, resnum, selectedSeats, model, session);
+		return resService.reservConfirm(userid, routeid, routeDeparture, routeArrival, routeTime, routeArrivalTime, resnum, charge, selectedSeats, model, session);
 	}
 	
 	@GetMapping("/reserv/list")
-	public String list(Model model, HttpServletRequest request)
-	{
+	public String list(Model model, HttpServletRequest request) {
 		return resService.list(model, request);
+	}
+	
+	@GetMapping("/reserv/payment")
+	public String payment(HttpSession session, HttpServletRequest request, Model model) {
+		return resService.payment(session, request, model);
+	}
+	
+	@PostMapping("/reserv/chargeOk")
+	public String chargeOk(ReservDto rdto) {
+		return resService.chargeOk(rdto);
 	}
 	
 	

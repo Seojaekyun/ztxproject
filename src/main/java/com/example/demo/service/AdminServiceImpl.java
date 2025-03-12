@@ -18,6 +18,7 @@ import com.example.demo.dto.ReservDto;
 import com.example.demo.dto.RoutesDto;
 import com.example.demo.mapper.ReservMapper;
 import com.example.demo.mapper.RoutesMapper;
+import com.google.gson.Gson;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -71,23 +72,23 @@ public class AdminServiceImpl implements AdminService{
 			// 현재 시간 이후의 예약 5개씩 조회
 			List<ReservDto> rsvList = rmapper.getRsvanow().stream().filter(rsv -> {
 				// String 타입의 departureTime을 LocalDateTime으로 변환
-				LocalDateTime departureTime = LocalDateTime.parse(rsv.getRouteTime(), formatter);
-				return departureTime.isAfter(now);  // 현재 시간 이후인지 확인
+				LocalDateTime departure_time = LocalDateTime.parse(rsv.getRouteTime(), formatter);
+				return departure_time.isAfter(now);  // 현재 시간 이후인지 확인
 			}).collect(Collectors.toList());
 			
-			// GMP로 시작하는 항공편의 예약 리스트
+			// 서울역의 예약 리스트
 			List<ReservDto> seoulRsv = rsvList.stream()
 					.filter(rsv -> rsv.getDeparture().equals("서울역"))
 					.limit(5).collect(Collectors.toList());
 			model.addAttribute("seoulRsv", seoulRsv);
 			
-			// ICN으로 시작하는 항공편의 예약 리스트
+			// 부산역의 예약 리스트
 			List<ReservDto> pusanRsv = rsvList.stream()
 					.filter(rsv -> rsv.getDeparture().equals("부산역"))
 					.limit(5).collect(Collectors.toList());
 			model.addAttribute("pusanRsv", pusanRsv);
 			
-			// 기타 항공편의 예약 리스트
+			// 기타 예약 리스트
 			List<ReservDto> otherRsv = rsvList.stream()
 					.filter(rsv -> !rsv.getDeparture().equals("서울역") && !rsv.getDeparture().equals("부산역"))
 					.limit(5).collect(Collectors.toList());
@@ -98,100 +99,96 @@ public class AdminServiceImpl implements AdminService{
 		else {
 			return "redirect:/main/index";
 		}
-		
 	}
 
 	@Override
 	public String reservList(String selectedDate, Integer seoulPage, Integer pusanPage, Integer otherPage, Integer page,
 			Model model) {
-		
 		int itemsPerPage = 5; // 페이지당 항목 수
-
-        // 페이지 번호가 null이거나 1보다 작으면 기본값으로 설정
-        if (page == null || page < 1) {
-            page = 1;
-        }
-        if (seoulPage == null || seoulPage < 1) {
-        	seoulPage = 1;
-        }
-        if (pusanPage == null || pusanPage < 1) {
-        	pusanPage = 1;
-        }
-        if (otherPage == null || otherPage < 1) {
-            otherPage = 1;
-        }
-
-        // 선택한 날짜가 있을 경우 해당 날짜에 맞는 예약 데이터만 가져오기
-        List<ReservDto> rsvList;
-        if (selectedDate != null && !selectedDate.isEmpty()) {
-            rsvList = rmapper.getRsvByDate(selectedDate);  // 특정 날짜의 예약 내역 가져오기
-        }
-        else {
-            rsvList = rmapper.getRsvanow();  // 선택한 날짜가 없으면 현재 이후 예약 내역 가져오기 
-        }
-
-        // 전체 예약 내역에 대한 페이징 처리
-        int totalItems = rsvList.size();
-        List<ReservDto> pagedRsvList = paginateList(rsvList, page, itemsPerPage);
-        int totalPages = calculateTotalPages(totalItems, itemsPerPage);
-        model.addAttribute("rsvList", pagedRsvList);
-        model.addAttribute("totalPages", totalPages);
-        model.addAttribute("currentPage", page);
-        
-        // seoul, pusan, 기타 출발 항공편 필터링 및 페이징 처리
-        List<ReservDto> seoulList = rsvList.stream().filter(rsv -> rsv.getDeparture().equals("서울역")).collect(Collectors.toList());;
-        
-        int seoulTotalItems = seoulList.size();
-        List<ReservDto> seoulRsv = paginateList(seoulList, seoulPage, itemsPerPage);
-        int seoulTotalPages = calculateTotalPages(seoulTotalItems, itemsPerPage);
-        model.addAttribute("seoulRsv", seoulRsv);
-        model.addAttribute("seoulTotalPages", seoulTotalPages);
-        model.addAttribute("seoulCurrentPage", seoulPage);
-
-        List<ReservDto> pusanList = rsvList.stream().filter(rsv -> rsv.getDeparture().equals("부산역")).collect(Collectors.toList());
-        int pusanTotalItems = pusanList.size();
-        List<ReservDto> pusanRsv = paginateList(pusanList, pusanPage, itemsPerPage);
-        int pusanTotalPages = calculateTotalPages(pusanTotalItems, itemsPerPage);
-        model.addAttribute("pusanRsv", pusanRsv);
-        model.addAttribute("pusanTotalPages", pusanTotalPages);
-        model.addAttribute("pusanCurrentPage", pusanPage);
-
-        List<ReservDto> otherList = rsvList.stream().filter(rsv -> !rsv.getDeparture().equals("서울역") && !rsv.getDeparture().equals("부산역")).collect(Collectors.toList());
-        int otherTotalItems = otherList.size();
-        List<ReservDto> otherRsv = paginateList(otherList, otherPage, itemsPerPage);
-        int otherTotalPages = calculateTotalPages(otherTotalItems, itemsPerPage);
-        model.addAttribute("otherRsv", otherRsv);
-        model.addAttribute("otherTotalPages", otherTotalPages);
-        model.addAttribute("otherCurrentPage", otherPage);
-
-        // 좌석 수 정보를 추가로 가져오기
-        List<Map<String, Object>> availableSeatsList = rmapper.getAvaiSeatCountByRouteid();
-        Map<Integer, Integer> availableSeatsMap = new HashMap<>();
-        for (Map<String, Object> availableSeat : availableSeatsList) {
-            availableSeatsMap.put((Integer) availableSeat.get("flight_id"), ((Long) availableSeat.get("availableSeats")).intValue());
-        }
-        model.addAttribute("availableSeatsMap", availableSeatsMap);
-
-        model.addAttribute("selectedDate", selectedDate);
-        
-        System.out.println("이것이다");
-        for (ReservDto rsv : seoulList) {
-            System.out.println(rsv.getDeparture()); // 이제 rsv를 이렇게 사용
-        }
-        
-        
-        return "/admin/reservList";
+		
+		// 페이지 번호가 null이거나 1보다 작으면 기본값으로 설정
+		if (page == null || page < 1) {
+			page = 1;
+		}
+		if (seoulPage == null || seoulPage < 1) {
+			seoulPage = 1;
+		}
+		if (pusanPage == null || pusanPage < 1) {
+			pusanPage = 1;
+		}
+		if (otherPage == null || otherPage < 1) {
+			otherPage = 1;
+		}
+		
+		// 선택한 날짜가 있을 경우 해당 날짜에 맞는 예약 데이터만 가져오기
+		List<ReservDto> rsvList;
+		if (selectedDate != null && !selectedDate.isEmpty()) {
+			rsvList = rmapper.getRsvByDate(selectedDate);  // 특정 날짜의 예약 내역 가져오기
+		}
+		else {
+			rsvList = rmapper.getRsvanow();  // 선택한 날짜가 없으면 현재 이후 예약 내역 가져오기
+		}
+		
+		// 전체 예약 내역에 대한 페이징 처리
+		int totalItems = rsvList.size();
+		List<ReservDto> pagedRsvList = paginateList(rsvList, page, itemsPerPage);
+		int totalPages = calculateTotalPages(totalItems, itemsPerPage);
+		model.addAttribute("rsvList", pagedRsvList);
+		model.addAttribute("totalPages", totalPages);
+		model.addAttribute("currentPage", page);
+		
+		// seoul, pusan, 기타 출발 항공편 필터링 및 페이징 처리
+		List<ReservDto> seoulList = rsvList.stream().filter(rsv -> rsv.getDeparture().equals("서울역")).collect(Collectors.toList());;
+		
+		int seoulTotalItems = seoulList.size();
+		List<ReservDto> seoulRsv = paginateList(seoulList, seoulPage, itemsPerPage);
+		int seoulTotalPages = calculateTotalPages(seoulTotalItems, itemsPerPage);
+		model.addAttribute("seoulRsv", seoulRsv);
+		model.addAttribute("seoulTotalPages", seoulTotalPages);
+		model.addAttribute("seoulCurrentPage", seoulPage);
+		
+		List<ReservDto> pusanList = rsvList.stream().filter(rsv -> rsv.getDeparture().equals("부산역")).collect(Collectors.toList());
+		int pusanTotalItems = pusanList.size();
+		List<ReservDto> pusanRsv = paginateList(pusanList, pusanPage, itemsPerPage);
+		int pusanTotalPages = calculateTotalPages(pusanTotalItems, itemsPerPage);
+		model.addAttribute("pusanRsv", pusanRsv);
+		model.addAttribute("pusanTotalPages", pusanTotalPages);
+		model.addAttribute("pusanCurrentPage", pusanPage);
+		
+		List<ReservDto> otherList = rsvList.stream().filter(rsv -> !rsv.getDeparture().equals("서울역") && !rsv.getDeparture().equals("부산역")).collect(Collectors.toList());
+		int otherTotalItems = otherList.size();
+		List<ReservDto> otherRsv = paginateList(otherList, otherPage, itemsPerPage);
+		int otherTotalPages = calculateTotalPages(otherTotalItems, itemsPerPage);
+		model.addAttribute("otherRsv", otherRsv);
+		model.addAttribute("otherTotalPages", otherTotalPages);
+		model.addAttribute("otherCurrentPage", otherPage);
+		
+		// 좌석 수 정보를 추가로 가져오기
+		List<Map<String, Object>> availableSeatsList = rmapper.getAvaiSeatCountByRouteid();
+		Map<Integer, Integer> availableSeatsMap = new HashMap<>();
+		for (Map<String, Object> availableSeat : availableSeatsList) {
+			availableSeatsMap.put((Integer) availableSeat.get("flight_id"), ((Long) availableSeat.get("availableSeats")).intValue());
+		}
+		model.addAttribute("availableSeatsMap", availableSeatsMap);
+		model.addAttribute("selectedDate", selectedDate);
+		
+		for (ReservDto rsv : seoulList) {
+			System.out.println(rsv.getDeparture()); // 이제 rsv를 이렇게 사용
+		}
+		
+		return "/admin/reservList";
 	}
-
+	
 	private List<ReservDto> paginateList(List<ReservDto> list, Integer page, int itemsPerPage) {
 		int startIndex = (page - 1) * itemsPerPage;
-        int endIndex = Math.min(startIndex + itemsPerPage, list.size());
-        return (startIndex >= list.size()) ? Collections.emptyList() : list.subList(startIndex, endIndex);
+		int endIndex = Math.min(startIndex + itemsPerPage, list.size());
+		return (startIndex >= list.size()) ? Collections.emptyList() : list.subList(startIndex, endIndex);
 	}
+	
 	private int calculateTotalPages(int totalItems, int itemsPerPage) {
-        return (int) Math.ceil((double) totalItems / itemsPerPage);
-    }
-
+		return (int) Math.ceil((double) totalItems / itemsPerPage);
+	}
+	
 	@Override
 	public String rsvdList(HttpServletRequest request, Model model) {
 		String trainid = request.getParameter("trainid");
@@ -249,7 +246,7 @@ public class AdminServiceImpl implements AdminService{
 		int itemsPerPage = 5;
 		int start = (page - 1) * itemsPerPage;
 		
-		// 항공편 목록 가져오기 (기존 로직 유지)
+		// 열차편 목록 가져오기 (기존 로직 유지)
 		List<RoutesDto> routesList;
 		if (selectedDate != null && !selectedDate.isEmpty()) {
 			routesList = romapper.getRoutesByDate(selectedDate);
@@ -277,7 +274,7 @@ public class AdminServiceImpl implements AdminService{
 			routes.setAvaiSeats(avaiSeats != null ? avaiSeats.intValue() : 0);  // int로 변환
 		});
 		
-		// 출발 공항에 따라 분류 (기존 로직 유지)
+		// 출발역에 따라 분류 (기존 로직 유지)
 		List<RoutesDto> seoulRoutes = routesList.stream()
 				.filter(routes -> routes.getDeparture().equals("서울역")).collect(Collectors.toList());
 		
@@ -288,7 +285,7 @@ public class AdminServiceImpl implements AdminService{
 				.filter(routes -> !routes.getDeparture().equals("서울역") && !routes.getDeparture().equals("부산역"))
 				.collect(Collectors.toList());
 		
-		// 각 항공편 분류에 따라 페이지네이션 처리 및 JSP에 데이터 전달
+		// 각 열차편 분류에 따라 페이지네이션 처리 및 JSP에 데이터 전달
 		if ("all".equals(routeType)) {
 			List<RoutesDto> pagedRoutes=routesList.subList(start, Math.min(start+itemsPerPage, routesList.size()));
 			int totalPages=(int) Math.ceil((double)routesList.size()/itemsPerPage);
@@ -324,6 +321,25 @@ public class AdminServiceImpl implements AdminService{
 		model.addAttribute("selectedDate", selectedDate);
 		
 		return "/admin/routesList";  // 전체 페이지를 반환합니다.
+	}
+	
+	@Override
+	public String rsvChart(Model model) {
+		// 월별 예약 통계 데이터
+		List<String> monthLabels = rmapper.getMonthLabels();
+		List<Integer> monthRsv = rmapper.getMonthRsv();
+		
+		// 항공편별 예약 통계 데이터
+		List<String> routeLabels = rmapper.getRouteLabels();
+		List<Integer> routeRsv = rmapper.getRouteRsv();
+		
+		// 모델에 데이터 추가
+		model.addAttribute("monthLabels", new Gson().toJson(monthLabels));
+		model.addAttribute("monthRsv", new Gson().toJson(monthRsv));
+		model.addAttribute("routeLabels", new Gson().toJson(routeLabels));
+		model.addAttribute("routeRsv", new Gson().toJson(routeRsv));
+		
+		return "admin/rsvChart";  // JSP 파일로 이동
 	}
 
 }
