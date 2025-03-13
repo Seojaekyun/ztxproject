@@ -64,22 +64,38 @@
    .btn:hover {
      background-color: #005bb5;
    }
+   
+   .badge-unanswered {
+        background-color: #DF251F;
+        color: white;
+        font-size: 12px;
+        padding: 3px 8px;
+        border-radius: 3px;
+        font-weight: 700;
+    }
+    .badge-answered {
+        background-color: #4CAF50;
+        color: white;
+        font-size: 12px;
+        padding: 3px 8px;
+        border-radius: 3px;
+        font-weight: 700;
+    }
 </style>
 </head>
 <body>
 
  <section>
-    <h3>내 문의 조회</h3>
+    <h3>나의 문의</h3>
     <table>
         <thead>
             <tr>
                 <th>순번</th>
-                <th>조회수</th>
-                <th>이름</th>
+                <th>아이디</th>
                 <th>제목</th>
                 <th>문의 유형</th>
                 <th>상태</th>
-                <th>조회</th>
+                <th>조회수</th>
                 <th>게시일</th>
             </tr>
         </thead>
@@ -87,9 +103,8 @@
             <c:forEach var="inquiry" items="${myInquiries}">
                 <tr>
                     <td>${inquiry.id}</td>
-                    <td>${inquiry.readnum}</td>
-                    <td>${inquiry.name}</td>
-                    <td>${inquiry.title}</td>
+                    <td>${inquiry.userid}</td>
+                    <td><a href="/inquiry/detail/${inquiry.id}">${inquiry.title}</a></td>
                     <td class="status-${inquiry.status}">
     					<c:choose>
         					<c:when test="${inquiry.category == 1}">불편/개선</c:when>
@@ -100,25 +115,17 @@
         					<c:otherwise>알 수 없음</c:otherwise>
     					</c:choose>
 				    </td>
-				    <td class="ref-${inquiry.ref}">
-				    	<c:choose>
-				    		<c:when test="${inquiry.ref == 0 }">미답변</c:when>
-				    		<c:when test="${inquiry.ref == 1 }">답변완료</c:when>
-				    	</c:choose>
-				    </td>
-                    <td>
-                        <c:choose>
-                            <c:when test="${inquiry.userid == 'guest'}">
-                                <form action="/inquiry/inquiryContent/${inquiry.id}" method="post">
-                                    <input type="password" name="pwd" placeholder="비밀번호 입력" required>
-                                    <button type="submit" class="btn">조회</button>
-                                </form>
-                            </c:when>
-                            <c:otherwise>
-                                <a href="/inquiry/detail/${inquiry.id}" class="btn">조회</a>
-                            </c:otherwise>
-                        </c:choose>
-                    </td>
+				    <td>
+                    <c:choose>
+                        <c:when test="${empty inquiry.answer}">
+                            <span class="badge-unanswered">답변대기</span>
+                        </c:when>
+                        <c:otherwise>
+                            <span class="badge-answered">답변완료</span>
+                        </c:otherwise>
+                    </c:choose>
+                	</td>
+                    <td>${inquiry.readnum}</td>
                     <td>${inquiry.writeday}</td>
                 </tr>
             </c:forEach>
