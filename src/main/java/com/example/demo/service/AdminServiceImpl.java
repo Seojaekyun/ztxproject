@@ -14,8 +14,10 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import com.example.demo.dto.InquiryDto;
 import com.example.demo.dto.ReservDto;
 import com.example.demo.dto.RoutesDto;
+import com.example.demo.mapper.InquiryMapper;
 import com.example.demo.mapper.ReservMapper;
 import com.example.demo.mapper.RoutesMapper;
 import com.google.gson.Gson;
@@ -32,6 +34,9 @@ public class AdminServiceImpl implements AdminService{
 	
 	@Autowired
 	private RoutesMapper romapper;
+	
+	@Autowired
+	private InquiryMapper mapper;
 
 	@Override
 	public String adminIndex(HttpSession session, HttpServletRequest request, Model model) {
@@ -341,5 +346,49 @@ public class AdminServiceImpl implements AdminService{
 		
 		return "admin/rsvChart";  // JSP 파일로 이동
 	}
+
+	
+	
+	 @Override
+	    public String adminInquiryList(int page, Model model) {
+	        int index = (page - 1) * 10;
+	        int total = mapper.getChong();
+	        int totalPage = (int) Math.ceil((double) total / 10);
+
+	        List<InquiryDto> inquiries = mapper.inquiryList(index);
+	        
+	        System.out.println("adminInquiryList 조회된 문의 개수: " + (inquiries != null ? inquiries.size() : "null"));
+
+	        // 🛠 inquiries 리스트 내부 데이터를 자세히 출력
+	        for (InquiryDto inquiry : inquiries) {
+	            System.out.println("문의 ID: " + inquiry.getId() + ", 제목: " + inquiry.getTitle());
+	        }
+	        
+	        model.addAttribute("inquiries", inquiries);
+	        model.addAttribute("page", page);
+	        model.addAttribute("totalPage", totalPage);
+
+	        return "/admin/adminInquiryList";
+	    }
+
+	 @Override
+	 public String adminInquiryAnswer(int id, Model model) {
+	     InquiryDto inquiry = mapper.getInquiryById(id);
+	     if (inquiry == null) {
+	         return "redirect:/admin/adminInquiryList"; // 존재하지 않는 경우 리스트로 이동
+	     }
+	     model.addAttribute("inquiry", inquiry);
+	     return "/admin/adminInquiryAnswer"; // JSP 파일 이름과 일치해야 함
+	 }
+
+	 @Override
+	    public void adminInquiryAnswerOk(int id, String answer) {
+	        mapper.updateInquiryAnswer(id, answer, 1); // ref 값을 1(답변완료)로 변경
+	    }
+	 
+	 @Override
+	    public void adminInquiryAnswerDelete(int id) {
+	        mapper.updateInquiryAnswer(id, null, 0); // ref 값을 0(미답변)으로 변경
+	    }
 
 }

@@ -12,6 +12,8 @@ public interface AdminService {
 	String rsvdList(HttpServletRequest request, Model model);
 	String routesList(Integer page, String selectedDate, String routeType, Model model);
 	String rsvChart(Model model);
-	
-
+	String adminInquiryList(int page,Model model);
+	String adminInquiryAnswer(int id, Model model);
+	void adminInquiryAnswerOk(int id, String answer);
+    void adminInquiryAnswerDelete(int id);
 }

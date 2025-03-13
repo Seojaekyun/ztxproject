@@ -6,5 +6,5 @@ import lombok.Data;
 public class InquiryDto {
 
 	private int id,ref,category,status,readnum;
-	private String userid,name,title,content,phone,writeday,pwd;
+	private String userid,name,title,content,phone,writeday,pwd,answer;
 }

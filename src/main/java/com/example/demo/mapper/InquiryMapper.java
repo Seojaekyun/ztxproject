@@ -3,6 +3,7 @@ package com.example.demo.mapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.example.demo.dto.InquiryDto;
 import java.util.List;
@@ -21,4 +22,6 @@ public interface InquiryMapper {
 	public void inquiryUpdate(InquiryDto idto);
 	public @Select("SELECT name, phone FROM user WHERE userid = #{userid}")
 			InquiryDto getUserInfo(@Param("userid") String userid);
+	public @Update("UPDATE inquiry SET answer = #{answer}, ref = #{ref} WHERE id = #{id}")
+    void updateInquiryAnswer(@Param("id") int id, @Param("answer") String answer, @Param("ref") int ref);
 }

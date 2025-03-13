@@ -570,12 +570,12 @@
 			<div id="s2container">
 				<div id="logocontainer">
 					<div id="logoimg">
-						<a href="../main/index">
+						<a href="/main/index">
 							<img src="../static/resources/train(white).png" height="50px" align="middle">
 						</a>
 					</div>
 					<div id="logotext">
-						<a href="../main/index">
+						<a href="/main/index">
 							Let's GGoRail
 						</a>
 					</div>
