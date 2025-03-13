@@ -109,10 +109,7 @@ public class InquiryServiceImpl implements InquiryService {
             return "/inquiry/inquiryContent";
         }
 
-        // ✅ 회원 문서는 본인만 조회 가능
-        if (sessionUserId == null || !sessionUserId.equals(inquiry.getUserid())) {
-            return "redirect:/login/login";
-        }
+
 
         model.addAttribute("inquiry", inquiry);
         return "/inquiry/inquiryContent";

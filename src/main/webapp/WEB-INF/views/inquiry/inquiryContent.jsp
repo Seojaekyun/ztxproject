@@ -1,104 +1,105 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
 <title>문의 상세보기</title>
 <style>
-   body {
-     font-family: 'Noto Sans KR', sans-serif;
-     background-color: #f5f5f5;
-     margin: 0;
-     padding: 0;
-   }
+    body {
+        font-family: 'Noto Sans KR', sans-serif;
+        background-color: #f8f8f8;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+    }
 
-   section {
-     width: 80%;
-     margin: 40px auto;
-     background: white;
-     padding: 20px;
-     border-radius: 10px;
-     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-     text-align: center;
-   }
+    /* 메인 컨테이너 */
+    .container {
+        width: 60%;
+        margin: 40px auto;
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    }
 
-   h3 {
-     margin-bottom: 20px;
-   }
+    h2 {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
 
-   table {
-     width: 100%;
-     border-collapse: collapse;
-     background-color: white;
-   }
+    /* 테이블 스타일 */
+    .inquiry-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+        background: white;
+    }
+    .inquiry-table th, .inquiry-table td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+        font-size: 16px;
+    }
+    .inquiry-table th {
+        background: #003b8b;
+        color: white;
+        width: 20%;
+    }
+    .inquiry-table td {
+        background: white;
+    }
 
-   th, td {
-     padding: 12px;
-     text-align: center;
-     border-bottom: 1px solid #ddd;
-   }
+    /* 답변칸 */
+    .answer-box {
+        background: #f5f5f5;
+        padding: 15px;
+        border-radius: 5px;
+        font-size: 16px;
+        margin-top: 15px;
+        text-align: left;
+    }
 
-   th {
-     background-color: #003b8b;
-     color: white;
-     font-weight: bold;
-   }
+    /* 비밀번호 입력 및 버튼 정렬 */
+    .action-box {
+        margin-top: 20px;
+        text-align: center;
+    }
+    .pwd-input {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: 200px;
+    }
 
-   tr:last-child td {
-     border-bottom: 2px solid black;
-   }
+    /* 버튼 스타일 */
+    .btn {
+        display: inline-block;
+        padding: 10px 15px;
+        background: #003b8b;
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+        border-radius: 5px;
+        text-decoration: none;
+        margin-left: 5px;
+    }
+    .btn:hover {
+        background: #005bb5;
+    }
 
-   .btn {
-     display: inline-block;
-     padding: 10px 15px;
-     background-color: #0078d7;
-     color: white;
-     border: none;
-     cursor: pointer;
-     font-size: 16px;
-     border-radius: 5px;
-     text-decoration: none;
-   }
-
-   .btn:hover {
-     background-color: #005bb5;
-   }
-
-   /* 관리자 답변 스타일 */
-   .answer-box {
-     margin-top: 20px;
-     padding: 15px;
-     background-color: #f9f9f9;
-     border-left: 5px solid #003b8b;
-     text-align: left;
-   }
-
-   .readonly-textarea {
-    width: 100%;
-    height: 100px;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: #f1f1f1;
-    resize: none;
-    font-size: 14px;
-    outline: none; /* 🔹 클릭해도 검은색 테두리 없음 */
-    pointer-events: none; /* 🔹 클릭/포커스 완전 차단 */
-	}
-
-
-   .no-answer {
-     margin-top: 20px;
-     padding: 15px;
-     background-color: #ffecec;
-     border-left: 5px solid #ff5c5c;
-     color: #d9534f;
-     text-align: center;
-     font-weight: bold;
-   }
+    /* readonly 스타일 */
+    .readonly {
+        border: none;
+        background: none;
+        color: #333;
+        font-size: 16px;
+        width: 100%;
+    }
 </style>
-
 <script>
 function validatePassword(actionUrl, correctPwd) {
     let inputPwd = document.getElementById("inputPwd").value;
@@ -112,60 +113,52 @@ function validatePassword(actionUrl, correctPwd) {
     document.getElementById("actionForm").submit(); // ✅ 이동 허용
 }
 </script>
-
 </head>
 <body>
 
- <section>
-    <h3>문의 상세보기</h3>
-    <table>
+<div class="container">
+    <h2>문의 상세보기</h2>
+
+    <table class="inquiry-table">
         <tr><th>제목</th><td>${inquiry.title}</td></tr>
         <tr><th>작성자</th><td>${inquiry.name}</td></tr>
         <tr><th>작성일</th><td>${inquiry.writeday}</td></tr>
-        <tr><th>내용</th><td>${inquiry.content}</td></tr>
+        <tr><th>내용</th>
+        <td>${inquiry.content}</td></tr>
     </table>
-    
-    <!-- ✅ 관리자 답변 출력 -->
-    <c:choose>
-        <c:when test="${not empty inquiry.answer}">
-            <div class="answer-box">
-                <strong>관리자 답변:</strong><br>
-                <textarea class="readonly-textarea" readonly>${inquiry.answer}</textarea>
-            </div>
-        </c:when>
-        <c:otherwise>
-            <div class="no-answer">답변이 등록되지 않았습니다.</div>
-        </c:otherwise>
-    </c:choose>
 
-    <br>
-    
-    <!-- 🚀 비회원일 경우 비밀번호 입력 후 수정/삭제 가능 -->
-    <c:if test="${inquiry.userid eq 'guest'}">
-        <form id="actionForm" method="POST">
-            <input type="hidden" name="id" value="${inquiry.id}">
-            
-            <!-- 비밀번호 입력 -->
-            <label>비밀번호 입력: </label>
-            <input type="password" id="inputPwd" name="pwd" required>
+    <!-- 답변이 있으면 출력, 없으면 "답변이 등록되지 않았습니다." -->
+    <div class="answer-box">
+        <strong>📢 관리자 답변</strong>
+        <textarea class="readonly" readonly>${inquiry.answer ne null ? inquiry.answer : "답변이 등록되지 않았습니다."}</textarea>
+    </div>
 
-            <!-- 수정 버튼 -->
-            <button type="button" onclick="validatePassword('/inquiry/inquiryUpdate', '${inquiry.pwd}')">수정</button>
+    <div class="action-box">
+        <!-- 🚀 비회원일 경우 비밀번호 입력 후 수정/삭제 가능 -->
+        <c:if test="${inquiry.userid eq 'guest'}">
+            <form id="actionForm" method="POST">
+                <input type="hidden" name="id" value="${inquiry.id}">
 
-            <!-- 삭제 버튼 -->
-            <button type="button" onclick="validatePassword('/inquiry/inquiryDelete', '${inquiry.pwd}')">삭제</button>
-        </form>
-    </c:if>
+                <!-- 비밀번호 입력 -->
+                <input type="password" id="inputPwd" class="pwd-input" name="pwd" placeholder="비밀번호 입력" required>
 
-    <!-- 🚀 회원일 경우 비밀번호 없이 수정 가능 -->
-    <c:if test="${inquiry.userid ne 'guest'}">
-        <a href="/inquiry/inquiryUpdate?id=${inquiry.id}" class="btn">수정</a>
-        <a href="/inquiry/inquiryDelete?id=${inquiry.id}" class="btn">삭제</a>
-    </c:if>
-    
-    <br>
-    <a href="/inquiry/inquiryList" class="btn">목록으로</a>
- </section>
+                <!-- 수정 버튼 -->
+                <button type="button" class="btn" onclick="validatePassword('/inquiry/inquiryUpdate', '${inquiry.pwd}')">수정</button>
+
+                <!-- 삭제 버튼 -->
+                <button type="button" class="btn" onclick="validatePassword('/inquiry/inquiryDelete', '${inquiry.pwd}')">삭제</button>
+            </form>
+        </c:if>
+
+        <!-- 🚀 회원일 경우 비밀번호 없이 수정 가능 -->
+        <c:if test="${inquiry.userid ne 'guest'}">
+            <a href="/inquiry/inquiryUpdate?id=${inquiry.id}" class="btn">수정</a>
+            <a href="/inquiry/inquiryDelete?id=${inquiry.id}" class="btn">삭제</a>
+        </c:if>
+
+        <a href="/inquiry/inquiryList" class="btn">목록으로</a>
+    </div>
+</div>
 
 </body>
 </html>
