@@ -64,6 +64,39 @@
    .btn:hover {
      background-color: #005bb5;
    }
+
+   /* 관리자 답변 스타일 */
+   .answer-box {
+     margin-top: 20px;
+     padding: 15px;
+     background-color: #f9f9f9;
+     border-left: 5px solid #003b8b;
+     text-align: left;
+   }
+
+   .readonly-textarea {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f1f1f1;
+    resize: none;
+    font-size: 14px;
+    outline: none; /* 🔹 클릭해도 검은색 테두리 없음 */
+    pointer-events: none; /* 🔹 클릭/포커스 완전 차단 */
+	}
+
+
+   .no-answer {
+     margin-top: 20px;
+     padding: 15px;
+     background-color: #ffecec;
+     border-left: 5px solid #ff5c5c;
+     color: #d9534f;
+     text-align: center;
+     font-weight: bold;
+   }
 </style>
 
 <script>
@@ -91,6 +124,20 @@ function validatePassword(actionUrl, correctPwd) {
         <tr><th>작성일</th><td>${inquiry.writeday}</td></tr>
         <tr><th>내용</th><td>${inquiry.content}</td></tr>
     </table>
+    
+    <!-- ✅ 관리자 답변 출력 -->
+    <c:choose>
+        <c:when test="${not empty inquiry.answer}">
+            <div class="answer-box">
+                <strong>관리자 답변:</strong><br>
+                <textarea class="readonly-textarea" readonly>${inquiry.answer}</textarea>
+            </div>
+        </c:when>
+        <c:otherwise>
+            <div class="no-answer">답변이 등록되지 않았습니다.</div>
+        </c:otherwise>
+    </c:choose>
+
     <br>
     
     <!-- 🚀 비회원일 경우 비밀번호 입력 후 수정/삭제 가능 -->
