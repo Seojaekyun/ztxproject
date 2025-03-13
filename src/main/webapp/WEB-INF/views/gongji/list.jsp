@@ -21,12 +21,16 @@
       margin-bottom:20px;
     }
 	section {
-	  max-width: 800px;
+	  width: 1000px;
+	  height: 800px;
 	  margin: 30px auto;
 	  padding: 20px;
 	  background-color: #fff;
 	  border-radius: 8px;
 	  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+	}
+	#tbbox {
+		height: 650px;
 	}
 	table {
 	  width: 100%;
@@ -34,7 +38,7 @@
 	  margin-bottom: 20px;
 	}
 	th, td {
-	  padding: 6px;
+	  padding: 8px;
 	  text-align: center;
 	  border-bottom: 1px solid #ddd;
 	}
@@ -47,7 +51,7 @@
 	td {
 	  background-color: #fff;
 	  color: #333;
-	  font-size: 14px;
+	  font-size: 15px;
 	}
 	a {
 	  color: #004EA2;
@@ -111,6 +115,7 @@
 <body> <!-- /gongji/list.jsp -->
  <section>
   <h3> 공지사항 </h3>
+  <div id="tbbox">
    <table>
      <tr>
        <th colspan="2">제목</th>
@@ -137,7 +142,7 @@
      </tr>
     </c:forEach>
    </table>
-   
+   </div>
    <div id="paging">
    
     <c:if test="${pstart != 1}">

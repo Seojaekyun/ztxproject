@@ -16,7 +16,7 @@
 
     /* 메인 컨테이너 */
     .container {
-        width: 60%;
+        width: 1000px;
         margin: 40px auto;
         background: white;
         padding: 20px;
@@ -120,40 +120,40 @@ function validatePassword(actionUrl, correctPwd) {
     <h2>문의 상세보기</h2>
 
     <table class="inquiry-table">
-        <tr><th>제목</th><td>${inquiry.title}</td></tr>
-        <tr><th>작성자</th><td>${inquiry.name}</td></tr>
-        <tr><th>작성일</th><td>${inquiry.writeday}</td></tr>
+        <tr><th>제목</th><td>${idto.title}</td></tr>
+        <tr><th>작성자</th><td>${idto.name}</td></tr>
+        <tr><th>작성일</th><td>${idto.writeday}</td></tr>
         <tr><th>내용</th>
-        <td>${inquiry.content}</td></tr>
+        <td>${idto.content}</td></tr>
     </table>
 
     <!-- 답변이 있으면 출력, 없으면 "답변이 등록되지 않았습니다." -->
     <div class="answer-box">
         <strong>📢 관리자 답변</strong>
-        <textarea class="readonly" readonly>${inquiry.answer ne null ? inquiry.answer : "답변이 등록되지 않았습니다."}</textarea>
+        <textarea class="readonly" readonly>${idto.answer ne null ? idto.answer : "답변이 등록되지 않았습니다."}</textarea>
     </div>
 
     <div class="action-box">
         <!-- 🚀 비회원일 경우 비밀번호 입력 후 수정/삭제 가능 -->
-        <c:if test="${inquiry.userid eq 'guest'}">
+        <c:if test="${idto.userid eq 'guest'}">
             <form id="actionForm" method="POST">
-                <input type="hidden" name="id" value="${inquiry.id}">
+                <input type="hidden" name="id" value="${idto.id}">
 
                 <!-- 비밀번호 입력 -->
                 <input type="password" id="inputPwd" class="pwd-input" name="pwd" placeholder="비밀번호 입력" required>
 
                 <!-- 수정 버튼 -->
-                <button type="button" class="btn" onclick="validatePassword('/inquiry/inquiryUpdate', '${inquiry.pwd}')">수정</button>
+                <button type="button" class="btn" onclick="validatePassword('/inquiry/inquiryUpdate', '${idto.pwd}')">수정</button>
 
                 <!-- 삭제 버튼 -->
-                <button type="button" class="btn" onclick="validatePassword('/inquiry/inquiryDelete', '${inquiry.pwd}')">삭제</button>
+                <button type="button" class="btn" onclick="validatePassword('/inquiry/inquiryDelete', '${idto.pwd}')">삭제</button>
             </form>
         </c:if>
 
         <!-- 🚀 회원일 경우 비밀번호 없이 수정 가능 -->
-        <c:if test="${inquiry.userid ne 'guest'}">
-            <a href="/inquiry/inquiryUpdate?id=${inquiry.id}" class="btn">수정</a>
-            <a href="/inquiry/inquiryDelete?id=${inquiry.id}" class="btn">삭제</a>
+        <c:if test="${idto.userid eq 'userid'}">
+            <a href="/inquiry/inquiryUpdate?id=${idto.id}" class="btn">수정</a>
+            <a href="/inquiry/inquiryDelete?id=${idto.id}" class="btn">삭제</a>
         </c:if>
 
         <a href="/inquiry/inquiryList" class="btn">목록으로</a>

@@ -11,10 +11,11 @@ public interface InquiryService {
 	public String inquiryMyList(int page, HttpSession session, Model model);
 	public String inquiryWrite(HttpSession session, Model model);
 	public String inquiryWriteOk(InquiryDto idto, HttpSession session, Model model);
-	public String inquiryContent(int id,String inputPwd, HttpSession session, Model model);
 	public String inquiryUpdate(int id, Model model,HttpSession session);
 	public String inquiryUpdateOk(InquiryDto idto,HttpSession session,HttpServletRequest request);
 	public String inquiryDelete(int id, String pwd, HttpSession session, Model model);
 	public InquiryDto getUserInfo(String userid);
+	public String readnum(HttpServletRequest request);
+	public String inquiryContent(HttpServletRequest request, HttpSession session, Model model);
 	
 }

@@ -3,7 +3,9 @@ package com.example.demo.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import com.example.demo.dto.InquiryDto;
 import com.example.demo.service.InquiryService;
 
@@ -44,10 +46,14 @@ public class InquiryController {
     	return service.inquiryWriteOk(idto, session, model);
     }
     
-    @RequestMapping(value = "/inquiry/detail/{id}", method = {RequestMethod.GET, RequestMethod.POST})
-    public String inquiryContent(@PathVariable int id, @RequestParam(value = "pwd", required = false) String inputPwd,
-    		HttpSession session, Model model) {
-        return service.inquiryContent(id, inputPwd, session, model);
+    @GetMapping("/inquiry/readnum")
+	public String readnum(HttpServletRequest request) {
+		return service.readnum(request);
+	}
+    
+    @GetMapping("/inquiry/inquiryContent")
+    public String inquiryContent(HttpServletRequest request, HttpSession session, Model model) {
+        return service.inquiryContent(request, session, model);
     }
     
     @GetMapping("/inquiry/inquiryUpdate")

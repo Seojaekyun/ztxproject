@@ -30,14 +30,13 @@
         SELECT COUNT(*) FROM inquiry WHERE userid = #{userid};
     </select>
 
-    <update id="increaseReadnum">
-    	UPDATE inquiry SET readnum = readnum + 1 WHERE id = #{id};
+    <update id="readnum">
+		update inquiry set readnum=readnum+1 where id=#{param}
 	</update>
-
-
-    <select id="readnum" resultType="com.example.demo.dto.InquiryDto">
-        SELECT * FROM inquiry WHERE id = #{id};
-    </select>
+	
+	<select id="content" resultType="com.example.demo.dto.InquiryDto">
+		select * from inquiry where id=#{param}
+	</select>
 
     <delete id="inquiryDelete">
         DELETE FROM inquiry WHERE id = #{id};

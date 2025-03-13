@@ -85,33 +85,26 @@ public class InquiryServiceImpl implements InquiryService {
         mapper.inquiryWriteOk(idto);
         return "redirect:/inquiry/inquiryList";
     }
-
-
+    
+    @Override
+	public String readnum(HttpServletRequest request) {
+		String id = request.getParameter("id");
+		mapper.readnum(id);
+		return "redirect:/inquiry/inquiryContent?id=" + id;
+	}
 
     @Override
-    public String inquiryContent(int id, String inputPwd, HttpSession session, Model model) {
-        // ✅ 조회수 증가
-        mapper.increaseReadnum(id);
-
-        InquiryDto inquiry = mapper.readnum(id);
-        String sessionUserId = (session.getAttribute("userid") != null) 
-                               ? session.getAttribute("userid").toString() 
-                               : null;
-
-        if (inquiry == null) {
-            model.addAttribute("error", "존재하지 않는 문의입니다.");
-            return "redirect:/inquiry/inquiryList";
-        }
-
-        // ✅ 비회원 문서는 비밀번호 확인 없이 조회 가능
-        if ("guest".equals(inquiry.getUserid())) {
-            model.addAttribute("inquiry", inquiry);
-            return "/inquiry/inquiryContent";
-        }
-
-
-
-        model.addAttribute("inquiry", inquiry);
+    public String inquiryContent(HttpServletRequest request, HttpSession session, Model model) {
+    	String userid=(String)session.getAttribute("userid");
+		if(userid!=null) {
+			model.addAttribute(userid);
+		}
+		String id = request.getParameter("id");
+		InquiryDto idto = mapper.content(id);
+		idto.setContent(idto.getContent().replace("\\r\\n", "<br>"));
+		System.out.println(idto);
+		model.addAttribute("idto", idto);
+		
         return "/inquiry/inquiryContent";
     }
 

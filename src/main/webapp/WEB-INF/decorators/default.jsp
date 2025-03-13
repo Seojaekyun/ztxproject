@@ -56,7 +56,11 @@
 		width: 100px;
 		text-align: center;
 		border: 1px solid #078EB9;
+		border-top: none;
 		border-bottom: none;
+	}
+	#titleMenu div:hover {
+		cursor: pointer;
 	}
 	#s1container #loginMenu {
 		display: flex;

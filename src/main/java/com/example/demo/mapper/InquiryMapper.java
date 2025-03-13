@@ -13,8 +13,6 @@ public interface InquiryMapper {
 	public List<InquiryDto> inquiryList(@Param("index") int index);
 	public List<InquiryDto> inquiryMyList(@Param("userid") String userid, @Param("index") int index);
 	public void inquiryWriteOk(InquiryDto idto);
-	public InquiryDto readnum(@Param("id") int id);
-	public void increaseReadnum(@Param("id") int id);
 	public InquiryDto getInquiryById(@Param("id") int id);
 	public void inquiryDelete(@Param("id") int id);
 	public int getChong();
@@ -24,4 +22,6 @@ public interface InquiryMapper {
 			InquiryDto getUserInfo(@Param("userid") String userid);
 	public @Update("UPDATE inquiry SET answer = #{answer}, ref = #{ref} WHERE id = #{id}")
     void updateInquiryAnswer(@Param("id") int id, @Param("answer") String answer, @Param("ref") int ref);
+	public InquiryDto content(String id);
+	public void readnum(String id);
 }

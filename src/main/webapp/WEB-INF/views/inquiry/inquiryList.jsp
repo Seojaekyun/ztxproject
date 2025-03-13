@@ -14,7 +14,8 @@
    }
 
    section {
-     width: 80%;
+     width: 1000px;
+     height: 800px;
      margin: 40px auto;
      background: white;
      padding: 20px;
@@ -22,8 +23,11 @@
      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
      text-align: center;
    }
+   #tablebox {
+   	 height: 700px;
+   }
 
-   h3 {
+   h2 {
      margin-bottom: 20px;
    }
 
@@ -48,7 +52,9 @@
    tr:last-child td {
      border-bottom: 2px solid black;
    }
-
+   #btnbox {
+   	 text-align: right;
+   }
    .btn {
      display: inline-block;
      padding: 10px 15px;
@@ -86,7 +92,8 @@
 <body>
 
  <section>
-    <h3>Q&A</h3>
+ <div id="tablebox">
+    <h2>Q＆A</h2>
     <table>
         <thead>
             <tr>
@@ -104,7 +111,7 @@
                 <tr>
                     <td>${inquiry.id}</td>
                     <td>${inquiry.userid}</td>
-                    <td align="left"><a href="/inquiry/detail/${inquiry.id}">${inquiry.title}</a></td>
+                    <td align="left"><a href="/inquiry/readnum?id=${inquiry.id}">${inquiry.title}</a></td>
                     <td class="status-${inquiry.status}">
     					<c:choose>
         					<c:when test="${inquiry.category == 1}">불편/개선</c:when>
@@ -131,8 +138,10 @@
             </c:forEach>
         </tbody>
     </table>
-    <br>
-    <a href="/inquiry/inquiryWrite" class="btn">문의 작성하기</a>
+    </div>
+    <div id="btnbox">
+    <a href="/inquiry/inquiryWrite" class="btn">문의 하기</a>
+    </div>
  </section>
 
 </body>
