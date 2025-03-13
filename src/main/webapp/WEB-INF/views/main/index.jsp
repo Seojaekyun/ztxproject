@@ -21,7 +21,7 @@
 	}
 	.train_service {
 		position: relative;
-		background-image: url('../static/resources/t0.jpg');
+		background-image: url('../static/resources/t0.jpg'), url('../static/resources/t1.jpg'), url('../static/resources/t2.jpg'), url('../static/resources/t3.jpg');
 		background-position: bottom;
 		background-size: cover;
 		width: 100%;
@@ -29,7 +29,25 @@
 		background-repeat: no-repeat;
 		margin: auto;
 		top: -90px;
+		animation: slideBackground 28s infinite;
 	}
+	@keyframes slideBackground {
+		0% {
+			background-image: url('../static/resources/t0.jpg');
+		}
+		25% {
+			background-image: url('../static/resources/t1.jpg');
+		}
+		50% {
+			background-image: url('../static/resources/t2.jpg');
+		}
+		75% {
+			background-image: url('../static/resources/t3.jpg');
+		}
+		100% {
+			background-image: url('../static/resources/t0.jpg');
+		}
+	}	
 	.booking_contents {
 		position: relative;
 		top: 42.5rem;
@@ -493,7 +511,8 @@
 	                var defaultStation = data.find(station => station.stationName === '서울');
 	                if (defaultStation) {
 	                    document.getElementById('from-text').textContent = defaultStation.stationName;
-	                } else {
+	                }
+	                else {
 	                    document.getElementById('from-text').textContent = '서울';
 	                }
 
@@ -519,10 +538,12 @@
 	                    };
 	                    row.appendChild(button);
 	                });
-	            } else {
+	            }
+	            else {
 	                console.error('The element with id "station-list" is not found.');
 	            }
-	        } else if (xhr.readyState === 4 && xhr.status !== 200) {
+	        }
+	        else if (xhr.readyState === 4 && xhr.status !== 200) {
 	            console.error('Failed to load stations data. Status: ' + xhr.status);
 	            document.getElementById('from-text').textContent = '서울';
 	        }
@@ -681,27 +702,6 @@
 			}
 		});
 	}
-	/* window.addEventListener('scroll', revealSections);
-	window.addEventListener('load', revealSections);
-	$(function() {
-		var currentURL = window.location.pathname;
-		var referrerURL = document.referrer ? (new URL(document.referrer)).pathname : '';
-		function isIndex(url) {
-			return url === '/' || url.endsWith('/index') || url.endsWith('/index.html') || url.endsWith('/index.php');
-		}
-		if (isIndex(currentURL) && (!referrerURL || !isIndex(referrerURL))) {
-			$('.main_content').slideDown(1000);
-		}
-		else if (!isIndex(currentURL) && isIndex(referrerURL)) {
-			$('.main_content').slideUp(500);
-		}
-		else if (!isIndex(currentURL) && (!referrerURL || !isIndex(referrerURL))) {
-						
-		}
-		else {
-			$('.main_content').show();
-		}
-	}); */
 	function selectDeparture(stationName, stationName) {
 		document.getElementById('from-text').textContent = stationName;
 		document.getElementById('from-hidden').value = stationName;

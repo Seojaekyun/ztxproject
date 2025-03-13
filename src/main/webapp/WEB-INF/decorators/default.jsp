@@ -26,71 +26,79 @@
 		z-index:100;
 	}
 	#section1 {
+		width: 100%;
+		height: 40px; /* Adjust the height as needed */
+	}
+	#s1container {
 		width: 1450px;
 		min-width: 1000px;
 		height: 40px; /* Adjust the height as needed */
-		position: flex;
-		max-width: 1900px;
+		display: flex;
 		margin: auto;
-		justify-content: space-evenly;
+		justify-content: between;
+		position: relative;
+		align-items: center;
 	}
 	#titleMenu {
 		top: 0;
 		right: 0;
-		width: 330px;
+		width: 380px;
 		display: flex;
-		text-align: left;
+		text-align: center;
 		font-size: 14px;
 		font-weight: 600;
 		line-height: 40px;
-		margin-left:9%;
+		align: center;
+		justify-content: flex-end;
+		margin-left: 120px;
 	}
 	#titleMenu div {
 		width: 100px;
 		text-align: center;
-		border: 1px solid black;
+		border: 1px solid #078EB9;
+		border-bottom: none;
 	}
-	#section1 #loginMenu {
-		position: absolute;
-		margin-right: 20%;
-		top: 0;
-		right: 0;
+	#s1container #loginMenu {
 		display: flex;
-		text-align: right;
-		font-size: 14px;
-		font-weight: 600;
-		line-height: 40px;
+	    text-align: right;
+	    font-size: 14px;
+	    font-weight: 600;
+	    line-height: 40px;
+	    align-items: right;
+	    width: 730px;
+	    justify-content: flex-end;
 	}
-	#section1 #loginMenu a {
+	#s1container #loginMenu a {
 		text-decoration: none;
 		color: black;
+		text-align: right;
 	}
-	#section1 #loginMenu a:hover {
+	#s1container #loginMenu a:hover {
 		text-decoration: none;
 		color: #00467F;
 	}
-	#section1 #loginMenu ul {
+	#s1container #loginMenu ul {
 		list-style-type: none;
 		margin: 0;
 		padding: 10px;
-		display: flex;
+		display: inline-block;
 		align-items: right;
 	}
-	#section1 #loginMenu ul li {
+	#s1container #loginMenu ul li {
 		position: relative;
 	}
-	#section1 #loginMenu .cmenu, #section1 #loginMenu .mmenu {
+	#s1container #loginMenu .cmenu, #s1container #loginMenu .mmenu {
 		padding-left: 0;
 		position: absolute;
 		left: -10px;
-		top: 17px;
+		top: 30px;
 		background: white;
 		display: none;
 		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 		z-index: 12;
 		border-radius:5px;
 	}
-	#section1 #loginMenu .cmenu > li, #section1 #loginMenu .mmenu > li {
+	#s1container #loginMenu .cmenu > li, #s1container #loginMenu .mmenu > li {
 		list-style-type: none;
 		width: 100px;
 		height: 35px;
@@ -99,15 +107,15 @@
 		cursor: pointer;
 		font-size: 14px;
 	}
-	#section1 #loginMenu .cmenu > li:hover,  #section1 #loginMenu .mmenu > li:hover {
+	#s1container #loginMenu .cmenu > li:hover,  #s1container #loginMenu .mmenu > li:hover {
 		text-decoration: none;
 		color: #00467F;
 	}
-	#section1 #loginMenu #supMenu, #section1 #loginMenu #myInfo {
+	#s1container #loginMenu #supMenu, #s1container #loginMenu #myInfo {
 		position: relative;
 	}
 	/* Center the nav at the bottom */
-	#section1 #nav {
+	#s1container #nav {
 		position: absolute;
 		bottom: 0 !important;
 		left: 40%;
@@ -115,21 +123,46 @@
 		z-index: 2000;
 		max-width: 1000px;
 	}
-	#section1 nav {
+	#s1container nav {
 		display: flex;
 		line-height: 30px !important;
 		font-family: Arial, sans-serif;
 		font-size: 16px;
 	}
-	#section1 nav a {
+	#s1container nav a {
 		text-decoration: none;
 	}
-	#section1 nav a:hover {
+	#s1container nav a:hover {
 		text-decoration: none;
 		color: #00467F;
 	}
+	#s1container > #nullbox {
+		width: 150px;
+		height: 40px;
+		background: none;
+		z-index: 20;
+		position: absolute;
+		top: 0; /* 부모 요소의 중앙 */
+		right: 0; /* 부모 요소의 중앙 */
+	}
+	#section2 {
+		width: 100%;
+		height: 90px;
+		z-index: 10;
+		background: rgba(0,0,0,0.6);
+		position: relative;
+	}
+	#s2container {
+		width: 1450px;
+		min-width: 1000px;
+		height: 90px; /* Adjust the height as needed */
+		margin: auto;
+		display: flex;
+		justify-content: space-evenly;
+	}
 	#logocontainer {
 		margin: auto;
+		margin-left: 200px;
 		max-width: 260px;
 		min-width: 260px;
 		height: 50px;
@@ -157,21 +190,6 @@
 		text-decoration: none;
 		color: white;
 	}
-	#section2 {
-		width: 100%;
-		height: 90px;
-		z-index: 10;
-		background: rgba(0,0,0,0.6);
-		position: relative;
-	}
-	#s2container {
-		width: 1450px;
-		min-width: 1000px;
-		height: 90px; /* Adjust the height as needed */
-		margin: auto;
-		display: flex;
-		justify-content: space-evenly;
-	}
 	#s2container > #nav {
 		display: inline-block;
 	}
@@ -183,12 +201,12 @@
 	#s2container nav #main > li {
 		display: inline-block;
 		list-style-type: none;
-		width: 180px;
+		width: 160px;
 		height: 30px !important;
 		padding: 0 20px 0 0; 
 		line-height: 30px !important;
 		text-align: left;
-		font-size: 18px;
+		font-size: 17px;
 		font-weight: 750;
 		position: relative;
 		z-index: 5;
@@ -224,8 +242,9 @@
 		color: black;
 	}
 	#menuicon {
-		width: 150px;
+		width: 300px;
 		line-height: 100px;
+		padding-left: 50px;
 	}
 	hr {
 		color: blue;
@@ -527,43 +546,46 @@
 <body>
 	<header>
 		<div id="section1">
-			<div id="titleMenu">
-				<div>🛤️은하철도</div>
-				<div style="background: #078EB9; color: white;">승차권예매</div>
-				<div>기차여행</div>
-			</div>
-			<div id="loginMenu">
-				<c:if test="${userid!=null&&userid=='administrator'}">
-					<a href="../admin/index" style="color: orange;"> 관리자 홈 </a>&nbsp;|&nbsp;
-				</c:if>
-				<c:if test="${userid==null}">
-					<a href="../user/user" id="into"> <span class="iconmem">📋</span>회원가입 </a>&nbsp;&nbsp;|&nbsp;&nbsp;
-					<!-- <a href="../login/login"> 로그인 </a>&nbsp;|&nbsp; -->
-				</c:if>
-				<c:if test="${userid==null}">
-					<a href="/login/login"> 로그인 </a>&nbsp;&nbsp;|&nbsp;&nbsp;
-				</c:if>
-				<c:if test="${userid!=null&&userid!='administrator'}">
-				<div id="myInfo" onmouseover="viewMmenu(0)" onmouseout="hideMmenu(0)">
-					<span> ${name}님 &nbsp;|&nbsp; </span>
-					<ul class="mmenu">
-						<li><a href="../user/userView">나의정보</a></li>
-						<li><a href="../reserv/list">예약정보</a></li>
-						<li><a href="/inquiry/inquiryMyList">나의문의</a></li>
-						<li><a href="../member/myRev">나의후기</a></li>
-					</ul>
+			<div id="s1container">
+				<div id="titleMenu">
+					<div>🛤️은하철도</div>
+					<div style="background: #078EB9; color: white;">승차권예매</div>
+					<div>기차여행</div>
 				</div>
-				<a href="/login/logout">로그아웃</a>&nbsp;|&nbsp;
-				</c:if>
-				<div id="supMenu" onmouseover="viewCmenu(0)" onmouseout="hideCmenu(0)">
-					<span>고객센터</span>
-					<ul class="cmenu">
-						<li><a href="../gongji/list"> 공지사항 </a></li>
-						<li><a href="/inquiry/inquiryList"> Q＆A </a></li>
-						<li><a href="../promot/list"> 이벤트 </a></li>
-						<li><a href="../review/list"> 여행후기 </a></li>
-					</ul>
+				<div id="loginMenu">
+					<c:if test="${userid!=null&&userid=='administrator'}">
+						<a href="../admin/index" style="color: orange;"> 관리자 홈 </a>&nbsp;|&nbsp;
+					</c:if>
+					<c:if test="${userid==null}">
+						<a href="../user/user" id="into"> <span class="iconmem">📋</span>회원가입 </a>&nbsp;&nbsp;|&nbsp;&nbsp;
+						<!-- <a href="../login/login"> 로그인 </a>&nbsp;|&nbsp; -->
+					</c:if>
+					<c:if test="${userid==null}">
+						<a href="/login/login"> 로그인 </a>&nbsp;&nbsp;|&nbsp;&nbsp;
+					</c:if>
+					<c:if test="${userid!=null&&userid!='administrator'}">
+					<div id="myInfo" onmouseover="viewMmenu(0)" onmouseout="hideMmenu(0)">
+						<span> ${name}님 &nbsp;|&nbsp; </span>
+						<ul class="mmenu">
+							<li><a href="../user/userView">나의정보</a></li>
+							<li><a href="../reserv/list">예약정보</a></li>
+							<li><a href="/inquiry/inquiryMyList">나의문의</a></li>
+							<li><a href="../member/myRev">나의후기</a></li>
+						</ul>
+					</div>
+					<a href="/login/logout">로그아웃</a>&nbsp;|&nbsp;
+					</c:if>
+					<div id="supMenu" onmouseover="viewCmenu(0)" onmouseout="hideCmenu(0)">
+						<span>고객센터</span>
+						<ul class="cmenu">
+							<li><a href="../gongji/list"> 공지사항 </a></li>
+							<li><a href="/inquiry/inquiryList"> Q＆A </a></li>
+							<li><a href="../promot/list"> 이벤트 </a></li>
+							<li><a href="../review/list"> 여행후기 </a></li>
+						</ul>
+					</div>
 				</div>
+				<div id="nullbox"></div>
 			</div>
 		</div>
 		<div id="section2">
@@ -620,7 +642,7 @@
 					</nav>
 				</div>
 				<div id="menuicon">
-					<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg>
+					<img src="../static/resources/menuicon.png" style="height: 24px;">
 				</div>
 			</div>
 		</div>

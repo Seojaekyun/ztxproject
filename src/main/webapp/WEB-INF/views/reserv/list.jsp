@@ -113,7 +113,14 @@
     </tr>
    <c:forEach items="${reslist}" var="resdto">
     <tr>
-      <td> <input type="checkbox" name="PNR" value="${resdto.PNR }"></td>
+      <td>
+       <c:if test="${resdto.payment == 0}">
+       <input type="checkbox" name="PNR" value="${resdto.PNR }">
+       </c:if>
+       <c:if test="${resdto.payment != 0}">
+       <input type="checkbox" disabled>
+       </c:if>
+      </td>
       <td> <a href="myReservDetail"> ${resdto.PNR} </a> </td>
       <td> ${resdto.reservday} </td>
       <td> ${resdto.routeDeparture} </td>
