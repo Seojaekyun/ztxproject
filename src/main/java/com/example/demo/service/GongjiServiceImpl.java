@@ -11,6 +11,7 @@ import com.example.demo.dto.GongjiDto;
 import com.example.demo.mapper.GongjiMapper;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 @Service
 @Qualifier("gs")
@@ -54,6 +55,7 @@ public class GongjiServiceImpl implements GongjiService{
 	@Override
 	public String list(GongjiDto gdto, Model model, HttpServletRequest request)
 	{	
+		
 		int page=1;
 		if(request.getParameter("page") != null)
 			page=Integer.parseInt(request.getParameter("page"));
@@ -112,4 +114,32 @@ public class GongjiServiceImpl implements GongjiService{
 		
 		return "/admin/gongjiContent";
 	}
+	
+	@Override
+	public String readnum(HttpServletRequest request)
+	{
+		String id=request.getParameter("id");
+		String page=request.getParameter("page");
+		
+		mapper.content(id);
+				
+		return "redirect:/gongji/content?id="+id+"&page="+page;
+	}
+
+	@Override
+	public String content(HttpServletRequest request, Model model)
+	{
+		String id=request.getParameter("id");
+		String page=request.getParameter("page");
+			
+		GongjiDto gdto=mapper.content(id);
+			
+		gdto.setContent(gdto.getContent().replace("/r/n", "<br>"));
+			
+		model.addAttribute("gdto", gdto);
+		model.addAttribute("page", page);
+			
+		return "/gongji/content";
+	}
+
 }

@@ -19,7 +19,7 @@
 		border-bottom: 2px solid #4CAF50;
 		padding-bottom: 10px;
 		margin-bottom: 20px;
-		text-align: left;
+		text-align: center;
 		width: 90%;
 		max-width: 600px;
 		margin: 50px auto 20px;
@@ -75,21 +75,6 @@
 	#btn a:hover {
 		background-color: #4CAF50;
 		color: white;
-	}
-	/* 반응형 디자인 */
-	@media (max-width: 768px) {
-		h3 {
-			font-size: 20px;
-			width: 95%;
-		}
-		table th, table td {
-			padding: 10px;
-			font-size: 14px;
-		}
-		#btn a {
-			padding: 8px 16px;
-			font-size: 14px;
-		}
 	}
 </style>
 </head>

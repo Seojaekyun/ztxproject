@@ -16,6 +16,10 @@
     values(#{title},#{writer},#{content},#{state},now())
   </insert>
   
+  <update id="readnum">
+    update gongji set readnum=readnum+1 where id=#{id}
+  </update>
+  
   <select id="content" resultType="com.example.demo.dto.GongjiDto">
     select * from gongji where id=#{id}
   </select>
