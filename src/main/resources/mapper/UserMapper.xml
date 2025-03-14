@@ -63,6 +63,9 @@
 	<update id="reMember" parameterType="com.example.demo.dto.UserDto">
 		UPDATE user SET level=5 WHERE userid = #{userid} AND level!=5
 	</update>
+	<select id="getUserById" parameterType="String" resultType="com.example.demo.dto.UserDto">
+		select * from user where userid = #{userid};
+	</select>
 	
 	
 </mapper>

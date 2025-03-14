@@ -183,14 +183,11 @@
 					<td>${seatCounts[rsv.reservid]}</td>
 					<td>${rsv.charge} 원</td>
 					<td>
-						<c:if test="${rsv.state == 0}">
+						<c:if test="${rsv.state != 2}">
 						<span id="badge1"> - </span> 
 						</c:if>
-						<c:if test="${rsv.state == 1}">
+						<c:if test="${rsv.state == 2}">
 						<span id="badge1">취소요청</span> 
-						</c:if>
-						<c:if test="${rsv.state!=0 && rsv.state!=1}">
-						<span id="badge1">처리완료</span> 
 						</c:if>
 					</td>
 					<td>
@@ -211,21 +208,21 @@
 						</c:if>
 					</td>
 					<td>
-						<c:if test="${rsv.payment==0||rsv.payment==1||(rsv.payment==3&&rsv.state!=0)||rsv.payment==4 }">
+						<c:if test="${rsv.state==0||rsv.state==1||(rsv.state==3&&rsv.payment!=1)||rsv.state==4 }">
 						-
 						</c:if>
-						<c:if test="${rsv.payment==2 && (rsv.departureTime >= rsv.offerDay)}">
-						<a href="cancelConfirm?trainid=${rsv.trainid}&departureTime=${rsv.departureTime}&reservid=${rsv.reservid}&routeid=${rsv.routeid}">
+						<c:if test="${rsv.state==2 && (rsv.routeTime >= rsv.offerday)}">
+						<a href="cancelConfirm?routeid=${rsv.routeid}&routeTime=${rsv.routeTime}&reservid=${rsv.reservid}">
 							<input type="button" value="취소처리">
 						</a>
 						</c:if>
-						<c:if test="${rsv.payment==2 && (rsv.departureTime <= rsv.offerDay)}">
-						<a href="cancelRejection?trainid=${rsv.trainid}&departureTime=${rsv.departureTime}&reservid=${rsv.reservid}&routeid=${rsv.routeid}">
+						<c:if test="${rsv.state==2 && (rsv.routeTime <= rsv.offerday)}">
+						<a href="cancelRejection?routeid=${rsv.routeid}&routeTime=${rsv.routeTime}&reservid=${rsv.reservid}">
 							<input type="button" value="취소불가">
 						</a>
 						</c:if>
-						<c:if test="${rsv.payment==3 && rsv.state==0 }">
-						<a href="payReturn?trainid=${rsv.trainid}&departureTime=${rsv.departureTime}&reservid=${rsv.reservid}&routeid=${rsv.routeid}">
+						<c:if test="${rsv.payment==1 && rsv.state==3 }">
+						<a href="payReturn?routeid=${rsv.routeid}&routeTime=${rsv.routeTime}&reservid=${rsv.reservid}">
 							<input type="button" value="환불처리">
 						</a>
 						</c:if>

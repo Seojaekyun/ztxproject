@@ -24,7 +24,7 @@
      text-align: center;
    }
    #tablebox {
-   	 height: 700px;
+   	 height: 470px;
    }
 
    h2 {
@@ -38,7 +38,7 @@
    }
 
    th, td {
-     padding: 12px;
+     padding: 7px;
      text-align: center;
      border-bottom: 1px solid #ddd;
    }
@@ -53,7 +53,10 @@
      border-bottom: 2px solid black;
    }
    #btnbox {
-   	 text-align: right;
+     display: flex;
+     justify-content: flex-end;
+     margin-top: 1px;
+     right: 20px;
    }
    .btn {
      display: inline-block;

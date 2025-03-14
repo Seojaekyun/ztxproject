@@ -16,8 +16,8 @@ public interface AdminService {
 	String rsvChart(Model model);
 	String adminInquiryList(int page,Model model);
 	String adminInquiryAnswer(int id, Model model);
-	void adminInquiryAnswerOk(int id, String answer);
-    void adminInquiryAnswerDelete(int id);
+	String adminInquiryAnswerOk(int id, String answer);
+    String adminInquiryAnswerDelete(int id);
 	String memberList(HttpServletRequest request, Model model);
 	String memberUp(UserDto mdto, int id, int level, Model model);
 	String oneMeminfo(HttpServletRequest request, Model model);

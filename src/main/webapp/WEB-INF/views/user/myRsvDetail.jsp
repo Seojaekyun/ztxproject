@@ -35,8 +35,9 @@
 		margin-bottom: 15px;
 	}
 	.train-info div {
+		padding-left: 10px;
 		flex: 1;
-		text-align: center;
+		text-align: left;
 	}
 	.train-header {
 		font-size: 20px;
@@ -85,6 +86,24 @@
 		color: #333;
 		margin-top: 20px;
 	}
+	#seatnum {
+		border: none;
+		border-radius: 10px;
+		background: #5dd7e2;
+		padding: 5px 10px;
+		margin-right: 5px;
+	}
+	#clsbtn {
+		display: inline-block;
+		background-color: #28a745;
+		color: white;
+		padding: 5px 10px;
+		border: none;
+		border-radius: 10px;
+		cursor: pointer;
+		font-size: 14px;
+		margin: auto;
+	}
 </style>
 </head>
 <body>
@@ -96,10 +115,30 @@
 			<div>
 				<p class="train-time">출발 시간: ${rsv.routeTime}</p>
 				<p class="train-time">도착 시간: ${rsv.routeArrivalTime}</p>
+				<p class="train-time">
+					<c:if test="${rsv.state == 0}">
+					<span style="color: olive">예약중</span>
+					</c:if>
+					<c:if test="${rsv.state == 1}">
+					<span style="color: blue">예매완료</span>
+					</c:if>
+					<c:if test="${rsv.state == 2}">
+					<span style="color: red">취소요청중</span>
+					</c:if>
+					<c:if test="${rsv.state == 3}">
+					<span style="color: darkgray">취소</span>
+					</c:if>
+					<c:if test="${rsv.state == 4}">
+					<span style="color: red">취소 불가</span>
+					</c:if>
+				</p>
 			</div>
 			<div>
-				<p class="train-time">소요 시간: </p>
-				<p class="train-time">선택한 좌석: ${rsv.seatnum}</p>
+				<p class="train-time">선택한 좌석: 
+					<c:forEach items="${rsvSeatList}" var="rsvs">
+				 	<span id="seatnum">${rsvs.seatnum}</span>
+				 	</c:forEach>
+				 </p>
 			</div>
 		</div>
 		<div class="pnr-box">예약 번호: ${rsv.PNR}</div>
@@ -107,13 +146,14 @@
 		<div id="going-details" class="train-details">
 			<div class="details-item">출발지: ${rsv.routeDeparture}</div>
 			<div class="details-item">도착지: ${rsv.routeArrival}</div>
-			<div class="details-item">소요 시간: </div>
 			<div class="details-item">탑승 인원: ${rsv.resnum}명</div>
 			<div class="details-item">총 결제 금액: <fmt:formatNumber value="${rsv.charge}" type="number"/>원</div>
 		</div>
-		<button onclick="window.location.href='../reserv/cancel';">예약취소</button>
+		<c:if test="${(rsv.state == 0)||(rsv.state == 1)}">
+		<a href="/reserv/cancelOffer?PNR=${rsv.PNR}"><input type="button" id="clsbtn" value="예약취소"></a>
+		</c:if>
 	</div>
-	</c:forEach>	
+	</c:forEach>
 	<button onclick="window.location.href='../reserv/list';">목록으로</button>
 
 <script>

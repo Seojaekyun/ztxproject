@@ -86,7 +86,7 @@
 		SELECT ts.seatnum FROM reservlist r JOIN trainseat ts ON r.reservid = ts.resid WHERE r.PNR = #{PNR}
 	</select>
 	<update id="chargeOk" parameterType="com.example.demo.dto.ReservDto">
-		update reservlist set payment=1 where PNR=#{PNR}
+		update reservlist set payment=1, state=1 where PNR=#{PNR}
 	</update>
 	<insert id="payOk" parameterType="com.example.demo.dto.ReservDto">
 		insert into payments (resid, amount, paydate, paymethod)
@@ -99,8 +99,26 @@
 	<select id="getMyRsvDetail" resultType="com.example.demo.dto.ReservDto" parameterType="map">
 		select r.*, ts.*, ro.* from reservlist r join trainseat ts
 		on r.reservid = ts.resid join routes ro on r.routeid = ro.routeid
+		where r.pnr=#{PNR} group by r.PNR
+	</select>
+	<select id="getMyRsvDetailSeat" resultType="com.example.demo.dto.ReservDto" parameterType="map">
+		select ts.seatnum from reservlist r join trainseat ts
+		on r.reservid = ts.resid join routes ro on r.routeid = ro.routeid
 		where r.pnr=#{PNR}
-
+	</select>
+	<update id="cancelOffer" parameterType="com.example.demo.dto.ReservDto">
+		update reservlist set state=2, offerday=NOW() where PNR=#{PNR}
+	</update>
+	<select id="getRsvUserid" parameterType="map" resultType="com.example.demo.dto.ReservDto">
+		select r.*, ro.* FROM reservlist r JOIN routes ro
+		ON r.routeid = ro.routeid WHERE r.userid = #{userid} ORDER BY reservday DESC
+		LIMIT #{itemsPerPage} OFFSET #{offset}
+	</select>
+	<select id="getTresByUser" parameterType="string" resultType="int">
+		select count(*) from reservlist where userid = #{userid}
+	</select>
+	<select id="getState" resultType="Integer">
+		select coalesce((select state from payments where resid = #{reservid}), 2);
 	</select>
 	
 	

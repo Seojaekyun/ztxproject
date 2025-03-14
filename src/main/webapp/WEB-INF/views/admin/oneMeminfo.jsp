@@ -114,16 +114,12 @@
 			<tr>
 				<th>고객명</th>
 				<th>ID</th>
-				<th>FirstName</th>
-				<th>LastName</th>
 				<th>회원등급</th>
 				<th>요청사항</th>
 			</tr>
 			<tr>
 				<td>${member.name}</td>
 				<td>${member.userid}</td>
-				<td>${member.sung}</td>
-				<td>${member.lname}</td>
 				<td>
 					<c:choose>
 						<c:when test="${member.level == 0}">일반회원</c:when>
@@ -146,42 +142,42 @@
 				<th>요청사항</th>
 				<th>처리</th>
 			</tr>
-			<c:forEach items="${member.reservations}" var="rsv">
+			<c:forEach items="${member.reservlist}" var="rsv">
 				<tr>
-					<td>${rsv.reservationDate}</td>
+					<td>${rsv.reservday}</td>
 					<td>
-						<c:if test="${rsv.chargePay == 0}">
-							<span id="badge1"> - </span>
+						<c:if test="${rsv.state == 0}">
+							<span id="badge1"> 예약중 </span>
 						</c:if>
-						<c:if test="${rsv.chargePay == 1}">
-							<span id="badge1"> - </span>
+						<c:if test="${rsv.state == 1}">
+							<span id="badge1"> 예매완료 </span>
 						</c:if>
-						<c:if test="${rsv.chargePay == 2}">
+						<c:if test="${rsv.state == 2}">
 							<span id="badge1"> 취소요청 </span> <!-- '필독' 배지 -->
 						</c:if>
-						<c:if test="${rsv.chargePay == 3}">
+						<c:if test="${rsv.state == 3}">
 							<span id="badge1"> 취소완료 </span>
 						</c:if>
-						<c:if test="${rsv.chargePay == 4}">
+						<c:if test="${rsv.state == 4}">
 							<span id="badge1"> 취소불가 </span>
 						</c:if>
 					</td>
 					<td>
-						<c:if test="${rsv.chargePay==0||rsv.chargePay==1||(rsv.chargePay==3&&rsv.state!=0)||rsv.chargePay==4 }">
+						<c:if test="${rsv.state==0||rsv.state==1||(rsv.state==3&&rsv.payment!=1)||rsv.state==4 }">
 						-
 						</c:if>
-						<c:if test="${rsv.chargePay==2 && (rsv.departureTime >= rsv.offerDay)}">
-						<a href="cancelConfirm?flightName=${rsv.flightName}&departureTime=${rsv.departureTime}&reservationId=${rsv.reservationId}&flightId=${rsv.flightId}">
+						<c:if test="${rsv.state==2 && (rsv.routeTime >= rsv.offerday)}">
+						<a href="cancelConfirm?routeid=${rsv.routeid}&routeTime=${rsv.routeTime}&reservid=${rsv.reservid}">
 							<input type="button" value="취소처리">
 						</a>
 						</c:if>
-						<c:if test="${rsv.chargePay==2 && (rsv.departureTime <= rsv.offerDay)}">
-						<a href="cancelRejection?flightName=${rsv.flightName}&departureTime=${rsv.departureTime}&reservationId=${rsv.reservationId}&flightId=${rsv.flightId}">
+						<c:if test="${rsv.state==2 && (rsv.routeTime <= rsv.offerday)}">
+						<a href="cancelRejection?routeid=${rsv.routeid}&routeTime=${rsv.routeTime}&reservid=${rsv.reservid}">
 							<input type="button" value="취소불가">
 						</a>
 						</c:if>
-						<c:if test="${rsv.chargePay==3 && rsv.state==0 }">
-						<a href="payReturn?flightName=${rsv.flightName}&departureTime=${rsv.departureTime}&reservationId=${rsv.reservationId}&flightId=${rsv.flightId}">
+						<c:if test="${rsv.payment==1 && rsv.state==3 }">
+						<a href="payReturn?routeid=${rsv.routeid}&routeTime=${rsv.routeTime}&reservid=${rsv.reservid}">
 							<input type="button" value="환불처리">
 						</a>
 						</c:if>

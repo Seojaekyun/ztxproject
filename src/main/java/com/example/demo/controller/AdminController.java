@@ -20,7 +20,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -150,22 +149,21 @@ public class AdminController {
 		return service.adminInquiryList(page,model);
 	}
 	
-	@GetMapping("/admin/adminInquiryAnswer/{id}")
-	public String adminInquiryAnswer(@PathVariable int id, Model model) {
+	@GetMapping("/admin/adminInquiryAnswer")
+	public String adminInquiryAnswer(@RequestParam int id, Model model) {
 		return service.adminInquiryAnswer(id, model);
 	}
 	
 	@PostMapping("/admin/inquiryAnswerOk")
 	public String adminInquiryAnswerOk(@RequestParam int id, @RequestParam String answer) {
-		service.adminInquiryAnswerOk(id, answer);
-		return "redirect:/admin/adminInquiryList";
+		return service.adminInquiryAnswerOk(id, answer);
+		
 	}
 	
 	// 답변 삭제
 	@PostMapping("/admin/inquiryAnswerDelete")
 	public String adminInquiryAnswerDelete(@RequestParam int id) {
-		service.adminInquiryAnswerDelete(id);
-		return "redirect:/admin/adminInquiryList";
+		return service.adminInquiryAnswerDelete(id);
 	}
 	
 	

@@ -111,7 +111,7 @@
 </head>
 <body>
 
-<h2>Q & A 관리</h2>
+<h2>Q ＆ A 관리</h2>
 <section>
     <table>
         <tr>
@@ -139,7 +139,7 @@
                         </c:otherwise>
                     </c:choose>
                 </td>
-                <td><a href="/admin/adminInquiryAnswer/${inquiry.id}">조회</a></td>    
+                <td><a href="/admin/adminInquiryAnswer?id=${inquiry.id}">조회</a></td>    
             </tr>
         </c:forEach>
     </table>

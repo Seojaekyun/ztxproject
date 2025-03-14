@@ -38,6 +38,8 @@ public interface ReservMapper {
 	List<ReservDto> getRsvUserid(String userid, int itemsPerPage, int offset);
 	int getTresByUser(String userid);
 	List<Map<String, Object>> getMyRsvDetail(String PNR);
+	List<Map<String, Object>> getMyRsvDetailSeat(String PNR);
+	void cancelOffer(ReservDto rdto);
 	
 	
 }

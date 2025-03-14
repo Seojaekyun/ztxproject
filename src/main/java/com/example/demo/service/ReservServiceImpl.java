@@ -164,10 +164,19 @@ public class ReservServiceImpl implements ReservService {
 	@Override
 	public String myRsvDetail(String PNR, Model model) {
 		List<Map<String, Object>> rsvList = resMapper.getMyRsvDetail(PNR);
+		List<Map<String, Object>> rsvSeatList = resMapper.getMyRsvDetailSeat(PNR);
 		model.addAttribute("rsvList", rsvList);
+		model.addAttribute("rsvSeatList", rsvSeatList);
 		System.out.println(rsvList);
+		System.out.println(rsvSeatList);
 		
-		return "user/myRsvDetail";
+		return "/user/myRsvDetail";
+	}
+
+	@Override
+	public String cancelOffer(ReservDto rdto) {
+		resMapper.cancelOffer(rdto);
+		return "redirect:/reserv/list";
 	}
 	
 	

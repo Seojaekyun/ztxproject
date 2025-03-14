@@ -28,38 +28,32 @@ public class UserController {
 	private ReservService rservice;
 	
 	@GetMapping("/user/user")
-	public String user()
-	{
+	public String user() {
 		return service.user();
 	}
 	
 	@GetMapping("/user/useridCheck")
-	public @ResponseBody String useridCheck(HttpServletRequest request)
-	{
+	public @ResponseBody String useridCheck(HttpServletRequest request) {
 		return service.useridCheck(request);
 	}
 	
 	@PostMapping("/user/userOk")
-	public String userOk(UserDto udto)
-	{
+	public String userOk(UserDto udto) {
 		return service.userOk(udto);
 	}
 	
 	@GetMapping("/user/userView")
-	public String userView(HttpSession session, Model model)
-	{
+	public String userView(HttpSession session, Model model) {
 		return service.userView(session, model);
 	}
 	
 	@PostMapping("/user/updateOk")
-	public String chgEmail(HttpSession session, HttpServletRequest request, UserDto udto)
-	{
+	public String chgEmail(HttpSession session, HttpServletRequest request, UserDto udto) {
 		return service.updateOk(session, request, udto);
 	}
 	
 	@GetMapping("/user/pwdCheck")
-	public @ResponseBody String pwdCk(HttpSession session, HttpServletRequest request)
-	{
+	public @ResponseBody String pwdCk(HttpSession session, HttpServletRequest request) {
 		return service.pwdCheck(session, request);
 	}
 	
@@ -67,5 +61,6 @@ public class UserController {
 	public String myRsvDetail(@RequestParam String PNR, Model model) {
         return rservice.myRsvDetail(PNR, model);
     }
+	
 	
 }

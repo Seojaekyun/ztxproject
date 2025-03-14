@@ -55,5 +55,9 @@ public class ReservController {
 		return resService.chargeOk(rdto);
 	}
 	
+	@GetMapping("/reserv/cancelOffer")
+	public String cancelOffer(ReservDto rdto) {
+		return resService.cancelOffer(rdto);
+	}
 	
 }

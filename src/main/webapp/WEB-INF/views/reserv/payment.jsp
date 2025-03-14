@@ -327,6 +327,6 @@
 	</div>
 	</form>
 	<hr>
-	<button onclick="window.location.href='chargePay';">돌아가기</button>
+	<button onclick="window.location.href='/reserv/list';">돌아가기</button>
 </body>
 </html>

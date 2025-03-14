@@ -235,11 +235,11 @@ public class AdminServiceImpl implements AdminService{
 	        */
 
 	        // offerDay +1일 처리
-	        String offerDay = reserv.getOfferDay();
+	        String offerDay = reserv.getOfferday();
 	        if (offerDay != null) {
 	            LocalDate parsedDate = LocalDate.parse(offerDay, formatter);
 	            LocalDate adjustedDate = parsedDate.plusDays(1); // +1일 처리
-	            reserv.setOfferDay(adjustedDate.format(formatter)); // 다시 저장
+	            reserv.setOfferday(adjustedDate.format(formatter)); // 다시 저장
 	        }
 	    }
 		
@@ -388,13 +388,15 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public void adminInquiryAnswerOk(int id, String answer) {
+	public String adminInquiryAnswerOk(int id, String answer) {
 		imapper.updateInquiryAnswer(id, answer, 1); // ref 값을 1(답변완료)로 변경
+		return "redirect:/admin/adminInquiryList";
 	}
 	 
 	@Override
-	public void adminInquiryAnswerDelete(int id) {
+	public String adminInquiryAnswerDelete(int id) {
 		imapper.updateInquiryAnswer(id, null, 0); // ref 값을 0(미답변)으로 변경
+		return "redirect:/admin/adminInquiryList";
 	}
 	
 	
@@ -444,56 +446,57 @@ public class AdminServiceImpl implements AdminService{
 	
 	@Override
 	public String oneMeminfo(HttpServletRequest request, Model model) {
-	    String userid = request.getParameter("userid");
-
-	    // 현재 페이지 정보 가져오기
-	    int currentPage = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
-	    int itemsPerPage = 5;  // 한 페이지당 표시할 예약 개수
-	    int offset = (currentPage - 1) * itemsPerPage;  // OFFSET 계산
-
-	    // 유저 정보 가져오기
-	    UserDto member = umapper.getUserById(userid);
-	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
-	    List<ReservDto> myrsv = new ArrayList<>();
-	    int totalReservlist = 0;
-
-	    if (member != null) {
-	        // 특정 유저의 예약 리스트 (페이징 적용)
-	        myrsv = rmapper.getRsvUserid(userid, itemsPerPage, offset);
-
-	        // 전체 예약 수 가져오기 (페이징을 위해 필요)
-	        totalReservlist = rmapper.getTresByUser(userid);
-
-	        for (ReservDto reserv : myrsv) {
-	            int reservationId = reserv.getReservid();
-	            Integer payState = rmapper.getState(reservationId);
-	            reserv.setState(payState);
-	            System.out.println("값:" + payState);
-
-	            // offerDay +1일 처리
-	            String offerDay = reserv.getOfferDay();
-	            if (offerDay != null) {
-	                LocalDate parsedDate = LocalDate.parse(offerDay, formatter);
-	                LocalDate adjustedDate = parsedDate.plusDays(1);  // +1일
-	                reserv.setOfferDay(adjustedDate.format(formatter));
-	            }
-	        }
-
-	        member.setReservlist(myrsv);
-	    }
-
-	    // 총 페이지 수 계산
-	    int totalPages = (int) Math.ceil((double) totalReservlist / itemsPerPage);
-
-	    // 모델에 데이터 추가
-	    model.addAttribute("member", member);
-	    model.addAttribute("myrsv", myrsv);  // 페이징 적용된 예약 리스트
-	    model.addAttribute("currentPage", currentPage);
-	    model.addAttribute("totalPages", totalPages);
-	    model.addAttribute("totalReservations", totalReservlist);
-
-	    return "/admin/oneMeminfo";
+		String userid = request.getParameter("userid");
+		
+		// 현재 페이지 정보 가져오기
+		int currentPage = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
+		int itemsPerPage = 5;  // 한 페이지당 표시할 예약 개수
+		int offset = (currentPage - 1) * itemsPerPage;  // OFFSET 계산
+		
+		// 유저 정보 가져오기
+		UserDto member = umapper.getUserById(userid);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		
+		List<ReservDto> myrsv = new ArrayList<>();
+		int totalReservlist = 0;
+		
+		if (member != null) {
+			// 특정 유저의 예약 리스트 (페이징 적용)
+			myrsv = rmapper.getRsvUserid(userid, itemsPerPage, offset);
+			
+			// 전체 예약 수 가져오기 (페이징을 위해 필요)
+			totalReservlist = rmapper.getTresByUser(userid);
+			
+			for (ReservDto reserv : myrsv) {
+				/*
+				int reservid = reserv.getReservid();
+				Integer payState = rmapper.getState(reservid);
+				reserv.setState(payState);
+				System.out.println("값:" + payState);
+				*/
+				// offerDay +1일 처리
+				String offerday = reserv.getOfferday();
+				if (offerday != null) {
+					LocalDate parsedDate = LocalDate.parse(offerday, formatter);
+					LocalDate adjustedDate = parsedDate.plusDays(1);  // +1일
+					reserv.setOfferday(adjustedDate.format(formatter));
+				}
+			}
+			
+			member.setReservlist(myrsv);
+		}
+		
+		// 총 페이지 수 계산
+		int totalPages = (int) Math.ceil((double) totalReservlist / itemsPerPage);
+		
+		// 모델에 데이터 추가
+		model.addAttribute("member", member);
+		model.addAttribute("myrsv", myrsv);  // 페이징 적용된 예약 리스트
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("totalPages", totalPages);
+		model.addAttribute("totalReservations", totalReservlist);
+		
+		return "/admin/oneMeminfo";
 	}
 
 }

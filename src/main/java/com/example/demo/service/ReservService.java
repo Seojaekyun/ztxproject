@@ -16,6 +16,7 @@ public interface ReservService {
 	String payment(HttpSession session, HttpServletRequest request, Model model);
 	String chargeOk(ReservDto rdto);
 	String myRsvDetail(String PNR, Model model);
+	String cancelOffer(ReservDto rdto);
 	
 	
 }
