@@ -11,5 +11,6 @@ public interface GongjiService {
 	String list(GongjiDto gdto, Model model, HttpServletRequest request);
 	String gongjiWrite();
 	String gongjiWriteOk(GongjiDto gdto);
+	String gongjiContent(HttpServletRequest request, Model model);
 	
 }

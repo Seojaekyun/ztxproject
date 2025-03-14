@@ -139,7 +139,14 @@ public class AdminController {
 	public String gongjiWriteOk(GongjiDto gdto)
 	{
 		return gservice.gongjiWriteOk(gdto);
-	}	
+	}
+	
+	@GetMapping("/admin/gongjiContent")
+	public String gongjiContent(HttpServletRequest request, Model model)
+	{
+		return gservice.gongjiContent(request, model);
+	}
+	
 	
 	
 	@GetMapping("/admin/adminInquiryList")

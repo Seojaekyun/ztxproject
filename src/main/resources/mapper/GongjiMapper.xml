@@ -15,6 +15,10 @@
     insert into gongji(title,writer,content,state,writeday)
     values(#{title},#{writer},#{content},#{state},now())
   </insert>
+  
+  <select id="content" resultType="com.example.demo.dto.GongjiDto">
+    select * from gongji where id=#{id}
+  </select>
 
 
 </mapper>

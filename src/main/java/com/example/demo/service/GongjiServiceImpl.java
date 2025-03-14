@@ -96,4 +96,20 @@ public class GongjiServiceImpl implements GongjiService{
 		
 		return "redirect:/admin/gongjiList";
 	}
+
+	@Override
+	public String gongjiContent(HttpServletRequest request, Model model)
+	{
+		String id=request.getParameter("id");
+		String page=request.getParameter("page");
+		
+		GongjiDto gdto=mapper.content(id);
+		
+		gdto.setContent(gdto.getContent().replace("\r\n", "<br>"));
+		
+		model.addAttribute("gdto", gdto);
+		model.addAttribute("page", page);
+		
+		return "/admin/gongjiContent";
+	}
 }

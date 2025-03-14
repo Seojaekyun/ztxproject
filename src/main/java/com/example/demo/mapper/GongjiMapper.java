@@ -11,4 +11,5 @@ public interface GongjiMapper {
 	public ArrayList<GongjiDto> list(int index);
 	public int getChong();
 	public void writeOk(GongjiDto gdto);
+	public GongjiDto content(String id);
 }
