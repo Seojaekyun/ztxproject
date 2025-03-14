@@ -8,10 +8,10 @@
 <title>공지사항</title>
   <style>
     body {
-	  font-family: 'Noto Sans KR', sans-serif;
-	  margin: 0;
-	  padding: 0;
-	  background-color: #f4f6f9;
+	  font-family:'Noto Sans KR', sans-serif;
+	  margin:0;
+	  padding:0;
+	  background-color:#f4f6f9;
 	}
 	h3 {
       font-size:24px;
@@ -21,98 +21,97 @@
       margin-bottom:20px;
     }
 	section {
-	  width: 1000px;
-	  height: 800px;
-	  margin: 30px auto;
-	  padding: 20px;
-	  background-color: #fff;
-	  border-radius: 8px;
-	  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+	  width:1000px;
+	  height:800px;
+	  margin:30px auto;
+	  padding:20px;
+	  background-color:#fff;
+	  border-radius:8px;
+	  box-shadow:0 2px 10px rgba(0, 0, 0, 0.1);
 	}
 	#tbbox {
-		height: 650px;
+	  height: 50px;
 	}
 	table {
-	  width: 100%;
-	  border-collapse: collapse;
-	  margin-bottom: 20px;
+	  width:100%;
+	  border-collapse:collapse;
+	  margin-bottom:20px;
 	}
 	th, td {
-	  padding: 8px;
-	  text-align: center;
-	  border-bottom: 1px solid #ddd;
+	  padding:8px;
+	  text-align:center;
+	  border-bottom:1px solid #ddd;
 	}
 	th {
-	  background-color: #004EA2;
-	  color: #fff;
-	  font-weight: 500;
-	  text-transform: uppercase;
+	  background-color:#004EA2;
+	  color:#fff;
+	  font-weight:500;
+	  text-transform:uppercase;
 	}
 	td {
-	  background-color: #fff;
-	  color: #333;
-	  font-size: 15px;
+	  background-color:#fff;
+	  color:#333;
+	  font-size:15px;
 	}
 	a {
-	  color: #004EA2;
-	  text-decoration: none;
+	  color:#004EA2;
+	  text-decoration:none;
 	}
 	a:hover {
-	  text-decoration: underline;
+	  text-decoration:underline;
 	}
-	/* 필독 및 공지 배지 스타일 */
 	#badge1 {
-	  background-color: #DF251F;
-	  color: white;
-	  font-size: 11px;
-	  padding: 3px 8px;
-	  border-radius: 3px;
-	  margin-right: 8px;
-	  font-weight: 700;
+	  background-color:#DF251F;
+	  color:white;
+	  font-size:11px;
+	  padding:3px 8px;
+	  border-radius:3px;
+	  margin-right:8px;
+	  font-weight:700;
 	}
 	#badge2 {
-	  background-color: #4CAF50;
-	  color: white;
-	  font-size: 11px;
-	  padding: 3px 8px;
-	  border-radius: 3px;
-	  margin-right: 8px;
-	  font-weight: 700;
+	  background-color:#4CAF50;
+	  color:white;
+	  font-size:11px;
+	  padding:3px 8px;
+	  border-radius:3px;
+	  margin-right:8px;
+	  font-weight:700;
 	}
 	#paging {
-	  text-align: center;
-  	  margin-top: 15px;
+	  text-align:center;
+  	  margin-top:15px;
     }
     #paging a, #paging span {
-      display: inline-block;
-      padding: 5px 10px;
-      margin: 0 3px;
-      font-size: 13px;
-      color: #333;
-      text-decoration: none;
-      border: 1px solid #ddd;
-      border-radius: 3px;
-      transition: all 0.2s ease-in-out;
+      display:inline-block;
+      padding:5px 10px;
+      margin:0 3px;
+      font-size:13px;
+      color:#333;
+      text-decoration:none;
+      border:1px solid #ddd;
+      border-radius:3px;
+      transition:all 0.2s ease-in-out;
     }
     #paging a:hover {
-      background-color: #004EA2;
-      color: white;
+      background-color:#004EA2;
+      color:white;
     }
     #paging .active {
-      background-color: #004EA2;
-      color: white;
-      font-weight: bold;
-      border: 1px solid #004EA2;
-      pointer-events: none;
+      background-color:#004EA2;
+      color:white;
+      font-weight:bold;
+      border:1px solid #004EA2;
+      pointer-events:none;
     }
     #paging .disabled {
-      color: #bbb;
-      border: 1px solid #eee;
-      pointer-events: none;
+      color:#bbb;
+      border:1px solid #eee;
+      pointer-events:none;
     }
   </style>
 </head>
-<body> <!-- /gongji/list.jsp -->
+<body> <!-- gongji/list.jsp -->
  <section>
   <h3> 공지사항 </h3>
   <div id="tbbox">

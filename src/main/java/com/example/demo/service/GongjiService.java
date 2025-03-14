@@ -4,8 +4,10 @@ import org.springframework.ui.Model;
 
 import com.example.demo.dto.GongjiDto;
 
+import jakarta.servlet.http.HttpServletRequest;
+
 public interface GongjiService {
-	String gongjiList(GongjiDto gdto, Model model);
-	String list(GongjiDto gdto, Model model);
+	String gongjiList(GongjiDto gdto, Model model, HttpServletRequest request);
+	String list(GongjiDto gdto, Model model, HttpServletRequest request);
 	
 }

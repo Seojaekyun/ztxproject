@@ -4,7 +4,11 @@
 <mapper namespace="com.example.demo.mapper.GongjiMapper">
 
   <select id="list" resultType="com.example.demo.dto.GongjiDto">
-    select * from gongji order by id desc limit 0,10
+    select * from gongji order by id desc limit #{index},10
+  </select>
+  
+  <select id="getChong" resultType="Integer">
+    select ceil( count(*)/10 ) from gongji
   </select>
 
 

@@ -8,5 +8,6 @@ import com.example.demo.dto.GongjiDto;
 
 @Mapper
 public interface GongjiMapper {
-	public ArrayList<GongjiDto> list();
+	public ArrayList<GongjiDto> list(int index);
+	public int getChong();
 }

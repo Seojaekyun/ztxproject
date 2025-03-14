@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import com.example.demo.dto.GongjiDto;
 import com.example.demo.service.GongjiService;
 
+import jakarta.servlet.http.HttpServletRequest;
+
 @Controller
 public class GongjiController {
 	
@@ -17,9 +19,9 @@ public class GongjiController {
 	private GongjiService service;
 	
 	@GetMapping("/gongji/list")
-	public String list(GongjiDto gdto, Model model)
+	public String list(GongjiDto gdto, Model model, HttpServletRequest request)
 	{
-		return service.list(gdto, model);
+		return service.list(gdto, model, request);
 	}
 
 }

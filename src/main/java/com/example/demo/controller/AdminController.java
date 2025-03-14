@@ -123,8 +123,8 @@ public class AdminController {
 	}
 	
 	@GetMapping("/admin/gongjiList")
-	public String gongjiList(GongjiDto gdto, Model model) {
-		return gservice.gongjiList(gdto, model);
+	public String gongjiList(GongjiDto gdto, Model model, HttpServletRequest request) {
+		return gservice.gongjiList(gdto, model, request);
 	}
 	
 	
