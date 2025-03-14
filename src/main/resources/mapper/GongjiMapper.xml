@@ -4,7 +4,24 @@
 <mapper namespace="com.example.demo.mapper.GongjiMapper">
 
   <select id="list" resultType="com.example.demo.dto.GongjiDto">
-    select * from gongji order by id desc limit 0,10
+    select * from gongji order by id desc limit #{index},10
+  </select>
+  
+  <select id="getChong" resultType="Integer">
+    select ceil( count(*)/10 ) from gongji
+  </select>
+  
+  <insert id="writeOk">
+    insert into gongji(title,writer,content,state,writeday)
+    values(#{title},#{writer},#{content},#{state},now())
+  </insert>
+  
+  <update id="readnum">
+    update gongji set readnum=readnum+1 where id=#{id}
+  </update>
+  
+  <select id="content" resultType="com.example.demo.dto.GongjiDto">
+    select * from gongji where id=#{id}
   </select>
 
 

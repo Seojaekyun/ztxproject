@@ -21,6 +21,7 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -122,10 +123,30 @@ public class AdminController {
 		return service.rsvChart(model);
 	}
 	
-	@GetMapping("/admin/gongjiList")
-	public String gongjiList(GongjiDto gdto, Model model) {
-		return gservice.gongjiList(gdto, model);
+	@RequestMapping("/admin/gongjiList")
+	public String gongjiList(GongjiDto gdto, Model model, HttpServletRequest request)
+	{
+		return gservice.gongjiList(gdto, model, request);
 	}
+	
+	@GetMapping("/admin/gongjiWrite")
+	public String gongjiWrite()
+	{
+		return gservice.gongjiWrite();
+	}
+	
+	@PostMapping("/admin/gongjiWriteOk")
+	public String gongjiWriteOk(GongjiDto gdto)
+	{
+		return gservice.gongjiWriteOk(gdto);
+	}
+	
+	@GetMapping("/admin/gongjiContent")
+	public String gongjiContent(HttpServletRequest request, Model model)
+	{
+		return gservice.gongjiContent(request, model);
+	}
+	
 	
 	
 	@GetMapping("/admin/adminInquiryList")
