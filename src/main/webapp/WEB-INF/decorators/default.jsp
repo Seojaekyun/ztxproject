@@ -638,7 +638,8 @@
 							<li id="main4" onmouseover="viewMenu(3)" onmouseout="hideMenu(3)">
 								<span class="icond">🚄</span>꼬레일 멤버십
 								<ul class="menu">
-									<li><a href="">멤버십 소개</a></li>
+									<li><a href="/membership/membership">멤버십 소개</a></li>
+									<li><a href="/membership/membershipsogae">멤버십 제휴소개</a></li>
 									<li><a href="">멤버십 가입신청</a></li>
 								</ul>
 							</li>
