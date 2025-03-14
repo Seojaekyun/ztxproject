@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="/resources/css/style.css">
     <style>
         .membership-container {
-            width: 80%;
+            width: 1100px;
             margin: auto;
             padding: 40px 20px;
             background-color: #ffffff;

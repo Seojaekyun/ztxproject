@@ -29,5 +29,40 @@
     select pwd from user where userid=#{userid}
   </select>
 	
+	<select id="selectAllUsers" resultType="com.example.demo.dto.UserDto">
+		SELECT userid, name FROM user
+	</select>
+	<select id="getUserList" resultType="com.example.demo.dto.UserDto">
+		SELECT * FROM user LIMIT #{itemsPerPage} OFFSET #{offset}
+	</select>
+	<select id="getTotalUserCount" resultType="int">
+		SELECT COUNT(*) FROM user
+	</select>
+	<update id="updateUserLevelByUserid" parameterType="String">
+		update user set level=3 where userid=#{userid}
+	</update>
+	<select id="getPreviousLevel" parameterType="String" resultType="int">
+		SELECT previous_level FROM user WHERE userid = #{userid}
+	</select>
+	<select id="selectUsers" resultType="com.example.demo.dto.UserDto">
+		SELECT userid, name, level, previous_level FROM user
+	</select>
+	<!-- 현재 level 가져오기 -->
+	<select id="getCurrentLevel" resultType="int" parameterType="String">
+		SELECT level FROM user WHERE userid = #{userid}
+	</select>
+	<update id="updatePreviousLevel">
+		UPDATE user SET previous_level = #{previousLevel} WHERE userid = #{userid}
+	</update>
+	<update id="updateUserLevel">
+		UPDATE user SET level = #{level} WHERE userid = #{userid}
+	</update>
+	<update id="memberUp" parameterType="com.example.demo.dto.UserDto">
+		update user set level=#{level} where id=#{id}
+	</update>
+	<update id="reMember" parameterType="com.example.demo.dto.UserDto">
+		UPDATE user SET level=5 WHERE userid = #{userid} AND level!=5
+	</update>
+	
 	
 </mapper>

@@ -1,6 +1,5 @@
 package com.example.demo.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -8,7 +7,6 @@ import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-
 import com.example.demo.dto.ReservDto;
 import com.example.demo.mapper.ReservMapper;
 
@@ -102,7 +100,9 @@ public class ReservServiceImpl implements ReservService {
 	}
 
 	@Override
-	public String list(Model model, HttpServletRequest request) {
+	public String list(HttpSession session, Model model, HttpServletRequest request) {
+		String userid=(String)session.getAttribute("userid");
+		
 		int page=1;
 		if(request.getParameter("page") != null)
 			page=Integer.parseInt(request.getParameter("page"));
@@ -121,8 +121,9 @@ public class ReservServiceImpl implements ReservService {
 			pend=chong;
 		
 		int index=(page-1)*10;
-		ArrayList<ReservDto> reslist=resMapper.list(index);
+		List<ReservDto> reslist=resMapper.list(index);
 		
+		model.addAttribute("userid", userid);
 		model.addAttribute("reslist", reslist);
 		model.addAttribute("page", page);
 		model.addAttribute("pstart", pstart);
@@ -158,6 +159,15 @@ public class ReservServiceImpl implements ReservService {
 		resMapper.payOk(rdto);
 		resMapper.chargeOk(rdto);
 		return "redirect:/reserv/list";
+	}
+
+	@Override
+	public String myRsvDetail(String PNR, Model model) {
+		List<Map<String, Object>> rsvList = resMapper.getMyRsvDetail(PNR);
+		model.addAttribute("rsvList", rsvList);
+		System.out.println(rsvList);
+		
+		return "user/myRsvDetail";
 	}
 	
 	

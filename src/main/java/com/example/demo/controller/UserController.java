@@ -6,9 +6,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.dto.UserDto;
+import com.example.demo.service.ReservService;
 import com.example.demo.service.UserService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -20,6 +22,10 @@ public class UserController {
 	@Autowired
 	@Qualifier("us")
 	private UserService service;
+	
+	@Autowired
+	@Qualifier("ress")
+	private ReservService rservice;
 	
 	@GetMapping("/user/user")
 	public String user()
@@ -56,5 +62,10 @@ public class UserController {
 	{
 		return service.pwdCheck(session, request);
 	}
+	
+	@GetMapping("/user/myRsvDetail")
+	public String myRsvDetail(@RequestParam String PNR, Model model) {
+        return rservice.myRsvDetail(PNR, model);
+    }
 	
 }

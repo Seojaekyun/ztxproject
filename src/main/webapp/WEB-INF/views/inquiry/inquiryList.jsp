@@ -15,7 +15,7 @@
 
    section {
      width: 1000px;
-     height: 800px;
+     height: 550px;
      margin: 40px auto;
      background: white;
      padding: 20px;

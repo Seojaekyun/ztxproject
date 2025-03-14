@@ -41,8 +41,8 @@ public class ReservController {
 	}
 	
 	@GetMapping("/reserv/list")
-	public String list(Model model, HttpServletRequest request) {
-		return resService.list(model, request);
+	public String list(HttpSession session, Model model, HttpServletRequest request) {
+		return resService.list(session, model, request);
 	}
 	
 	@GetMapping("/reserv/payment")

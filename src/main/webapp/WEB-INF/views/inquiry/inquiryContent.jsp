@@ -99,6 +99,13 @@
         font-size: 16px;
         width: 100%;
     }
+    
+    #upform, #delform {
+    	display: none;
+    }
+    #listbtn {
+    	margin-top: 10px;
+    }
 </style>
 <script>
 function validatePassword(actionUrl, correctPwd) {
@@ -112,6 +119,15 @@ function validatePassword(actionUrl, correctPwd) {
     document.getElementById("actionForm").action = actionUrl;
     document.getElementById("actionForm").submit(); // ✅ 이동 허용
 }
+function upform() {
+	document.getElementById("upform").style.display = "block";
+	document.getElementById("delform").style.display = "none";
+}
+function delform() {
+	document.getElementById("delform").style.display = "block";
+	document.getElementById("upform").style.display = "none";
+}
+
 </script>
 </head>
 <body>
@@ -136,27 +152,36 @@ function validatePassword(actionUrl, correctPwd) {
     <div class="action-box">
         <!-- 🚀 비회원일 경우 비밀번호 입력 후 수정/삭제 가능 -->
         <c:if test="${idto.userid eq 'guest'}">
-            <form id="actionForm" method="POST">
+            <form id="actionForm" method="get">
                 <input type="hidden" name="id" value="${idto.id}">
-
-                <!-- 비밀번호 입력 -->
-                <input type="password" id="inputPwd" class="pwd-input" name="pwd" placeholder="비밀번호 입력" required>
-
-                <!-- 수정 버튼 -->
-                <button type="button" class="btn" onclick="validatePassword('/inquiry/inquiryUpdate', '${idto.pwd}')">수정</button>
-
-                <!-- 삭제 버튼 -->
-                <button type="button" class="btn" onclick="validatePassword('/inquiry/inquiryDelete', '${idto.pwd}')">삭제</button>
+				
+                <!-- 수정 -->
+                <div id="upform">
+	                <input type="password" id="inputPwd" class="pwd-input" name="pwd" placeholder="비밀번호 입력" required>
+	                <button type="button" class="btn" onclick="validatePassword('/inquiry/inquiryUpdate', '${idto.pwd}')">수정</button>
+				</div>
+				
+                <!-- 삭제 -->
+                <div id="delform">
+	                <input type="password" id="inputPwd" class="pwd-input" name="pwd" placeholder="비밀번호 입력" required>
+	                <button type="button" class="btn" onclick="validatePassword('/inquiry/inquiryDelete', '${idto.pwd}')">삭제</button>
+                </div>
             </form>
         </c:if>
 
         <!-- 🚀 회원일 경우 비밀번호 없이 수정 가능 -->
-        <c:if test="${idto.userid eq 'userid'}">
-            <a href="/inquiry/inquiryUpdate?id=${idto.id}" class="btn">수정</a>
+        <c:if test="${idto.userid eq userid}">
+            <a href="/inquiry/inquiryUpdate?id=${idto.id}" class="btn" >수정</a>
             <a href="/inquiry/inquiryDelete?id=${idto.id}" class="btn">삭제</a>
         </c:if>
 
-        <a href="/inquiry/inquiryList" class="btn">목록으로</a>
+    </div>
+    <div id="listbtn">
+    <c:if test="${idto.userid eq 'guest'}">
+    	<input type="button" value="수정" id="upbtn" class="btn" onclick="upform()">
+		<input type="button" value="삭제" id="delbtn" class="btn" onclick="delform()">
+	</c:if>
+    	<a href="/inquiry/inquiryList"><input type="button" value="목록으로" class="btn"></a>
     </div>
 </div>
 

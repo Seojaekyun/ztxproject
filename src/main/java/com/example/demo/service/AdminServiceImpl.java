@@ -3,6 +3,7 @@ package com.example.demo.service;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -13,13 +14,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.dto.InquiryDto;
 import com.example.demo.dto.ReservDto;
 import com.example.demo.dto.RoutesDto;
+import com.example.demo.dto.UserDto;
 import com.example.demo.mapper.InquiryMapper;
 import com.example.demo.mapper.ReservMapper;
 import com.example.demo.mapper.RoutesMapper;
+import com.example.demo.mapper.UserMapper;
 import com.google.gson.Gson;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -36,7 +40,10 @@ public class AdminServiceImpl implements AdminService{
 	private RoutesMapper romapper;
 	
 	@Autowired
-	private InquiryMapper mapper;
+	private InquiryMapper imapper;
+	
+	@Autowired
+	private UserMapper umapper;
 
 	@Override
 	public String adminIndex(HttpSession session, HttpServletRequest request, Model model) {
@@ -346,49 +353,147 @@ public class AdminServiceImpl implements AdminService{
 		
 		return "admin/rsvChart";  // JSP 파일로 이동
 	}
-
 	
 	
-	 @Override
-	    public String adminInquiryList(int page, Model model) {
-	        int index = (page - 1) * 10;
-	        int total = mapper.getChong();
-	        int totalPage = (int) Math.ceil((double) total / 10);
+	@Override
+	public String adminInquiryList(int page, Model model) {
+		int index = (page - 1) * 10;
+		int total = imapper.getChong();
+		int totalPage = (int) Math.ceil((double) total / 10);
+		
+		List<InquiryDto> inquiries = imapper.inquiryList(index);
+		
+		System.out.println("adminInquiryList 조회된 문의 개수: " + (inquiries != null ? inquiries.size() : "null"));
+		
+		// 🛠 inquiries 리스트 내부 데이터를 자세히 출력
+		for (InquiryDto inquiry : inquiries) {
+			System.out.println("문의 ID: " + inquiry.getId() + ", 제목: " + inquiry.getTitle());
+		}
+		
+		model.addAttribute("inquiries", inquiries);
+		model.addAttribute("page", page);
+		model.addAttribute("totalPage", totalPage);
+		
+		return "/admin/adminInquiryList";
+	}
 
-	        List<InquiryDto> inquiries = mapper.inquiryList(index);
-	        
-	        System.out.println("adminInquiryList 조회된 문의 개수: " + (inquiries != null ? inquiries.size() : "null"));
+	@Override
+	public String adminInquiryAnswer(int id, Model model) {
+		InquiryDto inquiry = imapper.getInquiryById(id);
+		if (inquiry == null) {
+			return "redirect:/admin/adminInquiryList"; // 존재하지 않는 경우 리스트로 이동
+		}
+		model.addAttribute("inquiry", inquiry);
+		return "/admin/adminInquiryAnswer"; // JSP 파일 이름과 일치해야 함
+	}
 
-	        // 🛠 inquiries 리스트 내부 데이터를 자세히 출력
-	        for (InquiryDto inquiry : inquiries) {
-	            System.out.println("문의 ID: " + inquiry.getId() + ", 제목: " + inquiry.getTitle());
-	        }
-	        
-	        model.addAttribute("inquiries", inquiries);
-	        model.addAttribute("page", page);
-	        model.addAttribute("totalPage", totalPage);
-
-	        return "/admin/adminInquiryList";
-	    }
-
-	 @Override
-	 public String adminInquiryAnswer(int id, Model model) {
-	     InquiryDto inquiry = mapper.getInquiryById(id);
-	     if (inquiry == null) {
-	         return "redirect:/admin/adminInquiryList"; // 존재하지 않는 경우 리스트로 이동
-	     }
-	     model.addAttribute("inquiry", inquiry);
-	     return "/admin/adminInquiryAnswer"; // JSP 파일 이름과 일치해야 함
-	 }
-
-	 @Override
-	    public void adminInquiryAnswerOk(int id, String answer) {
-	        mapper.updateInquiryAnswer(id, answer, 1); // ref 값을 1(답변완료)로 변경
-	    }
+	@Override
+	public void adminInquiryAnswerOk(int id, String answer) {
+		imapper.updateInquiryAnswer(id, answer, 1); // ref 값을 1(답변완료)로 변경
+	}
 	 
-	 @Override
-	    public void adminInquiryAnswerDelete(int id) {
-	        mapper.updateInquiryAnswer(id, null, 0); // ref 값을 0(미답변)으로 변경
+	@Override
+	public void adminInquiryAnswerDelete(int id) {
+		imapper.updateInquiryAnswer(id, null, 0); // ref 값을 0(미답변)으로 변경
+	}
+	
+	
+	@Override
+	public String memberList(HttpServletRequest request, Model model) {
+		// 페이지 값 받기 (기본값 1)
+		String pageParam = request.getParameter("page");
+		int page = (pageParam != null) ? Integer.parseInt(pageParam) : 1;
+		
+		int itemsPerPage = 10; // 페이지당 출력할 항목 수
+		int totalItems = umapper.getTotalUserCount(); // 전체 회원 수 가져오기
+		int totalPages = (int) Math.ceil((double) totalItems / itemsPerPage);
+		
+		// 현재 페이지에 맞는 데이터 가져오기
+		int offset = (page - 1) * itemsPerPage;
+		List<UserDto> ulist = umapper.getUserList(offset, itemsPerPage);
+		
+		// 회원 리스트와 예약 리스트 매칭 (userid 기준으로 각 회원의 최근 예약만 가져옴)
+		for (UserDto user : ulist) {
+			// 각 회원의 최근 예약 한 건을 가져옴
+			ReservDto recentReserv = rmapper.getMyrsv(user.getUserid());
+			if (recentReserv != null) {
+				user.setReservlist(Collections.singletonList(recentReserv)); // 최근 예약 하나만 설정
+			}
+			else {
+				user.setReservlist(Collections.emptyList()); // 예약이 없는 경우 빈 리스트 설정
+			}
+		}
+		
+		model.addAttribute("ulist", ulist);
+		model.addAttribute("currentPage", page);
+		model.addAttribute("totalPages", totalPages);
+		
+		return "/admin/memberList";
+	}
+	
+	@Override
+	public String memberUp(UserDto mdto, @RequestParam int id, @RequestParam int level, Model model) {
+		mdto = new UserDto();		
+		// id와 state 값을 mdto 객체에 세팅
+		mdto.setId(id);
+		mdto.setLevel(level);
+		
+		umapper.memberUp(mdto);
+		return "redirect:/admin/memberList";
+	}
+	
+	@Override
+	public String oneMeminfo(HttpServletRequest request, Model model) {
+	    String userid = request.getParameter("userid");
+
+	    // 현재 페이지 정보 가져오기
+	    int currentPage = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
+	    int itemsPerPage = 5;  // 한 페이지당 표시할 예약 개수
+	    int offset = (currentPage - 1) * itemsPerPage;  // OFFSET 계산
+
+	    // 유저 정보 가져오기
+	    UserDto member = umapper.getUserById(userid);
+	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+	    List<ReservDto> myrsv = new ArrayList<>();
+	    int totalReservlist = 0;
+
+	    if (member != null) {
+	        // 특정 유저의 예약 리스트 (페이징 적용)
+	        myrsv = rmapper.getRsvUserid(userid, itemsPerPage, offset);
+
+	        // 전체 예약 수 가져오기 (페이징을 위해 필요)
+	        totalReservlist = rmapper.getTresByUser(userid);
+
+	        for (ReservDto reserv : myrsv) {
+	            int reservationId = reserv.getReservid();
+	            Integer payState = rmapper.getState(reservationId);
+	            reserv.setState(payState);
+	            System.out.println("값:" + payState);
+
+	            // offerDay +1일 처리
+	            String offerDay = reserv.getOfferDay();
+	            if (offerDay != null) {
+	                LocalDate parsedDate = LocalDate.parse(offerDay, formatter);
+	                LocalDate adjustedDate = parsedDate.plusDays(1);  // +1일
+	                reserv.setOfferDay(adjustedDate.format(formatter));
+	            }
+	        }
+
+	        member.setReservlist(myrsv);
 	    }
+
+	    // 총 페이지 수 계산
+	    int totalPages = (int) Math.ceil((double) totalReservlist / itemsPerPage);
+
+	    // 모델에 데이터 추가
+	    model.addAttribute("member", member);
+	    model.addAttribute("myrsv", myrsv);  // 페이징 적용된 예약 리스트
+	    model.addAttribute("currentPage", currentPage);
+	    model.addAttribute("totalPages", totalPages);
+	    model.addAttribute("totalReservations", totalReservlist);
+
+	    return "/admin/oneMeminfo";
+	}
 
 }

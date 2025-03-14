@@ -11,7 +11,6 @@ import com.example.demo.dto.GongjiDto;
 import com.example.demo.mapper.GongjiMapper;
 
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 
 @Service
 @Qualifier("gs")

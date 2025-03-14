@@ -5,13 +5,10 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-
 import com.example.demo.dto.GongjiDto;
 import com.example.demo.service.GongjiService;
 
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class GongjiController {
@@ -21,20 +18,17 @@ public class GongjiController {
 	private GongjiService service;
 	
 	@GetMapping("/gongji/list")
-	public String list(GongjiDto gdto, Model model, HttpServletRequest request)
-	{
+	public String list(GongjiDto gdto, Model model, HttpServletRequest request) {
 		return service.list(gdto, model, request);
 	}
 	
 	@GetMapping("/gongji/readnum")
-	public String readnum(HttpServletRequest request)
-	{
+	public String readnum(HttpServletRequest request) {
 		return service.readnum(request);
 	}
 	
 	@GetMapping("/gongji/content")
-	public String content(HttpServletRequest request, Model model)
-	{
+	public String content(HttpServletRequest request, Model model) {
 		return service.content(request, model);
 	}
 

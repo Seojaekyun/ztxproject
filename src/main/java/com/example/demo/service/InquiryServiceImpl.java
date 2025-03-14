@@ -148,15 +148,7 @@ public class InquiryServiceImpl implements InquiryService {
             return "redirect:/inquiry/inquiryList";
         }
 
-        // 로그인 사용자 확인
-        String userid = (session.getAttribute("userid") != null) 
-                        ? session.getAttribute("userid").toString() 
-                        : null;
-
-        // 회원 검증
-        if (!"guest".equals(inquiry.getUserid()) && (userid == null || !userid.equals(inquiry.getUserid()))) {
-            return "redirect:/login/login";
-        }
+       
 
         model.addAttribute("inquiry", inquiry);
         return "inquiry/inquiryUpdate";  // 수정 JSP로 이동
@@ -164,9 +156,6 @@ public class InquiryServiceImpl implements InquiryService {
     
     @Override
     public String inquiryUpdateOk(InquiryDto idto, HttpSession session, HttpServletRequest request) {
-        String userid = (session.getAttribute("userid") != null) 
-                        ? session.getAttribute("userid").toString() 
-                        : null;
 
         InquiryDto existingInquiry = mapper.getInquiryById(idto.getId());
         if (existingInquiry == null) {
@@ -174,22 +163,9 @@ public class InquiryServiceImpl implements InquiryService {
             return "redirect:/inquiry/inquiryList";
         }
 
-        // ✅ 회원이면 비밀번호 검증 없이 수정 가능
-        if (!"guest".equals(existingInquiry.getUserid())) {
-            if (userid == null || !userid.equals(existingInquiry.getUserid())) {
-                return "redirect:/login/login";
-            }
-        } else {
-            // ✅ 비회원이면 비밀번호 검증 필요
-            if (idto.getPwd() == null || !idto.getPwd().equals(existingInquiry.getPwd())) {
-                request.setAttribute("error", "비밀번호가 일치하지 않습니다.");
-                return "redirect:/inquiry/inquiryUpdate?id=" + idto.getId();
-            }
-        }
-
         // ✅ 업데이트 실행
         mapper.inquiryUpdate(idto);
-        return "redirect:/inquiry/detail/" + idto.getId();
+        return "redirect:/inquiry/inquiryContent?id=" + idto.getId();
     }
 
 	@Override

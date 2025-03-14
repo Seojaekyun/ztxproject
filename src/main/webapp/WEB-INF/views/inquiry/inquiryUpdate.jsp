@@ -47,12 +47,6 @@
             <textarea class="form-control" name="content" rows="5" required>${inquiry.content}</textarea>
         </div>
 
-        <!-- 비밀번호 입력 (비회원일 경우) -->
-        <div class="mb-3">
-            <label class="form-label">비밀번호</label>
-            <input type="password" class="form-control" name="pwd" required>
-        </div>
-
         <!-- 수정 버튼 -->
         <div class="d-grid gap-2">
             <button type="submit" class="btn btn-primary">문의 수정</button>

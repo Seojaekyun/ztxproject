@@ -14,7 +14,7 @@
    }
 
    section {
-     width: 80%;
+     width: 1100px;
      margin: 40px auto;
      background: white;
      padding: 20px;
@@ -104,7 +104,7 @@
                 <tr>
                     <td>${inquiry.id}</td>
                     <td>${inquiry.userid}</td>
-                    <td><a href="/inquiry/detail/${inquiry.id}">${inquiry.title}</a></td>
+                    <td><a href="/inquiry/readnum?id=${inquiry.id}">${inquiry.title}</a></td>
                     <td class="status-${inquiry.status}">
     					<c:choose>
         					<c:when test="${inquiry.category == 1}">불편/개선</c:when>

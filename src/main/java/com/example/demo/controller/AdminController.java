@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import com.example.demo.dto.GongjiDto;
 import com.example.demo.dto.StationsDto;
 import com.example.demo.dto.TrainesDto;
+import com.example.demo.dto.UserDto;
 import com.example.demo.service.AdminService;
 import com.example.demo.service.GongjiService;
 import com.example.demo.service.RoutesService;
@@ -21,7 +22,6 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -123,30 +123,26 @@ public class AdminController {
 		return service.rsvChart(model);
 	}
 	
-	@RequestMapping("/admin/gongjiList")
-	public String gongjiList(GongjiDto gdto, Model model, HttpServletRequest request)
-	{
+	
+	@GetMapping("/admin/gongjiList")
+	public String gongjiList(GongjiDto gdto, Model model, HttpServletRequest request) {
 		return gservice.gongjiList(gdto, model, request);
 	}
 	
 	@GetMapping("/admin/gongjiWrite")
-	public String gongjiWrite()
-	{
+	public String gongjiWrite() {
 		return gservice.gongjiWrite();
 	}
 	
 	@PostMapping("/admin/gongjiWriteOk")
-	public String gongjiWriteOk(GongjiDto gdto)
-	{
+	public String gongjiWriteOk(GongjiDto gdto) {
 		return gservice.gongjiWriteOk(gdto);
 	}
 	
 	@GetMapping("/admin/gongjiContent")
-	public String gongjiContent(HttpServletRequest request, Model model)
-	{
+	public String gongjiContent(HttpServletRequest request, Model model) {
 		return gservice.gongjiContent(request, model);
 	}
-	
 	
 	
 	@GetMapping("/admin/adminInquiryList")
@@ -170,6 +166,22 @@ public class AdminController {
 	public String adminInquiryAnswerDelete(@RequestParam int id) {
 		service.adminInquiryAnswerDelete(id);
 		return "redirect:/admin/adminInquiryList";
+	}
+	
+	
+	@GetMapping("/admin/memberList")
+	public String memberList(HttpServletRequest request, Model model) {
+		return service.memberList(request, model);
+	}
+	
+	@GetMapping("/admin/memberUp")
+	public String memberUp(UserDto mdto, @RequestParam int id, @RequestParam int level, Model model) {
+		return service.memberUp(mdto, id, level, model);
+	}
+	
+	@GetMapping("/admin/oneMeminfo")
+	public String oneMeminfo(HttpServletRequest request, Model model) {
+		return service.oneMeminfo(request, model);
 	}
 
 

@@ -22,7 +22,7 @@
     }
 	section {
 	  width:1000px;
-	  height:800px;
+	  height:550px;
 	  margin:30px auto;
 	  padding:20px;
 	  background-color:#fff;
@@ -80,7 +80,7 @@
 	}
 	#paging {
 	  text-align:center;
-  	  margin-top:15px;
+  	  margin-top:25px;
     }
     #paging a, #paging span {
       display:inline-block;
@@ -101,12 +101,12 @@
       background-color:#004EA2;
       color:white;
       font-weight:bold;
-      border:1px solid #004EA2;
+      
       pointer-events:none;
     }
     #paging .disabled {
       color:#bbb;
-      border:1px solid #eee;
+      
       pointer-events:none;
     }
   </style>

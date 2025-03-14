@@ -126,7 +126,7 @@
 			
 			<th>요청사항</th>
 		</tr>
-		<c:forEach items="${mlist}" var="mdto">
+		<c:forEach items="${ulist}" var="mdto">
 			<tr>
 				<td>${mdto.name}</td>
 				<td><a href="oneMeminfo?userid=${mdto.userid}">${mdto.userid}</a></td>
@@ -141,8 +141,8 @@
 					<c:if test="${mdto.level == 6}"><input type="button" value="Black" style="background: black"></c:if>
 				</td>
 				<td>
-					<c:forEach items="${mdto.reservations}" var="rsv">
-						${rsv.reservationDate}<br>
+					<c:forEach items="${mdto.reservlist}" var="rsv">
+						${rsv.reservday}<br>
 					</c:forEach>
 				</td>
 				<td>

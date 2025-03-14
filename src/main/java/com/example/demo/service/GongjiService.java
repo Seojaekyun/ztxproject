@@ -5,7 +5,6 @@ import org.springframework.ui.Model;
 import com.example.demo.dto.GongjiDto;
 
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 
 public interface GongjiService {
 	String gongjiList(GongjiDto gdto, Model model, HttpServletRequest request);

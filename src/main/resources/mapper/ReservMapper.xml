@@ -93,5 +93,15 @@
 		values(#{reservid}, #{charge}, now(), #{sudan})
 	</insert>
 	
+	<select id="getMyrsv" resultType="com.example.demo.dto.ReservDto">
+		SELECT * FROM reservlist WHERE userid = #{userid} ORDER BY reservday DESC LIMIT 1
+	</select>
+	<select id="getMyRsvDetail" resultType="com.example.demo.dto.ReservDto" parameterType="map">
+		select r.*, ts.*, ro.* from reservlist r join trainseat ts
+		on r.reservid = ts.resid join routes ro on r.routeid = ro.routeid
+		where r.pnr=#{PNR}
+
+	</select>
+	
 	
 </mapper>
