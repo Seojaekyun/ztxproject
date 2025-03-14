@@ -117,9 +117,6 @@
 	<select id="getTresByUser" parameterType="string" resultType="int">
 		select count(*) from reservlist where userid = #{userid}
 	</select>
-	<select id="getState" resultType="Integer">
-		select coalesce((select state from payments where resid = #{reservid}), 2);
-	</select>
 	
 	
 </mapper>

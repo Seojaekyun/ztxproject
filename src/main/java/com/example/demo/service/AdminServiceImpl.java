@@ -468,13 +468,7 @@ public class AdminServiceImpl implements AdminService{
 			totalReservlist = rmapper.getTresByUser(userid);
 			
 			for (ReservDto reserv : myrsv) {
-				/*
-				int reservid = reserv.getReservid();
-				Integer payState = rmapper.getState(reservid);
-				reserv.setState(payState);
-				System.out.println("값:" + payState);
-				*/
-				// offerDay +1일 처리
+				// offerday +1일 처리
 				String offerday = reserv.getOfferday();
 				if (offerday != null) {
 					LocalDate parsedDate = LocalDate.parse(offerday, formatter);
