@@ -10,6 +10,11 @@
   <select id="getChong" resultType="Integer">
     select ceil( count(*)/10 ) from gongji
   </select>
+  
+  <insert id="writeOk">
+    insert into gongji(title,writer,content,state,writeday)
+    values(#{title},#{writer},#{content},#{state},now())
+  </insert>
 
 
 </mapper>

@@ -9,5 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 public interface GongjiService {
 	String gongjiList(GongjiDto gdto, Model model, HttpServletRequest request);
 	String list(GongjiDto gdto, Model model, HttpServletRequest request);
+	String gongjiWrite();
+	String gongjiWriteOk(GongjiDto gdto);
 	
 }

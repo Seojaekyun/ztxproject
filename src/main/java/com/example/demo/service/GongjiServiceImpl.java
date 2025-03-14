@@ -82,4 +82,18 @@ public class GongjiServiceImpl implements GongjiService{
 		
 		return "/gongji/list";
 	}
+
+	@Override
+	public String gongjiWrite()
+	{
+		return "/admin/gongjiWrite";
+	}
+
+	@Override
+	public String gongjiWriteOk(GongjiDto gdto)
+	{
+		mapper.writeOk(gdto);
+		
+		return "redirect:/admin/gongjiList";
+	}
 }

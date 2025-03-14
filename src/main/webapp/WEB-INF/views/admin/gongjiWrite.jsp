@@ -89,9 +89,8 @@
 			<div><input type="text" name="title" placeholder="제 목" required></div>
 			<div><textarea name="content" placeholder="공지 내용" required></textarea></div>
 			<div class="radio-group">
-				<label><input type="radio" name="state" value="0" required> 일반</label>
-				<label><input type="radio" name="state" value="1"> 상시</label>
-				<label><input type="radio" name="state" value="2"> 필수</label>
+				<label><input type="radio" name="state" value="0" required> 공지 </label>
+				<label><input type="radio" name="state" value="1"> 필독 </label>
 			</div>
 			<div><input type="submit" value="공지사항 등록"></div>
 		</form>
