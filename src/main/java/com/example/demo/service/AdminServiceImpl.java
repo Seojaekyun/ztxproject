@@ -1,5 +1,7 @@
 package com.example.demo.service;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -491,6 +493,87 @@ public class AdminServiceImpl implements AdminService{
 		model.addAttribute("totalReservations", totalReservlist);
 		
 		return "/admin/oneMeminfo";
+	}
+	
+	@Override
+	public String cancelConfirm(HttpServletRequest request) {
+	    String referer = request.getHeader("Referer"); // 요청을 보낸 이전 페이지 URL 가져오기
+	    String rid = request.getParameter("reservid"); // 취소할 예약 ID
+	    String roid = request.getParameter("routeid");
+	    rmapper.cancelConfirm(rid); // 예약 취소 처리
+	    rmapper.cancelSeat(roid, rid);
+	    
+	    if (referer != null && !referer.isEmpty()) {
+	        try {
+	            URI refererUri = new URI(referer);
+	            String query = refererUri.getQuery(); // 기존 쿼리 스트링 가져오기
+
+	            // 기존 쿼리 스트링이 있으면 유지하면서 reservationId 추가
+	            String newQuery = (query != null && !query.isEmpty()) 
+	                ? query + "&reservationId=" + rid 
+	                : "reservationId=" + rid;
+
+	            return "redirect:" + refererUri.getPath() + "?" + newQuery;
+	        }
+	        catch (URISyntaxException e) {
+	            e.printStackTrace();
+	        }
+	    }
+
+	    // referer가 없거나 예외 발생 시 기본 페이지로 이동
+	    return "redirect:/admin/rsvdList";
+	}
+	
+	@Override
+	public String cancelRejection(HttpServletRequest request, Model model) {
+		String referer = request.getHeader("Referer");
+		String rid=request.getParameter("reservid");
+		rmapper.cancelRejection(rid);
+		
+		if (referer != null && !referer.isEmpty()) {
+	        try {
+	            URI refererUri = new URI(referer);
+	            String query = refererUri.getQuery(); // 기존 쿼리 스트링 가져오기
+
+	            // 기존 쿼리 스트링이 있으면 유지하면서 reservationId 추가
+	            String newQuery = (query != null && !query.isEmpty()) 
+	                ? query + "&reservationId=" + rid 
+	                : "reservationId=" + rid;
+
+	            return "redirect:" + refererUri.getPath() + "?" + newQuery;
+	        }
+	        catch (URISyntaxException e) {
+	            e.printStackTrace();
+	        }
+	    }
+		
+		return "redirect:/admin/rsvdList";
+	}
+	
+	@Override
+	public String payReturn(HttpServletRequest request, Model model) {
+		String referer = request.getHeader("Referer");
+		String rid=request.getParameter("reservid");
+		rmapper.payReturn(rid);
+		
+		if (referer != null && !referer.isEmpty()) {
+	        try {
+	            URI refererUri = new URI(referer);
+	            String query = refererUri.getQuery(); // 기존 쿼리 스트링 가져오기
+
+	            // 기존 쿼리 스트링이 있으면 유지하면서 reservationId 추가
+	            String newQuery = (query != null && !query.isEmpty()) 
+	                ? query + "&reservationId=" + rid 
+	                : "reservationId=" + rid;
+
+	            return "redirect:" + refererUri.getPath() + "?" + newQuery;
+	        }
+	        catch (URISyntaxException e) {
+	            e.printStackTrace();
+	        }
+	    }
+		
+		return "redirect:/admin/rsvdList";
 	}
 
 }

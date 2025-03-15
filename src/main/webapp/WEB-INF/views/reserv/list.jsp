@@ -6,6 +6,11 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
   <style>
+    #tbbox {
+      margin: auto;
+      width: 1100px;
+      height: 500px;
+    }
     table {
       margin: auto;
       width:100%;
@@ -113,73 +118,78 @@
 <body> <!-- reserv/list.jsp -->
 <section>
 	<form action="/reserv/payment?" method="get" onsubmit="return selchk()">
-	<table>
-		<tr>
-			<th>  </th>
-			<th> 예약코드 </th>
-			<th> 예약날짜 </th>
-			<th> 출발지 </th>
-			<th> 도착지 </th>
-			<th> 출발시간 </th>
-			<th> 도착시간 </th>
-			<th> 금 액 </th>
-			<th> 결제여부 </th>
-		</tr>
-		<c:forEach items="${reslist}" var="resdto">
-		<c:if test="${resdto.userid == userid}">
-		<tr>
-			<td>
-				<c:if test="${resdto.payment == 0}">
-				<input type="checkbox" name="PNR" value="${resdto.PNR }">
-				</c:if>
-				<c:if test="${resdto.payment != 0}">
-				<input type="checkbox" disabled>
-				</c:if>
-			</td>
-			<td> <a href="/user/myRsvDetail?PNR=${resdto.PNR}"> ${resdto.PNR} </a> </td>
-			<td> ${resdto.reservday} </td>
-			<td> ${resdto.routeDeparture} </td>
-			<td> ${resdto.routeArrival} </td>
-			<td> ${resdto.routeTime} </td>
-			<td> ${resdto.routeArrivalTime} </td>
-			<td> ${resdto.charge} </td>
-			<td>
-				<c:if test="${resdto.payment == 0}">
-				결제전
-				</c:if>
-				<c:if test="${resdto.payment == 1}">
-				결제 완료
-				</c:if>
-				<c:if test="${resdto.payment == 2}">
-				취소요청중
-				</c:if>
-				<c:if test="${resdto.payment == 3}">
-				취소
-				</c:if>
-				<c:if test="${resdto.payment == 4}">
-				취소 불가
-				</c:if>
-			</td>
-		</tr>
-		</c:if>
-		</c:forEach>
-	</table>
+	<div id="tbbox">
+		<table>
+			<tr>
+				<th>  </th>
+				<th> 예약코드 </th>
+				<th> 예약날짜 </th>
+				<th> 출발지 </th>
+				<th> 도착지 </th>
+				<th> 출발시간 </th>
+				<th> 도착시간 </th>
+				<th> 금 액 </th>
+				<th> 결제여부 </th>
+			</tr>
+			<c:forEach items="${reslist}" var="resdto">
+			<c:if test="${resdto.userid == userid}">
+			<tr>
+				<td>
+					<c:if test="${resdto.payment == 0}">
+					<input type="checkbox" name="PNR" value="${resdto.PNR }">
+					</c:if>
+					<c:if test="${resdto.payment != 0}">
+					<input type="checkbox" disabled>
+					</c:if>
+				</td>
+				<td> <a href="/user/myRsvDetail?PNR=${resdto.PNR}"> ${resdto.PNR} </a> </td>
+				<td> ${resdto.reservday} </td>
+				<td> ${resdto.routeDeparture} </td>
+				<td> ${resdto.routeArrival} </td>
+				<td> ${resdto.routeTime} </td>
+				<td> ${resdto.routeArrivalTime} </td>
+				<td> ${resdto.charge} </td>
+				<td>
+					<c:if test="${resdto.state == 0 && resdto.payment == 0}">
+					결제전
+					</c:if>
+					<c:if test="${resdto.state == 1 && resdto.payment == 1}">
+					결제 완료
+					</c:if>
+					<c:if test="${resdto.state == 2}">
+					취소요청중
+					</c:if>
+					<c:if test="${resdto.state == 3 && resdto.payment != 2}">
+					취소 완료
+					</c:if>
+					<c:if test="${resdto.state == 3 && resdto.payment == 2}">
+					환불 완료
+					</c:if>
+					<c:if test="${resdto.state == 4}">
+					취소 불가
+					</c:if>
+				</td>
+			</tr>
+			</c:if>
+			</c:forEach>
+		</table>
+	</div>
 	<div id="paybtn"><input type="submit" value="선택결제"></div>
 	</form>
 	
 	<div id="paging">
 		<c:if test="${pstart != 1}">
-		<a href="list?page=${pstart-1}"> &laquo; 이전10 </a>
+		<a href="list?page=${pstart-1}"> ⏪ </a>
 		</c:if>
 		<c:if test="${pstart == 1}">
-		«
+		◁
 		</c:if>
 		
 		<c:if test="${page != 1}">
-		<a href="list?page=${page-1}"> ‹ </a>
+		<a href="list?page=${page-1}"> ◀️ </a>
 		</c:if>
 		<c:if test="${page == 1}">
-		‹
+		◅
 		</c:if>
 		
 		<c:forEach var="i" begin="${pstart}" end="${pend}">
@@ -192,17 +202,17 @@
 		</c:forEach>
 		
 		<c:if test="${page != chong}">
-		<a href="list?page=${page+1}"> › </a>
+		<a href="list?page=${page+1}"> ▶️ </a>
 		</c:if>
 		<c:if test="${page == chong}">
-		›
+		▻
 		</c:if>
 		
 		<c:if test="${pend != chong}">
-		<a href="list?page=${pend+1}"> » </a>
+		<a href="list?page=${pend+1}"> ⏩ </a>
 		</c:if>
 		<c:if test="${pend == chong}">
-		»
+		▷
 		</c:if>
 	<div>
 </section>

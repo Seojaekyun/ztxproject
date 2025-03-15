@@ -52,7 +52,7 @@
 		SELECT level FROM user WHERE userid = #{userid}
 	</select>
 	<update id="updatePreviousLevel">
-		UPDATE user SET previous_level = #{previousLevel} WHERE userid = #{userid}
+		UPDATE user SET previous_level = #{currentLevel} WHERE userid = #{userid}
 	</update>
 	<update id="updateUserLevel">
 		UPDATE user SET level = #{level} WHERE userid = #{userid}
@@ -60,12 +60,28 @@
 	<update id="memberUp" parameterType="com.example.demo.dto.UserDto">
 		update user set level=#{level} where id=#{id}
 	</update>
+	<select id="checkPwd" resultType="boolean">
+		SELECT COUNT(*) FROM user WHERE userid = #{userid} AND pwd = #{pwd};
+	</select>
 	<update id="reMember" parameterType="com.example.demo.dto.UserDto">
 		UPDATE user SET level=5 WHERE userid = #{userid} AND level!=5
 	</update>
 	<select id="getUserById" parameterType="String" resultType="com.example.demo.dto.UserDto">
 		select * from user where userid = #{userid};
 	</select>
+	<select id="getPwdByUserid" parameterType="String" resultType="String">
+		SELECT pwd FROM user WHERE userid = #{userid}
+	</select>
+	<update id="pwdChg">
+		UPDATE user SET pwd = #{newPwd} WHERE userid = #{userid}
+	</update>
+	<update id="editEmail">
+		UPDATE user SET email = #{email} WHERE userid = #{userid}
+	</update>
+	<update id="editPhone">
+		UPDATE user SET phone = #{phone} WHERE userid = #{userid}
+	</update>
+	
 	
 	
 </mapper>

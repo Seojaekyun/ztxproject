@@ -115,13 +115,13 @@ public class ReservServiceImpl implements ReservService {
 		pstart=(pstart*10)+1;
 		pend=pstart+9;
 		
-		chong=resMapper.getChong();
+		chong=resMapper.getChong(userid);
 		
 		if(pend > chong)
 			pend=chong;
 		
 		int index=(page-1)*10;
-		List<ReservDto> reslist=resMapper.list(index);
+		List<ReservDto> reslist=resMapper.list(index, userid);
 		
 		model.addAttribute("userid", userid);
 		model.addAttribute("reslist", reslist);

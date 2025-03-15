@@ -224,7 +224,7 @@
 		background: white;
 		visibility: hidden;
 		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-		border-radius:5px;
+		border-radius:2px;
 		z-index: 2000;
 	}
 	#s2container nav #main > li > a{
@@ -237,7 +237,7 @@
 		height: 40px;
 		line-height: 40px;
 		padding-left: 30px;
-		font-size: 14px;
+		font-size: 16px;
 		font-weight: 600;
 		z-index: 2000;
 	}

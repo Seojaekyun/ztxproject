@@ -155,11 +155,14 @@
 						<c:if test="${rsv.state == 2}">
 							<span id="badge1"> 취소요청 </span> <!-- '필독' 배지 -->
 						</c:if>
-						<c:if test="${rsv.state == 3}">
+						<c:if test="${rsv.state == 3 && rsv.payment != 2}">
 							<span id="badge1"> 취소완료 </span>
 						</c:if>
 						<c:if test="${rsv.state == 4}">
 							<span id="badge1"> 취소불가 </span>
+						</c:if>
+						<c:if test="${rsv.state == 3 && rsv.payment == 2}">
+							<span id="badge1"> 환불완료 </span>
 						</c:if>
 					</td>
 					<td>

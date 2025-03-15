@@ -21,4 +21,7 @@ public interface AdminService {
 	String memberList(HttpServletRequest request, Model model);
 	String memberUp(UserDto mdto, int id, int level, Model model);
 	String oneMeminfo(HttpServletRequest request, Model model);
+	String cancelConfirm(HttpServletRequest request);
+	String cancelRejection(HttpServletRequest request, Model model);
+	String payReturn(HttpServletRequest request, Model model);
 }

@@ -181,6 +181,21 @@ public class AdminController {
 	public String oneMeminfo(HttpServletRequest request, Model model) {
 		return service.oneMeminfo(request, model);
 	}
+	
+	@GetMapping("/admin/cancelConfirm")
+	public String cancelConfirm(HttpServletRequest request) {
+		return service.cancelConfirm(request);
+	}
+	
+	@GetMapping("/admin/cancelRejection")
+	public String cancelRejection(HttpServletRequest request, Model model) {
+		return service.cancelRejection(request, model);
+	}
+	
+	@GetMapping("/admin/payReturn")
+	public String payReturn(HttpServletRequest request, Model model) {
+		return service.payReturn(request, model);
+	}
 
 
 

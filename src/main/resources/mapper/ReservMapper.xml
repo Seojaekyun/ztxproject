@@ -17,11 +17,11 @@
 	</update>
 	
 	<select id="list" resultType="com.example.demo.dto.ReservDto">
-		select * from reservlist order by reservid desc limit ${index},10
+		select * from reservlist where userid = #{userid} order by reservid desc limit ${index},10
 	</select>
 	
 	<select id="getChong" resultType="Integer">
-	  select ceil( count(*)/10 ) from reservlist
+	  select ceil( count(*)/10 ) from reservlist where userid= #{userid}
 	</select>
 
 	<select id="getRsvanow" resultType="com.example.demo.dto.ReservDto">
@@ -117,6 +117,18 @@
 	<select id="getTresByUser" parameterType="string" resultType="int">
 		select count(*) from reservlist where userid = #{userid}
 	</select>
-	
+	<update id="cancelConfirm" parameterType="com.example.demo.dto.ReservDto">
+		update reservlist set state=3 where reservid=#{rid}
+	</update>
+	<update id="cancelSeat" parameterType="com.example.demo.dto.ReservDto">
+		update trainseat set reserv=1, resid=NULL where routeid=#{roid} and resid=#{rid}
+	</update>
+	<update id="cancelRejection" parameterType="com.example.demo.dto.ReservDto">
+		update reservlist set state=4 where reservid=#{rid}
+	</update>
+	<update id="payReturn" parameterType="com.example.demo.dto.ReservDto">
+		UPDATE payments p JOIN reservlist r ON p.resid = r.reservid
+		SET p.state = 1, r.payment = 2 WHERE p.resid = #{rid};
+	</update>
 	
 </mapper>
