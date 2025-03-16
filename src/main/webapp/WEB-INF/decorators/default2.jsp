@@ -200,15 +200,14 @@
 		color: white;
 	}
 	#s2container > #nav {
-		display: flex;
-    	justify-content: space-between;
+		display: inline-block;
 	}
-	#s2container > #nav > #main {
+	#s2container nav #main {
 		line-height:95px;
 		margin: auto; /* Adjusted to align properly */
 		text-align: center;
 	}
-	#s2container > #nav > #main > div {
+	#s2container nav #main > li {
 		display: inline-block;
 		list-style-type: none;
 		width: 175px;
@@ -221,126 +220,33 @@
 		z-index: 5;
 		color: white;
 	}
-	#s2container #nav #main > div > a{
+	#s2container nav #main > li > .menu {
+		padding-left: 0px;
+		position: absolute;
+		right: 0px;
+		top: 29px;
+		background: white;
+		visibility: hidden;
+		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+		border-radius:2px;
+		z-index: 2000;
+	}
+	#s2container nav #main > li > a{
 		text-decoration: none;
 		color: white;
 	}
-	#section3 {
-		margin:auto;
-		width: 100%;
-		z-index: 10;
-		background: none;
-		position: relative;
-	}
-	#sub {
-		position: absolute;
-		width: 100%;
-		min-width: 1000px;
-		top:-95px;
-		height: 190px; /* Adjust the height as needed */
-		margin: auto;
-		z-index: 11;
-		display: none;
-		background: white;
-	}
-	#sub > #section2 {
-		width: 100%;
-		height: 95px;
-		z-index: 10;
-		background: white;
-		position: relative;
-		border-top: 1px lightgray solid;
-		border-bottom: 1px lightgray solid;
-	}
-	#sub > #section2 > #s2container {
-		width: 1450px;
-		min-width: 1000px;
-		height: 95px; /* Adjust the height as needed */
-		margin: auto;
-		display: flex;
-		justify-content: space-evenly;
-	}
-	#sub > #section2 > #s2container > #logocontainer {
-		margin: auto;
-		margin-left: 200px;
-		max-width: 260px;
-		min-width: 260px;
-		height: 50px;
-		background: none;
-		align-items: center;
-		display: flex;
-    	justify-content: space-between;
-	}
-	#sub > #section2 > #s2container > #logocontainer > #logoimg {
-		width: 50px;
-		height: 50px;
-		background: none;
-		display: inline-block;
-	}
-	#sub > #section2 > #s2container > #logocontainer > #logotext {
-		height: 95px;
-		width: 200px;
-		background: none;
-		font-size: 25px;
-		font-weight: 900;
-		line-height: 95px;
-		display: inline-block;
-	}
-	#sub > #section2 > #s2container > #logocontainer > #logotext a {
-		text-decoration: none;
-		color: black;
-	}
-	#sub > #section2 > #s2container > #nav {
-		display: flex;
-    	justify-content: space-between;
-	}
-	#sub > #section2 > #s2container > #nav > #main {
-		line-height:95px;
-		margin: auto; /* Adjusted to align properly */
-		text-align: center;
-	}
-	#sub > #section2 > #s2container > #nav > #main > div {
-		display: inline-block;
+	#s2container nav #main > li > .menu > li {
 		list-style-type: none;
-		width: 175px;
-		height: 30px !important;
-		line-height: 30px !important;
-		text-align: right;
-		font-size: 20px;
-		font-weight: 750;
-		position: relative;
-		z-index: 12;
-		color: black;
-	}
-	#sub > #section2 > #s2container #nav #main > div > a{
-		text-decoration: none;
-		color: black;
-	}
-	
-	#sub > div > .menu {
-		padding-left: 300px;
-		width: 1200px;
-		height: 95px;
-		background: none;
-		border-radius:2px;
-		z-index: 11;
-		margin: auto;
-		display: flex;
-		justify-content: flex-end;
-		
-	}
-	#sub > div > .menu > div {
-		margin-left: 300px;
-		margin: auto;
-		list-style-type: none;
-		width: 130px;
-		font-size: 18px;
+		width: 150px;
+		height: 40px;
+		line-height: 40px;
+		padding-left: 30px;
+		font-size: 16px;
 		font-weight: 600;
-		z-index: 12;
+		z-index: 2000;
 		text-align: left;
-		display: inline-block;
 	}
-	#sub > div > .menu > div > a{
+	#s2container nav #main > li > .menu > li > a{
 		text-decoration: none;
 		color: black;
 	}
@@ -352,6 +258,24 @@
 	hr {
 		color: blue;
 	}
+	/* #login {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		margin-left: 83%;
+		margin-bottom: 10px;
+	}
+	#loginbtn {
+		width: 120px;
+		padding: 10px;
+		border-radius: 20px;
+		background: #1f0c59;
+		color: white;
+		font-size: 15px;
+	}
+	#loginbtn:hover {
+		cursor: pointer;
+	} */
 	footer {
 		width: 100%;
 		min-width: 1200px;
@@ -616,22 +540,11 @@
 		document.getElementsByClassName("mmenu")[n].style.display = "none";
 	}
 	function viewMenu(n) {
-		document.getElementById("sub").style.display = "inline-block";
-		let menus = document.getElementsByClassName("menu");
-		for (let i = 0; i < menus.length; i++) {
-			menus[i].style.display = "none";
-		}
-		
-		// 선택한 메뉴만 보이게 하기
-		if (menus[n]) {
-			menus[n].style.display = "flex";
-		}
+		document.getElementsByClassName("menu")[n].style.visibility = "visible";
 	}
 	function hideMenu(n) {
-		document.getElementById("sub").style.display = "none";
-		
+		document.getElementsByClassName("menu")[n].style.visibility = "hidden";
 	}
-	
 
 </script>
 
@@ -699,100 +612,52 @@
 					</div>
 				</div>
 				<div id="nav">
-					<div id="main">
-						<div id="main1" onmouseover="viewMenu(0)">
-							<span class="icona">🚄</span>승차권
-						</div>
-						<div id="main2" onmouseover="viewMenu(1)">
-							<a href="../guide/checkinGuide"><span class="iconb">🚄</span>철도역·열차</a>
-						</div>
-						<div id="main3" onmouseover="viewMenu(2)">
-							<a href="../guide/travel"><span class="iconc">🚄</span>고객서비스</a>
-						</div>
-						<div id="main4" onmouseover="viewMenu(3)">
-							<span class="icond">🚄</span>꼬레일 멤버십
-						</div>
-					</div>
+					<nav>
+						<ul id="main">
+							<li id="main1" onmouseover="viewMenu(0)" onmouseout="hideMenu(0)">
+								<span class="icona">🚄</span>승차권
+								<ul class="menu">
+									<li><a href="../reserv/reservation">예약</a></li>
+									<li><a href="../reserv/reserveInfo">예약 조회</a></li>
+									<li><a href="../reserv/routeList">운행 정보</a></li>
+								</ul>
+							</li>
+							<li id="main2" onmouseover="viewMenu(1)" onmouseout="hideMenu(1)">
+								<a href="../guide/checkinGuide"><span class="iconb">🚄</span>철도역·열차</a>
+								<ul class="menu">
+									<li><a href="../guide/boardingGuide">탑승 안내</a></li>
+									<li><a href="../guide/seatGuide">좌석 안내</a></li>
+									<li><a href="../guide/baggageGuide">수하물 안내</a></li>
+								</ul>
+							</li>
+							<li id="main3" onmouseover="viewMenu(2)" onmouseout="hideMenu(2)">
+								<a href="../guide/travel"><span class="iconc">🚄</span>고객서비스</a>
+								<ul class="menu">
+									<li><a href="">고객센터</a></li>
+									<li><a href="">유실물</a></li>
+									<li><a href="">열차 서비스</a></li>
+									<li><a href="">여행 명소</a></li>
+									<li><a href="">테마 여행</a></li>
+								</ul>
+							</li>
+							<li id="main4" onmouseover="viewMenu(3)" onmouseout="hideMenu(3)">
+								<span class="icond">🚄</span>꼬레일 멤버십
+								<ul class="menu">
+									<li><a href="/membership/membership">멤버십 소개</a></li>
+									<li><a href="/membership/membershipsogae">멤버십 제휴소개</a></li>
+									<li><a href="">멤버십 가입신청</a></li>
+								</ul>
+							</li>
+						</ul>
+					</nav>
 				</div>
 				<div id="menuicon">
 					<img src="../static/resources/menuicon.png" style="height: 24px;">
 				</div>
 			</div>
 		</div>
-		<div id="section3">
-			<div id="sub">
-				<div id="section2">
-					<div id="s2container">
-						<div id="logocontainer">
-							<div id="logoimg">
-								<a href="/main/index">
-									<img src="../static/resources/train(black).png" height="50px" align="middle">
-								</a>
-							</div>
-							<div id="logotext">
-								<a href="/main/index">
-									Let's GGoRail
-								</a>
-							</div>
-						</div>
-						<div id="nav">
-							<div id="main">
-								<div id="main1" onmouseover="viewMenu(0)">
-									<span class="icona">🚄</span>승차권
-								</div>
-								<div id="main2" onmouseover="viewMenu(1)">
-									<a href="../guide/checkinGuide"><span class="iconb">🚄</span>철도역·열차</a>
-								</div>
-								<div id="main3" onmouseover="viewMenu(2)">
-									<a href="../guide/travel"><span class="iconc">🚄</span>고객서비스</a>
-								</div>
-								<div id="main4" onmouseover="viewMenu(3)">
-									<span class="icond">🚄</span>꼬레일 멤버십
-								</div>
-							</div>
-						</div>
-						<div id="menuicon">
-							<img src="../static/resources/menuicon(b).png" style="height: 24px;">
-						</div>
-					</div>
-				</div>
-				<div id="main1" onmouseover="viewMenu(0)" onmouseout="hideMenu(0)">
-					<div class="menu">
-						<div style="font-size: 22px; border-right: solid 1px lightgray;">승차권</div>
-						<div><a href="../reserv/reservation">예약</a></div>
-						<div><a href="../reserv/reserveInfo">예약 조회</a></div>
-						<div><a href="../reserv/routeList">운행 정보</a></div>
-					</div>
-				</div>
-				<div id="main2" onmouseover="viewMenu(1)" onmouseout="hideMenu(1)">
-					<div class="menu">
-						<div style="font-size: 22px; border-right: solid 1px lightgray;">철도역·열차</div>
-						<div><a href="../guide/boardingGuide">탑승 안내</a></div>
-						<div><a href="../guide/seatGuide">좌석 안내</a></div>
-						<div><a href="../guide/baggageGuide">수하물 안내</a></div>
-					</div>
-				</div>
-				<div id="main3" onmouseover="viewMenu(2)" onmouseout="hideMenu(2)">
-					<div class="menu">
-						<div style="font-size: 22px; border-right: solid 1px lightgray;">고객서비스</div>
-						<div><a href="">고객센터</a></div>
-						<div><a href="">유실물</a></div>
-						<div><a href="">열차 서비스</a></div>
-						<div><a href="">여행 명소</a></div>
-						<div><a href="">테마 여행</a></div>
-					</div>
-				</div>
-				<div id="main4" onmouseover="viewMenu(3)" onmouseout="hideMenu(3)">
-					<div class="menu">
-						<div style="font-size: 22px; border-right: solid 1px lightgray;">멤버십</div>
-						<div><a href="/membership/membership">멤버십 소개</a></div>
-						<div><a href="/membership/membershipsogae">멤버십 제휴소개</a></div>
-						<div><a href="">멤버십 가입신청</a></div>
-					</div>
-				</div>
-			</div>
-		</div>
 	</header>
+	<hr>
 <script>
 	function endChat() { // 닫기 버튼
 		sendMessage("상담이 종료되었습니다.");
