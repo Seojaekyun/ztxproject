@@ -28,7 +28,7 @@
 		height: 800px;
 		background-repeat: no-repeat;
 		margin: auto;
-		top: -90px;
+		top: -95px;
 		animation: slideBackground 28s infinite;
 	}
 	@keyframes slideBackground {

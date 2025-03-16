@@ -11,6 +11,7 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Hahmlet:wght@100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Gugi&family=Hahmlet:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
 	* {
 		margin: 0;
 		padding: 0;
@@ -18,7 +19,7 @@
 	}
 	body {
 		margin: auto;
-		font-family: Arial, sans-serif;
+		font-family: "Noto Sans KR", sans-serif;
 	}
 	header {
 		width: 100%;
@@ -27,12 +28,12 @@
 	}
 	#section1 {
 		width: 100%;
-		height: 40px; /* Adjust the height as needed */
+		height: 45px; /* Adjust the height as needed */
 	}
 	#s1container {
 		width: 1450px;
 		min-width: 1000px;
-		height: 40px; /* Adjust the height as needed */
+		height: 45px; /* Adjust the height as needed */
 		display: flex;
 		margin: auto;
 		justify-content: between;
@@ -45,9 +46,9 @@
 		width: 380px;
 		display: flex;
 		text-align: center;
-		font-size: 14px;
+		font-size: 16px;
 		font-weight: 600;
-		line-height: 40px;
+		line-height: 45px;
 		align: center;
 		justify-content: flex-end;
 		margin-left: 120px;
@@ -65,9 +66,9 @@
 	#s1container #loginMenu {
 		display: flex;
 	    text-align: right;
-	    font-size: 14px;
+	    font-size: 16px;
 	    font-weight: 600;
-	    line-height: 40px;
+	    line-height: 45px;
 	    align-items: right;
 	    width: 730px;
 	    justify-content: flex-end;
@@ -109,7 +110,7 @@
 		line-height: 35px;
 		text-align: center;
 		cursor: pointer;
-		font-size: 14px;
+		font-size: 15px;
 	}
 	#s1container #loginMenu .cmenu > li:hover,  #s1container #loginMenu .mmenu > li:hover {
 		text-decoration: none;
@@ -151,15 +152,19 @@
 	}
 	#section2 {
 		width: 100%;
-		height: 90px;
+		height: 95px;
 		z-index: 10;
 		background: rgba(0,0,0,0.6);
 		position: relative;
 	}
+	#section2:hover {
+		background: black;
+		color: black;
+	}
 	#s2container {
 		width: 1450px;
 		min-width: 1000px;
-		height: 90px; /* Adjust the height as needed */
+		height: 95px; /* Adjust the height as needed */
 		margin: auto;
 		display: flex;
 		justify-content: space-evenly;
@@ -182,12 +187,12 @@
 		display: inline-block;
 	}
 	#logocontainer > #logotext {
-		height: 90px;
+		height: 95px;
 		width: 200px;
 		background: none;
 		font-size: 25px;
 		font-weight: 900;
-		line-height: 90px;
+		line-height: 95px;
 		display: inline-block;
 	}
 	#logotext a {
@@ -198,19 +203,18 @@
 		display: inline-block;
 	}
 	#s2container nav #main {
-		line-height:90px;
+		line-height:95px;
 		margin: auto; /* Adjusted to align properly */
 		text-align: center;
 	}
 	#s2container nav #main > li {
 		display: inline-block;
 		list-style-type: none;
-		width: 160px;
+		width: 175px;
 		height: 30px !important;
-		padding: 0 20px 0 0; 
 		line-height: 30px !important;
-		text-align: left;
-		font-size: 17px;
+		text-align: right;
+		font-size: 20px;
 		font-weight: 750;
 		position: relative;
 		z-index: 5;
@@ -246,8 +250,8 @@
 		color: black;
 	}
 	#menuicon {
-		width: 300px;
-		line-height: 100px;
+		width: 270px;
+		line-height: 105px;
 		padding-left: 50px;
 	}
 	hr {
