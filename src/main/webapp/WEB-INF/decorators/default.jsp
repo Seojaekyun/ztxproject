@@ -70,7 +70,7 @@
 	    font-weight: 600;
 	    line-height: 45px;
 	    align-items: right;
-	    width: 730px;
+	    width: 750px;
 	    justify-content: flex-end;
 	}
 	#s1container #loginMenu a {
@@ -223,7 +223,7 @@
 	#s2container nav #main > li > .menu {
 		padding-left: 0px;
 		position: absolute;
-		left: 0px;
+		right: 0px;
 		top: 29px;
 		background: white;
 		visibility: hidden;
@@ -244,6 +244,7 @@
 		font-size: 16px;
 		font-weight: 600;
 		z-index: 2000;
+		text-align: left;
 	}
 	#s2container nav #main > li > .menu > li > a{
 		text-decoration: none;
