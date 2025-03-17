@@ -141,4 +141,36 @@ public class GongjiServiceImpl implements GongjiService{
 		return "/gongji/content";
 	}
 
+	@Override
+	public String gongjiUpdate(HttpServletRequest request, Model model)
+	{
+		String id=request.getParameter("id");
+		String page=request.getParameter("page");
+		
+		GongjiDto gdto=mapper.content(id);
+		
+		model.addAttribute("gdto", gdto);
+		model.addAttribute("page", page);
+		
+		return "/admin/gongjiUpdate";
+	}
+
+	@Override
+	public String gongjiUpdateOk(HttpServletRequest request, GongjiDto gdto)
+	{
+		String id=request.getParameter("id");
+		String page=request.getParameter("page");
+		
+		mapper.updateOk(gdto);
+		
+		return "redirect:/admin/gongjiContent?id="+id+"&page="+page;
+	}
+
+	@Override
+	public String gongjiDelete(HttpServletRequest request)
+	{
+		
+		return null;
+	}
+
 }

@@ -97,7 +97,7 @@
 	</table>
 	<div id="btn">
 		<a href="gongjiList">목록</a>
-		<a href="gonjiUpdate?id=${gdto.id}">수정</a>
+		<a href="gongjiUpdate?id=${gdto.id}">수정</a>
 		<a href="gongjiDelete?id=${gdto.id}">삭제</a>
 	</div>
 	
