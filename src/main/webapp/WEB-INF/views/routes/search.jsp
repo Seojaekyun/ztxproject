@@ -22,7 +22,7 @@
         background-color: #0059A3;
         color: white;
     }
-    .btn-select {
+    .btn-select, .btn-secondary {
         background-color: #00467F;
         color: white;
         padding: 5px 10px;
@@ -46,6 +46,7 @@
 <body>
 <div class="container">
     <h2 class="text-center">열차 시간표</h2>
+    <input type="button" class="btn btn-secondary" value="처음으로" onclick="location.href='../main/index'">
     <c:if test="${not empty routes}">
     <table class="table table-bordered text-center">
         <thead>

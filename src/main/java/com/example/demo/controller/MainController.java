@@ -52,4 +52,9 @@ public class MainController {
 		// 채팅 기록을 리셋하는 서비스 로직 호출
 		return service.clearChatMessages();
 	}
+	
+	@GetMapping("/main/csCustomer")
+	public String csCustomer(HttpServletRequest request, Model model) {
+		return service.csCustomer(request, model);
+	}
 }

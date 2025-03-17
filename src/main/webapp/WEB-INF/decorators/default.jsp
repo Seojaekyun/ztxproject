@@ -722,10 +722,10 @@
 							<span class="icona">🚄</span>승차권
 						</div>
 						<div id="main2" onmouseover="viewMenu(1)">
-							<a href="../guide/checkinGuide"><span class="iconb">🚄</span>철도역·열차</a>
+							<span class="iconb">🚄</span>철도역·열차
 						</div>
 						<div id="main3" onmouseover="viewMenu(2)">
-							<a href="../guide/travel"><span class="iconc">🚄</span>고객서비스</a>
+							<span class="iconc">🚄</span>고객서비스
 						</div>
 						<div id="main4" onmouseover="viewMenu(3)">
 							<span class="icond">🚄</span>꼬레일 멤버십
@@ -759,10 +759,10 @@
 									<span class="icona">🚄</span>승차권
 								</div>
 								<div id="main2" onmouseover="viewMenu(1)">
-									<a href="../guide/checkinGuide"><span class="iconb">🚄</span>철도역·열차</a>
+									<span class="iconb">🚄</span>철도역·열차
 								</div>
 								<div id="main3" onmouseover="viewMenu(2)">
-									<a href="../guide/travel"><span class="iconc">🚄</span>고객서비스</a>
+									<span class="iconc">🚄</span>고객서비스
 								</div>
 								<div id="main4" onmouseover="viewMenu(3)">
 									<span class="icond">🚄</span>꼬레일 멤버십
@@ -798,7 +798,7 @@
 					<div class="menu">
 						<div id="subtitle" style="font-size: 22px; border-right: solid 1px lightgray;">고객서비스</div>
 						<div id="submenu">
-							<div><a href="">고객센터</a></div>
+							<div><a href="../main/csCustomer">고객센터</a></div>
 							<div><a href="">유실물</a></div>
 							<div><a href="">열차 서비스</a></div>
 							<div><a href="">여행 명소</a></div>
