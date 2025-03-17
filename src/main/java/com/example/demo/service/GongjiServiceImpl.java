@@ -169,8 +169,12 @@ public class GongjiServiceImpl implements GongjiService{
 	@Override
 	public String gongjiDelete(HttpServletRequest request)
 	{
+		String id=request.getParameter("id");
+		String page=request.getParameter("page");
 		
-		return null;
+		mapper.delete(id);
+		
+		return "redirect:/admin/gongjiList?page="+page;
 	}
 
 }

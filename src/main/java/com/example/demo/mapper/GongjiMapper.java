@@ -14,4 +14,5 @@ public interface GongjiMapper {
 	public void readnum(String id);
 	public GongjiDto content(String id);
 	public void updateOk(GongjiDto gdto);
+	public void delete(String id);
 }
