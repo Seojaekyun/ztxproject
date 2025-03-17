@@ -81,7 +81,8 @@
             </ul>
             <p><a href="https://www.lost112.go.kr/">www.lost112.go.kr</a></p>
         </div>
-
+		<br>
+		<br>
         <h2 class="section-title">보관 습득물 조회 및 확인</h2>
         <div>
             <ul>
@@ -89,7 +90,8 @@
             </ul>
             <p><a href="https://www.lost112.go.kr/">(www.lost112.go.kr)</a></p>
         </div>
-
+		<br>
+		<br>
         <h2 class="section-title">유실물 수령</h2>
         <div>
             <ul>
@@ -98,12 +100,14 @@
             </ul>
             <p><a href="../static/resources/files/lost_form.hwp" class="button" download>대리수령 위임장 서식</a></p>
         </div>
-
+		<br>
+		<br>
         <h2 class="section-title">유실물 처리절차</h2>
         <div>
             <p><img src="../static/resources/pickup.png" alt="유실물 처리절차"></p>
         </div>
-
+		<br>
+		<br>
         <h2 class="section-title">코레일 주요 유실물 센터 연락처</h2>
         <div id="lost-center">
             <input type="text" id="searchStation" placeholder="역명을 입력하세요" style="width: 300px; padding: 8px; margin-bottom: 15px; border: 1px solid #ccc;">
