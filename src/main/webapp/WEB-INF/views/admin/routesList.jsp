@@ -135,8 +135,6 @@
 		color: #333;
 		margin-top: 10px;
 	}
-
-	/* 항공편 추가 버튼과 좌석 추가 버튼 디자인 */
 	.button {
 		background-color: #000A8E;
 		color: white;
@@ -161,290 +159,281 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 </head>
 <body>
-
-<div style="text-align: right; margin-bottom: 20px;">
-	<!-- 항공편 추가 버튼 -->
-	<button class="button" onclick="location.href='/admin/addRoute'">열차편 추가</button>
-	
-	<!-- 좌석 추가 버튼 -->
-	<form action="/admin/addSeats" method="post" style="display:inline;">
-		<input type="hidden" name="routeid" value="${routeid}">
-		<button type="submit" class="button">좌석 추가</button>
-	</form>
-</div>
-
-<!-- 항공편 리스트 -->
-<div style="width: 100%; text-align: center"><h2>열차편 리스트</h2></div>
-<section id="sec1">
-	<div class="date-container">
-		<button id="clsd" onclick="clearDate()">날짜 선택 해제</button><br>    
-		<div id="datepicker"></div>
-		<div id="selectedDate">
-			<c:if test="${not empty selectedDate}">
-				선택한 날짜: ${selectedDate}
-			</c:if>
-		</div>
+	<div style="text-align: right; margin-bottom: 20px;">
+		<button class="button" onclick="location.href='/admin/addRoute'">열차편 추가</button>
 	</div>
-	<div class="table-container">
-		<table id="otherTable">
-			<caption>기타 출발편</caption>
-			<tr>
-				<th>열차명</th>
-				<th>출발역</th>
-				<th>도착역</th>
-				<th>출발시간</th>
-				<th>도착시간</th>
-				<th>잔여석</th>
-			</tr>
-			<c:forEach var="route" items="${pagedOtherRoutes}">
-				<tr>
-					<td>${route.trainid}</td>
-					<td>${route.departure}</td>
-					<td>${route.arrival}</td>
-					<td>${route.departureTime}</td>
-					<td>${route.arrivalTime}</td>
-					<td>${route.avaiSeats}</td>
-				</tr>
-			</c:forEach>
-			<c:if test="${empty pagedOtherRoutes}">
-				<tr>
-					<td colspan="6">기타 출발편 데이터가 없습니다.</td>
-				</tr>
-			</c:if>
-		</table>
-		<!-- 기타 페이지네이션 -->
-		<div id="otherPagination" class="pagination">
-			<c:if test="${totalOtherPages > 1}">
-				<!-- 이전 페이지 버튼 -->
-				<c:if test="${currentOtherPage > 10}">
-					<a href="javascript:void(0);" onclick="loadPage(${currentOtherPage - 10}, 'other');">이전10</a>
+	<!-- 열차편 리스트 -->
+	<div style="width: 100%; text-align: center"><h2>열차편 리스트</h2></div>
+	<section id="sec1">
+		<div class="date-container">
+			<button id="clsd" onclick="clearDate()">날짜 선택 해제</button><br>    
+			<div id="datepicker"></div>
+			<div id="selectedDate">
+				<c:if test="${not empty selectedDate}">
+					선택한 날짜: ${selectedDate}
 				</c:if>
-				<!-- 페이지 번호 표시 -->
-				<c:set var="startPage" value="${currentOtherPage - 5}" />
-				<c:set var="endPage" value="${currentOtherPage + 4}" />
-				<c:if test="${startPage < 1}">
-					<c:set var="startPage" value="1" />
-					<c:set var="endPage" value="10" />
+			</div>
+		</div>
+		<div class="table-container">
+			<table id="otherTable">
+				<caption>기타 출발편</caption>
+				<tr>
+					<th>열차명</th>
+					<th>출발역</th>
+					<th>도착역</th>
+					<th>출발시간</th>
+					<th>도착시간</th>
+					<th>잔여석</th>
+				</tr>
+				<c:forEach var="route" items="${pagedOtherRoutes}">
+					<tr>
+						<td>은하-${route.trainid}호</td>
+						<td>${route.departure}</td>
+						<td>${route.arrival}</td>
+						<td>${route.departureTime}</td>
+						<td>${route.arrivalTime}</td>
+						<td>${route.avaiSeats}</td>
+					</tr>
+				</c:forEach>
+				<c:if test="${empty pagedOtherRoutes}">
+					<tr>
+						<td colspan="6">기타 출발편 데이터가 없습니다.</td>
+					</tr>
 				</c:if>
-				<c:if test="${endPage > totalOtherPages}">
-					<c:set var="endPage" value="${totalOtherPages}" />
-					<c:set var="startPage" value="${totalOtherPages - 9}" />
+			</table>
+			<!-- 기타 페이지네이션 -->
+			<div id="otherPagination" class="pagination">
+				<c:if test="${totalOtherPages > 1}">
+					<!-- 이전 페이지 버튼 -->
+					<c:if test="${currentOtherPage > 10}">
+						<a href="javascript:void(0);" onclick="loadPage(${currentOtherPage - 10}, 'other');">이전10</a>
+					</c:if>
+					<!-- 페이지 번호 표시 -->
+					<c:set var="startPage" value="${currentOtherPage - 5}" />
+					<c:set var="endPage" value="${currentOtherPage + 4}" />
 					<c:if test="${startPage < 1}">
 						<c:set var="startPage" value="1" />
+						<c:set var="endPage" value="10" />
+					</c:if>
+					<c:if test="${endPage > totalOtherPages}">
+						<c:set var="endPage" value="${totalOtherPages}" />
+						<c:set var="startPage" value="${totalOtherPages - 9}" />
+						<c:if test="${startPage < 1}">
+							<c:set var="startPage" value="1" />
+						</c:if>
+					</c:if>
+					<c:forEach begin="${startPage}" end="${endPage}" var="i">
+						<c:choose>
+							<c:when test="${i == currentOtherPage}">
+								<span class="active">${i}</span>
+							</c:when>
+							<c:otherwise>
+								<a href="javascript:void(0);" onclick="loadPage(${i}, 'other');">${i}</a>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+					<!-- 다음 페이지 버튼 -->
+					<c:if test="${currentOtherPage +10 < totalOtherPages}">
+						<a href="javascript:void(0);" onclick="loadPage(${currentOtherPage + 10}, 'other');">다음10</a>
 					</c:if>
 				</c:if>
-				<c:forEach begin="${startPage}" end="${endPage}" var="i">
-					<c:choose>
-						<c:when test="${i == currentOtherPage}">
-							<span class="active">${i}</span>
-						</c:when>
-						<c:otherwise>
-							<a href="javascript:void(0);" onclick="loadPage(${i}, 'other');">${i}</a>
-						</c:otherwise>
-					</c:choose>
-				</c:forEach>
-				<!-- 다음 페이지 버튼 -->
-				<c:if test="${currentOtherPage +10 < totalOtherPages}">
-					<a href="javascript:void(0);" onclick="loadPage(${currentOtherPage + 10}, 'other');">다음10</a>
-				</c:if>
-			</c:if>
+			</div>
 		</div>
-	</div>
-</section>
-<section id="sec2">
-	<div class="table-container">
-		<table id="seoulTable">
-			<caption>서울역 출발 열차편</caption>
-			<tr>
-				<th>열차명</th>
-				<th>도착역</th>
-				<th>출발시간</th>
-				<th>도착시간</th>
-				<th>잔여석</th>
-			</tr>
-			<c:forEach var="route" items="${pagedSeoulRoutes}">
+	</section>
+	<section id="sec2">
+		<div class="table-container">
+			<table id="seoulTable">
+				<caption>서울역 출발 열차편</caption>
 				<tr>
-					<td>${route.trainid}</td>
-					<td>${route.arrival}</td>
-					<td>${route.departureTime}</td>
-					<td>${route.arrivalTime}</td>
-					<td>${route.avaiSeats}</td>
+					<th>열차명</th>
+					<th>도착역</th>
+					<th>출발시간</th>
+					<th>도착시간</th>
+					<th>잔여석</th>
 				</tr>
-			</c:forEach>
-			<c:if test="${empty pagedSeoulRoutes}">
-				<tr>
-					<td colspan="6">서울역 열차편 데이터가 없습니다.</td>
-				</tr>
-			</c:if>
-		</table>
-		<!-- seoul 페이지네이션 -->
-		<div id="seoulPagination" class="pagination">
-			<c:if test="${totalSeoulpPages > 1}">
-				<!-- 이전 페이지 버튼 -->
-				<c:if test="${currentSeoulPage > 10}">
-					<a href="javascript:void(0);" onclick="loadPage(${currentSeoulPage - 10}, '서울역');">이전10</a>
+				<c:forEach var="route" items="${pagedSeoulRoutes}">
+					<tr>
+						<td>은하-${route.trainid}호</td>
+						<td>${route.arrival}</td>
+						<td>${route.departureTime}</td>
+						<td>${route.arrivalTime}</td>
+						<td>${route.avaiSeats}</td>
+					</tr>
+				</c:forEach>
+				<c:if test="${empty pagedSeoulRoutes}">
+					<tr>
+						<td colspan="6">서울역 열차편 데이터가 없습니다.</td>
+					</tr>
 				</c:if>
-				<!-- 페이지 번호 표시 -->
-				<c:set var="startPage" value="${currentSeoulPage - 5}" />
-				<c:set var="endPage" value="${currentSeoulPage + 4}" />
-				<c:if test="${startPage < 1}">
-					<c:set var="startPage" value="1" />
-					<c:set var="endPage" value="10" />
-				</c:if>
-				<c:if test="${endPage > totalSeoulPages}">
-					<c:set var="endPage" value="${totalSeoulPages}" />
-					<c:set var="startPage" value="${totalSeoulPages - 9}" />
+			</table>
+			<!-- seoul 페이지네이션 -->
+			<div id="seoulPagination" class="pagination">
+				<c:if test="${totalSeoulpPages > 1}">
+					<!-- 이전 페이지 버튼 -->
+					<c:if test="${currentSeoulPage > 10}">
+						<a href="javascript:void(0);" onclick="loadPage(${currentSeoulPage - 10}, '서울역');">이전10</a>
+					</c:if>
+					<!-- 페이지 번호 표시 -->
+					<c:set var="startPage" value="${currentSeoulPage - 5}" />
+					<c:set var="endPage" value="${currentSeoulPage + 4}" />
 					<c:if test="${startPage < 1}">
 						<c:set var="startPage" value="1" />
+						<c:set var="endPage" value="10" />
+					</c:if>
+					<c:if test="${endPage > totalSeoulPages}">
+						<c:set var="endPage" value="${totalSeoulPages}" />
+						<c:set var="startPage" value="${totalSeoulPages - 9}" />
+						<c:if test="${startPage < 1}">
+							<c:set var="startPage" value="1" />
+						</c:if>
+					</c:if>
+					<c:forEach begin="${startPage}" end="${endPage}" var="i">
+						<c:choose>
+							<c:when test="${i == currentSeoulPage}">
+								<span class="active">${i}</span>
+							</c:when>
+							<c:otherwise>
+								<a href="javascript:void(0);" onclick="loadPage(${i}, '서울역');">${i}</a>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+					<!-- 다음 페이지 버튼 -->
+					<c:if test="${currentSeoulPage + 10 < totalSeoulPages}">
+						<a href="javascript:void(0);" onclick="loadPage(${currentSeoulPage + 10}, '서울역');">다음10</a>
 					</c:if>
 				</c:if>
-				<c:forEach begin="${startPage}" end="${endPage}" var="i">
-					<c:choose>
-						<c:when test="${i == currentSeoulPage}">
-							<span class="active">${i}</span>
-						</c:when>
-						<c:otherwise>
-							<a href="javascript:void(0);" onclick="loadPage(${i}, '서울역');">${i}</a>
-						</c:otherwise>
-					</c:choose>
-				</c:forEach>
-				<!-- 다음 페이지 버튼 -->
-				<c:if test="${currentSeoulPage + 10 < totalSeoulPages}">
-					<a href="javascript:void(0);" onclick="loadPage(${currentSeoulPage + 10}, '서울역');">다음10</a>
-				</c:if>
-			</c:if>
+			</div>
 		</div>
-	</div>
-	<div class="table-container">
-		<table id="pusanTable">
-			<caption>부산역 출발 열차편</caption>
-			<tr>
-				<th>열차명</th>
-				<th>도착역</th>
-				<th>출발시간</th>
-				<th>도착시간</th>
-				<th>잔여석</th>
-			</tr>
-			<c:forEach var="route" items="${pagedPusanRoutes}">
+		<div class="table-container">
+			<table id="pusanTable">
+				<caption>부산역 출발 열차편</caption>
 				<tr>
-					<td>${route.trainid}</td>
-					<td>${route.arrival}</td>
-					<td>${route.departureTime}</td>
-					<td>${route.arrivalTime}</td>
-					<td>${route.avaiSeats}</td>
+					<th>열차명</th>
+					<th>도착역</th>
+					<th>출발시간</th>
+					<th>도착시간</th>
+					<th>잔여석</th>
 				</tr>
-			</c:forEach>
-			<c:if test="${empty pagedPusanRoutes}">
-				<tr>
-					<td colspan="6">부산역 출발편 데이터가 없습니다.</td>
-				</tr>
-			</c:if>
-		</table>
-		<!-- pusan 페이지네이션 -->
-		<div id="pusanPagination" class="pagination">
-			<c:if test="${totalPusanPages > 1}">
-				<!-- 이전 페이지 버튼 -->
-				<c:if test="${currentPusanPage > 10}">
-					<a href="javascript:void(0);" onclick="loadPage(${currentPusanPage - 10}, '부산역');">이전10</a>
+				<c:forEach var="route" items="${pagedPusanRoutes}">
+					<tr>
+						<td>은하-${route.trainid}호</td>
+						<td>${route.arrival}</td>
+						<td>${route.departureTime}</td>
+						<td>${route.arrivalTime}</td>
+						<td>${route.avaiSeats}</td>
+					</tr>
+				</c:forEach>
+				<c:if test="${empty pagedPusanRoutes}">
+					<tr>
+						<td colspan="6">부산역 출발편 데이터가 없습니다.</td>
+					</tr>
 				</c:if>
-				<!-- 페이지 번호 표시 -->
-				<c:set var="startPage" value="${currentPusanPage - 5}" />
-				<c:set var="endPage" value="${currentPusanPage + 4}" />
-				<c:if test="${startPage < 1}">
-					<c:set var="startPage" value="1" />
-					<c:set var="endPage" value="10" />
-				</c:if>
-				<c:if test="${endPage > totalPusanPages}">
-					<c:set var="endPage" value="${totalPusanPages}" />
-					<c:set var="startPage" value="${totalPusanPages - 9}" />
+			</table>
+			<!-- pusan 페이지네이션 -->
+			<div id="pusanPagination" class="pagination">
+				<c:if test="${totalPusanPages > 1}">
+					<!-- 이전 페이지 버튼 -->
+					<c:if test="${currentPusanPage > 10}">
+						<a href="javascript:void(0);" onclick="loadPage(${currentPusanPage - 10}, '부산역');">이전10</a>
+					</c:if>
+					<!-- 페이지 번호 표시 -->
+					<c:set var="startPage" value="${currentPusanPage - 5}" />
+					<c:set var="endPage" value="${currentPusanPage + 4}" />
 					<c:if test="${startPage < 1}">
 						<c:set var="startPage" value="1" />
+						<c:set var="endPage" value="10" />
+					</c:if>
+					<c:if test="${endPage > totalPusanPages}">
+						<c:set var="endPage" value="${totalPusanPages}" />
+						<c:set var="startPage" value="${totalPusanPages - 9}" />
+						<c:if test="${startPage < 1}">
+							<c:set var="startPage" value="1" />
+						</c:if>
+					</c:if>
+					<c:forEach begin="${startPage}" end="${endPage}" var="i">
+						<c:choose>
+							<c:when test="${i == currentPusanPage}">
+								<span class="active">${i}</span>
+							</c:when>
+							<c:otherwise>
+								<a href="javascript:void(0);" onclick="loadPage(${i}, '부산역');">${i}</a>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+					<!-- 다음 페이지 버튼 -->
+					<c:if test="${currentPusanPage +10 < totalPusanPages}">
+						<a href="javascript:void(0);" onclick="loadPage(${currentPusanPage + 10}, '부산역');">다음10</a>
 					</c:if>
 				</c:if>
-				<c:forEach begin="${startPage}" end="${endPage}" var="i">
-					<c:choose>
-						<c:when test="${i == currentPusanPage}">
-							<span class="active">${i}</span>
-						</c:when>
-						<c:otherwise>
-							<a href="javascript:void(0);" onclick="loadPage(${i}, '부산역');">${i}</a>
-						</c:otherwise>
-					</c:choose>
-				</c:forEach>
-				<!-- 다음 페이지 버튼 -->
-				<c:if test="${currentPusanPage +10 < totalPusanPages}">
-					<a href="javascript:void(0);" onclick="loadPage(${currentPusanPage + 10}, '부산역');">다음10</a>
-				</c:if>
-			</c:if>
+			</div>
 		</div>
-	</div>
-</section>
-<section id="sec3">
-	<div class="table-container">
-		<table id="routeTable">
-			<caption>열차편 전체</caption>
-			<tr>
-				<th>열차명</th>
-				<th>출발역</th>
-				<th>도착역</th>
-				<th>출발시간</th>
-				<th>도착시간</th>
-				<th>잔여석</th>
-			</tr>
-			<c:forEach var="route" items="${routesList}">
+	</section>
+	<section id="sec3">
+		<div class="table-container">
+			<table id="routeTable">
+				<caption>열차편 전체</caption>
 				<tr>
-					<td>${route.trainid}</td>
-					<td>${route.departure}</td>
-					<td>${route.arrival}</td>
-					<td>${route.departureTime}</td>
-					<td>${route.arrivalTime}</td>
-					<td>${route.avaiSeats}</td>
+					<th>열차명</th>
+					<th>출발역</th>
+					<th>도착역</th>
+					<th>출발시간</th>
+					<th>도착시간</th>
+					<th>잔여석</th>
 				</tr>
-			</c:forEach>
-			<c:if test="${empty routesList}">
-				<tr>
-					<td colspan="6">열차편 데이터가 없습니다.</td>
-				</tr>
-			</c:if>
-		</table>
-		<div id="mainPagination" class="pagination">
-			<c:if test="${totalPages > 1}">
-				<!-- 이전 페이지 버튼 -->
-				<c:if test="${currentPage > 10}">
-					<a href="javascript:void(0);" onclick="loadPage(${currentPage - 10}, 'all');">이전10</a>
+				<c:forEach var="route" items="${routesList}">
+					<tr>
+						<td>은하-${route.trainid}호</td>
+						<td>${route.departure}</td>
+						<td>${route.arrival}</td>
+						<td>${route.departureTime}</td>
+						<td>${route.arrivalTime}</td>
+						<td>${route.avaiSeats}</td>
+					</tr>
+				</c:forEach>
+				<c:if test="${empty routesList}">
+					<tr>
+						<td colspan="6">열차편 데이터가 없습니다.</td>
+					</tr>
 				</c:if>
-				<!-- 페이지 번호 표시 -->
-				<c:set var="startPage" value="${currentPage - 5}" />
-				<c:set var="endPage" value="${currentPage + 4}" />
-				<c:if test="${startPage < 1}">
-					<c:set var="startPage" value="1" />
-					<c:set var="endPage" value="10" />
-				</c:if>
-				<c:if test="${endPage > totalPages}">
-					<c:set var="endPage" value="${totalPages}" />
-					<c:set var="startPage" value="${totalPages - 9}" />
+			</table>
+			<div id="mainPagination" class="pagination">
+				<c:if test="${totalPages > 1}">
+					<!-- 이전 페이지 버튼 -->
+					<c:if test="${currentPage > 10}">
+						<a href="javascript:void(0);" onclick="loadPage(${currentPage - 10}, 'all');">이전10</a>
+					</c:if>
+					<!-- 페이지 번호 표시 -->
+					<c:set var="startPage" value="${currentPage - 5}" />
+					<c:set var="endPage" value="${currentPage + 4}" />
 					<c:if test="${startPage < 1}">
 						<c:set var="startPage" value="1" />
+						<c:set var="endPage" value="10" />
+					</c:if>
+					<c:if test="${endPage > totalPages}">
+						<c:set var="endPage" value="${totalPages}" />
+						<c:set var="startPage" value="${totalPages - 9}" />
+						<c:if test="${startPage < 1}">
+							<c:set var="startPage" value="1" />
+						</c:if>
+					</c:if>
+					<c:forEach begin="${startPage}" end="${endPage}" var="i">
+						<c:choose>
+							<c:when test="${i == currentPage}">
+								<span class="active">${i}</span>
+							</c:when>
+							<c:otherwise>
+								<a href="javascript:void(0);" onclick="loadPage(${i}, 'all');">${i}</a>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+					<!-- 다음 페이지 버튼 -->
+					<c:if test="${currentPage + 10 < totalPages}">
+						<a href="javascript:void(0);" onclick="loadPage(${currentPage + 10}, 'all');">다음10</a>
 					</c:if>
 				</c:if>
-				<c:forEach begin="${startPage}" end="${endPage}" var="i">
-					<c:choose>
-						<c:when test="${i == currentPage}">
-							<span class="active">${i}</span>
-						</c:when>
-						<c:otherwise>
-							<a href="javascript:void(0);" onclick="loadPage(${i}, 'all');">${i}</a>
-						</c:otherwise>
-					</c:choose>
-				</c:forEach>
-				<!-- 다음 페이지 버튼 -->
-				<c:if test="${currentPage + 10 < totalPages}">
-					<a href="javascript:void(0);" onclick="loadPage(${currentPage + 10}, 'all');">다음10</a>
-				</c:if>
-			</c:if>
+			</div>
 		</div>
-	</div>
-</section>
+	</section>
 
 <!-- jQuery 및 jQuery UI 스크립트 추가 -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

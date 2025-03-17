@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 @Controller
@@ -74,10 +75,10 @@ public class AdminController {
 			@RequestParam int unitPrice, @RequestParam String returnDeparture, @RequestParam String returnArrival,
 			@RequestParam String returnDepartureTime, @RequestParam String returnArrivalTime,
 			@RequestParam("returnFtimeValue") String returnFtime, @RequestParam int returnTrainid, @RequestParam int returnUnitPrice,
-			Model model) {
+			Model model, RedirectAttributes redirectAttributes) {
 		return service.addRoutes(departure, arrival, departureTime, arrivalTime, ftime, trainid,
 				unitPrice, returnDeparture, returnArrival, returnDepartureTime, returnArrivalTime,
-				returnFtime, returnTrainid, returnUnitPrice, model);
+				returnFtime, returnTrainid, returnUnitPrice, model, redirectAttributes);
 	}
 	
 	@GetMapping("/admin/getRouteTime")
@@ -93,16 +94,10 @@ public class AdminController {
 		return response;
 	}
 	
-	@PostMapping("/admin/addSeats")
-	public String addSeats() { // flightId는 내부에서 처리되므로 전달하지 않음
-		return service.addSeats();
-	}
-	
 	@GetMapping("/admin/rsvChart")
 	public String rsvChart(Model model) {
 		return service.rsvChart(model);
 	}
-	
 	
 	@GetMapping("/admin/gongjiList")
 	public String gongjiList(GongjiDto gdto, Model model, HttpServletRequest request) {
@@ -125,46 +120,40 @@ public class AdminController {
 	}
 	
 	@GetMapping("/admin/gongjiUpdate")
-	public String gongjiUpdate(HttpServletRequest request, Model model)
-	{
+	public String gongjiUpdate(HttpServletRequest request, Model model) {
 		return gservice.gongjiUpdate(request, model);
 	}
 	
 	@PostMapping("/admin/gongjiUpdateOk")
-	public String gongjiUpdateOk(HttpServletRequest request, GongjiDto gdto)
-	{
+	public String gongjiUpdateOk(HttpServletRequest request, GongjiDto gdto) {
 		return gservice.gongjiUpdateOk(request, gdto);
 	}
 	
 	@GetMapping("/admin/gongjiDelete")
-	public String gongjiDelete(HttpServletRequest request)
-	{
+	public String gongjiDelete(HttpServletRequest request) {
 		return gservice.gongjiDelete(request);
 	}
 	
 	
-	@GetMapping("/admin/adminInquiryList")
-	public String adminInquiryList(@RequestParam(defaultValue = "1") int page, Model model) {
-		return service.adminInquiryList(page,model);
+	@GetMapping("/admin/inquiryList")
+	public String inquiryList(@RequestParam(defaultValue = "1") int page, Model model) {
+		return service.inquiryList(page,model);
 	}
 	
-	@GetMapping("/admin/adminInquiryAnswer")
-	public String adminInquiryAnswer(@RequestParam int id, Model model) {
-		return service.adminInquiryAnswer(id, model);
+	@GetMapping("/admin/inquiryAnswer")
+	public String inquiryAnswer(@RequestParam int id, Model model) {
+		return service.inquiryAnswer(id, model);
 	}
 	
 	@PostMapping("/admin/inquiryAnswerOk")
-	public String adminInquiryAnswerOk(@RequestParam int id, @RequestParam String answer) {
-		return service.adminInquiryAnswerOk(id, answer);
-		
+	public String inquiryAnswerOk(@RequestParam int id, @RequestParam String answer) {
+		return service.inquiryAnswerOk(id, answer);
 	}
 	
-	// 답변 삭제
-	@PostMapping("/admin/inquiryAnswerDelete")
-	public String adminInquiryAnswerDelete(@RequestParam int id) {
-		return service.adminInquiryAnswerDelete(id);
+	@PostMapping("/admin/inquiryAnswerDel")
+	public String inquiryAnswerDel(@RequestParam int id) {
+		return service.inquiryAnswerDel(id);
 	}
-	
 	
 	@GetMapping("/admin/memberList")
 	public String memberList(HttpServletRequest request, Model model) {

@@ -48,10 +48,14 @@
     color: white; 
     border: none; 
     cursor: pointer; 
-    border-radius: 5px; 
+    border-radius: 5px;
+    display: inline-block;
     }
     .delete-btn { 
     background-color: #D9534F; 
+    }
+    a {
+    	text-decoration: none;
     }
 </style>
 </head>
@@ -87,10 +91,10 @@
                     <input type="hidden" name="id" value="${inquiry.id}">
                     <textarea name="answer">${inquiry.answer}</textarea>
                     <button type="submit">답변 저장</button>
-                </form>
-                <form action="/admin/inquiryAnswerDelete" method="post">
-                    <input type="hidden" name="id" value="${inquiry.id}">
-                    <button type="submit" class="delete-btn">답변 삭제</button>
+                    <a href="/admin/inquiryAnswerDel?id=${inquiry.id}">
+                	    <button type="button" class="delete-btn">답변 삭제</button>
+                	</a>
+                	<a href="inquiryList"><button>목록으로</button></a>
                 </form>
             </td>
         </tr>

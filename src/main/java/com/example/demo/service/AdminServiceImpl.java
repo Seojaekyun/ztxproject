@@ -16,8 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.dto.InquiryDto;
 import com.example.demo.dto.ReservDto;
@@ -362,7 +362,7 @@ public class AdminServiceImpl implements AdminService{
 	
 	
 	@Override
-	public String adminInquiryList(int page, Model model) {
+	public String inquiryList(int page, Model model) {
 		int index = (page - 1) * 10;
 		int total = imapper.getChong();
 		int totalPage = (int) Math.ceil((double) total / 10);
@@ -380,29 +380,29 @@ public class AdminServiceImpl implements AdminService{
 		model.addAttribute("page", page);
 		model.addAttribute("totalPage", totalPage);
 		
-		return "/admin/adminInquiryList";
+		return "/admin/inquiryList";
 	}
 
 	@Override
-	public String adminInquiryAnswer(int id, Model model) {
+	public String inquiryAnswer(int id, Model model) {
 		InquiryDto inquiry = imapper.getInquiryById(id);
 		if (inquiry == null) {
-			return "redirect:/admin/adminInquiryList"; // 존재하지 않는 경우 리스트로 이동
+			return "redirect:/admin/inquiryList"; // 존재하지 않는 경우 리스트로 이동
 		}
 		model.addAttribute("inquiry", inquiry);
-		return "/admin/adminInquiryAnswer"; // JSP 파일 이름과 일치해야 함
+		return "/admin/inquiryAnswer"; // JSP 파일 이름과 일치해야 함
 	}
 
 	@Override
-	public String adminInquiryAnswerOk(int id, String answer) {
+	public String inquiryAnswerOk(int id, String answer) {
 		imapper.updateInquiryAnswer(id, answer, 1); // ref 값을 1(답변완료)로 변경
-		return "redirect:/admin/adminInquiryList";
+		return "redirect:/admin/inquiryList";
 	}
 	 
 	@Override
-	public String adminInquiryAnswerDelete(int id) {
+	public String inquiryAnswerDel(int id) {
 		imapper.updateInquiryAnswer(id, null, 0); // ref 값을 0(미답변)으로 변경
-		return "redirect:/admin/adminInquiryList";
+		return "redirect:/admin/inquiryList";
 	}
 	
 	
@@ -599,56 +599,51 @@ public class AdminServiceImpl implements AdminService{
 			@RequestParam String arrivalTime, @RequestParam("ftimeValue") String ftime, @RequestParam int trainid,
 			@RequestParam int unitPrice, @RequestParam String returnDeparture, @RequestParam String returnArrival,
 			@RequestParam String returnDepartureTime, @RequestParam String returnArrivalTime,
-			@RequestParam("returnFtimeValue") String returnFtime, @RequestParam int returnTrainid, @RequestParam int returnUnitPrice,
-			Model model) {
+			@RequestParam("returnFtimeValue") String returnFtime, @RequestParam int returnTrainid,
+			@RequestParam int returnUnitPrice, Model model, RedirectAttributes redirectAttributes) {
 		
 		try {
+			// 1. 왕복 루트 추가
 			romapper.addRoutes(departure, arrival, departureTime, arrivalTime, ftime, trainid, unitPrice);
 			romapper.addRoutes(returnDeparture, returnArrival, returnDepartureTime, returnArrivalTime, returnFtime, returnTrainid, returnUnitPrice);
 			
-			model.addAttribute("message", "성공적으로 추가되었습니다.");
+			// 성공 메시지 설정
+			redirectAttributes.addFlashAttribute("message", "성공적으로 추가되었습니다.");
+			
+			// 경로에 대한 좌석 추가 두번
+			addSeatsForRoute();
+			addSeatsForRoute();
+			
+			return "redirect:/admin/routesList";
 		}
 		catch (Exception e) {
-			model.addAttribute("message", "오류가 발생했습니다: " + e.getMessage());
-			return "admin/addRoute";  // 오류 발생 시 다시 항공편 추가 페이지로
+			redirectAttributes.addFlashAttribute("message", "오류가 발생했습니다: " + e.getMessage());
+			return "redirect:/admin/addRoute";
 		}
-		
-		// 항공편 목록 페이지로 리다이렉트
-		return "redirect:/admin/routesList";
 	}
 	
-	@Override
-	public String addSeats() { // flightId는 내부에서 처리되므로 전달하지 않음
+	private void addSeatsForRoute() {
 		Integer routeid = romapper.getRouteidForAddingSeats();
-	    
-	    if (routeid != null) {
-	        // 2. capa(좌석 수) 가져오기
-	        Map<String, Object> trainData = romapper.getRouteCapa(routeid);
-	        
-	        if (trainData != null) {
-	            int capacity = (int) trainData.get("seat");
-	            
-	            // 3. seates 테이블에서 좌석 정보 가져오기 (좌석 번호와 좌석 아이디)
-	            List<SeatDto> seatNumbers = romapper.getSeatsForRoute(routeid);
-
-	            // 4. 좌석 번호 리스트가 routeid에 맞게 제대로 가져왔는지 확인
-	            if (seatNumbers.size() < capacity) {
-	                // 좌석 개수가 부족하면, 추가적인 처리 필요 (예: 예외 처리 또는 로직 수정)
-	                // 여기서는 capacity에 맞게 좌석을 가져왔다고 가정
-	                System.out.println("좌석 개수 부족: seates 테이블에서 좌석을 추가로 가져와야 할 경우 처리 필요");
-	            }
-
-	            // 5. MyBatis에 routeid와 seatNumbers 전달하여 좌석 추가
-	            Map<String, Object> params = new HashMap<>();
-	            params.put("routeid", routeid);
-	            params.put("seatNumbers", seatNumbers);
-
-	            // 6. 좌석 추가
-	            romapper.addSeats(params);
-	        }
-	    }
-	    
-		return "redirect:/admin/routesList";  // 완료 후 항공편 목록 페이지로 이동
+		if(routeid != null) {
+			Map<String, Object> trainData = romapper.getRouteCapa(routeid);
+			if(trainData != null) {
+				int capacity = (int) trainData.get("seat");
+				
+				// 좌석 정보 가져오기
+				List<SeatDto> seatNumbers = romapper.getSeatsForRoute(routeid);
+				
+				if(seatNumbers.size() < capacity) {
+					throw new RuntimeException("좌석 개수가 부족합니다. 추가 작업이 필요합니다.");
+				}
+				
+				// 좌석 추가
+				Map<String, Object> params = new HashMap<>();
+				params.put("routeid", routeid);
+				params.put("seatNumbers", seatNumbers);
+				romapper.addSeats(params);
+			}
+		}
 	}
+
 
 }

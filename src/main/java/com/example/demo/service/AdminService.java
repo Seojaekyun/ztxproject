@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import org.springframework.ui.Model;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.dto.UserDto;
 
@@ -14,10 +15,10 @@ public interface AdminService {
 	String rsvdList(HttpServletRequest request, Model model);
 	String routesList(Integer page, String selectedDate, String routeType, Model model);
 	String rsvChart(Model model);
-	String adminInquiryList(int page,Model model);
-	String adminInquiryAnswer(int id, Model model);
-	String adminInquiryAnswerOk(int id, String answer);
-    String adminInquiryAnswerDelete(int id);
+	String inquiryList(int page,Model model);
+	String inquiryAnswer(int id, Model model);
+	String inquiryAnswerOk(int id, String answer);
+    String inquiryAnswerDel(int id);
 	String memberList(HttpServletRequest request, Model model);
 	String memberUp(UserDto mdto, int id, int level, Model model);
 	String oneMeminfo(HttpServletRequest request, Model model);
@@ -27,8 +28,8 @@ public interface AdminService {
 	String addRoute(Model model);
 	String addRoutes(String departure, String arrival, String departureTime, String arrivalTime, String ftime,
 			int trainid, int unitPrice, String returnDeparture, String returnArrival, String returnDepartureTime,
-			String returnArrivalTime, String returnFtime, int returnTrainid, int returnUnitPrice, Model model);
-	String addSeats();
+			String returnArrivalTime, String returnFtime, int returnTrainid, int returnUnitPrice, Model model, RedirectAttributes redirectAttributes);
+	
 	
 	
 }

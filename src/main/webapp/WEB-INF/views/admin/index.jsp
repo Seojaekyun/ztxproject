@@ -113,13 +113,13 @@
 	        <table>
 	            <caption><span id="h5"> 서울역 출발 </span></caption>
 	            <tr>
-	                <td>출발일</td>
+	                <td>열차명</td>
 	                <td>출발시간</td>
 	                <td>예약</td>
 	            </tr>
 	            <c:forEach items="${seoulRsv}" var="srsv">
 	                <tr>
-	                    <td>${srsv.trainid}</td>
+	                    <td>은하-${srsv.trainid}호</td>
 	                    <td>${srsv.routeTime}</td>
 	                    <td>${srsv.reservCount}</td>
 	                </tr>
@@ -135,13 +135,13 @@
 	        <table>
 	            <caption><span id="h5"> 부산역 출발 </span></caption>
 	            <tr>
-	                <td>출발일</td>
+	                <td>열차명</td>
 	                <td>출발시간</td>
 	                <td>예약</td>
 	            </tr>
 	            <c:forEach items="${pusanRsv}" var="prsv">
 	                <tr>
-	                    <td>${prsv.trainid}</td>
+	                    <td>은하-${prsv.trainid}호</td>
 	                    <td>${prsv.routeTime}</td>
 	                    <td>${prsv.reservCount}</td>
 	                </tr>
@@ -157,13 +157,13 @@
 	        <table>
 	            <caption><span id="h5"> 기타 </span></caption>
 	            <tr>
-	                <td>출발일</td>
+	                <td>열차명</td>
 	                <td>출발시간</td>
 	                <td>예약</td>
 	            </tr>
 	            <c:forEach items="${otherRsv}" var="orsv">
 	                <tr>
-	                    <td>${orsv.trainid}</td>
+	                    <td>은하-${orsv.trainid}호</td>
 	                    <td>${orsv.routeTime}</td>
 	                    <td>${orsv.reservCount}</td>
 	                </tr>

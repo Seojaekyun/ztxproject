@@ -1,11 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>Q ＆ A 리스트</title>
+<title>Q & A 관리</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
     /* 기본 스타일 */
@@ -36,7 +35,7 @@
         margin-bottom: 20px;
     }
     th, td {
-        padding: 6px;
+        padding: 10px;
         text-align: center;
         border-bottom: 1px solid #ddd;
     }
@@ -59,22 +58,20 @@
         text-decoration: underline;
     }
     /* 배지 스타일 */
-    #badge1 {
+    .badge-unanswered {
         background-color: #DF251F;
         color: white;
         font-size: 12px;
         padding: 3px 8px;
         border-radius: 3px;
-        margin-right: 8px;
         font-weight: 700;
     }
-    #badge2 {
+    .badge-answered {
         background-color: #4CAF50;
         color: white;
         font-size: 12px;
         padding: 3px 8px;
         border-radius: 3px;
-        margin-right: 8px;
         font-weight: 700;
     }
     /* 페이징 스타일 */
@@ -83,10 +80,10 @@
         justify-content: center;
         gap: 5px;
         margin-top: 10px;
-        font-size: 10px;
+        font-size: 14px;
     }
     .pagination a, .pagination span {
-        padding: 5px 10px;
+        padding: 8px 12px;
         text-decoration: none;
         border: 1px solid #ddd;
         border-radius: 5px;
@@ -107,77 +104,55 @@
         }
         th, td {
             font-size: 14px;
-            padding: 10px;
+            padding: 8px;
         }
     }
 </style>
 </head>
 <body>
 
-<div>
-    <h2>Q ＆ A 관리</h2>
-</div>
+<h2>Q ＆ A 관리</h2>
 <section>
     <table>
         <tr>
-            <th colspan="2">문의사항</th>
+            <th>번호</th>
             <th>작성자</th>
-            <th>조회수</th>
+            <th>제목</th>
             <th>작성일</th>
+            <th>답변 상태</th>
+            <th>조회</th>
         </tr>
-        <c:forEach items="${ilist}" var="idto">
-            <tr>
-                <td width="100">
-                    <c:if test="${idto.answer == 0}">
-                        <span id="badge1">답변대기</span>
-                    </c:if>
-                    <c:if test="${idto.answer == 1}">
-                        <span id="badge2">답변완료</span>
-                    </c:if>
-                </td>
-                <td style="text-align:left">
-                    <a href="inquiryContent?id=${idto.id}">
-                        <c:choose>
-                            <c:when test="${idto.state == 0}">예약접수 관련 문의</c:when>
-                            <c:when test="${idto.state == 1}">탑승수속 관련 문의</c:when>
-                            <c:when test="${idto.state == 2}">예약취소 관련 문의</c:when>
-                            <c:when test="${idto.state == 3}">웹사이트 관련 문의</c:when>
-                            <c:otherwise>기타 문의</c:otherwise>
-                        </c:choose>
-                    </a>
-                </td>
-                <td>${idto.userid}</td>
-                <td>${idto.readnum}</td>
-                <td>${idto.writeday}</td>
-            </tr>
+
+        <c:forEach var="inquiry" items="${inquiries}">
+        <tr>
+            <td>${inquiry.id}</td>
+            <td>${inquiry.name}</td>
+            <td>${inquiry.title}</td>
+            <td>${inquiry.writeday}</td>
+            <td>
+                <c:choose>
+                    <c:when test="${empty inquiry.answer}">
+                        <span class="badge-unanswered">미답변</span>
+                    </c:when>
+                    <c:otherwise>
+                        <span class="badge-answered">답변완료</span>
+                    </c:otherwise>
+                </c:choose>
+            </td>
+            <td><a href="../admin/inquiryAnswer?id=${inquiry.id}">조회</a></td>    
+        </tr>
         </c:forEach>
     </table>
 
     <!-- 페이징 처리 -->
     <div class="pagination">
-        <c:set var="prevPage" value="${currentPage - 10 < 1 ? 1 : currentPage - 10}" />
-        <a href="?page=${prevPage}">&laquo; 이전10</a>
-        <c:set var="startPage" value="${currentPage <= 5 ? 1 : currentPage - 4}" />
-        <c:set var="endPage" value="${startPage + 9}" />
-        <c:if test="${startPage < 1}">
-            <c:set var="startPage" value="1" />
+        <c:if test="${page > 1}">
+        <a href="/admin/adminInquiryList?page=${page - 1}">이전</a>
         </c:if>
-        <c:if test="${endPage > totalPages}">
-            <c:set var="endPage" value="${totalPages}" />
-            <c:set var="startPage" value="${endPage - 9 > 0 ? endPage - 9 : 1}" />
+        <span>${page} / ${totalPage}</span>
+        <c:if test="${page < totalPage}">
+        <a href="/admin/adminInquiryList?page=${page + 1}">다음</a>
         </c:if>
-        <c:forEach begin="${startPage}" end="${endPage}" var="i">
-            <c:choose>
-                <c:when test="${i == currentPage}">
-                    <span class="active">${i}</span>
-                </c:when>
-                <c:otherwise>
-                    <a href="?page=${i}">${i}</a>
-                </c:otherwise>
-            </c:choose>
-        </c:forEach>
-        <c:set var="nextPage" value="${currentPage + 10 > totalPages ? totalPages : currentPage + 10}" />
-        <a href="?page=${nextPage}">다음10 &raquo;</a>
     </div>
 </section>
 
