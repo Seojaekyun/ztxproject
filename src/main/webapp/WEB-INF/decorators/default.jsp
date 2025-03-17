@@ -800,7 +800,7 @@
 						<div id="submenu">
 							<div><a href="../main/csCustomer">고객센터</a></div>
 							<div><a href="../main/pickup">유실물</a></div>
-							<div><a href="/trainservice/trainservice">열차 서비스</a></div>
+							<div><a href="../main/trainservice">열차 서비스</a></div>
 							<div><a href="">여행 명소</a></div>
 							<div><a href="">테마 여행</a></div>
 						</div>

@@ -62,4 +62,10 @@ public class MainController {
 	public String pickup() {
 		return service.pickup();
 	}
+	
+	@GetMapping("/main/trainservice")
+	public String trainservice()
+	{
+		return "/main/trainservice";
+	}
 }
