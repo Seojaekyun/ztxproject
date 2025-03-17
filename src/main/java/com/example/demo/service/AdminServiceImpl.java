@@ -360,7 +360,6 @@ public class AdminServiceImpl implements AdminService{
 		return "admin/rsvChart";  // JSP 파일로 이동
 	}
 	
-	
 	@Override
 	public String inquiryList(int page, Model model) {
 		int index = (page - 1) * 10;
@@ -404,7 +403,6 @@ public class AdminServiceImpl implements AdminService{
 		imapper.updateInquiryAnswer(id, null, 0); // ref 값을 0(미답변)으로 변경
 		return "redirect:/admin/inquiryList";
 	}
-	
 	
 	@Override
 	public String memberList(HttpServletRequest request, Model model) {
@@ -482,7 +480,6 @@ public class AdminServiceImpl implements AdminService{
 					reserv.setOfferday(adjustedDate.format(formatter));
 				}
 			}
-			
 			member.setReservlist(myrsv);
 		}
 		
@@ -554,7 +551,6 @@ public class AdminServiceImpl implements AdminService{
 	            e.printStackTrace();
 	        }
 	    }
-		
 		return "redirect:/admin/rsvdList";
 	}
 	
@@ -580,7 +576,6 @@ public class AdminServiceImpl implements AdminService{
 	            e.printStackTrace();
 	        }
 	    }
-		
 		return "redirect:/admin/rsvdList";
 	}
 

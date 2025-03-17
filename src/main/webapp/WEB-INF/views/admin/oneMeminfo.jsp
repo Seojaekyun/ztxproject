@@ -170,17 +170,17 @@
 						-
 						</c:if>
 						<c:if test="${rsv.state==2 && (rsv.routeTime >= rsv.offerday)}">
-						<a href="cancelConfirm?routeid=${rsv.routeid}&routeTime=${rsv.routeTime}&reservid=${rsv.reservid}">
+						<a href="cancelConfirm?routeid=${rsv.routeid}&reservid=${rsv.reservid}&resnum=${rsv.resnum}">
 							<input type="button" value="취소처리">
 						</a>
 						</c:if>
 						<c:if test="${rsv.state==2 && (rsv.routeTime <= rsv.offerday)}">
-						<a href="cancelRejection?routeid=${rsv.routeid}&routeTime=${rsv.routeTime}&reservid=${rsv.reservid}">
+						<a href="cancelRejection?routeid=${rsv.routeid}&reservid=${rsv.reservid}">
 							<input type="button" value="취소불가">
 						</a>
 						</c:if>
 						<c:if test="${rsv.payment==1 && rsv.state==3 }">
-						<a href="payReturn?routeid=${rsv.routeid}&routeTime=${rsv.routeTime}&reservid=${rsv.reservid}">
+						<a href="payReturn?routeid=${rsv.routeid}&reservid=${rsv.reservid}">
 							<input type="button" value="환불처리">
 						</a>
 						</c:if>
