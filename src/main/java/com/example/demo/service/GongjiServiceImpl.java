@@ -120,7 +120,7 @@ public class GongjiServiceImpl implements GongjiService{
 		String id=request.getParameter("id");
 		String page=request.getParameter("page");
 		
-		mapper.content(id);
+		mapper.readnum(id);
 				
 		return "redirect:/gongji/content?id="+id+"&page="+page;
 	}
