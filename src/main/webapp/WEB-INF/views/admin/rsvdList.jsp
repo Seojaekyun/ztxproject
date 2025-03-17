@@ -184,12 +184,6 @@
 					<td>${seatCounts[rsv.reservid]}</td>
 					<td>${rsv.charge} 원</td>
 					<td>
-						<c:if test="${rsv.state != 2 && (rsv.payment!=1 && rsv.state!=3)}">
-						<span id="badge1"> - </span> 
-						</c:if>
-						<c:if test="${rsv.state != 2 && ((rsv.payment==0)||(rsv.payment==2))}">
-						<span id="badge1"> - </span> 
-						</c:if>
 						<c:if test="${rsv.state == 2}">
 						<span id="badge1">취소요청</span> 
 						</c:if>
@@ -230,7 +224,7 @@
 						-
 						</c:if>
 						<c:if test="${rsv.state==2 && (rsv.routeTime >= rsv.offerday)}">
-						<a href="cancelConfirm?routeid=${rsv.routeid}&routeTime=${rsv.routeTime}&reservid=${rsv.reservid}">
+						<a href="cancelConfirm?routeid=${rsv.routeid}&routeTime=${rsv.routeTime}&reservid=${rsv.reservid}&resnum=${rsv.resnum}">
 							<input type="button" value="취소처리">
 						</a>
 						</c:if>

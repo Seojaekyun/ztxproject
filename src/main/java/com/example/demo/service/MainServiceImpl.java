@@ -45,4 +45,9 @@ public class MainServiceImpl implements MainService {
 		return "/main/csCustomer";
 	}
 
+	@Override
+	public String pickup() {
+		return "/main/pickup";
+	}
+
 }

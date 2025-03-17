@@ -24,4 +24,5 @@ public interface AdminService {
 	String cancelConfirm(HttpServletRequest request);
 	String cancelRejection(HttpServletRequest request, Model model);
 	String payReturn(HttpServletRequest request, Model model);
+	String addRoute(Model model);
 }

@@ -57,4 +57,9 @@ public class MainController {
 	public String csCustomer(HttpServletRequest request, Model model) {
 		return service.csCustomer(request, model);
 	}
+	
+	@GetMapping("/main/pickup")
+	public String pickup() {
+		return service.pickup();
+	}
 }

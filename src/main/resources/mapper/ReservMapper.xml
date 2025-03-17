@@ -123,6 +123,9 @@
 	<update id="cancelSeat" parameterType="com.example.demo.dto.ReservDto">
 		update trainseat set reserv=1, resid=NULL where routeid=#{roid} and resid=#{rid}
 	</update>
+	<update id="cancelTrainSeat" parameterType="com.example.demo.dto.ReservDto">
+		UPDATE routes SET seat=(seat+#{resnum}) WHERE routeid = #{roid}
+	</update>
 	<update id="cancelRejection" parameterType="com.example.demo.dto.ReservDto">
 		update reservlist set state=4 where reservid=#{rid}
 	</update>
