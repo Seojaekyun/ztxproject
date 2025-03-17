@@ -20,6 +20,18 @@
 	.buttons {
 		margin-top: 20px;
 	}
+    a {
+	    text-decoration: none;
+	  	color: black;
+    }
+    a:hover {
+		text-decoration: none;
+		color:#004EA2;
+	}
+    form {
+    	display: flex;
+    	justify-content: space-between;
+    }
 </style>
 
 </head>
@@ -94,9 +106,10 @@
 				<input type="hidden" name="routeTime" value="${routeTime}">
 				<input type="hidden" name="routeArrivalTime" value="${routeArrivalTime}">
 				<input type="hidden" name="charge" value="${charge}">
+				<input type="button" class="btn btn-secondary" value="이전으로" onclick="history.back()">
 				<button type="submit" class="btn btn-success">예약하기</button>
 			</form>
-			<button class="btn btn-secondary" onclick="history.back()">이전으로</button>
+			
 		</div>
 	</div>
 <script>

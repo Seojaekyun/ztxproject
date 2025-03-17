@@ -8,7 +8,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
 <style>
 	body {
-		font-family: Arial, sans-serif;
 		background-color: #f4f4f4;
 		margin: 0;
 		padding: 0;
@@ -31,7 +30,7 @@
 	th, td {
 		text-align: center;
 	}
-	.btn-seat-select, .btn-reservation {
+	.btn-seat-select, .btn-reservation, .btn-secondary {
 		padding: 5px 10px;
 		background-color: #00467F; /* 블루 색상 */
 		color: white;
@@ -40,9 +39,7 @@
 		cursor: pointer;
 		transition: background-color 0.3s ease;
 		font-size: 12px;
-	}
-	.btn-reservation {
-		font-size: 15px;
+		font-weight: 700;
 	}
 	.btn-seat-select:hover, .btn-reservation:hover {
 		background-color: #003A66;
@@ -60,6 +57,18 @@
 	.modal-content {
 		width: 1100px;
 	}
+	a {
+	    text-decoration: none;
+	  	color: black;
+    }
+    a:hover {
+		text-decoration: none;
+		color:#004EA2;
+	}
+    form {
+    	display: flex;
+    	justify-content: space-between;
+    }
 
 </style>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -131,7 +140,6 @@
 			</tbody>
 		</table>
 	
-		<!-- 선택한 항공편 정보 -->
 		<h4>선택한 열차편 정보</h4>
 		<table class="table table-bordered">
 			<thead>
@@ -156,8 +164,10 @@
 			<input type="hidden" name="resnum" value="${resnum}">
 			<input type="hidden" name="charge" value="${charge}">
 			<input type="hidden" name="selectedSeats" id="selectedSeats">
+			<input type="button" class="btn btn-secondary" value="이전으로" onclick="history.back()">
 			<button type="submit" class="btn btn-success btn-reservation">예약하기</button>
 		</form>
+		
 	</div>
 	
 	<!-- Bootstrap 모달 -->

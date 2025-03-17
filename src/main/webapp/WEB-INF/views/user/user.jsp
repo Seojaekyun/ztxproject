@@ -6,7 +6,6 @@
 <title>회원가입</title>
 <style>
   body {
-    font-family:Arial, sans-serif;
     background-color:#f4f4f4;
     margin:0;
     padding:0;
@@ -69,6 +68,10 @@
   }
   section #umsg, #pmsg {
     font-size:12px;
+  }
+  a {
+    text-decoration: none;
+  	color: black;
   }
 </style>
 <script>

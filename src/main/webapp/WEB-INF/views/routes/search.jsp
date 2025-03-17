@@ -9,7 +9,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
 <style>
     body {
-        font-family: Arial, sans-serif;
         background-color: #f4f4f4;
     }
     .container {
@@ -29,10 +28,19 @@
         padding: 5px 10px;
         border-radius: 5px;
         text-decoration: none;
+        font-size: 10px;
     }
     .btn-select:hover {
         background-color: #003A66;
     }
+    a {
+	    text-decoration: none;
+	  	color: black;
+    }
+    a:hover {
+		text-decoration: none;
+		color:#004EA2;
+	}
 </style>
 </head>
 <body>

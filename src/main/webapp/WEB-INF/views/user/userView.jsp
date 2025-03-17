@@ -306,7 +306,7 @@
 		</div>
 		<div class="delete_id">
 			<c:choose>
-			<c:when test="${udto.level == 0 || mdto.level == 1 || mdto.level == 2 || mdto.level == 6}">
+			<c:when test="${udto.level == 0 || udto.level == 1 || udto.level == 2 || udto.level == 6}">
 			<a href="../user/reqOut"><input type="button" value="탈퇴신청" id="outbtn"></a>
 			</c:when>
 			<c:when test="${udto.level == 3}">

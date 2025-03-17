@@ -53,12 +53,8 @@
 	  color:#333;
 	  font-size:15px;
 	}
-	a {
-	  color:#004EA2;
-	  text-decoration:none;
-	}
 	a:hover {
-	  text-decoration:underline;
+	  color:#004EA2;
 	}
 	#badge1 {
 	  background-color:#DF251F;
