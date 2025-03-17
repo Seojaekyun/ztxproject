@@ -58,7 +58,7 @@ public class MainController {
 		return service.csCustomer(request, model);
 	}
 	
-	@GetMapping("/pickup/pickup")
+	@GetMapping("/main/pickup")
 	public String pickup() {
 		return service.pickup();
 	}
