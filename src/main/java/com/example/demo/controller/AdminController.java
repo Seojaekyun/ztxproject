@@ -95,8 +95,7 @@ public class AdminController {
 	
 	@PostMapping("/admin/addSeats")
 	public String addSeats() { // flightId는 내부에서 처리되므로 전달하지 않음
-		rservice.addSeatsForRoute();
-		return "redirect:/admin/routesList";  // 완료 후 항공편 목록 페이지로 이동
+		return service.addSeats();
 	}
 	
 	@GetMapping("/admin/rsvChart")

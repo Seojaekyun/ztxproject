@@ -2,9 +2,7 @@ package com.example.demo.service;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
@@ -119,38 +117,6 @@ public class RoutesServiceImpl implements RoutesService {
 		}
 	}
 	
-	@Override
-	public void addSeatsForRoute() {
-	    // 1. routeid 가져오기
-	    Integer routeid = mapper.getRouteidForAddingSeats();
-	    
-	    if (routeid != null) {
-	        // 2. capa(좌석 수) 가져오기
-	        Map<String, Object> trainData = mapper.getRouteCapa(routeid);
-	        
-	        if (trainData != null) {
-	            int capacity = (int) trainData.get("seat");
-	            
-	            // 3. seates 테이블에서 좌석 정보 가져오기 (좌석 번호와 좌석 아이디)
-	            List<SeatDto> seatNumbers = mapper.getSeatsForRoute(routeid);
-
-	            // 4. 좌석 번호 리스트가 routeid에 맞게 제대로 가져왔는지 확인
-	            if (seatNumbers.size() < capacity) {
-	                // 좌석 개수가 부족하면, 추가적인 처리 필요 (예: 예외 처리 또는 로직 수정)
-	                // 여기서는 capacity에 맞게 좌석을 가져왔다고 가정
-	                System.out.println("좌석 개수 부족: seates 테이블에서 좌석을 추가로 가져와야 할 경우 처리 필요");
-	            }
-
-	            // 5. MyBatis에 routeid와 seatNumbers 전달하여 좌석 추가
-	            Map<String, Object> params = new HashMap<>();
-	            params.put("routeid", routeid);
-	            params.put("seatNumbers", seatNumbers);
-
-	            // 6. 좌석 추가
-	            mapper.addSeatsForRoute(params);
-	        }
-	    }
-	}
 
 	
 	

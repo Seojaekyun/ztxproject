@@ -79,7 +79,7 @@
 	<select id="getSeatsForRoute" resultType="com.example.demo.dto.SeatDto">
 	    SELECT * FROM seates
 	</select>
-	<insert id="addSeatsForRoute">
+	<insert id="addSeats">
 		INSERT INTO trainseat (routeid, seatid, seatnum) VALUES
 		<foreach collection="seatNumbers" item="seat" separator=",">
 			(#{routeid}, #{seat.seatid}, #{seat.seatnum})

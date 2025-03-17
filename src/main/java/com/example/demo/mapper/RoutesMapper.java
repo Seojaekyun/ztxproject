@@ -27,11 +27,12 @@ public interface RoutesMapper {
 	List<TrainesDto> getAllTraines();
 	Integer getRouteidForAddingSeats();
 	Map<String, Object> getRouteCapa(Integer routeid);
-	void addSeatsForRoute(Map<String, Object> params);
+	void addSeats(Map<String, Object> params);
 	RouteTimeDto getRouteTime(@Param("a") String a, @Param("b") String b);
 	List<SeatDto> getSeatsForRoute(Integer routeid);
 	void addRoutes(String departure, String arrival, String departureTime, String arrivalTime, String ftime, int trainid,
 			int unitPrice);
+	void addSeats();
 	
 	
 }
