@@ -70,7 +70,9 @@
             <ul>
                 <li>철도고객센터 1588-7788</li>
             </ul>
+            <br>
             <p>주요역 유실물 센터</p>
+            <p style="color:red;">※하단 참조</p>
         </div>
         <div>
             <ul>
@@ -108,7 +110,7 @@
         </div>
 		<br>
 		<br>
-        <h2 class="section-title">코레일 주요 유실물 센터 연락처</h2>
+        <h2 class="section-title">꼬레일 주요 유실물 센터 연락처</h2>
         <div id="lost-center">
             <input type="text" id="searchStation" placeholder="역명을 입력하세요" style="width: 300px; padding: 8px; margin-bottom: 15px; border: 1px solid #ccc;">
             <ul id="stationList" style="list-style: none; padding: 0;">
