@@ -132,10 +132,10 @@
     <table>
         <thead>
             <tr>
-                <th>순번</th>
-                <th>아이디</th>
-                <th>제목</th>
+                <th> </th>
                 <th>문의 유형</th>
+                <th>제목</th>
+                <th>작성자</th>
                 <th>상태</th>
                 <th>조회수</th>
                 <th>게시일</th>
@@ -145,18 +145,30 @@
             <c:forEach var="inquiry" items="${inquiries}">
                 <tr>
                     <td>${inquiry.id}</td>
-                    <td>${inquiry.userid}</td>
-                    <td align="left"><a href="/inquiry/readnum?id=${inquiry.id}">${inquiry.title}</a></td>
                     <td class="status-${inquiry.status}">
     					<c:choose>
-        					<c:when test="${inquiry.category == 1}">불편/개선</c:when>
-        					<c:when test="${inquiry.category == 2}">단순 문의</c:when>
-        					<c:when test="${inquiry.category == 3}">친절 제보</c:when>
-        					<c:when test="${inquiry.category == 4}">서식 VOC</c:when>
-        					<c:when test="${inquiry.category == 5}">시민 재해 예방</c:when>
-        					<c:otherwise>알 수 없음</c:otherwise>
-    					</c:choose>
+						<c:when test="${inquiry.category eq 4}">
+						<span id="s1">기타 문의</span>
+						</c:when>
+						<c:when test="${inquiry.category eq 3}">
+						<span id="s2">웹사이트 관련 문의</span>
+						</c:when>
+						<c:when test="${inquiry.category eq 2}">
+						<span id="s1">예약취소 관련 문의</span>
+						</c:when>
+						<c:when test="${inquiry.category eq 1}">
+						<span id="s2">탑승 관련 문의</span>
+						</c:when>
+						<c:when test="${inquiry.category eq 0}">
+						<span id="s1">예약 관련 문의</span>
+						</c:when>
+						<c:otherwise>
+						<span id="s1">알 수 없는 문의</span>
+						</c:otherwise>
+						</c:choose>
 				    </td>
+				    <td style="text-align: left"><a href="/inquiry/readnum?id=${inquiry.id}">${inquiry.title}</a></td>
+				    <td>${inquiry.userid}</td>
 					<td>
                     <c:choose>
                         <c:when test="${empty inquiry.answer}">

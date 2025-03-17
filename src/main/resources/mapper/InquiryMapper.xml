@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.mapper.InquiryMapper">
-    
-    <insert id="inquiryWriteOk" parameterType="com.example.demo.dto.InquiryDto">
-        INSERT INTO inquiry (userid, name, category, title, content, phone, pwd, status, writeday)
-        VALUES (#{userid}, #{name}, #{category}, #{title}, #{content}, #{phone}, #{pwd}, 1, NOW());
-    </insert>
+	<insert id="inquiryWriteOk" parameterType="com.example.demo.dto.InquiryDto">
+		INSERT INTO inquiry (userid, name, category, title, content, phone, pwd, status, writeday)
+		VALUES (#{userid}, #{name}, #{category}, #{title}, #{content}, #{phone}, #{pwd}, 1, NOW());
+	</insert>
 
     <select id="inquiryList" resultType="com.example.demo.dto.InquiryDto">
     	SELECT * FROM inquiry ORDER BY id DESC LIMIT #{index}, 10;
@@ -47,5 +44,16 @@
     	SET title = #{title}, content = #{content}, category = #{category}, phone = #{phone}, status = #{status}
     	WHERE id = #{id}
 	</update>
+	
+	<select id="ilist" resultType="com.example.demo.dto.InquiryDto">
+		select * from inquiry order by id desc limit 3
+	</select>
+	<select id="listCountsPerCategory" resultType="com.example.demo.dto.InquiryDto">
+		SELECT category, COUNT(*) AS count FROM inquiry GROUP BY category ORDER BY category DESC limit 3
+	</select>
+	<resultMap id="categoryCountMap" type="com.example.demo.dto.InquiryDto">
+		<result property="category" column="category"/>
+		<result property="count" column="count"/>
+	</resultMap>
 
 </mapper>

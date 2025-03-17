@@ -66,11 +66,11 @@
             <label class="form-label">문의 유형</label>
             <select class="form-select" name="category" required>
                 <option value="">선택하세요</option>
-                <option value="1">불편/개선</option>
-                <option value="2">단순 문의</option>
-                <option value="3">친절 제보</option>
-                <option value="4">서식 VOC</option>
-                <option value="5">시민 재해 예방</option>
+                <option value="0">예약 관련 문의</option>
+                <option value="1">탑승 관련 문의</option>
+                <option value="2">예약취소 관련 문의</option>
+                <option value="3">웹사이트 관련 문의</option>
+                <option value="4">기타 문의</option>
             </select>
         </div>
 

@@ -24,4 +24,8 @@ public interface InquiryMapper {
     void updateInquiryAnswer(@Param("id") int id, @Param("answer") String answer, @Param("ref") int ref);
 	public InquiryDto content(String id);
 	public void readnum(String id);
+	public List<InquiryDto> ilist();
+	public List<InquiryDto> listCountsPerCategory();
+	
+	
 }

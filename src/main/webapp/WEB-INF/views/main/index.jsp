@@ -17,7 +17,7 @@
 		background-color: #f4f4f4;
 	}
 	.main_content {
-		height: 690px;
+		height: 1010px;
 		z-index: 2;
 	}
 	.train_service {
@@ -26,11 +26,92 @@
 		background-position: bottom;
 		background-size: cover;
 		width: 100%;
-		height: 800px;
+		height: 1130px;
 		background-repeat: no-repeat;
 		margin: auto;
 		top: -95px;
 		animation: slideBackground 28s infinite;
+	}
+	.evecon {
+		width: 1650px;
+		height: 350px;
+		position: relative;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%); /* 정확한 중앙 정렬 */
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	.market {
+		position: absolute;
+		top: 0%;
+		left: -8%;
+		width: 1130px;
+		height: 350px;
+		box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+		border-radius: 10px;
+		background: white;
+		display: inline-block;
+		flex-direction: column;
+		overflow: hidden;
+		position: relative;
+		margin-right: 40px;
+	}
+	.market img {
+		width: 1130px;
+		height: 350px;
+		border-radius: 10px;
+	}
+	.button {
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		background-color: rgba(0, 0, 0, 0.5);
+		color: white;
+		border: none;
+		padding: 5px 10px;
+		margin: 10px;
+		cursor: pointer;
+		z-index: 10;
+		border-radius:25px;
+		font-size: 18px;
+		font-weight: bold;
+		line-height: 25px;
+	}
+	.prev {
+		left: 0;
+	}
+	.next {
+		right: 0;
+	}
+	.dairy {
+		position: absolute;
+		top: 0%;
+		right: 8%;
+		width: 235px;
+		height: 240px;
+		box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+		border-radius: 10px;
+		background: white;
+		display: inline-block;
+		z-index: 20;
+	}
+	#schbtn {
+		padding: 20px;
+		font-size: 17px;
+		font-weight: 600;
+	}
+	#schbtn > div {
+		align-items: center;
+		margin-bottom: 5px;
+		display: flex;
+		height: 35px;
+	}
+	#schbtn > div > img {
+		margin: 5px 10px 0 0; 
+		height: 25px;
+		line-height: 35px;
 	}
 	@keyframes slideBackground {
 		0% {
@@ -51,7 +132,7 @@
 	}	
 	.booking_contents {
 		position: relative;
-		top: 42.5rem;
+		top: 41.0rem;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -92,12 +173,11 @@
 		justify-content: space-between;
 		align-items: center;
 		align-self: flex-start;
-		width: 500px;
-		margin-right: 15px;
+		width: 617px;
 	}
 	.qbbtitle {
 		display: flex;
-		width: 500px;
+		width: 617px;
 		justify-content: space-between;
 		font-size: 16px;
 		font-weight: 600;
@@ -108,15 +188,15 @@
 		justify-content: space-between;
 		align-items: center;
 		align-self: flex-start;
-		width: 500px;
+		width: 617px;
 		padding:0px;	
 	}
 	.qbbdep, .qbbarr {
 		display: inline-block;
-		width: 247px;
+		width: 284px;
 		text-align: left;
 		padding: 5px;
-		margin: 0 5px;
+		margin-right: 24px;
 	}
 	.quick_booking_button {
 		display: flex;
@@ -124,7 +204,7 @@
 		align-items: center; /* 세로 중앙 정렬 */
 		flex: 1;
 		text-align: left;
-		margin: 0 5px;
+		margin-right: 24px;
 		padding: 5px;
 		border-bottom: 1px solid white;
 		background: none;
@@ -223,17 +303,17 @@
 	}
 	.datetitle, .passtitle {
 		display: flex;
-		width: 200px;
-		justify-content: space-between;
+		width: 284px;
+		justify-content: flex-start;
 		font-size: 16px;
 		font-weight: 600;
 		color: white;
 	}
 	.date_selection {
-		margin-top: 4px;
+		
 	}
 	.date_selection, #passenger_selection {
-		margin-right: 15px;
+		margin-right: 24px;
 		border-bottom: 1px solid white;
 	}
 	.date_selection input, #passenger_selection .passenger-btn {
@@ -247,20 +327,19 @@
 	}
 	.date_selection .date_wrap {
 		position:relative;
-		width: 220px;
+		width: 284px;
+		height: 39px;
 	}
 	i {
 		font-size:20px;
 		color: white;
 	}
 	.date_selection .date_wrap input {
-		width:100%;
-		
+		width: 100%;
 	}
 	#date-btn {
 		display: flex;
-		align-items: center;
-		padding-right: 10px;
+		justify-content: flex-start;
 	}
 	#passenger_selection .passenger-btn {
 		width: 100%;
@@ -311,7 +390,7 @@
 		margin: 0 10px;
 	}
 	#search_button {
-		width: 140px;
+		width: 170px;
 		background-color: white;
 		color: #078eb9;
 		padding: 5px 10px;
@@ -743,11 +822,57 @@
 	}
 	
 </script>
+<script>
+	document.addEventListener('DOMContentLoaded', function() {
+		const imagePaths = ["../static/resources/mar0.jpg", "../static/resources/mar1.jpg"];
+		
+		let index = 0; // 현재 이미지 인덱스
+		const imageElement = document.getElementById("proimg"); // 이미지 요소
+		
+		function slideImage() {
+			index = (index + 1) % imagePaths.length;
+			imageElement.src = imagePaths[index];
+		}
+		setInterval(slideImage, 5000);
+		
+		function prevImage() {
+			index = (index - 1 + imagePaths.length) % imagePaths.length;
+			imageElement.src = imagePaths[index];
+		}
+		
+		function nextImage() {
+			index = (index + 1) % imagePaths.length;
+			imageElement.src = imagePaths[index];
+		}
+		
+		document.querySelector('.prev').addEventListener('click', prevImage);
+		document.querySelector('.next').addEventListener('click', nextImage);
+	});
+</script>
 </head>
 	<body>
 	<section>
 		<div class="main_content">
 			<div class="train_service">
+				<div class="evecon">
+					<div class="market">
+						<div id="product">
+							<img id="proimg" src="../static/resources/mar0.jpg">
+							<button class="button prev">＜</button>
+							<!-- 우측 버튼 -->
+							<button class="button next">＞</button>
+						</div>
+					</div>
+					<div class="dairy">
+						<div id="schbtn">
+							<div><img src="../static/resources/directions_railway.png">승차권 예매</div>
+							<div><img src="../static/resources/transit_ticket.png">승차권 확인</div>
+							<div><img src="../static/resources/confirmation_number.png">예약 승차권 조회/취소</div>
+							<div><img src="../static/resources/dictionary.png">승차권 이용안내</div>
+							<div><img src="../static/resources/support_agent.png">고객센터</div>
+						</div>
+					</div>
+				</div>
 				<div class="booking_contents">
 					<div id="popup-overlay" class="popup-overlay" style="display: none;"></div>
 					<form action="${pageContext.request.contextPath}/routes/search" method="get">
@@ -797,7 +922,7 @@
 									<div class="qbbdep">인원</div>
 								</div>
 								<div class="passenger-btn" onclick="openPopup('passenger')">
-									<span id="passenger-btn">인원수</span>
+									총&nbsp;<span id="passenger-btn">인원수</span>
 									<i class="fa-solid fa-user"></i>
 								</div>
 							</div>
@@ -815,7 +940,7 @@
 							</div>
 							<div id="search">
 								<button type="submit" id="search_button">
-									<span>열차조회</span>
+									<span>열차 조회하기</span>
 								</button>
 							</div>
 						</div>

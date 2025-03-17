@@ -214,25 +214,25 @@
 					<td id="title"> 문의 사항 </td>
 					<td> 문의량 </td>
 				</tr>
-				<c:forEach items="${countsList}" var="entry" varStatus="status">
+				<c:forEach items="${countsList}" var="entry" varStatus="category">
 					<tr>
 						<td id="num"> ${entry.rank} </td>
 						<td>
 							<c:choose>
-								<c:when test="${entry.state eq 4}">
+								<c:when test="${entry.category eq 4}">
 									<span id="s1">기타 문의</span>
 								</c:when>
-								<c:when test="${entry.state eq 3}">
+								<c:when test="${entry.category eq 3}">
 									<span id="s2">웹사이트 관련 문의</span>
 								</c:when>
-								<c:when test="${entry.state eq 2}">
+								<c:when test="${entry.category eq 2}">
 									<span id="s1">예약취소 관련 문의</span>
 								</c:when>
-								<c:when test="${entry.state eq 1}">
-									<span id="s2">탑승수속 관련 문의</span>
+								<c:when test="${entry.category eq 1}">
+									<span id="s2">탑승 관련 문의</span>
 								</c:when>
-								<c:when test="${entry.state eq 0}">
-									<span id="s1">예약접수 관련 문의</span>
+								<c:when test="${entry.category eq 0}">
+									<span id="s1">예약 관련 문의</span>
 								</c:when>
 								<c:otherwise>
 									<span id="s1">알 수 없는 문의</span>
@@ -259,19 +259,19 @@
 						<td id="num"> ${idto.id } </td>
 						<td id="title" align="center">
 							<a href="inquiryContent?id=${idto.id}">
-								<c:if test="${idto.state==0}">
-									<span id="s1">예약접수 관련 문의</span>
+								<c:if test="${idto.category==0}">
+									<span id="s1">예약 관련 문의</span>
 								</c:if>
-								<c:if test="${idto.state==1}">
-									<span id="s2">탑승수속 관련 문의</span>
+								<c:if test="${idto.category==1}">
+									<span id="s2">탑승 관련 문의</span>
 								</c:if>
-								<c:if test="${idto.state==2}">
+								<c:if test="${idto.category==2}">
 									<span id="s3">예약취소 관련 문의</span>
 								</c:if>
-								<c:if test="${idto.state==3}">
+								<c:if test="${idto.category==3}">
 									<span id="s4">웹사이트 관련 문의</span>
 								</c:if>
-								<c:if test="${idto.state==4}">
+								<c:if test="${idto.category==4}">
 									<span id="s5">기타 문의</span>
 								</c:if>
 							</a>

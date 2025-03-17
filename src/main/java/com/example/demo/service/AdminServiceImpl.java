@@ -72,13 +72,13 @@ public class AdminServiceImpl implements AdminService{
 			
 			model.addAttribute("departureList", departureList);
 			model.addAttribute("arrivalList", arrivalList);
-			/*
+			
 			// 모든 문의 리스트 조회
-			ArrayList<InquiryDto> ilist = imapper.ilist();
+			List<InquiryDto> ilist = imapper.ilist();
 			model.addAttribute("ilist", ilist);
 			
 			// State별 문의 수 조회
-			List<StateCountDto> countsList = imapper.listCountsPerState();
+			List<InquiryDto> countsList = imapper.listCountsPerCategory();
 			countsList.sort((entry1, entry2) -> Integer.compare(entry2.getCount(), entry1.getCount()));
 			
 			for (int i = 0; i < countsList.size(); i++) {
@@ -86,7 +86,7 @@ public class AdminServiceImpl implements AdminService{
 			}
 			
 			model.addAttribute("countsList", countsList);
-			*/
+			
 			// 현재 시간 이후의 예약 5개씩 조회
 			List<ReservDto> rsvList = rmapper.getRsvanow().stream().filter(rsv -> {
 				// String 타입의 departureTime을 LocalDateTime으로 변환

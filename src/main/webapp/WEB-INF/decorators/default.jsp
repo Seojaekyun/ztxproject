@@ -31,7 +31,7 @@
 		height: 45px; /* Adjust the height as needed */
 	}
 	#s1container {
-		width: 1450px;
+		width: 1650px;
 		min-width: 1000px;
 		height: 45px; /* Adjust the height as needed */
 		display: flex;
@@ -43,15 +43,15 @@
 	#titleMenu {
 		top: 0;
 		right: 0;
-		width: 380px;
+		width: 400px;
 		display: flex;
 		text-align: center;
 		font-size: 16px;
 		font-weight: 600;
 		line-height: 45px;
 		align: center;
-		justify-content: flex-end;
-		margin-left: 120px;
+		justify-content: flex-start;
+		margin-left: 110px;
 	}
 	#titleMenu div {
 		width: 100px;
@@ -70,7 +70,7 @@
 	    font-weight: 600;
 	    line-height: 45px;
 	    align-items: right;
-	    width: 750px;
+	    width: 1030px;
 	    justify-content: flex-end;
 	}
 	#s1container #loginMenu a {
@@ -158,16 +158,16 @@
 		position: relative;
 	}
 	#s2container {
-		width: 1450px;
+		width: 1650px;
 		min-width: 1000px;
 		height: 95px; /* Adjust the height as needed */
 		margin: auto;
 		display: flex;
-		justify-content: space-evenly;
+		justify-content: space-between;
 	}
 	#logocontainer {
 		margin: auto;
-		margin-left: 200px;
+		margin-left: 100px;
 		max-width: 260px;
 		min-width: 260px;
 		height: 50px;
@@ -196,6 +196,7 @@
 		color: white;
 	}
 	#s2container > #nav {
+		margin-right: 150px;
 		display: flex;
     	justify-content: space-between;
 	}
@@ -207,12 +208,12 @@
 	#s2container > #nav > #main > div {
 		display: inline-block;
 		list-style-type: none;
-		width: 175px;
+		width: 190px;
 		height: 30px !important;
 		line-height: 30px !important;
 		text-align: right;
-		font-size: 20px;
-		font-weight: 750;
+		font-size: 22px;
+		font-weight: 600;
 		position: relative;
 		z-index: 5;
 		color: white;
@@ -252,16 +253,16 @@
 		border-bottom: 1px lightgray solid;
 	}
 	#sub > #section2 > #s2container {
-		width: 1450px;
+		width: 1650px;
 		min-width: 1000px;
 		height: 95px; /* Adjust the height as needed */
 		margin: auto;
 		display: flex;
-		justify-content: space-evenly;
+		justify-content: space-between;
 	}
 	#sub > #section2 > #s2container > #logocontainer {
 		margin: auto;
-		margin-left: 200px;
+		margin-left: 100px;
 		max-width: 260px;
 		min-width: 260px;
 		height: 50px;
@@ -290,6 +291,7 @@
 		color: black !important;
 	}
 	#sub > #section2 > #s2container > #nav {
+		margin-right: 150px;
 		display: flex;
     	justify-content: space-between;
 	}
@@ -301,12 +303,12 @@
 	#sub > #section2 > #s2container > #nav > #main > div {
 		display: inline-block;
 		list-style-type: none;
-		width: 175px;
+		width: 190px;
 		height: 30px !important;
 		line-height: 30px !important;
 		text-align: right;
-		font-size: 20px;
-		font-weight: 750;
+		font-size: 22px;
+		font-weight: 600;
 		position: relative;
 		z-index: 12;
 		color: black;
@@ -356,9 +358,9 @@
 		display: inline-block;
 	}
 	#menuicon {
-		width: 270px;
-		line-height: 105px;
-		padding-left: 50px;
+		width: 250px;
+		line-height: 110px;
+		text-align: center;
 	}
 	hr {
 		color: blue;
@@ -733,7 +735,7 @@
 					</div>
 				</div>
 				<div id="menuicon">
-					<img src="../static/resources/menuicon.png" style="height: 24px;">
+					<img src="../static/resources/menuicon.png" style="height: 30px;">
 				</div>
 			</div>
 		</div>
@@ -770,7 +772,7 @@
 							</div>
 						</div>
 						<div id="menuicon">
-							<img src="../static/resources/menuicon(b).png" style="height: 24px;">
+							<img src="../static/resources/menuicon(b).png" style="height: 30px;">
 						</div>
 					</div>
 				</div>

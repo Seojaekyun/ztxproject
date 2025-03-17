@@ -4,7 +4,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>Q & A 관리</title>
+<title>Q＆A 관리</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
     /* 기본 스타일 */
@@ -55,7 +55,7 @@
         text-decoration: none;
     }
     a:hover {
-        text-decoration: underline;
+        font-weight: bold;
     }
     /* 배지 스타일 */
     .badge-unanswered {
@@ -115,19 +115,43 @@
 <section>
     <table>
         <tr>
-            <th>번호</th>
+            <th>no.</th>
+            <th>유형</th>
             <th>작성자</th>
             <th>제목</th>
             <th>작성일</th>
             <th>답변 상태</th>
-            <th>조회</th>
         </tr>
 
         <c:forEach var="inquiry" items="${inquiries}">
         <tr>
             <td>${inquiry.id}</td>
+            <td>
+            	<c:choose>
+				<c:when test="${inquiry.category eq 4}">
+				<span id="s1">기타 문의</span>
+				</c:when>
+				<c:when test="${inquiry.category eq 3}">
+				<span id="s2">웹 문의</span>
+				</c:when>
+				<c:when test="${inquiry.category eq 2}">
+				<span id="s1">취소 문의</span>
+				</c:when>
+				<c:when test="${inquiry.category eq 1}">
+				<span id="s2">탑승 문의</span>
+				</c:when>
+				<c:when test="${inquiry.category eq 0}">
+				<span id="s1">예약 문의</span>
+				</c:when>
+				<c:otherwise>
+				<span id="s1">알 수 없는 문의</span>
+				</c:otherwise>
+				</c:choose>
+            </td>
             <td>${inquiry.name}</td>
-            <td>${inquiry.title}</td>
+            <td style="text-align: left">
+            	<a href="../admin/inquiryAnswer?id=${inquiry.id}">${inquiry.title}</a>
+            </td>
             <td>${inquiry.writeday}</td>
             <td>
                 <c:choose>
@@ -138,8 +162,7 @@
                         <span class="badge-answered">답변완료</span>
                     </c:otherwise>
                 </c:choose>
-            </td>
-            <td><a href="../admin/inquiryAnswer?id=${inquiry.id}">조회</a></td>    
+            </td> 
         </tr>
         </c:forEach>
     </table>
@@ -147,11 +170,11 @@
     <!-- 페이징 처리 -->
     <div class="pagination">
         <c:if test="${page > 1}">
-        <a href="/admin/adminInquiryList?page=${page - 1}">이전</a>
+        <a href="/admin/inquiryList?page=${page - 1}">이전</a>
         </c:if>
         <span>${page} / ${totalPage}</span>
         <c:if test="${page < totalPage}">
-        <a href="/admin/adminInquiryList?page=${page + 1}">다음</a>
+        <a href="/admin/inquiryList?page=${page + 1}">다음</a>
         </c:if>
     </div>
 </section>
