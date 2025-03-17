@@ -143,6 +143,24 @@ public class AdminController {
 		return gservice.gongjiContent(request, model);
 	}
 	
+	@GetMapping("/admin/gongjiUpdate")
+	public String gongjiUpdate(HttpServletRequest request, Model model)
+	{
+		return gservice.gongjiUpdate(request, model);
+	}
+	
+	@PostMapping("/admin/gongjiUpdateOk")
+	public String gongjiUpdateOk(HttpServletRequest request, GongjiDto gdto)
+	{
+		return gservice.gongjiUpdateOk(request, gdto);
+	}
+	
+	@GetMapping("/admin/gongjiDelete")
+	public String gongjiDelete(HttpServletRequest request)
+	{
+		return gservice.gongjiDelete(request);
+	}
+	
 	
 	@GetMapping("/admin/adminInquiryList")
 	public String adminInquiryList(@RequestParam(defaultValue = "1") int page, Model model) {

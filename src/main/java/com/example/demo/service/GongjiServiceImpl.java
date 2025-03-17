@@ -120,7 +120,7 @@ public class GongjiServiceImpl implements GongjiService{
 		String id=request.getParameter("id");
 		String page=request.getParameter("page");
 		
-		mapper.content(id);
+		mapper.readnum(id);
 				
 		return "redirect:/gongji/content?id="+id+"&page="+page;
 	}
@@ -139,6 +139,42 @@ public class GongjiServiceImpl implements GongjiService{
 		model.addAttribute("page", page);
 			
 		return "/gongji/content";
+	}
+
+	@Override
+	public String gongjiUpdate(HttpServletRequest request, Model model)
+	{
+		String id=request.getParameter("id");
+		String page=request.getParameter("page");
+		
+		GongjiDto gdto=mapper.content(id);
+		
+		model.addAttribute("gdto", gdto);
+		model.addAttribute("page", page);
+		
+		return "/admin/gongjiUpdate";
+	}
+
+	@Override
+	public String gongjiUpdateOk(HttpServletRequest request, GongjiDto gdto)
+	{
+		String id=request.getParameter("id");
+		String page=request.getParameter("page");
+		
+		mapper.updateOk(gdto);
+		
+		return "redirect:/admin/gongjiContent?id="+id+"&page="+page;
+	}
+
+	@Override
+	public String gongjiDelete(HttpServletRequest request)
+	{
+		String id=request.getParameter("id");
+		String page=request.getParameter("page");
+		
+		mapper.delete(id);
+		
+		return "redirect:/admin/gongjiList?page="+page;
 	}
 
 }

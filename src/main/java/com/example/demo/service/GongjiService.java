@@ -14,5 +14,8 @@ public interface GongjiService {
 	String gongjiContent(HttpServletRequest request, Model model);
 	String readnum(HttpServletRequest request);
 	String content(HttpServletRequest request, Model model);
+	String gongjiUpdate(HttpServletRequest request, Model model);
+	String gongjiUpdateOk(HttpServletRequest request, GongjiDto gdto);
+	String gongjiDelete(HttpServletRequest request);
 	
 }

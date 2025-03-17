@@ -49,15 +49,14 @@
 </head>
 <body> <!-- gongji/update.jsp --> 
 <section>
-	<form method="post" action="updateOk" name="uform">
+	<form method="post" action="gongjiUpdateOk" name="uform">
 		<input type="hidden" name="id" value="${gdto.id}">
 		<h3> 공지사항 수정 </h3>
 		<div><input type="text" name="title" placeholder="제 목" value="${gdto.title}"></div>
 		<div><textarea name="content" placeholder="공지사항 내용">${gdto.content}</textarea></div>
 		<div> 
-			<input type="radio" name="state" value="0"> 일반공지
-			<input type="radio" name="state" value="1"> 상시공지
-			<input type="radio" name="state" value="2"> 필수공지
+			<input type="radio" name="state" value="0"> 공 지
+			<input type="radio" name="state" value="1"> 필 독
 		</div>
 		<div><input type="submit" value="공지사항 등록"></div>
 	</form>

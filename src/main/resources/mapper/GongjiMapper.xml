@@ -23,6 +23,15 @@
   <select id="content" resultType="com.example.demo.dto.GongjiDto">
     select * from gongji where id=#{id}
   </select>
+  
+  <update id="updateOk">
+    update gongji set title=#{title}, content=#{content},
+    state=#{state} where id=#{id}
+  </update>
+  
+  <delete id="delete">
+    delete from gongji where id=#{id}
+  </delete>
 
 
 </mapper>

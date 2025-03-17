@@ -18,17 +18,20 @@ public class GongjiController {
 	private GongjiService service;
 	
 	@GetMapping("/gongji/list")
-	public String list(GongjiDto gdto, Model model, HttpServletRequest request) {
+	public String list(GongjiDto gdto, Model model, HttpServletRequest request)
+	{
 		return service.list(gdto, model, request);
 	}
 	
 	@GetMapping("/gongji/readnum")
-	public String readnum(HttpServletRequest request) {
+	public String readnum(HttpServletRequest request)
+	{
 		return service.readnum(request);
 	}
 	
 	@GetMapping("/gongji/content")
-	public String content(HttpServletRequest request, Model model) {
+	public String content(HttpServletRequest request, Model model)
+	{
 		return service.content(request, model);
 	}
 
