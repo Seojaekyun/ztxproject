@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -23,7 +22,7 @@
 	section {
 	  width:1000px;
 	  height:550px;
-	  margin:30px auto;
+	  margin:10px auto;
 	  padding:20px;
 	  background-color:#fff;
 	  border-radius:8px;
@@ -105,9 +104,43 @@
       
       pointer-events:none;
     }
+    .csc {
+        background-color: #078EB9;
+        color: white;
+        padding: 15px;
+        text-align: center;
+        font-size: 18px;
+        font-weight: 600;
+    }
+    .cscmc {
+    	width: 100%;
+    	background: #078EB9;
+    }
+    .cscmenu {
+    	width: 600px;
+        display: flex;
+        justify-content: space-around;
+        background: #078EB9;
+        padding: 10px;
+        margin: auto;
+    }
+    .cscmenu a {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+    }
   </style>
 </head>
 <body> <!-- gongji/list.jsp -->
+<div class="csc">꼬레일 고객센터</div>
+<div class="cscmc">
+ <div class="cscmenu">
+     <a href="../gongji/list">공지 사항</a>
+     <a href="../inquiry/inquiryList">Q＆A</a>
+     <a href="#">이벤트</a>
+     <a href="#">여행 후기</a>
+ </div>
+</div>
  <section>
   <h3> 공지사항 </h3>
   <div id="tbbox">

@@ -101,12 +101,12 @@
 	}
 	input [type="button"] {
 		width: 100px;
-		padding: 12px;
-		font-size: 16px;
-		font-weight: bold;
+		padding: 5px 10px;
+		font-size: 12px;
+		font-weight: 600;
 		background-color: #00aaff;
 		border: none;
-		border-radius: 8px;
+		border-radius: 20px;
 		transition: background-color 0.3s;
 		dsiplay: inline-block;
 		align: right;
@@ -138,7 +138,7 @@
 	button {
 		padding: 5px 10px;
 		background: #00aaff;
-		border-radius: 8px;
+		border-radius: 20px;
 		border: none;
 		font-size: 12px;
 		color: white;

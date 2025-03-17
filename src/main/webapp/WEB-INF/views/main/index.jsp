@@ -18,6 +18,7 @@
 	}
 	.main_content {
 		height: 690px;
+		z-index: 2;
 	}
 	.train_service {
 		position: relative;
@@ -59,7 +60,7 @@
 		border: none;
 		width: 100%;
 		height: 120px;
-		z-index: 1;
+		z-index: 2;
 		margin: auto;
 	}
 	.active-button  {
@@ -169,22 +170,22 @@
 	}
 	.popup {
 		position: fixed;
-		top: 150px;
-		left: 20%;
-		width: 760px;
+		top: 300px;
+		left: 50%;
+		width: 800px;
 		padding: 20px;
 		background-color: white;
 		border: 1px solid #ccc;
 		box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 		border-radius: 15px;
-		z-index:1000;
+		z-index:2;
 		list-style:none;
+		transform: translate(-50%, 0); /* 중앙 정렬 */
 	}
 	.station-list {
 	    padding: 10px;
 	    margin: 0;
 	}
-	
 	.station-row {
 	    display: flex;
 	    justify-content: space-between;
@@ -282,7 +283,7 @@
 		background-color: white;
 		border: 1px solid #ccc;
 		box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-		z-index: 1000;
+		z-index: 2;
 		border-radius: 15px;
 	}
 	.passenger-er {
@@ -345,7 +346,7 @@
 		width: 100%;
 		height: 100%;
 		background-color: rgba(0, 0, 0, 0.7);
-		z-index: 999;
+		z-index: 2;
 	}
 	.close-btn {
 		position: absolute;
@@ -516,7 +517,7 @@
 	                    document.getElementById('from-text').textContent = '서울';
 	                }
 
-	                // 역 버튼을 4개씩 한 줄에 배치
+	                // 역 버튼을 5개씩 한 줄에 배치
 	                var row;
 	                data.forEach(function(station, index) {
 	                    if (index % 5 === 0) {
@@ -572,7 +573,7 @@
 	        if (stationList) {
 	            stationList.innerHTML = '';  // 리스트 초기화
 
-	            // 역 버튼을 4개씩 한 줄에 배치
+	            // 역 버튼을 5개씩 한 줄에 배치
 	            var row;
 	            data.forEach(function(station, index) {
 	                if (index % 5 === 0) {

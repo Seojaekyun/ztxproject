@@ -34,7 +34,7 @@
 		padding: 5px 10px;
 		background-color: #00467F; /* 블루 색상 */
 		color: white;
-		border-radius: 5px;
+		border-radius: 20px;
 		border: none;
 		cursor: pointer;
 		transition: background-color 0.3s ease;
@@ -164,10 +164,9 @@
 			<input type="hidden" name="resnum" value="${resnum}">
 			<input type="hidden" name="charge" value="${charge}">
 			<input type="hidden" name="selectedSeats" id="selectedSeats">
-			<input type="button" class="btn btn-secondary" value="이전으로" onclick="history.back()">
+			<input type="button" class="btn btn-secondary" value="처음으로" onclick="location.href='../main/index'">
 			<button type="submit" class="btn btn-success btn-reservation">예약하기</button>
 		</form>
-		
 	</div>
 	
 	<!-- Bootstrap 모달 -->
