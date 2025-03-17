@@ -21,12 +21,16 @@
       margin-bottom:20px;
     }
 	section {
-		max-width: 800px;
-		margin: 30px auto;
-		padding: 20px;
-		background-color: #fff;
-		border-radius: 8px;
-		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+	  width:1000px;
+	  height:550px;
+	  margin:10px auto;
+	  padding:20px;
+	  background-color:#fff;
+	  border-radius:8px;
+	  box-shadow:0 2px 10px rgba(0, 0, 0, 0.1);
+	}
+	#tbbox {
+	  height: 50px;
 	}
 	table {
 		width: 100%;
@@ -49,12 +53,8 @@
 		color: #333;
 		font-size: 14px;
 	}
-	a {
-		color: #004EA2;
-		text-decoration: none;
-	}
 	a:hover {
-		text-decoration: underline;
+	  color:#004EA2;
 	}
 	/* 필독 및 공지 배지 스타일 */
 	#badge1 {
@@ -75,32 +75,74 @@
 		margin-right: 8px;
 		font-weight: 700;
 	}
-	/* 페이지네이션 */
-	.pagination {
-		display: flex;
-		justify-content: center;
-		gap: 5px;
-		margin-top: 10px;
-		font-size: 10px;
-	}
-	.pagination a, .pagination span {
-		padding: 5px 10px;
-		text-decoration: none;
-		border: 1px solid #ddd;
-		border-radius: 5px;
-		color: #004EA2;
-	}
-	.pagination a.active, .pagination span.active {
-		background-color: #004EA2;
-		color: white;
-		border: none;
-	}
-	.pagination a:hover {
-		background-color: #f4f4f4;
-	}
-</style>
+	#paging {
+	  text-align:center;
+  	  margin-top:25px;
+    }
+    #paging a, #paging span {
+      display:inline-block;
+      padding:5px 10px;
+      margin:0 3px;
+      font-size:13px;
+      color:#333;
+      text-decoration:none;
+      border:1px solid #ddd;
+      border-radius:3px;
+      transition:all 0.2s ease-in-out;
+    }
+    #paging a:hover {
+      background-color:#004EA2;
+      color:white;
+    }
+    #paging .active {
+      background-color:#004EA2;
+      color:white;
+      font-weight:bold;
+      
+      pointer-events:none;
+    }
+    #paging .disabled {
+      color:#bbb;
+      
+      pointer-events:none;
+    }
+    .csc {
+        background-color: #078EB9;
+        color: white;
+        padding: 15px;
+        text-align: center;
+        font-size: 18px;
+        font-weight: 600;
+    }
+    .cscmc {
+    	width: 100%;
+    	background: #078EB9;
+    }
+    .cscmenu {
+    	width: 600px;
+        display: flex;
+        justify-content: space-around;
+        background: #078EB9;
+        padding: 10px;
+        margin: auto;
+    }
+    .cscmenu a {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+    }
+  </style>
 </head>
-<body>
+<body> <!-- gongji/list.jsp -->
+<div class="csc">꼬레일 고객센터</div>
+<div class="cscmc">
+ <div class="cscmenu">
+     <a href="../gongji/list">공지 사항</a>
+     <a href="../inquiry/inquiryList">Q＆A</a>
+     <a href="#">이벤트</a>
+     <a href="#">여행 후기</a>
+ </div>
+</div>
  <section>
   <h3> 공지사항 관리 </h3>
     <table>

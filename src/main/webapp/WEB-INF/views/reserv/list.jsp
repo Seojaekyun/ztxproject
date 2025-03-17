@@ -48,10 +48,7 @@
       text-decoration:none;
       color:black;
     }
-    a:hover {
-      text-decoration:underline;
-      color:red;
-    }
+    
     
     #paging {
       margin-top:20px;
@@ -130,15 +127,16 @@
 				<th> 도착시간 </th>
 				<th> 금 액 </th>
 				<th> 결제여부 </th>
+				<th> 예약상태 </th>
 			</tr>
 			<c:forEach items="${reslist}" var="resdto">
 			<c:if test="${resdto.userid == userid}">
 			<tr>
 				<td>
-					<c:if test="${resdto.payment == 0}">
+					<c:if test="${resdto.payment == 0 && resdto.state != 3}">
 					<input type="checkbox" name="PNR" value="${resdto.PNR }">
 					</c:if>
-					<c:if test="${resdto.payment != 0}">
+					<c:if test="${resdto.payment != 0 || resdto.state == 3}">
 					<input type="checkbox" disabled>
 					</c:if>
 				</td>
@@ -150,17 +148,31 @@
 				<td> ${resdto.routeArrivalTime} </td>
 				<td> ${resdto.charge} </td>
 				<td>
-					<c:if test="${resdto.state == 0 && resdto.payment == 0}">
+					<c:if test="${resdto.payment == 0}">
 					결제전
 					</c:if>
-					<c:if test="${resdto.state == 1 && resdto.payment == 1}">
+					<c:if test="${resdto.payment == 1}">
 					결제 완료
+					</c:if>
+					<c:if test="${resdto.payment == 2}">
+					환불 완료
+					</c:if>
+				</td>
+				<td>
+					<c:if test="${resdto.state == 0}">
+					예약중
+					</c:if>
+					<c:if test="${resdto.state == 1}">
+					예매 완료
 					</c:if>
 					<c:if test="${resdto.state == 2}">
 					취소요청중
 					</c:if>
-					<c:if test="${resdto.state == 3 && resdto.payment != 2}">
+					<c:if test="${resdto.state == 3 && resdto.payment == 0}">
 					취소 완료
+					</c:if>
+					<c:if test="${resdto.state == 3 && resdto.payment == 1}">
+					환불요청중
 					</c:if>
 					<c:if test="${resdto.state == 3 && resdto.payment == 2}">
 					환불 완료

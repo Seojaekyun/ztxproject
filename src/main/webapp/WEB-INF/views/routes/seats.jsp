@@ -10,7 +10,6 @@
 <style>
 	body {
 		background-color: #f7f7f7;
-		font-family: Arial, sans-serif;
 	}
 	.container {
 		margin-top: 20px;
@@ -102,12 +101,12 @@
 	}
 	input [type="button"] {
 		width: 100px;
-		padding: 12px;
-		font-size: 16px;
-		font-weight: bold;
+		padding: 5px 10px;
+		font-size: 12px;
+		font-weight: 600;
 		background-color: #00aaff;
 		border: none;
-		border-radius: 8px;
+		border-radius: 20px;
 		transition: background-color 0.3s;
 		dsiplay: inline-block;
 		align: right;
@@ -123,8 +122,27 @@
 		background-color: #0099cc; /* 좌석 호버 시 색상 */
 	}
 	.mt-5 {
-	display: flex;
+		display: flex;
 		justify-content: space-between;
+	}
+	.pagination {
+		margin: auto;
+		display: flex;
+		justify-content: center;
+	}
+	
+	#currentPage {
+		width: 100px;
+		text-align: center;
+	}
+	button {
+		padding: 5px 10px;
+		background: #00aaff;
+		border-radius: 20px;
+		border: none;
+		font-size: 12px;
+		color: white;
+		font-weight: bold;
 	}
 </style>
 <script>
@@ -183,13 +201,14 @@
 		<p><b>열차:&nbsp;</b> 은하-${routeid}&nbsp;&nbsp;<b>탑승객 수:&nbsp;</b> ${resnum}명</p>
 		<div class="pagination">
 			<c:if test="${currentPage > 0}">
-			<a href="/routes/seats?routeid=${routeid}&resnum=${resnum}&page=${currentPage - 1}&size=${pageSize}">이전호&nbsp;</a>
+			<a href="/routes/seats?routeid=${routeid}&resnum=${resnum}&page=${currentPage - 1}&size=${pageSize}">
+				<button>이전호</button></a>
 			</c:if>
-			<span>${1 + currentPage}호차</span>
+			<span id="currentPage">${1 + currentPage}호차</span>
 			<c:if test="${(currentPage+1) < totalPages}">
-			<a href="/routes/seats?routeid=${routeid}&resnum=${resnum}&page=${currentPage + 1}&size=${pageSize}">&nbsp;다음호</a>
+			<a href="/routes/seats?routeid=${routeid}&resnum=${resnum}&page=${currentPage + 1}&size=${pageSize}">
+				<button>다음호</button></a>
 			</c:if>
-			
 		</div>
 		<!-- 선택한 좌석 표시 -->
 		<div class="mt-5">

@@ -19,6 +19,8 @@
 		font-size: 26px;
 	}
 	.train-box {
+		margin: auto;
+		width: 1000px;
 		background-color: #fff;
 		border: 1px solid #ddd;
 		border-radius: 10px;
@@ -94,7 +96,6 @@
 				<p class="train-time">도착 시간: ${routeArrivalTime}</p>
 			</div>
 			<div>
-				<p class="train-time">소요 시간: </p>
 				<p class="train-time">선택한 좌석: ${selectedSeats}</p>
 			</div>
 		</div>
@@ -103,7 +104,6 @@
 		<div id="going-details" class="train-details">
 			<div class="details-item">출발지: ${routeDeparture}</div>
 			<div class="details-item">도착지: ${routeArrival}</div>
-			<div class="details-item">소요 시간: </div>
 			<div class="details-item">탑승 인원: ${resnum}명</div>
 			<div class="details-item">총 결제 금액: <fmt:formatNumber value="${charge}" type="number"/>원</div>
 		</div>

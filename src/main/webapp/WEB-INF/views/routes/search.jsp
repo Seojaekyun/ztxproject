@@ -9,7 +9,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
 <style>
     body {
-        font-family: Arial, sans-serif;
         background-color: #f4f4f4;
     }
     .container {
@@ -23,21 +22,32 @@
         background-color: #0059A3;
         color: white;
     }
-    .btn-select {
+    .btn-select, .btn-secondary {
         background-color: #00467F;
         color: white;
         padding: 5px 10px;
-        border-radius: 5px;
+        border-radius: 20px;
         text-decoration: none;
+        font-size: 12px;
+        font-weight: 700;
     }
     .btn-select:hover {
         background-color: #003A66;
     }
+    a {
+	    text-decoration: none;
+	  	color: black;
+    }
+    a:hover {
+		text-decoration: none;
+		color:#004EA2;
+	}
 </style>
 </head>
 <body>
 <div class="container">
     <h2 class="text-center">열차 시간표</h2>
+    <input type="button" class="btn btn-secondary" value="처음으로" onclick="location.href='../main/index'">
     <c:if test="${not empty routes}">
     <table class="table table-bordered text-center">
         <thead>

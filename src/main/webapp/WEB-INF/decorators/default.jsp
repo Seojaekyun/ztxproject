@@ -19,7 +19,7 @@
 	}
 	body {
 		margin: auto;
-		font-family: "Noto Sans KR", sans-serif;
+		font-family: "Noto Sans KR", sans-serif !important;
 	}
 	header {
 		width: 100%;
@@ -157,10 +157,6 @@
 		background: rgba(0,0,0,0.6);
 		position: relative;
 	}
-	#section2:hover {
-		background: black;
-		color: black;
-	}
 	#s2container {
 		width: 1450px;
 		min-width: 1000px;
@@ -243,6 +239,9 @@
 		display: none;
 		background: white;
 	}
+	#sub:hover {
+		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+	}
 	#sub > #section2 {
 		width: 100%;
 		height: 95px;
@@ -287,8 +286,8 @@
 		display: inline-block;
 	}
 	#sub > #section2 > #s2container > #logocontainer > #logotext a {
-		text-decoration: none;
-		color: black;
+		text-decoration: none !important;
+		color: black !important;
 	}
 	#sub > #section2 > #s2container > #nav {
 		display: flex;
@@ -312,11 +311,10 @@
 		z-index: 12;
 		color: black;
 	}
-	#sub > #section2 > #s2container #nav #main > div > a{
-		text-decoration: none;
-		color: black;
+	#sub > #section2 > #s2container > #nav > #main > div > a{
+		text-decoration: none !important;
+		color: black !important;
 	}
-	
 	#sub > div > .menu {
 		padding-left: 300px;
 		width: 1200px;
@@ -327,22 +325,35 @@
 		margin: auto;
 		display: flex;
 		justify-content: flex-end;
-		
 	}
 	#sub > div > .menu > div {
-		margin-left: 300px;
 		margin: auto;
 		list-style-type: none;
-		width: 130px;
 		font-size: 18px;
 		font-weight: 600;
 		z-index: 12;
 		text-align: left;
-		display: inline-block;
 	}
 	#sub > div > .menu > div > a{
-		text-decoration: none;
-		color: black;
+		text-decoration: none !important;
+		color: black !important;
+	}
+	#subtitle {
+		width: 200px;
+		height: 95px;
+		line-height: 95px;
+		padding-right: 50px;
+		display: flex;
+		justify-content: flex-end;
+	}
+	#submenu {
+		width: 100%;
+		display: flex;
+		justify-content: flex-start;
+	}
+	#submenu > div{
+		padding-left: 50px;
+		display: inline-block;
 	}
 	#menuicon {
 		width: 270px;
@@ -598,7 +609,14 @@
 	#chat-toggle:hover {
 		background-color: #1A9987;
 	}
-	
+	a {
+		text-decoration: none;
+		color: black;
+	}
+	a:hover {
+		text-decoration: none;
+		color:#004EA2;
+	}
 
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -704,10 +722,10 @@
 							<span class="icona">🚄</span>승차권
 						</div>
 						<div id="main2" onmouseover="viewMenu(1)">
-							<a href="../guide/checkinGuide"><span class="iconb">🚄</span>철도역·열차</a>
+							<span class="iconb">🚄</span>철도역·열차
 						</div>
 						<div id="main3" onmouseover="viewMenu(2)">
-							<a href="../guide/travel"><span class="iconc">🚄</span>고객서비스</a>
+							<span class="iconc">🚄</span>고객서비스
 						</div>
 						<div id="main4" onmouseover="viewMenu(3)">
 							<span class="icond">🚄</span>꼬레일 멤버십
@@ -741,10 +759,10 @@
 									<span class="icona">🚄</span>승차권
 								</div>
 								<div id="main2" onmouseover="viewMenu(1)">
-									<a href="../guide/checkinGuide"><span class="iconb">🚄</span>철도역·열차</a>
+									<span class="iconb">🚄</span>철도역·열차
 								</div>
 								<div id="main3" onmouseover="viewMenu(2)">
-									<a href="../guide/travel"><span class="iconc">🚄</span>고객서비스</a>
+									<span class="iconc">🚄</span>고객서비스
 								</div>
 								<div id="main4" onmouseover="viewMenu(3)">
 									<span class="icond">🚄</span>꼬레일 멤버십
@@ -758,36 +776,44 @@
 				</div>
 				<div id="main1" onmouseover="viewMenu(0)" onmouseout="hideMenu(0)">
 					<div class="menu">
-						<div style="font-size: 22px; border-right: solid 1px lightgray;">승차권</div>
-						<div><a href="../reserv/reservation">예약</a></div>
-						<div><a href="../reserv/reserveInfo">예약 조회</a></div>
-						<div><a href="../reserv/routeList">운행 정보</a></div>
+						<div id="subtitle" style="font-size: 22px; border-right: solid 1px lightgray;">승차권</div>
+						<div id="submenu">
+							<div><a href="../reserv/reservation">예약</a></div>
+							<div><a href="../reserv/reserveInfo">예약 조회</a></div>
+							<div><a href="../reserv/routeList">운행 정보</a></div>
+						</div>
 					</div>
 				</div>
 				<div id="main2" onmouseover="viewMenu(1)" onmouseout="hideMenu(1)">
 					<div class="menu">
-						<div style="font-size: 22px; border-right: solid 1px lightgray;">철도역·열차</div>
-						<div><a href="../guide/boardingGuide">탑승 안내</a></div>
-						<div><a href="../guide/seatGuide">좌석 안내</a></div>
-						<div><a href="../guide/baggageGuide">수하물 안내</a></div>
+						<div id="subtitle" style="font-size: 22px; border-right: solid 1px lightgray;">철도역·열차</div>
+						<div id="submenu">
+							<div><a href="../guide/boardingGuide">탑승 안내</a></div>
+							<div><a href="../guide/seatGuide">좌석 안내</a></div>
+							<div><a href="../guide/baggageGuide">수하물 안내</a></div>
+						</div>
 					</div>
 				</div>
 				<div id="main3" onmouseover="viewMenu(2)" onmouseout="hideMenu(2)">
 					<div class="menu">
-						<div style="font-size: 22px; border-right: solid 1px lightgray;">고객서비스</div>
-						<div><a href="">고객센터</a></div>
-						<div><a href="">유실물</a></div>
-						<div><a href="">열차 서비스</a></div>
-						<div><a href="">여행 명소</a></div>
-						<div><a href="">테마 여행</a></div>
+						<div id="subtitle" style="font-size: 22px; border-right: solid 1px lightgray;">고객서비스</div>
+						<div id="submenu">
+							<div><a href="../main/csCustomer">고객센터</a></div>
+							<div><a href="/pickup/pickup">유실물</a></div>
+							<div><a href="">열차 서비스</a></div>
+							<div><a href="">여행 명소</a></div>
+							<div><a href="">테마 여행</a></div>
+						</div>
 					</div>
 				</div>
 				<div id="main4" onmouseover="viewMenu(3)" onmouseout="hideMenu(3)">
 					<div class="menu">
-						<div style="font-size: 22px; border-right: solid 1px lightgray;">멤버십</div>
-						<div><a href="/membership/membership">멤버십 소개</a></div>
-						<div><a href="/membership/membershipsogae">멤버십 제휴소개</a></div>
-						<div><a href="">멤버십 가입신청</a></div>
+						<div id="subtitle" style="font-size: 22px; border-right: solid 1px lightgray;">멤버십</div>
+						<div id="submenu">
+							<div><a href="/membership/membership">멤버십 소개</a></div>
+							<div><a href="/membership/membershipsogae">멤버십 제휴소개</a></div>
+							<div><a href="">멤버십 가입신청</a></div>
+						</div>
 					</div>
 				</div>
 			</div>

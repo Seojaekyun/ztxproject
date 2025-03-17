@@ -11,6 +11,8 @@ public interface MainService {
 	String saveMessage(String message, boolean isAdmin);
 	List<String> getMessages();
 	String clearChatMessages();
+	String csCustomer(HttpServletRequest request, Model model);
+	
 	
 	
 }

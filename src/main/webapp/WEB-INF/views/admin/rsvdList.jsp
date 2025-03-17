@@ -174,6 +174,7 @@
 					<th>요금</th>
 					<th>요청</th>
 					<th>결제여부</th>
+					<th>예약상태</th>
 					<th>처리</th>
 				</tr>
 				<c:forEach var="rsv" items="${rsvList}">
@@ -183,11 +184,17 @@
 					<td>${seatCounts[rsv.reservid]}</td>
 					<td>${rsv.charge} 원</td>
 					<td>
-						<c:if test="${rsv.state != 2}">
+						<c:if test="${rsv.state != 2 && (rsv.payment!=1 && rsv.state!=3)}">
+						<span id="badge1"> - </span> 
+						</c:if>
+						<c:if test="${rsv.state != 2 && ((rsv.payment==0)||(rsv.payment==2))}">
 						<span id="badge1"> - </span> 
 						</c:if>
 						<c:if test="${rsv.state == 2}">
 						<span id="badge1">취소요청</span> 
+						</c:if>
+						<c:if test="${rsv.payment==1 && rsv.state==3 }">
+						<span id="badge1">환불요청</span>
 						</c:if>
 					</td>
 					<td>
@@ -198,12 +205,23 @@
 						<span id="badge1"> 결제완료 </span>
 						</c:if>
 						<c:if test="${rsv.payment == 2}">
+						<span id="badge1"> 환불완료 </span>
+						</c:if>
+					</td>
+					<td>
+						<c:if test="${rsv.state == 0}">
+						<span id="badge1"> 예약중 </span>
+						</c:if>
+						<c:if test="${rsv.state == 1}">
+						<span id="badge1"> 예매완료 </span>
+						</c:if>
+						<c:if test="${rsv.state == 2}">
 						<span id="badge1"> 취소요청 </span>
 						</c:if>
-						<c:if test="${rsv.payment == 3}">
+						<c:if test="${rsv.state == 3}">
 						<span id="badge1"> 취소완료 </span>
 						</c:if>
-						<c:if test="${rsv.payment == 4}">
+						<c:if test="${rsv.state == 4}">
 						<span id="badge1"> 취소불가 </span>
 						</c:if>
 					</td>
