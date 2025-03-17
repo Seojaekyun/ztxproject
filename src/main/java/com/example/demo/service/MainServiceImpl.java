@@ -44,7 +44,7 @@ public class MainServiceImpl implements MainService {
 	public String csCustomer(HttpServletRequest request, Model model) {
 		return "/main/csCustomer";
 	}
-
+	
 	@Override
 	public String pickup() {
 		return "/main/pickup";
