@@ -695,7 +695,7 @@
 							<li><a href="../gongji/list"> 공지사항 </a></li>
 							<li><a href="/inquiry/inquiryList"> Q＆A </a></li>
 							<li><a href="../promot/list"> 이벤트 </a></li>
-							<li><a href="../review/list"> 여행후기 </a></li>
+							<li><a href="../review/reviewList"> 여행후기 </a></li>
 						</ul>
 					</div>
 				</div>
