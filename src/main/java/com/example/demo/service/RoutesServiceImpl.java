@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.demo.dto.RouteTimeDto;
 import com.example.demo.dto.RoutesDto;
 import com.example.demo.dto.SeatDto;
-import com.example.demo.dto.StationsDto;
-import com.example.demo.dto.TrainesDto;
 import com.example.demo.mapper.RoutesMapper;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -27,11 +25,6 @@ public class RoutesServiceImpl implements RoutesService {
 	private RoutesMapper mapper;
 	public RoutesServiceImpl(JdbcTemplate jdbcTemplate) {
     }
-	
-	@Override
-	public List<StationsDto> getAllStations() { 
-		return mapper.AllStations();
-	}
 	
 	@Override
 	public String routeSearch(@RequestParam String departure, @RequestParam String arrival,
@@ -122,11 +115,6 @@ public class RoutesServiceImpl implements RoutesService {
 		route.setUnitPrice(unitPrice);
 		
 		mapper.addRoute(route);
-	}
-	
-	@Override
-	public List<TrainesDto> getAllTraines() {
-		return mapper.AllTraines();
 	}
 	
 	@Override

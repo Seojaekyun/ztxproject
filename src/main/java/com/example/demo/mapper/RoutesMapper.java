@@ -20,11 +20,11 @@ public interface RoutesMapper {
 	List<RoutesDto> getDepartureRoutes();
 	List<RoutesDto> getArrivalRoutes();
 	void addRoute(RoutesDto route);
-	List<StationsDto> AllStations();
+	List<StationsDto> getAllStations();
 	List<RoutesDto> getRoutesByDate(String selectedDate);
 	List<RoutesDto> getAllRoutes();
 	List<Map<String, Object>> getTotalSeatsByRouteid();
-	List<TrainesDto> AllTraines();
+	List<TrainesDto> getAllTraines();
 	Integer getRouteidForAddingSeats();
 	Map<String, Object> getRouteCapa(Integer routeid);
 	void addSeatsForRoute(Map<String, Object> params);
