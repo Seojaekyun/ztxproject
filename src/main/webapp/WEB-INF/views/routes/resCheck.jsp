@@ -34,7 +34,7 @@
 		padding: 5px 10px;
 		background-color: #00467F; /* 블루 색상 */
 		color: white;
-		border-radius: 5px;
+		border-radius: 20px;
 		border: none;
 		cursor: pointer;
 		transition: background-color 0.3s ease;

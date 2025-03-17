@@ -26,9 +26,10 @@
         background-color: #00467F;
         color: white;
         padding: 5px 10px;
-        border-radius: 5px;
+        border-radius: 20px;
         text-decoration: none;
-        font-size: 10px;
+        font-size: 12px;
+        font-weight: 700;
     }
     .btn-select:hover {
         background-color: #003A66;
