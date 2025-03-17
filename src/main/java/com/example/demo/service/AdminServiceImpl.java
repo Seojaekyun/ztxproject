@@ -500,8 +500,12 @@ public class AdminServiceImpl implements AdminService{
 	    String referer = request.getHeader("Referer"); // 요청을 보낸 이전 페이지 URL 가져오기
 	    String rid = request.getParameter("reservid"); // 취소할 예약 ID
 	    String roid = request.getParameter("routeid");
-	    rmapper.cancelConfirm(rid); // 예약 취소 처리
+	    int resnum=Integer.parseInt(request.getParameter("resnum"));
+	    
+	    // 예약 취소 처리
 	    rmapper.cancelSeat(roid, rid);
+	    rmapper.cancelTrainSeat(roid, resnum);
+	    rmapper.cancelConfirm(rid);
 	    
 	    if (referer != null && !referer.isEmpty()) {
 	        try {

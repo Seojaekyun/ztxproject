@@ -44,6 +44,7 @@ public interface ReservMapper {
 	void cancelSeat(String roid, String rid);
 	void cancelRejection(String rid);
 	void payReturn(String rid);
+	void cancelTrainSeat(String roid, int resnum);
 	
 	
 }
