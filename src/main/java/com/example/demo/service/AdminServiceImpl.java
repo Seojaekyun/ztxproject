@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.demo.dto.InquiryDto;
 import com.example.demo.dto.ReservDto;
 import com.example.demo.dto.RoutesDto;
+import com.example.demo.dto.StationsDto;
+import com.example.demo.dto.TrainesDto;
 import com.example.demo.dto.UserDto;
 import com.example.demo.mapper.InquiryMapper;
 import com.example.demo.mapper.ReservMapper;
@@ -500,8 +502,12 @@ public class AdminServiceImpl implements AdminService{
 	    String referer = request.getHeader("Referer"); // 요청을 보낸 이전 페이지 URL 가져오기
 	    String rid = request.getParameter("reservid"); // 취소할 예약 ID
 	    String roid = request.getParameter("routeid");
-	    rmapper.cancelConfirm(rid); // 예약 취소 처리
+	    int resnum=Integer.parseInt(request.getParameter("resnum"));
+	    
+	    // 예약 취소 처리
 	    rmapper.cancelSeat(roid, rid);
+	    rmapper.cancelTrainSeat(roid, resnum);
+	    rmapper.cancelConfirm(rid);
 	    
 	    if (referer != null && !referer.isEmpty()) {
 	        try {
@@ -574,6 +580,15 @@ public class AdminServiceImpl implements AdminService{
 	    }
 		
 		return "redirect:/admin/rsvdList";
+	}
+
+	@Override
+	public String addRoute(Model model) {
+		List<StationsDto> stations = romapper.getAllStations();
+		List<TrainesDto> traines = romapper.getAllTraines();
+		model.addAttribute("stations", stations);
+		model.addAttribute("traines", traines);
+		return "admin/addRoute";
 	}
 
 }

@@ -28,14 +28,14 @@
 		ORDER BY departure_time LIMIT 5
 	</select>
 	
-	<select id="AllStations" resultType="com.example.demo.dto.StationsDto">
+	<select id="getAllStations" resultType="com.example.demo.dto.StationsDto">
 		SELECT * FROM stations
 	</select>
 	<insert id="addRoute" parameterType="com.example.demo.dto.RoutesDto">
 		INSERT INTO routes (departure, arrival, departure_time, arrival_time, trainid, charge)
 		VALUES (#{departure}, #{arrival}, #{departureTime}, #{arrivalTime}, #{trainid}, #{unitPrice})
 	</insert>
-	<select id="AllTraines" resultType="com.example.demo.dto.TrainesDto">
+	<select id="getAllTraines" resultType="com.example.demo.dto.TrainesDto">
 		SELECT * FROM traines<!--  order by capa desc, trainid asc --> 
 	</select>
 	<!-- 아직 좌석이 없는 routeid를 조회 -->

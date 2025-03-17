@@ -1,7 +1,6 @@
 package com.example.demo.controller;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
 import com.example.demo.dto.GongjiDto;
-import com.example.demo.dto.StationsDto;
-import com.example.demo.dto.TrainesDto;
 import com.example.demo.dto.UserDto;
 import com.example.demo.service.AdminService;
 import com.example.demo.service.GongjiService;
@@ -66,12 +63,8 @@ public class AdminController {
 	}
 	
 	@GetMapping("/admin/addRoute")
-	public String showAddRouteForm(Model model) {
-		List<StationsDto> stations = rservice.getAllStations();
-		List<TrainesDto> traines = rservice.getAllTraines();
-		model.addAttribute("stations", stations);
-		model.addAttribute("traines", traines);
-		return "admin/addRoute";
+	public String addRoute(Model model) {
+		return service.addRoute(model);
 	}
 	
 	@PostMapping("/admin/addRoutes")
