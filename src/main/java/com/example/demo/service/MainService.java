@@ -12,6 +12,7 @@ public interface MainService {
 	List<String> getMessages();
 	String clearChatMessages();
 	String csCustomer(HttpServletRequest request, Model model);
+	String pickup();
 	
 	
 	
