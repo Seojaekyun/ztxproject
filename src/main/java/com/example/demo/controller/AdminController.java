@@ -75,20 +75,9 @@ public class AdminController {
 			@RequestParam String returnDepartureTime, @RequestParam String returnArrivalTime,
 			@RequestParam("returnFtimeValue") String returnFtime, @RequestParam int returnTrainid, @RequestParam int returnUnitPrice,
 			Model model) {
-		
-		try {
-			rservice.addRoute(departure, arrival, departureTime, arrivalTime, ftime, trainid, unitPrice);
-			rservice.addRoute(returnDeparture, returnArrival, returnDepartureTime, returnArrivalTime, returnFtime, returnTrainid, returnUnitPrice);
-			
-			model.addAttribute("message", "성공적으로 추가되었습니다.");
-		}
-		catch (Exception e) {
-			model.addAttribute("message", "오류가 발생했습니다: " + e.getMessage());
-			return "admin/addRoute";  // 오류 발생 시 다시 항공편 추가 페이지로
-		}
-		
-		// 항공편 목록 페이지로 리다이렉트
-		return "redirect:/admin/routesList";
+		return service.addRoutes(departure, arrival, departureTime, arrivalTime, ftime, trainid,
+				unitPrice, returnDeparture, returnArrival, returnDepartureTime, returnArrivalTime,
+				returnFtime, returnTrainid, returnUnitPrice, model);
 	}
 	
 	@GetMapping("/admin/getRouteTime")

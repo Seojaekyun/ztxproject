@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.dto.InquiryDto;
@@ -589,6 +590,30 @@ public class AdminServiceImpl implements AdminService{
 		model.addAttribute("stations", stations);
 		model.addAttribute("traines", traines);
 		return "admin/addRoute";
+	}
+	
+	@PostMapping("/admin/addRoutes")
+	public String addRoutes(
+			@RequestParam String departure, @RequestParam String arrival, @RequestParam String departureTime,
+			@RequestParam String arrivalTime, @RequestParam("ftimeValue") String ftime, @RequestParam int trainid,
+			@RequestParam int unitPrice, @RequestParam String returnDeparture, @RequestParam String returnArrival,
+			@RequestParam String returnDepartureTime, @RequestParam String returnArrivalTime,
+			@RequestParam("returnFtimeValue") String returnFtime, @RequestParam int returnTrainid, @RequestParam int returnUnitPrice,
+			Model model) {
+		
+		try {
+			romapper.addRoutes(departure, arrival, departureTime, arrivalTime, ftime, trainid, unitPrice);
+			romapper.addRoutes(returnDeparture, returnArrival, returnDepartureTime, returnArrivalTime, returnFtime, returnTrainid, returnUnitPrice);
+			
+			model.addAttribute("message", "성공적으로 추가되었습니다.");
+		}
+		catch (Exception e) {
+			model.addAttribute("message", "오류가 발생했습니다: " + e.getMessage());
+			return "admin/addRoute";  // 오류 발생 시 다시 항공편 추가 페이지로
+		}
+		
+		// 항공편 목록 페이지로 리다이렉트
+		return "redirect:/admin/routesList";
 	}
 
 }

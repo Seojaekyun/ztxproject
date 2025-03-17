@@ -30,6 +30,8 @@ public interface RoutesMapper {
 	void addSeatsForRoute(Map<String, Object> params);
 	RouteTimeDto getRouteTime(@Param("a") String a, @Param("b") String b);
 	List<SeatDto> getSeatsForRoute(Integer routeid);
+	void addRoutes(String departure, String arrival, String departureTime, String arrivalTime, String ftime, int trainid,
+			int unitPrice);
 	
 	
 }

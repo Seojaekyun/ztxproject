@@ -38,7 +38,7 @@
             color: #cc0000;
         }
         .benefit-table {
-            width: 100%;
+            width: 90%;
             border-collapse: collapse;
             margin-top: 20px;
         }

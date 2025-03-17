@@ -103,21 +103,6 @@ public class RoutesServiceImpl implements RoutesService {
 	}
 	
 	@Override
-	public void addRoute(String departure, String arrival, String departureTime, String arrivalTime, String ftime,
-			int trainid, int unitPrice) {
-		RoutesDto route = new RoutesDto();
-		route.setDeparture(departure);
-		route.setArrival(arrival);
-		route.setDepartureTime(departureTime);
-		route.setArrivalTime(arrivalTime);
-		route.setTrainid(trainid);
-		route.setFtime(ftime);
-		route.setUnitPrice(unitPrice);
-		
-		mapper.addRoute(route);
-	}
-	
-	@Override
 	public int[] getRouteTime(String departure, String arrival) {
 		RouteTimeDto RouteTimeDto = mapper.getRouteTime(departure, arrival);
 		if(RouteTimeDto != null && RouteTimeDto.getRoutetime() != null) {

@@ -25,4 +25,9 @@ public interface AdminService {
 	String cancelRejection(HttpServletRequest request, Model model);
 	String payReturn(HttpServletRequest request, Model model);
 	String addRoute(Model model);
+	String addRoutes(String departure, String arrival, String departureTime, String arrivalTime, String ftime,
+			int trainid, int unitPrice, String returnDeparture, String returnArrival, String returnDepartureTime,
+			String returnArrivalTime, String returnFtime, int returnTrainid, int returnUnitPrice, Model model);
+	
+	
 }

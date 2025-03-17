@@ -11,8 +11,6 @@ public interface RoutesService {
 			String routeArrivalTime, Integer resnum, String[] goingSelectedSeats, Integer charge, HttpServletRequest request, HttpSession session, Model model);
 	String showSeatSelection(int routeid, int resnum, int page, int size, Model model);
 	String confirmSeats(int routeid, String selectedSeats, int resnum, HttpSession session, Model model);
-	void addRoute(String departure, String arrival, String departureTime, String arrivalTime, String ftime, int trainid,
-			int unitPrice);
 	void addSeatsForRoute();
 	int[] getRouteTime(String departure, String arrival);
 	
