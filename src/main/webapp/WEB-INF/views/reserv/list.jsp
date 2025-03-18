@@ -140,7 +140,14 @@
 					<input type="checkbox" disabled>
 					</c:if>
 				</td>
-				<td> <a href="/user/myRsvDetail?PNR=${resdto.PNR}"> ${resdto.PNR} </a> </td>
+				<td>
+					<c:if test="${resdto.state != 3}">
+				 	<a href="/user/myRsvDetail?PNR=${resdto.PNR}"> ${resdto.PNR} </a>
+				 	</c:if> 
+				 	<c:if test="${resdto.state == 3}">
+				 	<span>${resdto.PNR}</span>
+				 	</c:if>
+				</td>
 				<td> ${resdto.reservday} </td>
 				<td> ${resdto.routeDeparture} </td>
 				<td> ${resdto.routeArrival} </td>

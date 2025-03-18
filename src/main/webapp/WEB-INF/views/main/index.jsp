@@ -62,6 +62,10 @@
 		width: 1130px;
 		height: 350px;
 		border-radius: 10px;
+		transition: transform 0.3s ease;
+	}
+	.market img:hover {
+		transform: scale(1.05); /* 5% 확대 */
 	}
 	.button {
 		position: absolute;
