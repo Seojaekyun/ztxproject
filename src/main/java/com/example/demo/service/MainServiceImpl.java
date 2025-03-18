@@ -16,7 +16,6 @@ import jakarta.servlet.http.HttpServletRequest;
 @Service
 @Qualifier("ms")
 public class MainServiceImpl implements MainService {
-
 	@Qualifier("ms")
 	private List<String> chatMessages = new ArrayList<>();
 	@Autowired
