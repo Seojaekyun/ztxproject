@@ -16,7 +16,15 @@
 		margin: 0;
 		padding: 0;
 	}
-	/* 헤더 디자인 */
+	main {
+		top: -95px;
+		position: relative;
+	}
+	.nullbox {
+		height: 95px;
+		display: flex;
+		background-color: #078EB9;
+	}
 	section header {
 		background-color: #078EB9;
 		padding: 20px;
@@ -105,26 +113,29 @@
 </style>
 </head>
 <body>
-<section>
-	<header>
-		<h1>예약 조회</h1>
-	</header>
-	<nav>
-		<div><a href="../reserv/reserv">예약</a></div>
-		<div><a href="../reserv/reservInfo">예약 조회</a></div>
-		<div><a href="../routes/list">운행 정보</a></div>
-	</nav>
-	<div class="container">
-		<form id="reservForm" action="${pageContext.request.contextPath}/reserv/oneRsvDetail" method="get">
-			<!-- 예약 번호 -->
-			<div class="form-group">
-				<label for="pnr">예약번호</label>
-				<input type="text" id="pnr" name="PNR" required>
-				<input type="submit" value="예약 조회">
-			</div>
-			
-		</form>
-	</div>
-</section>
+<main>
+	<div class="nullbox"></div>
+	<section>
+		<header>
+			<h1>예약 조회</h1>
+		</header>
+		<nav>
+			<div><a href="../reserv/reserv">예약</a></div>
+			<div><a href="../reserv/reservInfo">예약 조회</a></div>
+			<div><a href="../routes/list">운행 정보</a></div>
+		</nav>
+		<div class="container">
+			<form id="reservForm" action="${pageContext.request.contextPath}/reserv/oneRsvDetail" method="get">
+				<!-- 예약 번호 -->
+				<div class="form-group">
+					<label for="pnr">예약번호</label>
+					<input type="text" id="pnr" name="PNR" required>
+					<input type="submit" value="예약 조회">
+				</div>
+				
+			</form>
+		</div>
+	</section>
+</main>
 </body>
 </html>

@@ -12,7 +12,15 @@
      margin: 0;
      padding: 0;
    }
-
+	main {
+		top: -95px;
+		position: relative;
+	}
+	.nullbox {
+		height: 95px;
+		display: flex;
+		background-color: #078EB9;
+	}
    section {
      width: 1100px;
      margin: 40px auto;
@@ -84,56 +92,57 @@
 </style>
 </head>
 <body>
-
- <section>
-    <h3>나의 문의</h3>
-    <table>
-        <thead>
-            <tr>
-                <th>순번</th>
-                <th>아이디</th>
-                <th>제목</th>
-                <th>문의 유형</th>
-                <th>상태</th>
-                <th>조회수</th>
-                <th>게시일</th>
-            </tr>
-        </thead>
-        <tbody>
-            <c:forEach var="inquiry" items="${myInquiries}">
-                <tr>
-                    <td>${inquiry.id}</td>
-                    <td>${inquiry.userid}</td>
-                    <td><a href="/inquiry/readnum?id=${inquiry.id}">${inquiry.title}</a></td>
-                    <td class="status-${inquiry.status}">
-    					<c:choose>
-        					<c:when test="${inquiry.category == 1}">불편/개선</c:when>
-        					<c:when test="${inquiry.category == 2}">단순 문의</c:when>
-        					<c:when test="${inquiry.category == 3}">친절 제보</c:when>
-        					<c:when test="${inquiry.category == 4}">서식 VOC</c:when>
-        					<c:when test="${inquiry.category == 5}">시민 재해 예방</c:when>
-        					<c:otherwise>알 수 없음</c:otherwise>
-    					</c:choose>
+<main>
+	<div class="nullbox"></div>
+	<section>
+	   <h3>나의 문의</h3>
+	   <table>
+	       <thead>
+	           <tr>
+	               <th>순번</th>
+	               <th>아이디</th>
+	               <th>제목</th>
+	               <th>문의 유형</th>
+	               <th>상태</th>
+	               <th>조회수</th>
+	               <th>게시일</th>
+	           </tr>
+	       </thead>
+	       <tbody>
+	           <c:forEach var="inquiry" items="${myInquiries}">
+	               <tr>
+	                   <td>${inquiry.id}</td>
+	                   <td>${inquiry.userid}</td>
+	                   <td><a href="/inquiry/readnum?id=${inquiry.id}">${inquiry.title}</a></td>
+	                   <td class="status-${inquiry.status}">
+	   					<c:choose>
+	       					<c:when test="${inquiry.category == 1}">불편/개선</c:when>
+	       					<c:when test="${inquiry.category == 2}">단순 문의</c:when>
+	       					<c:when test="${inquiry.category == 3}">친절 제보</c:when>
+	       					<c:when test="${inquiry.category == 4}">서식 VOC</c:when>
+	       					<c:when test="${inquiry.category == 5}">시민 재해 예방</c:when>
+	       					<c:otherwise>알 수 없음</c:otherwise>
+	   					</c:choose>
 				    </td>
 				    <td>
-                    <c:choose>
-                        <c:when test="${empty inquiry.answer}">
-                            <span class="badge-unanswered">답변대기</span>
-                        </c:when>
-                        <c:otherwise>
-                            <span class="badge-answered">답변완료</span>
-                        </c:otherwise>
-                    </c:choose>
-                	</td>
-                    <td>${inquiry.readnum}</td>
-                    <td>${inquiry.writeday}</td>
-                </tr>
-            </c:forEach>
-        </tbody>
-    </table>
-    <br>
-    <a href="/inquiry/inquiryWrite" class="btn">문의 작성하기</a>
- </section>
-
+	                   <c:choose>
+	                       <c:when test="${empty inquiry.answer}">
+	                           <span class="badge-unanswered">답변대기</span>
+	                       </c:when>
+	                       <c:otherwise>
+	                           <span class="badge-answered">답변완료</span>
+	                       </c:otherwise>
+	                   </c:choose>
+	               	</td>
+	                   <td>${inquiry.readnum}</td>
+	                   <td>${inquiry.writeday}</td>
+	               </tr>
+	           </c:forEach>
+	       </tbody>
+	   </table>
+	   <br>
+	   <a href="/inquiry/inquiryWrite" class="btn">문의 작성하기</a>
+	</section>
+</main>
 </body>
 </html>

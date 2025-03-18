@@ -6,6 +6,15 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
   <style>
+	main {
+		top: -95px;
+		position: relative;
+	}
+	.nullbox {
+		height: 95px;
+		display: flex;
+		background-color: #078EB9;
+	}
     #tbbox {
       margin: auto;
       width: 1100px;
@@ -113,132 +122,135 @@
 
 </head>
 <body> <!-- reserv/list.jsp -->
-<section>
-	<form action="/reserv/payment?" method="get" onsubmit="return selchk()">
-	<div id="tbbox">
-		<table>
-			<tr>
-				<th>  </th>
-				<th> 예약코드 </th>
-				<th> 예약날짜 </th>
-				<th> 출발지 </th>
-				<th> 도착지 </th>
-				<th> 출발시간 </th>
-				<th> 도착시간 </th>
-				<th> 금 액 </th>
-				<th> 결제여부 </th>
-				<th> 예약상태 </th>
-			</tr>
-			<c:forEach items="${reslist}" var="resdto">
-			<c:if test="${resdto.userid == userid}">
-			<c:if test="${resdto.state == 3}">
-			<tr style="background: lightgray; text-decoration: line-through;">
+<main>
+	<div class="nullbox"></div>
+	<section>
+		<form action="/reserv/payment?" method="get" onsubmit="return selchk()">
+		<div id="tbbox">
+			<table>
+				<tr>
+					<th>  </th>
+					<th> 예약코드 </th>
+					<th> 예약날짜 </th>
+					<th> 출발지 </th>
+					<th> 도착지 </th>
+					<th> 출발시간 </th>
+					<th> 도착시간 </th>
+					<th> 금 액 </th>
+					<th> 결제여부 </th>
+					<th> 예약상태 </th>
+				</tr>
+				<c:forEach items="${reslist}" var="resdto">
+				<c:if test="${resdto.userid == userid}">
+				<c:if test="${resdto.state == 3}">
+				<tr style="background: lightgray; text-decoration: line-through;">
+				</c:if>
+				<c:if test="${resdto.state != 3}">
+				<tr>
+				</c:if>
+					<td>
+						<c:if test="${resdto.payment == 0 && resdto.state != 3}">
+						<input type="checkbox" name="PNR" value="${resdto.PNR }">
+						</c:if>
+						<c:if test="${resdto.payment != 0 || resdto.state == 3}">
+						<input type="checkbox" disabled>
+						</c:if>
+					</td>
+					<td>
+						<c:if test="${resdto.state != 3}">
+					 	<a href="/user/myRsvDetail?PNR=${resdto.PNR}"> ${resdto.PNR} </a>
+					 	</c:if> 
+					 	<c:if test="${resdto.state == 3}">
+					 	${resdto.PNR}
+					 	</c:if>
+					</td>
+					<td> ${resdto.reservday} </td>
+					<td> ${resdto.routeDeparture} </td>
+					<td> ${resdto.routeArrival} </td>
+					<td> ${resdto.routeTime} </td>
+					<td> ${resdto.routeArrivalTime} </td>
+					<td> ${resdto.charge} </td>
+					<td>
+						<c:if test="${resdto.payment == 0}">
+						결제전
+						</c:if>
+						<c:if test="${resdto.payment == 1}">
+						결제 완료
+						</c:if>
+						<c:if test="${resdto.payment == 2}">
+						환불 완료
+						</c:if>
+					</td>
+					<td>
+						<c:if test="${resdto.state == 0}">
+						예약중
+						</c:if>
+						<c:if test="${resdto.state == 1}">
+						예매 완료
+						</c:if>
+						<c:if test="${resdto.state == 2}">
+						취소요청중
+						</c:if>
+						<c:if test="${resdto.state == 3 && resdto.payment == 0}">
+						취소 완료
+						</c:if>
+						<c:if test="${resdto.state == 3 && resdto.payment == 1}">
+						환불요청중
+						</c:if>
+						<c:if test="${resdto.state == 3 && resdto.payment == 2}">
+						환불 완료
+						</c:if>
+						<c:if test="${resdto.state == 4}">
+						취소 불가
+						</c:if>
+					</td>
+				</tr>
+				</c:if>
+				</c:forEach>
+			</table>
+		</div>
+		<div id="paybtn"><input type="submit" value="선택결제"></div>
+		</form>
+		
+		<div id="paging">
+			<c:if test="${pstart != 1}">
+			<a href="list?page=${pstart-1}"> ⏪ </a>
 			</c:if>
-			<c:if test="${resdto.state != 3}">
-			<tr>
+			<c:if test="${pstart == 1}">
+			◁
 			</c:if>
-				<td>
-					<c:if test="${resdto.payment == 0 && resdto.state != 3}">
-					<input type="checkbox" name="PNR" value="${resdto.PNR }">
-					</c:if>
-					<c:if test="${resdto.payment != 0 || resdto.state == 3}">
-					<input type="checkbox" disabled>
-					</c:if>
-				</td>
-				<td>
-					<c:if test="${resdto.state != 3}">
-				 	<a href="/user/myRsvDetail?PNR=${resdto.PNR}"> ${resdto.PNR} </a>
-				 	</c:if> 
-				 	<c:if test="${resdto.state == 3}">
-				 	${resdto.PNR}
-				 	</c:if>
-				</td>
-				<td> ${resdto.reservday} </td>
-				<td> ${resdto.routeDeparture} </td>
-				<td> ${resdto.routeArrival} </td>
-				<td> ${resdto.routeTime} </td>
-				<td> ${resdto.routeArrivalTime} </td>
-				<td> ${resdto.charge} </td>
-				<td>
-					<c:if test="${resdto.payment == 0}">
-					결제전
-					</c:if>
-					<c:if test="${resdto.payment == 1}">
-					결제 완료
-					</c:if>
-					<c:if test="${resdto.payment == 2}">
-					환불 완료
-					</c:if>
-				</td>
-				<td>
-					<c:if test="${resdto.state == 0}">
-					예약중
-					</c:if>
-					<c:if test="${resdto.state == 1}">
-					예매 완료
-					</c:if>
-					<c:if test="${resdto.state == 2}">
-					취소요청중
-					</c:if>
-					<c:if test="${resdto.state == 3 && resdto.payment == 0}">
-					취소 완료
-					</c:if>
-					<c:if test="${resdto.state == 3 && resdto.payment == 1}">
-					환불요청중
-					</c:if>
-					<c:if test="${resdto.state == 3 && resdto.payment == 2}">
-					환불 완료
-					</c:if>
-					<c:if test="${resdto.state == 4}">
-					취소 불가
-					</c:if>
-				</td>
-			</tr>
+			
+			<c:if test="${page != 1}">
+			<a href="list?page=${page-1}"> ◀️ </a>
+			</c:if>
+			<c:if test="${page == 1}">
+			◁
+			</c:if>
+			
+			<c:forEach var="i" begin="${pstart}" end="${pend}">
+			<c:if test="${page == i}">
+			<a href="list?page=${i}" style="color:red;"> ${i} </a>
+			</c:if>
+			<c:if test="${page != i}">
+			<a href="list?page=${i}"> ${i} </a>
 			</c:if>
 			</c:forEach>
-		</table>
-	</div>
-	<div id="paybtn"><input type="submit" value="선택결제"></div>
-	</form>
-	
-	<div id="paging">
-		<c:if test="${pstart != 1}">
-		<a href="list?page=${pstart-1}"> ⏪ </a>
-		</c:if>
-		<c:if test="${pstart == 1}">
-		◁
-		</c:if>
-		
-		<c:if test="${page != 1}">
-		<a href="list?page=${page-1}"> ◀️ </a>
-		</c:if>
-		<c:if test="${page == 1}">
-		◁
-		</c:if>
-		
-		<c:forEach var="i" begin="${pstart}" end="${pend}">
-		<c:if test="${page == i}">
-		<a href="list?page=${i}" style="color:red;"> ${i} </a>
-		</c:if>
-		<c:if test="${page != i}">
-		<a href="list?page=${i}"> ${i} </a>
-		</c:if>
-		</c:forEach>
-		
-		<c:if test="${page != chong}">
-		<a href="list?page=${page+1}"> ▶️ </a>
-		</c:if>
-		<c:if test="${page == chong}">
-		▷
-		</c:if>
-		
-		<c:if test="${pend != chong}">
-		<a href="list?page=${pend+1}"> ⏩ </a>
-		</c:if>
-		<c:if test="${pend == chong}">
-		▷
-		</c:if>
-	<div>
-</section>
+			
+			<c:if test="${page != chong}">
+			<a href="list?page=${page+1}"> ▶️ </a>
+			</c:if>
+			<c:if test="${page == chong}">
+			▷
+			</c:if>
+			
+			<c:if test="${pend != chong}">
+			<a href="list?page=${pend+1}"> ⏩ </a>
+			</c:if>
+			<c:if test="${pend == chong}">
+			▷
+			</c:if>
+		<div>
+	</section>
+</main>
 </body>
 </html>

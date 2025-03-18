@@ -3,67 +3,87 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <title>유실물신고안내</title>
-    <link rel="stylesheet" href="/resources/css/style.css">
-    <style>
-        .membership-container {
-            width: 1100px;
-            margin: auto;
-            padding: 20px;
-        }
-        .section-title {
-            font-size: 22px;
-            font-weight: bold;
-            margin-bottom: 15px;
-            color: #003366;
-            border-bottom: 2px solid #003366;
-            padding-bottom: 5px;
-        }
-        .exclusion-box {
-            background-color: #f9f9f9;
-            padding: 20px;
-            border-left: 5px solid #cc0000;
-            margin-top: 20px;
-            border-radius: 8px;
-        }
-       .info-box {
-            background-color: #f9f9f9;
-            padding: 30px;
-            border-left: 5px solid #003366;
-            margin-bottom: 20px;
-        }
-        .highlight {
-            font-weight: bold;
-            color: #cc0000;
-        }
-        .benefit-table {
-            width: 90%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        .benefit-table th, .benefit-table td {
-            border: 1px solid #ddd;
-            padding: 12px;
-            text-align: center;
-        }
-        .benefit-table th {
-            background-color: #003366;
-            color: white;
-        }
-        .button {
-            display: inline-block;
-            padding: 10px 15px;
-            background-color: #0073e6;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            margin-top: 10px;
-        }
-    </style>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<meta charset="UTF-8">
+<title>유실물신고안내</title>
+<link rel="stylesheet" href="/resources/css/style.css">
+<style>
+	main {
+		top: -95px;
+		position: relative;
+	}
+	.nullbox {
+		height: 95px;
+		display: flex;
+		background-color: #078EB9;
+	}
+	.membership-container {
+	    width: 1100px;
+	    margin: auto;
+	    padding: 20px;
+	}
+	.section-title {
+	    font-size: 22px;
+	    font-weight: bold;
+	    margin-bottom: 15px;
+	    color: #003366;
+	    border-bottom: 2px solid #003366;
+	    padding-bottom: 5px;
+	}
+	.exclusion-box {
+	    background-color: #f9f9f9;
+	    padding: 20px;
+	    border-left: 5px solid #cc0000;
+	    margin-top: 20px;
+	    border-radius: 8px;
+	}
+	.info-box {
+	     background-color: #f9f9f9;
+	     padding: 30px;
+	     border-left: 5px solid #003366;
+	     margin-bottom: 20px;
+	}
+	.highlight {
+	    font-weight: bold;
+	    color: #cc0000;
+	}
+	.benefit-table {
+	    width: 90%;
+	    border-collapse: collapse;
+	    margin-top: 20px;
+	}
+	.benefit-table th, .benefit-table td {
+	    border: 1px solid #ddd;
+	    padding: 12px;
+	    text-align: center;
+	}
+	.benefit-table th {
+	    background-color: #003366;
+	    color: white;
+	}
+	.button {
+	    display: inline-block;
+	    padding: 10px 15px;
+	    background-color: #0073e6;
+	    color: white;
+	    text-decoration: none;
+	    border-radius: 5px;
+	    margin-top: 10px;
+	}
+	.csc {
+		background-color: #078EB9;
+		color: white;
+		padding: 20px;
+		text-align: center;
+		font-size: 24px;
+		font-weight: 600;
+	}
+</style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
+<main>
+	<div class="nullbox"></div>
+	<div class="csc">유실물</div>
     <div class="membership-container">
         <h2 class="section-title">유실물 신고·문의</h2>
         <div class="info-box">
@@ -127,34 +147,34 @@
             </div>
         </div>
     </div>
+</main>
+<script>
+    const stationInfo = {
+        "서울역": "서울역 유실물 센터 연락처: 02-1234-5678",
+        "용산역": "용산역 유실물 센터 연락처: 02-2345-6789",
+        "수원역": "수원역 유실물 센터 연락처: 031-345-6789",
+        "부산역": "부산역 유실물 센터 연락처: 051-456-7890",
+        "대전역": "대전역 유실물 센터 연락처: 042-567-8901",
+        "광주송정역": "광주송정역 유실물 센터 연락처: 062-678-9012"
+    };
 
-    <script>
-        const stationInfo = {
-            "서울역": "서울역 유실물 센터 연락처: 02-1234-5678",
-            "용산역": "용산역 유실물 센터 연락처: 02-2345-6789",
-            "수원역": "수원역 유실물 센터 연락처: 031-345-6789",
-            "부산역": "부산역 유실물 센터 연락처: 051-456-7890",
-            "대전역": "대전역 유실물 센터 연락처: 042-567-8901",
-            "광주송정역": "광주송정역 유실물 센터 연락처: 062-678-9012"
-        };
+    $('#stationList li').on('click', function() {
+        const station = $(this).data('station');
+        $('#stationName').text(station);
+        $('#stationContact').text(stationInfo[station]);
+        $('#stationDetail').stop(true, true).slideDown();
+        $('html, body').animate({
+            scrollTop: $('#stationDetail').offset().top - 50
+        }, 500);
+    });
 
-        $('#stationList li').on('click', function() {
-            const station = $(this).data('station');
-            $('#stationName').text(station);
-            $('#stationContact').text(stationInfo[station]);
-            $('#stationDetail').stop(true, true).slideDown();
-            $('html, body').animate({
-                scrollTop: $('#stationDetail').offset().top - 50
-            }, 500);
+    $('#searchStation').on('keyup', function() {
+        const search = $(this).val().toLowerCase();
+        $('#stationList li').each(function() {
+            const station = $(this).data('station').toLowerCase();
+            $(this).toggle(station.includes(search));
         });
-
-        $('#searchStation').on('keyup', function() {
-            const search = $(this).val().toLowerCase();
-            $('#stationList li').each(function() {
-                const station = $(this).data('station').toLowerCase();
-                $(this).toggle(station.includes(search));
-            });
-        });
-    </script>
+    });
+</script>
 </body>
 </html>

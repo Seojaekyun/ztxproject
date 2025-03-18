@@ -151,11 +151,19 @@
 		top: 0; /* 부모 요소의 중앙 */
 		right: 0; /* 부모 요소의 중앙 */
 	}
+	#loginMenu > #langMenu > select {
+		font-size: 16px;
+		width: 100px;
+		background: white;
+		color: black;
+		border: none;
+		font-weight: 400;
+	}
 	#section2 {
 		width: 100%;
 		height: 95px;
 		z-index: 10;
-		background: rgba(0,0,0,0.6);
+		background: rgba(0,0,0,0.45);
 		position: relative;
 	}
 	#s2container {
@@ -369,24 +377,34 @@
 	footer {
 		width: 100%;
 		min-width: 1200px;
-		height: 50px;
-		background: lightgray;
-		color: #5F6368;
+		height: 150px;
+		background: #343c45;
+		color: white;
 		text-align: center;
 		font-family: 'Hahmlet';
 		font-size: 10px;
 		margin-top: 40px;
 	}
-	.footer-container {
+	#footerbox {
 		display: flex;
 		justify-content: space-around;
+	}
+	.footer-container {
+		display: flex;
+		justify-content: flex-start;
 		align-items: center;
-		min-width: 1000px;
-		max-width: 1200px;
+		width: 1000px;
 		margin: auto;
 		flex-wrap: wrap;
+		font-size: 15px;
+	}
+	#famsite {
+		width: 400px;
+		display: flex;
+		justify-content: center;
 	}
 	.footer-logo {
+		margin-left: 40px;
 		font-size: 25px;
 		line-height: 50px;
 		font-weight: 900;
@@ -399,14 +417,14 @@
 		width: 100%;
 		min-width: 1000px;
 		height: 50px;
-		background: lightgray;
+		background: #343c45;
 		align-items: center;
 		display: flex;
 	}
 	#logof > #logotext {
 		height: 50px;
 		width: 200px;
-		background: lightgray;
+		background: #343c45;
 		font-size: 25px;
 		font-weight: 900;
 		line-height: 50px;
@@ -418,9 +436,12 @@
 		margin-bottom: 5px;
 	}
 	.footer {
-		background: #083B82;
+		width: 850px;
+		height: 60px;
 		color: white !important;
-		text-align: center;
+		text-align: right;
+		font-size: 14px;
+		line-height: 60px;
 	}
 	
 	@media (max-width: 768px) {
@@ -620,7 +641,20 @@
 		text-decoration: none;
 		color:#004EA2;
 	}
-
+	select {
+		background: #343c45;
+		width: 150px;
+		border-radius: 25px;
+		text-align: center;
+		border: 2px solid white;
+		color: white;
+		font-size: 16px;
+		font-weight: bold;
+	}
+	option {
+		font-size: 14px;
+		border-radius: 10px;
+	}
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
@@ -665,24 +699,24 @@
 		<div id="section1">
 			<div id="s1container">
 				<div id="titleMenu">
-					<div>🛤️은하철도</div>
+					<div>🌎은하철도</div>
 					<div style="background: #078EB9; color: white;">승차권예매</div>
 					<div>기차여행</div>
 				</div>
 				<div id="loginMenu">
 					<c:if test="${userid!=null&&userid=='administrator'}">
-						<a href="../admin/index" style="color: orange;"> 관리자 홈 </a>&nbsp;|&nbsp;
+						<a href="../admin/index" style="color: orange;"> 관리자 홈 </a>&nbsp;&nbsp;&nbsp;
 					</c:if>
 					<c:if test="${userid==null}">
-						<a href="../user/user" id="into"> <span class="iconmem">📋</span>회원가입 </a>&nbsp;&nbsp;|&nbsp;&nbsp;
+						<a href="../user/user" id="into"> <span class="iconmem">📋</span>회원가입 </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<!-- <a href="../login/login"> 로그인 </a>&nbsp;|&nbsp; -->
 					</c:if>
 					<c:if test="${userid==null}">
-						<a href="/login/login"> 로그인 </a>&nbsp;&nbsp;|&nbsp;&nbsp;
+						<a href="/login/login"> 로그인 </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					</c:if>
 					<c:if test="${userid!=null&&userid!='administrator'}">
 					<div id="myInfo" onmouseover="viewMmenu(0)" onmouseout="hideMmenu(0)">
-						<span> ${name}님 &nbsp;|&nbsp; </span>
+						<span> ${name}님 &nbsp;&nbsp;&nbsp; </span>
 						<ul class="mmenu">
 							<li><a href="../user/userView">나의정보</a></li>
 							<li><a href="../reserv/list">예약정보</a></li>
@@ -690,16 +724,22 @@
 							<li><a href="../member/myRev">나의후기</a></li>
 						</ul>
 					</div>
-					<a href="/login/logout">로그아웃</a>&nbsp;|&nbsp;
+					<a href="/login/logout">로그아웃</a>&nbsp;&nbsp;&nbsp;
 					</c:if>
 					<div id="supMenu" onmouseover="viewCmenu(0)" onmouseout="hideCmenu(0)">
-						<span>고객센터</span>
+						<span>고객센터</span>&nbsp;&nbsp;&nbsp;
 						<ul class="cmenu">
 							<li><a href="../gongji/list"> 공지사항 </a></li>
 							<li><a href="../inquiry/inquiryList"> Q＆A </a></li>
 							<li><a href="../promot/list"> 이벤트 </a></li>
 							<li><a href="../review/list"> 여행후기 </a></li>
 						</ul>
+					</div>
+					<div id="langMenu">
+						<select>
+							<option>Language</option>
+							<option>KOREAN</option>
+						</select>
 					</div>
 				</div>
 				<div id="nullbox"></div>
@@ -715,7 +755,7 @@
 					</div>
 					<div id="logotext">
 						<a href="/main/index">
-							Let's GGoRail
+							GGoRail
 						</a>
 					</div>
 				</div>
@@ -940,36 +980,31 @@
 <sitemesh:write property="body" />
 	
 	<footer>
-		<div class="footer-container">
-			<div class="footer-logo">
-				<img alt="logo" src="../static/resources/train(gray).png" align="top">
-				Let's GGoRail
+		<div class="footer" style="color: white">
+			이용약관 ㆍ 여객운송약관 및 부속약관 ㆍ 개인정보처리방침 ㆍ 이메일무단수집거부 ㆍ 저작권정책지원 ㆍ 브라우저 안내
+		</div>
+		<div id="footerbox">
+			<div class="footer-container">
+				<div class="footer-info">
+					<div>(주)MonoRail | 대표이사 : 철이 | 사업자등록 : 314-82-99999 | 통신판매업신고 : 은하철도-999</div>
+					<div>본사 : 경기도 파주시 야당동 | TEL: 090-888-1234(유료) | 전화번호 : 010-1234-5678</div>
+				</div>
+				<div class="footer-logo">
+						<img alt="logo" src="../static/resources/train(white).png" align="top">
+						GGoRail
+					</div>
 			</div>
-			<div class="footer-info">
-				<div>(주)MonoRail</div>
-			</div>
-			<div class="footer-info">
-				<div>대표이사 : 철이</div>
-			</div>
-			<div class="footer-info">
-				<div>사업자등록 : 314-82-99999</div>
-			</div>
-			<div class="footer-info">
-				<div>통신판매업신고 : 은하철도-999</div>
-			</div>
-			<div class="footer-info">
-				<div>본사 : 경기도 파주시 야당동</div>
-			</div>
-			<div class="footer-info">
-				<div>TEL: 090-888-1234(유료)</div>
-			</div>
-			<div class="footer-info">
-				<div>전화번호 : 010-1234-5678</div>
+			<div id="famsite">
+				<select>
+					<option>패밀리 사이트</option>
+					<option>eLT항공</option>
+					<option>차차고속</option>
+					<option>모두의 렌탈</option>
+					<option>아고다</option>
+				</select>
 			</div>
 		</div>
 	</footer>
-	<div class="footer" style="color: white">
-		<p>&copy; 2025 꼬레일. 모든 권리 보유.</p>
-	</div>
+	
 </body>
 </html>

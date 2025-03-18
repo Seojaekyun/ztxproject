@@ -13,6 +13,15 @@
 		padding: 0;
 		background-color: #f4f4f4;
 	}
+	main {
+		top: -95px;
+		position: relative;
+	}
+	.nullbox {
+		height: 95px;
+		display: flex;
+		background-color: #078EB9;
+	}
 	section header {
 		background-color: #00467F;
 		padding: 20px;
@@ -181,73 +190,74 @@
 </style>
 </head>
 <body>
-
-<section>
-	<div class="csc">고객센터</div>
-	<div class="cscmc">
-		<div class="cscmenu">
-		    <a href="../gongji/list">공지 사항</a>
-		    <a href="../inquiry/inquiryList">Q＆A</a>
-		    <a href="#">이벤트</a>
-		    <a href="../review/list">여행 후기</a>
+<main>
+	<div class="nullbox"></div>
+	<section>
+		<div class="csc">고객센터</div>
+		<div class="cscmc">
+			<div class="cscmenu">
+			    <a href="../gongji/list">공지 사항</a>
+			    <a href="../inquiry/inquiryList">Q＆A</a>
+			    <a href="#">이벤트</a>
+			    <a href="../review/list">여행 후기</a>
+			</div>
 		</div>
-	</div>
-	<div class="container">
-		<div class="content">
-			<h2>여행 후기</h2>
-			<table class="qna-table">
-				<tr>
-					<th colspan="2"> 제 목</th>
-					<th>작성자</th>
-					<th>조회수</th>
-					<th>작성일</th>
-				</tr>
-				<c:forEach items="${revlist}" var="revdto">
+		<div class="container">
+			<div class="content">
+				<h2>여행 후기</h2>
+				<table class="qna-table">
 					<tr>
-						<td style="text-align: left" colspan="2">
-							<a href="readnum?id=${revdto.id}&page=${page}">
-								${revdto.title}
-							</a>
-						</td>
-						<td>${revdto.userid}</td>
-						<td>${revdto.readnum}</td>
-						<td>${revdto.writeday}</td>
+						<th colspan="2"> 제 목</th>
+						<th>작성자</th>
+						<th>조회수</th>
+						<th>작성일</th>
 					</tr>
+					<c:forEach items="${revlist}" var="revdto">
+						<tr>
+							<td style="text-align: left" colspan="2">
+								<a href="reviewReadnum?id=${revdto.id}">
+									${revdto.title}
+								</a>
+							</td>
+							<td>${revdto.userid}</td>
+							<td>${revdto.readnum}</td>
+							<td>${revdto.writeday}</td>
+						</tr>
+					</c:forEach>
+				</table>
+			</div>
+			<!-- 페이징 처리 -->
+			<div class="pagination">
+				<c:if test="${currentPage > 10}">
+					<a href="?page=${currentPage - 10}">&laquo; 이전 10</a>
+				</c:if>
+				<c:set var="startPage" value="${currentPage - 5}" />
+				<c:set var="endPage" value="${currentPage + 4}" />
+				<c:if test="${startPage < 1}">
+					<c:set var="startPage" value="1" />
+				</c:if>
+				<c:if test="${endPage > totalPages}">
+					<c:set var="endPage" value="${totalPages}" />
+				</c:if>
+				<c:forEach begin="${startPage}" end="${endPage}" var="i">
+					<c:choose>
+						<c:when test="${i == currentPage}">
+							<span class="active">${i}</span>
+						</c:when>
+						<c:otherwise>
+							<a href="?page=${i}">${i}</a>
+						</c:otherwise>
+					</c:choose>
 				</c:forEach>
-			</table>
+				<c:if test="${currentPage + 10 <= totalPages}">
+					<a href="?page=${currentPage + 10}">다음 10 &raquo;</a>
+				</c:if>
+			</div>
+			<div align="right">
+				<a href="write" id="write" style='align: right'>후기 등록</a>
+			</div>
 		</div>
-		<!-- 페이징 처리 -->
-		<div class="pagination">
-			<c:if test="${currentPage > 10}">
-				<a href="?page=${currentPage - 10}">&laquo; 이전 10</a>
-			</c:if>
-			<c:set var="startPage" value="${currentPage - 5}" />
-			<c:set var="endPage" value="${currentPage + 4}" />
-			<c:if test="${startPage < 1}">
-				<c:set var="startPage" value="1" />
-			</c:if>
-			<c:if test="${endPage > totalPages}">
-				<c:set var="endPage" value="${totalPages}" />
-			</c:if>
-			<c:forEach begin="${startPage}" end="${endPage}" var="i">
-				<c:choose>
-					<c:when test="${i == currentPage}">
-						<span class="active">${i}</span>
-					</c:when>
-					<c:otherwise>
-						<a href="?page=${i}">${i}</a>
-					</c:otherwise>
-				</c:choose>
-			</c:forEach>
-			<c:if test="${currentPage + 10 <= totalPages}">
-				<a href="?page=${currentPage + 10}">다음 10 &raquo;</a>
-			</c:if>
-		</div>
-		<div align="right">
-			<a href="write" id="write" style='align: right'>후기 등록</a>
-		</div>
-	</div>
-</section>
-
+	</section>
+</main>
 </body>
 </html>

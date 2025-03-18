@@ -13,6 +13,15 @@
 		padding: 0;
 		background-color: #f4f6f9;
 	}
+	main {
+		top: -95px;
+		position: relative;
+	}
+	.nullbox {
+		height: 95px;
+		display: flex;
+		background-color: #078EB9;
+	}
 	h3 {
       font-size:24px;
       font-weight:bold;
@@ -134,70 +143,72 @@
   </style>
 </head>
 <body> <!-- gongji/list.jsp -->
-<div class="csc">공지사항</div>
-<div class="cscmc">
-	<div class="cscmenu">
-	    <a href="../gongji/list">공지 사항</a>
-	    <a href="../inquiry/inquiryList">Q＆A</a>
-	    <a href="#">이벤트</a>
-	    <a href="../review/list">여행 후기</a>
+<main>
+	<div class="nullbox"></div>
+	<div class="csc">공지사항</div>
+	<div class="cscmc">
+		<div class="cscmenu">
+		    <a href="../gongji/list">공지 사항</a>
+		    <a href="../inquiry/inquiryList">Q＆A</a>
+		    <a href="#">이벤트</a>
+		    <a href="../review/list">여행 후기</a>
+		</div>
 	</div>
-</div>
- <section>
-    <table>
-        <tr>
-            <th colspan="2">제목</th>
-            <th>작성자</th>
-            <th>조회수</th>
-            <th>작성일</th>
-        </tr>
-        <c:forEach items="${glist}" var="gdto">
-            <tr>
-                <td width="100">
-                    <c:if test="${gdto.state == 1}">
-                        <span id="badge1">필독</span>
-                    </c:if>
-                    <c:if test="${gdto.state == 0}">
-                        <span id="badge2">공지</span>
-                    </c:if>
-                </td>
-                <td style="text-align:left">
-                    <a href="readnum?id=${gdto.id}"> ${gdto.title }</a>
-                </td>
-                <td>${gdto.writer}</td>
-                <td>${gdto.readnum}</td>
-                <td>${gdto.writeday}</td>
-            </tr>
-        </c:forEach>
-    </table>
-
-    <!-- 페이징 처리 -->
-    <div class="pagination">
-        <c:set var="prevPage" value="${currentPage - 10 < 1 ? 1 : currentPage - 10}" />
-        <a href="?page=${prevPage}">&laquo; 이전10</a>
-        <c:set var="startPage" value="${currentPage <= 5 ? 1 : currentPage - 4}" />
-        <c:set var="endPage" value="${startPage + 9}" />
-        <c:if test="${startPage < 1}">
-            <c:set var="startPage" value="1" />
-        </c:if>
-        <c:if test="${endPage > totalPages}">
-            <c:set var="endPage" value="${totalPages}" />
-            <c:set var="startPage" value="${endPage - 9 > 0 ? endPage - 9 : 1}" />
-        </c:if>
-        <c:forEach begin="${startPage}" end="${endPage}" var="i">
-            <c:choose>
-                <c:when test="${i == currentPage}">
-                    <span class="active">${i}</span>
-                </c:when>
-                <c:otherwise>
-                    <a href="?page=${i}">${i}</a>
-                </c:otherwise>
-            </c:choose>
-        </c:forEach>
-        <c:set var="nextPage" value="${currentPage + 10 > totalPages ? totalPages : currentPage + 10}" />
-        <a href="?page=${nextPage}">다음10 &raquo;</a>
-    </div>
-</section>
-
+	 <section>
+	    <table>
+	        <tr>
+	            <th colspan="2">제목</th>
+	            <th>작성자</th>
+	            <th>조회수</th>
+	            <th>작성일</th>
+	        </tr>
+	        <c:forEach items="${glist}" var="gdto">
+	            <tr>
+	                <td width="100">
+	                    <c:if test="${gdto.state == 1}">
+	                        <span id="badge1">필독</span>
+	                    </c:if>
+	                    <c:if test="${gdto.state == 0}">
+	                        <span id="badge2">공지</span>
+	                    </c:if>
+	                </td>
+	                <td style="text-align:left">
+	                    <a href="readnum?id=${gdto.id}"> ${gdto.title }</a>
+	                </td>
+	                <td>${gdto.writer}</td>
+	                <td>${gdto.readnum}</td>
+	                <td>${gdto.writeday}</td>
+	            </tr>
+	        </c:forEach>
+	    </table>
+	
+	    <!-- 페이징 처리 -->
+	    <div class="pagination">
+	        <c:set var="prevPage" value="${currentPage - 10 < 1 ? 1 : currentPage - 10}" />
+	        <a href="?page=${prevPage}">&laquo; 이전10</a>
+	        <c:set var="startPage" value="${currentPage <= 5 ? 1 : currentPage - 4}" />
+	        <c:set var="endPage" value="${startPage + 9}" />
+	        <c:if test="${startPage < 1}">
+	            <c:set var="startPage" value="1" />
+	        </c:if>
+	        <c:if test="${endPage > totalPages}">
+	            <c:set var="endPage" value="${totalPages}" />
+	            <c:set var="startPage" value="${endPage - 9 > 0 ? endPage - 9 : 1}" />
+	        </c:if>
+	        <c:forEach begin="${startPage}" end="${endPage}" var="i">
+	            <c:choose>
+	                <c:when test="${i == currentPage}">
+	                    <span class="active">${i}</span>
+	                </c:when>
+	                <c:otherwise>
+	                    <a href="?page=${i}">${i}</a>
+	                </c:otherwise>
+	            </c:choose>
+	        </c:forEach>
+	        <c:set var="nextPage" value="${currentPage + 10 > totalPages ? totalPages : currentPage + 10}" />
+	        <a href="?page=${nextPage}">다음10 &raquo;</a>
+	    </div>
+	</section>
+</main>
 </body>
 </html>

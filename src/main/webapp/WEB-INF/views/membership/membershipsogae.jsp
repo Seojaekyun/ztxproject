@@ -3,53 +3,64 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>코레일 멤버십 제휴 혜택</title>
-    <link rel="stylesheet" type="text/css" href="/resources/css/style.css">
-    <style>
-        .membership-container {
-            width: 1100px;
-            margin: auto;
-            padding: 20px;
-        }
-        .section-title {
-            font-size: 20px;
-            font-weight: bold;
-            margin-bottom: 15px;
-            color: #003366; 
-        }
-        .benefit-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        .benefit-table th, .benefit-table td {
-            border: 1px solid #ddd;
-            padding: 12px;
-            text-align: left;
-            vertical-align: middle;
-        }
-        .benefit-table th {
-            background-color: #003366;
-            color: white;
-        }
-        .partner-logo {
-            width: 100px; 
-            height: auto;
-            display: block;
-            margin: auto;
-        }
-        .benefit-text {
-            display: flex;
-            align-items: center;
-        }
-        .highlight {
-            font-weight: bold;
-            color: #cc0000;
-        }
-    </style>
+<meta charset="UTF-8">
+<title>코레일 멤버십 제휴 혜택</title>
+<link rel="stylesheet" type="text/css" href="/resources/css/style.css">
+<style>
+	main {
+		top: -95px;
+		position: relative;
+	}
+	.nullbox {
+		height: 95px;
+		display: flex;
+		background-color: #078EB9;
+	}
+    .membership-container {
+        width: 1100px;
+        margin: auto;
+        padding: 20px;
+    }
+    .section-title {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 15px;
+        color: #003366; 
+    }
+    .benefit-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+    .benefit-table th, .benefit-table td {
+        border: 1px solid #ddd;
+        padding: 12px;
+        text-align: left;
+        vertical-align: middle;
+    }
+    .benefit-table th {
+        background-color: #003366;
+        color: white;
+    }
+    .partner-logo {
+        width: 100px; 
+        height: auto;
+        display: block;
+        margin: auto;
+    }
+    .benefit-text {
+        display: flex;
+        align-items: center;
+    }
+    .highlight {
+        font-weight: bold;
+        color: #cc0000;
+    }
+</style>
 </head>
 <body>
+<main>
+	<div class="nullbox"></div>
     <div class="membership-container">
         <h2 class="section-title" align="center">꼬레일멤버십 회원 제휴 혜택 서비스 소개</h2>
         <table class="benefit-table">
@@ -97,5 +108,6 @@
             </tbody>
         </table>
     </div>
+</main>
 </body>
 </html>

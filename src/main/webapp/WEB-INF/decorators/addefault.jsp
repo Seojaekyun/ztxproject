@@ -207,7 +207,7 @@
 				</div>
 				<div id="logotext">
 					<a href="../admin/index">
-						Let's GGoRail				
+						GGoRail				
 						Administrator
 					</a>
 				</div>

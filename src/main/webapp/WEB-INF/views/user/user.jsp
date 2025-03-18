@@ -18,6 +18,15 @@
     border-radius:8px;
     box-shadow:0 4px 8px rgba(0, 0, 0, 0.1);
   }
+  main {
+		top: -95px;
+		position: relative;
+	}
+	.nullbox {
+		height: 95px;
+		display: flex;
+		background-color: #078EB9;
+	}
   section div {
     margin-top:10px;
   }
@@ -170,6 +179,8 @@
 </script>
 </head>
 <body> <!-- user/user.jsp -->
+<main>
+<div class="nullbox"></div>
  <section>
   <form method="post" name="uform" action="userOk" onsubmit="return check()">
     <input type="hidden" name="email">
@@ -206,5 +217,6 @@
     </div>
   </form> 
  </section>
+</main>
 </body>
 </html>
