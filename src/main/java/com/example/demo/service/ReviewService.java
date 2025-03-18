@@ -4,8 +4,6 @@ import java.io.IOException;
 
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-
 import com.example.demo.dto.ReviewDto;
 
 import jakarta.servlet.http.HttpServletRequest;

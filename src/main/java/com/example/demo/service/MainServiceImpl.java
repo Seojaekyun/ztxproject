@@ -3,9 +3,13 @@ package com.example.demo.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+
+import com.example.demo.dto.PromotDto;
+import com.example.demo.mapper.PromotMapper;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -15,9 +19,14 @@ public class MainServiceImpl implements MainService {
 
 	@Qualifier("ms")
 	private List<String> chatMessages = new ArrayList<>();
+	@Autowired
+	private PromotMapper pmapper;
 
 	@Override
 	public String index(HttpServletRequest request, Model model) {
+		List<PromotDto> plist = pmapper.plist();
+		
+		model.addAttribute("plist", plist);
 		return "/main/index";
 	}
 	

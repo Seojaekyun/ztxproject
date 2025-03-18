@@ -445,8 +445,8 @@
 	}
 	h3 {
 		margin-bottom: 20px;
-		font-size: 22px;
-		font-weight: 800;
+		font-size: 26px;
+		font-weight: 400;
 	}
 	.fade-in-section {
 		width: 100%;
@@ -467,7 +467,7 @@
 		z-index: 1;
 	}
 	.promotion-container {
-		width: 1000px;
+		width: 1400px;
 		max-width: 90%;
 		margin: auto;
 		display: flex;
@@ -475,18 +475,18 @@
 		gap: 20px;
 	}
 	.promotion-item {
-		flex: 1 1 calc(33.333% - 20px);
+		flex: 1 1 calc(25.0% - 20px);
 		background-color: #eaeaea;
 		border-radius: 10px;
 		overflow: hidden;
 		text-align: center;
 	}
-	.promotion-item img {
-		width: auto;
+	.promotion-item > #promobox {
 		height: 205px;
+		overflow: hidden;
 	}
-	.promotion-item h3 {
-		margin: 15px 0;
+	.promotion-item img {
+		width: 336px;
 	}
 	.promotion-item p {
 		padding: 0 15px 15px;
@@ -967,11 +967,13 @@
 			</div>
 		</div>
 		<div id="sec2" class="sec2 promotion-section fade-in-section">
-			<h3 style="text-align: center;">프로모션</h3>
+			<h3 style="text-align: center;"> 꼬레일은 다양한 <b>이벤트</b>로 고객에게 다가가고 있습니다.</h3>
 			<div class="promotion-container">
 				<c:forEach items="${plist}" var="pdto">
-				<div class="promotion-item" onclick="window.location.href='../promot/promotReadnum?id=${pdto.id}'">
-					<img src="../static/resources/${pdto.fname}" alt="이벤트 이미지">
+				<div class="promotion-item" onclick="window.location.href='../promot/readnum?id=${pdto.id}'">
+					<div id="promobox">
+						<img src="../static/resources/${pdto.fname}" alt="이벤트 이미지">
+					</div>
 					<br>
 					<h3>${pdto.title}</h3>
 					<p>${pdto.subtitle}</p>
