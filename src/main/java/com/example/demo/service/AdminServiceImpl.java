@@ -55,60 +55,50 @@ public class AdminServiceImpl implements AdminService{
 	public String adminIndex(HttpSession session, HttpServletRequest request, Model model) {
 		Object useridObj = session.getAttribute("userid");
 		
-		if (useridObj == null) {
+		if(useridObj == null) {
 			return "redirect:/main/index";  // userid가 null이면 메인 페이지로 리다이렉트
 		}
 		
 		String adminid = useridObj.toString();
 		
-		if ("administrator".equals(adminid)) {
-			// 현재 날짜 및 시간 구하기
+		if("administrator".equals(adminid)) {
 			LocalDateTime now = LocalDateTime.now();
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 			
-			// 항공편 5개 조회
 			List<RoutesDto> departureList = romapper.getDepartureRoutes();
 			List<RoutesDto> arrivalList = romapper.getArrivalRoutes();
 			
 			model.addAttribute("departureList", departureList);
 			model.addAttribute("arrivalList", arrivalList);
 			
-			// 모든 문의 리스트 조회
 			List<InquiryDto> ilist = imapper.ilist();
 			model.addAttribute("ilist", ilist);
 			
-			// State별 문의 수 조회
 			List<InquiryDto> countsList = imapper.listCountsPerCategory();
-			countsList.sort((entry1, entry2) -> Integer.compare(entry2.getCount(), entry1.getCount()));
+			countsList.sort((entry1, entry2) -> 
+			Integer.compare(entry2.getCount(), entry1.getCount()));
 			
-			for (int i = 0; i < countsList.size(); i++) {
+			for(int i = 0; i < countsList.size(); i++) {
 				countsList.get(i).setRank(i + 1);  // 1위부터 순위 부여
 			}
 			
 			model.addAttribute("countsList", countsList);
 			
-			// 현재 시간 이후의 예약 5개씩 조회
 			List<ReservDto> rsvList = rmapper.getRsvanow().stream().filter(rsv -> {
-				// String 타입의 departureTime을 LocalDateTime으로 변환
 				LocalDateTime departure_time = LocalDateTime.parse(rsv.getRouteTime(), formatter);
 				return departure_time.isAfter(now);  // 현재 시간 이후인지 확인
 			}).collect(Collectors.toList());
 			
-			// 서울역의 예약 리스트
-			List<ReservDto> seoulRsv = rsvList.stream()
-					.filter(rsv -> rsv.getDeparture().equals("서울역"))
-					.limit(5).collect(Collectors.toList());
+			List<ReservDto> seoulRsv = rsvList.stream().filter(rsv -> rsv.getDeparture()
+					.equals("서울역")).limit(5).collect(Collectors.toList());
 			model.addAttribute("seoulRsv", seoulRsv);
 			
-			// 부산역의 예약 리스트
-			List<ReservDto> pusanRsv = rsvList.stream()
-					.filter(rsv -> rsv.getDeparture().equals("부산역"))
-					.limit(5).collect(Collectors.toList());
+			List<ReservDto> pusanRsv = rsvList.stream().filter(rsv -> rsv.getDeparture()
+					.equals("부산역")).limit(5).collect(Collectors.toList());
 			model.addAttribute("pusanRsv", pusanRsv);
 			
-			// 기타 예약 리스트
-			List<ReservDto> otherRsv = rsvList.stream()
-					.filter(rsv -> !rsv.getDeparture().equals("서울역") && !rsv.getDeparture().equals("부산역"))
+			List<ReservDto> otherRsv = rsvList.stream().filter(rsv -> !rsv.getDeparture()
+					.equals("서울역") && !rsv.getDeparture().equals("부산역"))
 					.limit(5).collect(Collectors.toList());
 			model.addAttribute("otherRsv", otherRsv);
 			
@@ -118,29 +108,29 @@ public class AdminServiceImpl implements AdminService{
 			return "redirect:/main/index";
 		}
 	}
-
+	
 	@Override
 	public String reservList(String selectedDate, Integer seoulPage, Integer pusanPage, Integer otherPage, Integer page,
 			Model model) {
 		int itemsPerPage = 5; // 페이지당 항목 수
 		
 		// 페이지 번호가 null이거나 1보다 작으면 기본값으로 설정
-		if (page == null || page < 1) {
+		if(page == null || page < 1) {
 			page = 1;
 		}
-		if (seoulPage == null || seoulPage < 1) {
+		if(seoulPage == null || seoulPage < 1) {
 			seoulPage = 1;
 		}
-		if (pusanPage == null || pusanPage < 1) {
+		if(pusanPage == null || pusanPage < 1) {
 			pusanPage = 1;
 		}
-		if (otherPage == null || otherPage < 1) {
+		if(otherPage == null || otherPage < 1) {
 			otherPage = 1;
 		}
 		
 		// 선택한 날짜가 있을 경우 해당 날짜에 맞는 예약 데이터만 가져오기
 		List<ReservDto> rsvList;
-		if (selectedDate != null && !selectedDate.isEmpty()) {
+		if(selectedDate != null && !selectedDate.isEmpty()) {
 			rsvList = rmapper.getRsvByDate(selectedDate);  // 특정 날짜의 예약 내역 가져오기
 		}
 		else {
@@ -184,13 +174,13 @@ public class AdminServiceImpl implements AdminService{
 		// 좌석 수 정보를 추가로 가져오기
 		List<Map<String, Object>> availableSeatsList = rmapper.getAvaiSeatCountByRouteid();
 		Map<Integer, Integer> availableSeatsMap = new HashMap<>();
-		for (Map<String, Object> availableSeat : availableSeatsList) {
+		for(Map<String, Object> availableSeat : availableSeatsList) {
 			availableSeatsMap.put((Integer) availableSeat.get("flight_id"), ((Long) availableSeat.get("availableSeats")).intValue());
 		}
 		model.addAttribute("availableSeatsMap", availableSeatsMap);
 		model.addAttribute("selectedDate", selectedDate);
 		
-		for (ReservDto rsv : seoulList) {
+		for(ReservDto rsv : seoulList) {
 			System.out.println(rsv.getDeparture()); // 이제 rsv를 이렇게 사용
 		}
 		
@@ -226,28 +216,21 @@ public class AdminServiceImpl implements AdminService{
 		int totalPages = (int) Math.ceil((double) totalReserv / itemsPerPage);
 		
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
-	    // 각 예약번호별 좌석 수 계산 및 offerDay -1일 처리
-	    Map<Integer, Integer> seatCounts = new HashMap<>();
-	    for (ReservDto reserv : rsvList) {
-	        int seatCount = rmapper.getSeatCountByReservid(reserv.getReservid());
-	        seatCounts.put(reserv.getReservid(), seatCount);
-	        
-	        /*
-	        int reservid = reserv.getReservid();
-	        Integer payState = rmapper.getState(reservid);
-	        reserv.setState(payState);
-	        System.out.println("값:" + payState);
-	        */
-
-	        // offerDay +1일 처리
-	        String offerDay = reserv.getOfferday();
-	        if (offerDay != null) {
-	            LocalDate parsedDate = LocalDate.parse(offerDay, formatter);
-	            LocalDate adjustedDate = parsedDate.plusDays(1); // +1일 처리
-	            reserv.setOfferday(adjustedDate.format(formatter)); // 다시 저장
-	        }
-	    }
+		
+		// 각 예약번호별 좌석 수 계산 및 offerDay -1일 처리
+		Map<Integer, Integer> seatCounts = new HashMap<>();
+		for(ReservDto reserv : rsvList) {
+			int seatCount = rmapper.getSeatCountByReservid(reserv.getReservid());
+			seatCounts.put(reserv.getReservid(), seatCount);
+			
+			// offerDay +1일 처리
+			String offerDay = reserv.getOfferday();
+			if(offerDay != null) {
+				LocalDate parsedDate = LocalDate.parse(offerDay, formatter);
+				LocalDate adjustedDate = parsedDate.plusDays(1); // +1일 처리
+				reserv.setOfferday(adjustedDate.format(formatter)); // 다시 저장
+			}
+		}
 		
 		// 모델에 추가
 		model.addAttribute("rsvList", rsvList);
@@ -266,7 +249,7 @@ public class AdminServiceImpl implements AdminService{
 		
 		// 열차편 목록 가져오기 (기존 로직 유지)
 		List<RoutesDto> routesList;
-		if (selectedDate != null && !selectedDate.isEmpty()) {
+		if(selectedDate != null && !selectedDate.isEmpty()) {
 			routesList = romapper.getRoutesByDate(selectedDate);
 		}
 		else {
@@ -280,7 +263,7 @@ public class AdminServiceImpl implements AdminService{
 		
 		Map<Integer, Long> avaiSeatsMap = new HashMap<>();  // Long 타입으로 변경
 		
-		for (Map<String, Object> seatInfo : avaiSeatsList) {
+		for(Map<String, Object> seatInfo : avaiSeatsList) {
 			Integer Routeid = (Integer) seatInfo.get("routeid");
 			Long avaiSeats = (Long) seatInfo.get("avaiSeats");  // Long으로 변경
 			avaiSeatsMap.put(Routeid, avaiSeats);
@@ -304,14 +287,14 @@ public class AdminServiceImpl implements AdminService{
 				.collect(Collectors.toList());
 		
 		// 각 열차편 분류에 따라 페이지네이션 처리 및 JSP에 데이터 전달
-		if ("all".equals(routeType)) {
+		if("all".equals(routeType)) {
 			List<RoutesDto> pagedRoutes=routesList.subList(start, Math.min(start+itemsPerPage, routesList.size()));
 			int totalPages=(int) Math.ceil((double)routesList.size()/itemsPerPage);
 			model.addAttribute("routesList", pagedRoutes);
 			model.addAttribute("totalPages", totalPages);
 			model.addAttribute("currentPage", page);
 		}
-		else if ("서울역".equals(routeType)) {
+		else if("서울역".equals(routeType)) {
 			List<RoutesDto> pagedSeoulRoutes = seoulRoutes.stream()
 					.skip(start).limit(itemsPerPage).collect(Collectors.toList());
 			int totalSeoulPages = (int) Math.ceil((double) seoulRoutes.size() / itemsPerPage);
@@ -319,7 +302,7 @@ public class AdminServiceImpl implements AdminService{
 			model.addAttribute("totalSeoulPages", totalSeoulPages);
 			model.addAttribute("currentSeoulPage", page);
 		}
-		else if ("부산역".equals(routeType)) {
+		else if("부산역".equals(routeType)) {
 			List<RoutesDto> pagedPusanRoutes = pusanRoutes.stream()
 					.skip(start).limit(itemsPerPage).collect(Collectors.toList());
 			int totalPusanPages = (int) Math.ceil((double) pusanRoutes.size() / itemsPerPage);
@@ -327,7 +310,7 @@ public class AdminServiceImpl implements AdminService{
 			model.addAttribute("totalPusanPages", totalPusanPages);
 			model.addAttribute("currentPusanPage", page);
 		}
-		else if ("other".equals(routeType)) {
+		else if("other".equals(routeType)) {
 			List<RoutesDto> pagedOtherRoutes = otherRoutes.stream()
 					.skip(start).limit(itemsPerPage).collect(Collectors.toList());
 			int totalOtherPages = (int) Math.ceil((double) otherRoutes.size() / itemsPerPage);
@@ -337,7 +320,6 @@ public class AdminServiceImpl implements AdminService{
 		}
 		
 		model.addAttribute("selectedDate", selectedDate);
-		
 		return "/admin/routesList";  // 전체 페이지를 반환합니다.
 	}
 	
@@ -364,14 +346,14 @@ public class AdminServiceImpl implements AdminService{
 	public String inquiryList(int page, Model model) {
 		int index = (page - 1) * 10;
 		int total = imapper.getChong();
-		int totalPage = (int) Math.ceil((double) total / 10);
+		int totalPage = (int)Math.ceil((double) total / 10);
 		
 		List<InquiryDto> inquiries = imapper.inquiryList(index);
 		
 		System.out.println("adminInquiryList 조회된 문의 개수: " + (inquiries != null ? inquiries.size() : "null"));
 		
 		// 🛠 inquiries 리스트 내부 데이터를 자세히 출력
-		for (InquiryDto inquiry : inquiries) {
+		for(InquiryDto inquiry : inquiries) {
 			System.out.println("문의 ID: " + inquiry.getId() + ", 제목: " + inquiry.getTitle());
 		}
 		
@@ -385,7 +367,7 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public String inquiryAnswer(int id, Model model) {
 		InquiryDto inquiry = imapper.getInquiryById(id);
-		if (inquiry == null) {
+		if(inquiry == null) {
 			return "redirect:/admin/inquiryList"; // 존재하지 않는 경우 리스트로 이동
 		}
 		model.addAttribute("inquiry", inquiry);
@@ -412,17 +394,17 @@ public class AdminServiceImpl implements AdminService{
 		
 		int itemsPerPage = 10; // 페이지당 출력할 항목 수
 		int totalItems = umapper.getTotalUserCount(); // 전체 회원 수 가져오기
-		int totalPages = (int) Math.ceil((double) totalItems / itemsPerPage);
+		int totalPages = (int)Math.ceil((double) totalItems / itemsPerPage);
 		
 		// 현재 페이지에 맞는 데이터 가져오기
 		int offset = (page - 1) * itemsPerPage;
 		List<UserDto> ulist = umapper.getUserList(offset, itemsPerPage);
 		
 		// 회원 리스트와 예약 리스트 매칭 (userid 기준으로 각 회원의 최근 예약만 가져옴)
-		for (UserDto user : ulist) {
+		for(UserDto user : ulist) {
 			// 각 회원의 최근 예약 한 건을 가져옴
 			ReservDto recentReserv = rmapper.getMyrsv(user.getUserid());
-			if (recentReserv != null) {
+			if(recentReserv != null) {
 				user.setReservlist(Collections.singletonList(recentReserv)); // 최근 예약 하나만 설정
 			}
 			else {
@@ -464,17 +446,17 @@ public class AdminServiceImpl implements AdminService{
 		List<ReservDto> myrsv = new ArrayList<>();
 		int totalReservlist = 0;
 		
-		if (member != null) {
+		if(member != null) {
 			// 특정 유저의 예약 리스트 (페이징 적용)
 			myrsv = rmapper.getRsvUserid(userid, itemsPerPage, offset);
 			
 			// 전체 예약 수 가져오기 (페이징을 위해 필요)
 			totalReservlist = rmapper.getTresByUser(userid);
 			
-			for (ReservDto reserv : myrsv) {
+			for(ReservDto reserv : myrsv) {
 				// offerday +1일 처리
 				String offerday = reserv.getOfferday();
-				if (offerday != null) {
+				if(offerday != null) {
 					LocalDate parsedDate = LocalDate.parse(offerday, formatter);
 					LocalDate adjustedDate = parsedDate.plusDays(1);  // +1일
 					reserv.setOfferday(adjustedDate.format(formatter));
@@ -484,7 +466,7 @@ public class AdminServiceImpl implements AdminService{
 		}
 		
 		// 총 페이지 수 계산
-		int totalPages = (int) Math.ceil((double) totalReservlist / itemsPerPage);
+		int totalPages = (int)Math.ceil((double) totalReservlist / itemsPerPage);
 		
 		// 모델에 데이터 추가
 		model.addAttribute("member", member);
@@ -508,7 +490,7 @@ public class AdminServiceImpl implements AdminService{
 	    rmapper.cancelTrainSeat(roid, resnum);
 	    rmapper.cancelConfirm(rid);
 	    
-	    if (referer != null && !referer.isEmpty()) {
+	    if(referer != null && !referer.isEmpty()) {
 	        try {
 	            URI refererUri = new URI(referer);
 	            String query = refererUri.getQuery(); // 기존 쿼리 스트링 가져오기
@@ -520,7 +502,7 @@ public class AdminServiceImpl implements AdminService{
 
 	            return "redirect:" + refererUri.getPath() + "?" + newQuery;
 	        }
-	        catch (URISyntaxException e) {
+	        catch(URISyntaxException e) {
 	            e.printStackTrace();
 	        }
 	    }
@@ -535,7 +517,7 @@ public class AdminServiceImpl implements AdminService{
 		String rid=request.getParameter("reservid");
 		rmapper.cancelRejection(rid);
 		
-		if (referer != null && !referer.isEmpty()) {
+		if(referer != null && !referer.isEmpty()) {
 	        try {
 	            URI refererUri = new URI(referer);
 	            String query = refererUri.getQuery(); // 기존 쿼리 스트링 가져오기
@@ -547,7 +529,7 @@ public class AdminServiceImpl implements AdminService{
 
 	            return "redirect:" + refererUri.getPath() + "?" + newQuery;
 	        }
-	        catch (URISyntaxException e) {
+	        catch(URISyntaxException e) {
 	            e.printStackTrace();
 	        }
 	    }
@@ -560,7 +542,7 @@ public class AdminServiceImpl implements AdminService{
 		String rid=request.getParameter("reservid");
 		rmapper.payReturn(rid);
 		
-		if (referer != null && !referer.isEmpty()) {
+		if(referer != null && !referer.isEmpty()) {
 	        try {
 	            URI refererUri = new URI(referer);
 	            String query = refererUri.getQuery(); // 기존 쿼리 스트링 가져오기
@@ -572,7 +554,7 @@ public class AdminServiceImpl implements AdminService{
 
 	            return "redirect:" + refererUri.getPath() + "?" + newQuery;
 	        }
-	        catch (URISyntaxException e) {
+	        catch(URISyntaxException e) {
 	            e.printStackTrace();
 	        }
 	    }
@@ -611,7 +593,7 @@ public class AdminServiceImpl implements AdminService{
 			
 			return "redirect:/admin/routesList";
 		}
-		catch (Exception e) {
+		catch(Exception e) {
 			redirectAttributes.addFlashAttribute("message", "오류가 발생했습니다: " + e.getMessage());
 			return "redirect:/admin/addRoute";
 		}
@@ -639,6 +621,6 @@ public class AdminServiceImpl implements AdminService{
 			}
 		}
 	}
-
-
+	
+	
 }

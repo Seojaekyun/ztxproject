@@ -19,7 +19,7 @@
 	}
 	body {
 		margin: auto;
-		font-family: "Noto Sans KR", sans-serif !important;
+		font-family: "Noto Sans KR", arial, sans-serif !important;
 	}
 	header {
 		width: 100%;
@@ -132,7 +132,6 @@
 	#s1container nav {
 		display: flex;
 		line-height: 30px !important;
-		font-family: Arial, sans-serif;
 		font-size: 16px;
 	}
 	#s1container nav a {
@@ -188,21 +187,9 @@
 	#logocontainer > #logoimg {
 		width: 50px;
 		height: 50px;
+		padding-left: 10px;
 		background: none;
 		display: inline-block;
-	}
-	#logocontainer > #logotext {
-		height: 95px;
-		width: 200px;
-		background: none;
-		font-size: 25px;
-		font-weight: 900;
-		line-height: 95px;
-		display: inline-block;
-	}
-	#logotext a {
-		text-decoration: none;
-		color: white;
 	}
 	#s2container > #nav {
 		margin-right: 150px;
@@ -286,19 +273,6 @@
 		background: none;
 		display: inline-block;
 	}
-	#sub > #section2 > #s2container > #logocontainer > #logotext {
-		height: 95px;
-		width: 200px;
-		background: none;
-		font-size: 25px;
-		font-weight: 900;
-		line-height: 95px;
-		display: inline-block;
-	}
-	#sub > #section2 > #s2container > #logocontainer > #logotext a {
-		text-decoration: none !important;
-		color: black !important;
-	}
 	#sub > #section2 > #s2container > #nav {
 		margin-right: 150px;
 		display: flex;
@@ -381,11 +355,10 @@
 		background: #343c45;
 		color: white;
 		text-align: center;
-		font-family: 'Hahmlet';
 		font-size: 10px;
 		margin-top: 40px;
 	}
-	#footerbox {
+	#footerbox1, #footerbox2 {
 		display: flex;
 		justify-content: space-around;
 	}
@@ -408,14 +381,12 @@
 		font-size: 25px;
 		line-height: 50px;
 		font-weight: 900;
-		font-family: Arial, sans-serif;
 	}
 	.footer-logo img {
-		height: 50px;
+		height: 25px;
 	}
 	#logof {
-		width: 100%;
-		min-width: 1000px;
+		width: 1000px;
 		height: 50px;
 		background: #343c45;
 		align-items: center;
@@ -436,10 +407,12 @@
 		margin-bottom: 5px;
 	}
 	.footer {
-		width: 850px;
-		height: 60px;
-		color: white !important;
-		text-align: right;
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+		width: 1000px;
+		margin: auto;
+		flex-wrap: wrap;
 		font-size: 14px;
 		line-height: 60px;
 	}
@@ -514,7 +487,6 @@
 		display: none;
 		flex-direction: column;
 		overflow: hidden;
-		font-family: Arial, sans-serif;
 		z-index: 9999;
 	}
 	#chat-header {
@@ -622,7 +594,6 @@
 		border-radius: 30px;
 		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 		transition: background-color 0.3s;
-		font-family: Arial, sans-serif;
 		font-size: 30px;
 		z-index: 9999;
 	}
@@ -750,12 +721,7 @@
 				<div id="logocontainer">
 					<div id="logoimg">
 						<a href="/main/index">
-							<img src="../static/resources/train(white).png" height="50px" align="middle">
-						</a>
-					</div>
-					<div id="logotext">
-						<a href="/main/index">
-							GGoRail
+							<img src="../static/resources/ggorail(white).png" height="30px" align="middle">
 						</a>
 					</div>
 				</div>
@@ -787,12 +753,7 @@
 						<div id="logocontainer">
 							<div id="logoimg">
 								<a href="/main/index">
-									<img src="../static/resources/train(black).png" height="50px" align="middle">
-								</a>
-							</div>
-							<div id="logotext">
-								<a href="/main/index">
-									Let's GGoRail
+									<img src="../static/resources/ggorail(blue).png" height="30px" align="middle">
 								</a>
 							</div>
 						</div>
@@ -960,6 +921,14 @@
 	// 페이지 로드 후 메시지 요청 시작
 	pollMessages();
 
+	function goToSite(select) {
+		const url = select.value;
+		if(url) {
+			window.open(url, "_blank");
+			select.selectedIndex = 0;
+		}
+	}
+
 </script>
   
 	<!-- 채팅 상담 버튼 -->
@@ -980,27 +949,30 @@
 <sitemesh:write property="body" />
 	
 	<footer>
-		<div class="footer" style="color: white">
-			이용약관 ㆍ 여객운송약관 및 부속약관 ㆍ 개인정보처리방침 ㆍ 이메일무단수집거부 ㆍ 저작권정책지원 ㆍ 브라우저 안내
+		<div id="footerbox1">
+			<div class="footer" style="color: white">
+				이용약관 ㆍ 여객운송약관 및 부속약관 ㆍ 개인정보처리방침 ㆍ 이메일무단수집거부 ㆍ 저작권정책지원 ㆍ 브라우저 안내
+			</div>
+			<div id="famsite">
+			</div>
 		</div>
-		<div id="footerbox">
+		<div id="footerbox2">
 			<div class="footer-container">
 				<div class="footer-info">
-					<div>(주)MonoRail | 대표이사 : 철이 | 사업자등록 : 314-82-99999 | 통신판매업신고 : 은하철도-999</div>
+					<div>(주)GgoRail | 대표이사 : 철이 | 사업자등록 : 314-82-99999 | 통신판매업신고 : 은하철도-999</div>
 					<div>본사 : 경기도 파주시 야당동 | TEL: 090-888-1234(유료) | 전화번호 : 010-1234-5678</div>
 				</div>
 				<div class="footer-logo">
-						<img alt="logo" src="../static/resources/train(white).png" align="top">
-						GGoRail
-					</div>
+					<img alt="logo" src="../static/resources/ggorail(white).png" align="top">
+				</div>
 			</div>
 			<div id="famsite">
-				<select>
+				<select onchange="goToSite(this)">
 					<option>패밀리 사이트</option>
-					<option>eLT항공</option>
-					<option>차차고속</option>
-					<option>모두의 렌탈</option>
-					<option>아고다</option>
+					<option value="https://www.koreanair.com/">대한항공</option>
+					<option value="https://www.kobus.co.kr/main.do">코버스</option>
+					<option value="https://kr.trip.com/?locale=ko-KR&curr=KRW">트립닷컴</option>
+					<option value="https://www.agoda.com/ko-kr/?ds=KhSAhFMDhlLeCC8Q">아고다</option>
 				</select>
 			</div>
 		</div>

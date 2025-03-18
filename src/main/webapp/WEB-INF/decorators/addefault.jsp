@@ -8,7 +8,7 @@
 <style>
 	body {
 		margin: 0;
-		font-family: 'Noto Sans KR', sans-serif;
+		font-family: "Noto Sans KR", arial, sans-serif;
 		box-sizing: border-box;
 	}
 	header {
