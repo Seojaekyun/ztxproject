@@ -58,7 +58,7 @@
 		    <a href="../gongji/list">공지 사항</a>
 		    <a href="../inquiry/inquiryList">Q＆A</a>
 		    <a href="#">이벤트</a>
-		    <a href="#">여행 후기</a>
+		    <a href="../review/list">여행 후기</a>
 		</div>
 	</div>
 	<div class="csccont">

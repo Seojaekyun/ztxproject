@@ -18,10 +18,9 @@ public class ReviewController {
 	@Qualifier("rev")
 	private ReviewService service;
 	
-	@GetMapping("/review/reviewList")
-	public String reviewList(HttpServletRequest request, Model model, HttpSession session)
-	{
-		return service.reviewList(request, model, session);
+	@GetMapping("/review/list")
+	public String list(HttpServletRequest request, Model model, HttpSession session) {
+		return service.list(request, model, session);
 	}
 
 }

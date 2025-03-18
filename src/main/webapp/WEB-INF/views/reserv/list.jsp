@@ -131,7 +131,12 @@
 			</tr>
 			<c:forEach items="${reslist}" var="resdto">
 			<c:if test="${resdto.userid == userid}">
+			<c:if test="${resdto.state == 3}">
+			<tr style="background: lightgray; text-decoration: line-through;">
+			</c:if>
+			<c:if test="${resdto.state != 3}">
 			<tr>
+			</c:if>
 				<td>
 					<c:if test="${resdto.payment == 0 && resdto.state != 3}">
 					<input type="checkbox" name="PNR" value="${resdto.PNR }">
@@ -145,7 +150,7 @@
 				 	<a href="/user/myRsvDetail?PNR=${resdto.PNR}"> ${resdto.PNR} </a>
 				 	</c:if> 
 				 	<c:if test="${resdto.state == 3}">
-				 	<span>${resdto.PNR}</span>
+				 	${resdto.PNR}
 				 	</c:if>
 				</td>
 				<td> ${resdto.reservday} </td>
@@ -208,7 +213,7 @@
 		<a href="list?page=${page-1}"> ◀️ </a>
 		</c:if>
 		<c:if test="${page == 1}">
-		◅
+		◁
 		</c:if>
 		
 		<c:forEach var="i" begin="${pstart}" end="${pend}">
@@ -224,7 +229,7 @@
 		<a href="list?page=${page+1}"> ▶️ </a>
 		</c:if>
 		<c:if test="${page == chong}">
-		▻
+		▷
 		</c:if>
 		
 		<c:if test="${pend != chong}">

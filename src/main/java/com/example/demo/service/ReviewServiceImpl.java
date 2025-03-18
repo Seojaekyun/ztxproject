@@ -21,7 +21,7 @@ public class ReviewServiceImpl implements ReviewService {
 	private ReviewMapper mapper;
 
 	@Override
-	public String reviewList(HttpServletRequest request, Model model, HttpSession session) {
+	public String list(HttpServletRequest request, Model model, HttpSession session) {
 		String userid=session.getAttribute("userid").toString();
 		if(userid == null) {
 			return "redirect:/login/login";
@@ -31,7 +31,7 @@ public class ReviewServiceImpl implements ReviewService {
 			ArrayList<ReviewDto> revlist=mapper.list(index);
 			model.addAttribute("revlist", revlist);
 			
-			return "/review/reviewList"; 
+			return "/review/list"; 
 		}
 	}
 	

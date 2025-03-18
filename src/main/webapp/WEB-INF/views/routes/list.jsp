@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>항공편 확인</title>
+<title>열차편 확인</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -171,33 +171,31 @@ $(function() {
 		<div><a href="../routes/list">운행 정보</a></div>
 	</nav>
 	<div class="container">
-	<h2>운행 정보</h2>
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th>NO.</th>
-                <th>출발지</th>
-                <th>도착지</th>
-                <th>출발시간</th>
-                <th>도착시간</th>
-                <th>열차명</th>
-            </tr>
-        </thead>
-        <tbody>
-            <c:forEach var="route" items="${routeList}">
-                <tr>
-                    <td>${route.routeid}</td>
-                    <td>${route.departure}</td>
-                    <td>${route.arrival}</td>
-                    <td>${route.departureTime}</td>
-                    <td>${route.arrivalTime}</td>
-                    <td>은하-${route.trainid}호</td>
-                </tr>
-            </c:forEach>
-        </tbody>
-    </table>
-
-    <!-- 페이지 네이션 -->
+	    <table class="table table-hover">
+	        <thead>
+	            <tr>
+	                <th>NO.</th>
+	                <th>출발지</th>
+	                <th>도착지</th>
+	                <th>출발시간</th>
+	                <th>도착시간</th>
+	                <th>열차명</th>
+	            </tr>
+	        </thead>
+	        <tbody>
+	            <c:forEach var="route" items="${routeList}">
+	                <tr>
+	                    <td>${route.routeid}</td>
+	                    <td>${route.departure}</td>
+	                    <td>${route.arrival}</td>
+	                    <td>${route.departureTime}</td>
+	                    <td>${route.arrivalTime}</td>
+	                    <td>은하-${route.trainid}호</td>
+	                </tr>
+	            </c:forEach>
+	        </tbody>
+	    </table>
+    	<!-- 페이지 네이션 -->
 	    <div class="pagination">
 		    <c:if test="${currentPage > 1}">
 		        <a href="?page=${currentPage - 1}&selectedDate=${selectedDate}&departureAirport=${departureAirport}&arrivalAirport=${arrivalAirport}">이전</a>
@@ -213,7 +211,6 @@ $(function() {
 		        <a href="?page=${currentPage + 1}&selectedDate=${selectedDate}&departureAirport=${departureAirport}&arrivalAirport=${arrivalAirport}">다음</a>
 		    </c:if>
 		</div>
-
 	</div>
 </section>
 </body>

@@ -90,45 +90,44 @@
         font-weight: 700;
     }
     .csc {
-        background-color: #078EB9;
-        color: white;
-        padding: 15px;
-        text-align: center;
-        font-size: 18px;
-        font-weight: 600;
-    }
-    .cscmc {
-    	width: 100%;
-    	background: #078EB9;
-    }
-    .cscmenu {
-    	width: 600px;
-        display: flex;
-        justify-content: space-around;
-        background: #078EB9;
-        padding: 10px;
-        margin: auto;
-    }
-    .cscmenu a {
-        color: white;
-        text-decoration: none;
-        font-weight: bold;
-    }
+		background-color: #078EB9;
+		color: white;
+		padding: 20px;
+		text-align: center;
+		font-size: 24px;
+		font-weight: 600;
+	}
+	.cscmc {
+		width: 100%;
+		background: white;
+	}
+	.cscmenu {
+		width: 600px;
+		display: flex;
+		justify-content: space-around;
+		background: white;
+		padding: 10px;
+		margin: auto;
+	}
+	.cscmenu a {
+		color: black;
+		text-decoration: none;
+		font-weight: bold;
+	}
 </style>
 </head>
 <body>
-<div class="csc">꼬레일 고객센터</div>
+<div class="csc">Q＆A</div>
 <div class="cscmc">
- <div class="cscmenu">
-     <a href="../gongji/list">공지 사항</a>
-     <a href="../inquiry/inquiryList">Q＆A</a>
-     <a href="#">이벤트</a>
-     <a href="#">여행 후기</a>
- </div>
+	<div class="cscmenu">
+	    <a href="../gongji/list">공지 사항</a>
+	    <a href="../inquiry/inquiryList">Q＆A</a>
+	    <a href="#">이벤트</a>
+	    <a href="../review/list">여행 후기</a>
+	</div>
 </div>
  <section>
  <div id="tablebox">
-    <h2>Q＆A</h2>
     <table>
         <thead>
             <tr>

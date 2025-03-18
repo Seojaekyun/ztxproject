@@ -48,7 +48,6 @@
 		color: #555;
 	}
 	.train-details {
-		display: none;
 		margin-top: 15px;
 		padding-top: 10px;
 		border-top: 1px solid #ddd;
@@ -141,31 +140,15 @@
 			</div>
 		</div>
 		<div class="pnr-box">예약 번호: ${rsv.PNR}</div>
-		<div class="toggle-details" onclick="toggleDetails('going-details')">세부 사항 보기 ▼</div>
 		<div id="going-details" class="train-details">
 			<div class="details-item">출발지: ${rsv.routeDeparture}</div>
 			<div class="details-item">도착지: ${rsv.routeArrival}</div>
 			<div class="details-item">탑승 인원: ${rsv.resnum}명</div>
 			<div class="details-item">총 결제 금액: <fmt:formatNumber value="${rsv.charge}" type="number"/>원</div>
 		</div>
-		<c:if test="${(rsv.state == 0)||(rsv.state == 1)}">
-		<a href="/reserv/cancelOffer?PNR=${rsv.PNR}"><input type="button" id="clsbtn" value="예약취소"></a>
-		</c:if>
 	</div>
 	</c:forEach>
 	<button onclick="window.location.href='../main/index';">처음으로</button>
-
-<script>
-	function toggleDetails(id) {
-		var details = document.getElementById(id);
-		if (details.style.display === 'none' || details.style.display === '') {
-			details.style.display = 'block';
-		}
-		else {
-			details.style.display = 'none';
-		}
-	}
-</script>
 
 </body>
 </html>

@@ -115,7 +115,6 @@
 		<div><a href="../routes/list">운행 정보</a></div>
 	</nav>
 	<div class="container">
-		<h2>예약 조회</h2>
 		<form id="reservForm" action="${pageContext.request.contextPath}/reserv/oneRsvDetail" method="get">
 			<!-- 예약 번호 -->
 			<div class="form-group">

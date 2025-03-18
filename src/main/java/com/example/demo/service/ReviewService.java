@@ -6,6 +6,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 public interface ReviewService {
-	String reviewList(HttpServletRequest request, Model model, HttpSession session);
+	String list(HttpServletRequest request, Model model, HttpSession session);
 
 }
