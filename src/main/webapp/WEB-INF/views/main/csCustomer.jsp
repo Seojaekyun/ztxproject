@@ -13,6 +13,15 @@
 		padding: 0;
 		background-color: #f4f4f4;
 	}
+	main {
+		top: -95px;
+		position: relative;
+	}
+	.nullbox {
+		height: 95px;
+		display: flex;
+		background-color: #078EB9;
+	}
 	.csc {
 		background-color: #078EB9;
 		color: white;
@@ -52,6 +61,8 @@
 </style>
 </head>
 <body>
+<main>
+	<div class="nullbox"></div>
 	<div class="csc">고객센터</div>
 	<div class="cscmc">
 		<div class="cscmenu">
@@ -67,5 +78,6 @@
 			<p>코레일 고객센터에 오신 것을 환영합니다. 궁금하신 사항을 검색하거나 고객센터에 문의해 주세요.</p>
 		</div>
 	</div>
+</main>
 </body>
 </html>

@@ -11,6 +11,15 @@
     margin:0;
     padding:0;
   }
+  main {
+		top: -95px;
+		position: relative;
+	}
+	.nullbox {
+		height: 95px;
+		display: flex;
+		background-color: #078EB9;
+	}
   section {
     width:100%;
     max-width:500px;
@@ -114,6 +123,8 @@
 </script>
 </head>
 <body> <!-- login/login.jsp -->
+<main>
+	<div class="nullbox"></div>
  <section>
   <h3>로그인</h3>
   <form method="post" action="loginOk" name="lform" onsubmit="return check()">
@@ -138,5 +149,6 @@
 	
  </section>
  <a href="loginAd"><span style="font-size: 30px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
+</main>
 </body>
 </html>

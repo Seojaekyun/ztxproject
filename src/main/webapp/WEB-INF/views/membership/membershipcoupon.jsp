@@ -3,66 +3,77 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>ZTX 마일리지 & 회원쿠폰</title>
-    <link rel="stylesheet" type="text/css" href="/resources/css/style.css">
-    <style>
-        .membership-container {
-            width: 1100px;
-            margin: auto;
-            padding: 20px;
-        }
-        .section-title {
-            font-size: 22px;
-            font-weight: bold;
-            margin-bottom: 15px;
-            color: #003366;
-            border-bottom: 2px solid #003366;
-            padding-bottom: 5px;
-        }
-        .exclusion-box {
-            background-color: #f9f9f9;
-            padding: 20px;
-            border-left: 5px solid #cc0000;
-            margin-top: 20px;
-            border-radius: 8px;
-        }
-        .info-box {
-            background-color: #f9f9f9;
-            padding: 15px;
-            border-left: 5px solid #003366;
-            margin-bottom: 20px;
-        }
-        .highlight {
-            font-weight: bold;
-            color: #cc0000;
-        }
-        .benefit-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        .benefit-table th, .benefit-table td {
-            border: 1px solid #ddd;
-            padding: 12px;
-            text-align: center;
-        }
-        .benefit-table th {
-            background-color: #003366;
-            color: white;
-        }
-        .button {
-            display: inline-block;
-            padding: 10px 15px;
-            background-color: #0073e6;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            margin-top: 10px;
-        }
-    </style>
+<meta charset="UTF-8">
+<title>ZTX 마일리지 & 회원쿠폰</title>
+<link rel="stylesheet" type="text/css" href="/resources/css/style.css">
+<style>
+	main {
+		top: -95px;
+		position: relative;
+	}
+	.nullbox {
+		height: 95px;
+		display: flex;
+		background-color: #078EB9;
+	}
+    .membership-container {
+        width: 1100px;
+        margin: auto;
+        padding: 20px;
+    }
+    .section-title {
+        font-size: 22px;
+        font-weight: bold;
+        margin-bottom: 15px;
+        color: #003366;
+        border-bottom: 2px solid #003366;
+        padding-bottom: 5px;
+    }
+    .exclusion-box {
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-left: 5px solid #cc0000;
+        margin-top: 20px;
+        border-radius: 8px;
+    }
+    .info-box {
+        background-color: #f9f9f9;
+        padding: 15px;
+        border-left: 5px solid #003366;
+        margin-bottom: 20px;
+    }
+    .highlight {
+        font-weight: bold;
+        color: #cc0000;
+    }
+    .benefit-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+    .benefit-table th, .benefit-table td {
+        border: 1px solid #ddd;
+        padding: 12px;
+        text-align: center;
+    }
+    .benefit-table th {
+        background-color: #003366;
+        color: white;
+    }
+    .button {
+        display: inline-block;
+        padding: 10px 15px;
+        background-color: #0073e6;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        margin-top: 10px;
+    }
+</style>
 </head>
 <body>
+<main>
+	<div class="nullbox"></div>
     <div class="membership-container">
         <h2 class="section-title">ZTX 마일리지 이용안내</h2>
         <div class="info-box">
@@ -203,5 +214,6 @@
         <p>2. 승차권 예매 시 마일리지 사용 선택</p>
         <p>3. 결제 진행 후 마일리지 차감</p>
     </div>
+</main>
 </body>
 </html>

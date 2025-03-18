@@ -155,7 +155,7 @@
 		width: 100%;
 		height: 95px;
 		z-index: 10;
-		background: rgba(0,0,0,0.6);
+		background: rgba(0,0,0,0.45);
 		position: relative;
 	}
 	#s2container {

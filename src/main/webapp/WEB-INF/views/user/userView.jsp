@@ -10,7 +10,16 @@
 		font-family: Arial, sans-serif;
 		background-color: #f8f8f8;
 		margin: 0;
-		padding: 20px;
+		padding: 0px;
+	}
+	main {
+		top: -95px;
+		position: relative;
+	}
+	.nullbox {
+		height: 95px;
+		display: flex;
+		background-color: #078EB9;
 	}
 	section {
 		width: 1000px;
@@ -233,92 +242,94 @@
 	
 </script>
 </head>
-<body> 
- <section>
-    <!-- 상단 회원 정보 -->
-    <div class="profile-header">
-		<div class="profile-info">
-			<div class="profile-item">
-				<h2>성명</h2>
-				<span>${udto.name}</span>
-			</div>
-			<div class=profile-divider></div>
-			<div class="profile-item">
-				<h2>아이디</h2>
-				<span>${udto.userid}</span>
-			</div>
-		</div>
-        <!-- 비밀번호 변경 -->
-		<div class="section-box">
-			<h3>비밀번호</h3>
-			<p>회원님의 소중한 개인정보 보호를 위해 비밀번호를 주기적으로 변경해 주세요.</p>
-			<span style="font-size:14px;cursor:pointer;" onclick="pwdChg(this)">
-				<c:if test="${err == null}"><b>비밀번호 변경</b></c:if>
-				<c:if test="${err == 1}"><b>비밀번호 변경취소</b></c:if>
-			</span>
-			<div id="pwdChg" style="display:none; margin-top:10px;">
-				<form name="mform" method="post" action="pwdChg">
-				<input type="password" name="oldPwd" placeholder="기존 비밀번호"><br>
-				<input type="password" name="pwd" placeholder="새 비밀번호" onkeyup="pwdCheck()"><br>
-				<input type="password" name="pwd2" placeholder="새 비밀번호 확인" onkeyup="pwdCheck()"><br>
-				<br> <span style="margin-bottom: 15px; margin-top: -25px;" id="pmsg"></span>
-				<input id="submit" type="submit" value="비밀번호 변경">
-				</form>
-			</div>
-		</div>
-		<!-- 기본정보 수정 -->
-		<div class="section-box">
-			<h3>기본정보</h3>
-			<p>이메일, 연락처 정보를 변경할 수 있습니다.</p>
-			<div class=txt-divider></div>
-			<div class="etc_aligner">
-				<div class="email">
-					<div id="emailOne" class="email_aligner">
-						<span>${udto.email}</span>  
-						<span style="font-size:14px;cursor:pointer;" onclick="emailTwo(this)">
-							<c:if test="${err == null}"><b>이메일 수정</b></c:if>
-							<c:if test="${err == 1}"><b>이메일 수정취소</b></c:if>
-						</span>
-					</div>
-					<div id="emailTwo" class="email_aligner" style="display:none;margin-top:10px;">
-						<form method="post" action="emailEdit">
-						<input type="text" name="email" value="${udto.email}">
-						<input type="submit" value="수정">
-						</form>
-					</div>
+<body>
+<main>
+	<div class="nullbox"></div>
+	 <section>
+	    <!-- 상단 회원 정보 -->
+	    <div class="profile-header">
+			<div class="profile-info">
+				<div class="profile-item">
+					<h2>성명</h2>
+					<span>${udto.name}</span>
 				</div>
-				<div class="phone">
-					<div id="phoneOne" class="phone_aligner">
-						<span>${udto.phone}</span> 
-						<span style="font-size:14px;cursor:pointer;" onclick="phoneTwo(this)">
-							<c:if test="${err == null}"><b>연락처 수정</b></c:if>
-							<c:if test="${err == 1}"><b>연락처 수정취소</b></c:if>
-						</span>
-					</div>
-					<div id="phoneTwo" class="phone_aligner" style="display:none;margin-top:10px;">
-						<form method="post" action="phoneEdit">
-						<input type="text" name="phone" value="${udto.phone}">
-						<input type="submit" value="수정">
-						</form>
-					</div>
+				<div class=profile-divider></div>
+				<div class="profile-item">
+					<h2>아이디</h2>
+					<span>${udto.userid}</span>
 				</div>
 			</div>
-		</div>
-		<div class="delete_id">
-			<c:choose>
-			<c:when test="${udto.level == 0 || udto.level == 1 || udto.level == 2 || udto.level == 6}">
-			<a href="../user/reqOut"><input type="button" value="탈퇴신청" id="outbtn"></a>
-			</c:when>
-			<c:when test="${udto.level == 3}">
-			<span>탈퇴승인중 | <a href="../user/recoveryid"><input type="button" value="탈퇴취소" id="outbtn"></a></span>
-			</c:when>
-			<c:when test="${udto.level == 5}">
-			<span>복구승인중 | <a href="../user/reqOut">탈퇴 신청 ></a></span>
-			</c:when>
-			</c:choose>
-		</div>
-    </div>
-</section>
-
+	        <!-- 비밀번호 변경 -->
+			<div class="section-box">
+				<h3>비밀번호</h3>
+				<p>회원님의 소중한 개인정보 보호를 위해 비밀번호를 주기적으로 변경해 주세요.</p>
+				<span style="font-size:14px;cursor:pointer;" onclick="pwdChg(this)">
+					<c:if test="${err == null}"><b>비밀번호 변경</b></c:if>
+					<c:if test="${err == 1}"><b>비밀번호 변경취소</b></c:if>
+				</span>
+				<div id="pwdChg" style="display:none; margin-top:10px;">
+					<form name="mform" method="post" action="pwdChg">
+					<input type="password" name="oldPwd" placeholder="기존 비밀번호"><br>
+					<input type="password" name="pwd" placeholder="새 비밀번호" onkeyup="pwdCheck()"><br>
+					<input type="password" name="pwd2" placeholder="새 비밀번호 확인" onkeyup="pwdCheck()"><br>
+					<br> <span style="margin-bottom: 15px; margin-top: -25px;" id="pmsg"></span>
+					<input id="submit" type="submit" value="비밀번호 변경">
+					</form>
+				</div>
+			</div>
+			<!-- 기본정보 수정 -->
+			<div class="section-box">
+				<h3>기본정보</h3>
+				<p>이메일, 연락처 정보를 변경할 수 있습니다.</p>
+				<div class=txt-divider></div>
+				<div class="etc_aligner">
+					<div class="email">
+						<div id="emailOne" class="email_aligner">
+							<span>${udto.email}</span>  
+							<span style="font-size:14px;cursor:pointer;" onclick="emailTwo(this)">
+								<c:if test="${err == null}"><b>이메일 수정</b></c:if>
+								<c:if test="${err == 1}"><b>이메일 수정취소</b></c:if>
+							</span>
+						</div>
+						<div id="emailTwo" class="email_aligner" style="display:none;margin-top:10px;">
+							<form method="post" action="emailEdit">
+							<input type="text" name="email" value="${udto.email}">
+							<input type="submit" value="수정">
+							</form>
+						</div>
+					</div>
+					<div class="phone">
+						<div id="phoneOne" class="phone_aligner">
+							<span>${udto.phone}</span> 
+							<span style="font-size:14px;cursor:pointer;" onclick="phoneTwo(this)">
+								<c:if test="${err == null}"><b>연락처 수정</b></c:if>
+								<c:if test="${err == 1}"><b>연락처 수정취소</b></c:if>
+							</span>
+						</div>
+						<div id="phoneTwo" class="phone_aligner" style="display:none;margin-top:10px;">
+							<form method="post" action="phoneEdit">
+							<input type="text" name="phone" value="${udto.phone}">
+							<input type="submit" value="수정">
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="delete_id">
+				<c:choose>
+				<c:when test="${udto.level == 0 || udto.level == 1 || udto.level == 2 || udto.level == 6}">
+				<a href="../user/reqOut"><input type="button" value="탈퇴신청" id="outbtn"></a>
+				</c:when>
+				<c:when test="${udto.level == 3}">
+				<span>탈퇴승인중 | <a href="../user/recoveryid"><input type="button" value="탈퇴취소" id="outbtn"></a></span>
+				</c:when>
+				<c:when test="${udto.level == 5}">
+				<span>복구승인중 | <a href="../user/reqOut">탈퇴 신청 ></a></span>
+				</c:when>
+				</c:choose>
+			</div>
+	    </div>
+	</section>
+</main>
 </body>
 </html>

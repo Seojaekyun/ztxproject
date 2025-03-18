@@ -2,51 +2,62 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>코레일 멤버십</title>
-    <link rel="stylesheet" type="text/css" href="/resources/css/style.css">
-    <style>
-        .membership-container {
-            width: 1100px;
-            margin: auto;
-            padding: 40px 20px;
-            background-color: #ffffff;
-            border-radius: 10px;
-        }
-        .section {
-            padding: 25px 20px;
-            border-bottom: 1px solid #ddd;
-            margin-bottom: 20px;
-        }
-        .section-title {
-            font-size: 22px;
-            font-weight: bold;
-            margin-bottom: 15px;
-            color: #003366;
-        }
-        .info-box {
-            background-color: #f4f4f4;
-            padding: 15px;
-            border-radius: 8px;
-            border-left: 5px solid #003366;
-            margin-bottom: 15px;
-        }
-        .highlight {
-            font-weight: bold;
-            color: #cc0000;
-        }
-        .button {
-            display: inline-block;
-            padding: 10px 15px;
-            background-color: #0073e6;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            margin-top: 10px;
-        }
-    </style>
+<meta charset="UTF-8">
+<title>코레일 멤버십</title>
+<link rel="stylesheet" type="text/css" href="/resources/css/style.css">
+<style>
+	main {
+		top: -95px;
+		position: relative;
+	}
+	.nullbox {
+		height: 95px;
+		display: flex;
+		background-color: #078EB9;
+	}
+    .membership-container {
+        width: 1100px;
+        margin: auto;
+        padding: 40px 20px;
+        background-color: #ffffff;
+        border-radius: 10px;
+    }
+    .section {
+        padding: 25px 20px;
+        border-bottom: 1px solid #ddd;
+        margin-bottom: 20px;
+    }
+    .section-title {
+        font-size: 22px;
+        font-weight: bold;
+        margin-bottom: 15px;
+        color: #003366;
+    }
+    .info-box {
+        background-color: #f4f4f4;
+        padding: 15px;
+        border-radius: 8px;
+        border-left: 5px solid #003366;
+        margin-bottom: 15px;
+    }
+    .highlight {
+        font-weight: bold;
+        color: #cc0000;
+    }
+    .button {
+        display: inline-block;
+        padding: 10px 15px;
+        background-color: #0073e6;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        margin-top: 10px;
+    }
+</style>
 </head>
 <body>
+<main>
+	<div class="nullbox"></div>
     <div class="membership-container">
         <h2 class="section-title">가입방법</h2>
         <div class="info-box">
@@ -68,5 +79,6 @@
             <li>철도 관련 여행명소, 이벤트 등 공지사항 수신</li>
         </ul>
     </div>
+</main>
 </body>
 </html>

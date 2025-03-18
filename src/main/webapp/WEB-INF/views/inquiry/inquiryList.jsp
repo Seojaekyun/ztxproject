@@ -12,6 +12,15 @@
      margin: 0;
      padding: 0;
    }
+   	main {
+		top: -95px;
+		position: relative;
+	}
+	.nullbox {
+		height: 95px;
+		display: flex;
+		background-color: #078EB9;
+	}
    section {
      width: 1000px;
      height: 550px;
@@ -117,6 +126,8 @@
 </style>
 </head>
 <body>
+<main>
+	<div class="nullbox"></div>
 <div class="csc">Q＆A</div>
 <div class="cscmc">
 	<div class="cscmenu">
@@ -189,6 +200,6 @@
     <a href="/inquiry/inquiryWrite" class="btn">문의 하기</a>
     </div>
  </section>
-
+</main>
 </body>
 </html>
