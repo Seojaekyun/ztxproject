@@ -15,63 +15,61 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class InquiryController {
 
-    @Autowired
-    private InquiryService service;
+	@Autowired
+	private InquiryService service;
 
-    @GetMapping("/inquiry/inquiryList")
-    public String inquiryList(@RequestParam(defaultValue = "1") int page, HttpSession session, Model model) {
-        return service.inquiryList(page, session, model);
-    }
+	@GetMapping("/inquiry/inquiryList")
+	public String inquiryList(@RequestParam(defaultValue = "1") int page, HttpSession session, Model model) {
+		return service.inquiryList(page, session, model);
+	}
 
-    @GetMapping("/inquiry/inquiryMyList")
-    public String inquiryMyList(@RequestParam(defaultValue = "1") int page, HttpSession session, Model model) {
-        return service.inquiryMyList(page, session, model);
-    }
+	@GetMapping("/inquiry/inquiryMyList")
+	public String inquiryMyList(@RequestParam(defaultValue = "1") int page, HttpSession session, Model model) {
+		return service.inquiryMyList(page, session, model);
+	}
 
-    @GetMapping("/inquiry/inquiryWrite")
-    public String inquiryWrite(HttpSession session, Model model) {
-        String userid = (String) session.getAttribute("userid");
+	@GetMapping("/inquiry/inquiryWrite")
+	public String inquiryWrite(HttpSession session, Model model) {
+		String userid = (String) session.getAttribute("userid");
 
-        if (userid != null) {
-            // ✅ 회원 정보 조회 후 model에 저장
-            InquiryDto userInfo = service.getUserInfo(userid);
-            model.addAttribute("userInfo", userInfo);
-        }
+		if (userid != null) {
 
-        return "/inquiry/inquiryWrite";
-    }
-    
-    @PostMapping("/inquiry/inquiryWriteOk")
-    public String inquiryWriteOk(InquiryDto idto, HttpSession session, Model model) {
-    	return service.inquiryWriteOk(idto, session, model);
-    }
-    
-    @GetMapping("/inquiry/readnum")
+			InquiryDto userInfo = service.getUserInfo(userid);
+			model.addAttribute("userInfo", userInfo);
+		}
+
+		return "/inquiry/inquiryWrite";
+	}
+
+	@PostMapping("/inquiry/inquiryWriteOk")
+	public String inquiryWriteOk(InquiryDto idto, HttpSession session, Model model) {
+		return service.inquiryWriteOk(idto, session, model);
+	}
+
+	@GetMapping("/inquiry/readnum")
 	public String readnum(HttpServletRequest request) {
 		return service.readnum(request);
 	}
-    
-    @GetMapping("/inquiry/inquiryContent")
-    public String inquiryContent(HttpServletRequest request, HttpSession session, Model model) {
-        return service.inquiryContent(request, session, model);
-    }
-    
-    @GetMapping("/inquiry/inquiryUpdate")
-    public String inquiryUpdate(@RequestParam int id, Model model , HttpSession session) {
-    	return service.inquiryUpdate(id,model,session);
-    } 
-    
-    @PostMapping("/inquiry/inquiryUpdateOk")
-    public String inquiryUpdateCheckOk(InquiryDto idto,HttpSession session,HttpServletRequest request) {
-        return service.inquiryUpdateOk(idto,session,request);
-    }
 
-    @GetMapping("/inquiry/inquiryDelete")
-    public String inquiryDelete(@RequestParam int id,  @RequestParam(required = false) String pwd,
-    		HttpSession session, Model model) {
-        return service.inquiryDelete(id, pwd, session, model);
-    }
+	@GetMapping("/inquiry/inquiryContent")
+	public String inquiryContent(HttpServletRequest request, HttpSession session, Model model) {
+		return service.inquiryContent(request, session, model);
+	}
 
-    
-    
+	@GetMapping("/inquiry/inquiryUpdate")
+	public String inquiryUpdate(@RequestParam int id, Model model, HttpSession session) {
+		return service.inquiryUpdate(id, model, session);
+	}
+
+	@PostMapping("/inquiry/inquiryUpdateOk")
+	public String inquiryUpdateCheckOk(InquiryDto idto, HttpSession session, HttpServletRequest request) {
+		return service.inquiryUpdateOk(idto, session, request);
+	}
+
+	@GetMapping("/inquiry/inquiryDelete")
+	public String inquiryDelete(@RequestParam int id, @RequestParam(required = false) String pwd, HttpSession session,
+			Model model) {
+		return service.inquiryDelete(id, pwd, session, model);
+	}
+
 }
