@@ -64,14 +64,19 @@ public class MainController {
 	}
 	
 	@GetMapping("/main/trainservice")
-	public String trainservice()
-	{
+	public String trainservice() {
 		return "/main/trainservice";
 	}
 	
 	@GetMapping("/main/theme")
-	public String theme()
-	{
-		return "/main/theme";
+	public String theme() {
+    return "/main/theme";
+  }
+ 
+	@GetMapping("/reserv/reservInfo")
+	public String reservInfo() {
+		return service.reservInfo();
 	}
+  
+  
 }

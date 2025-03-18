@@ -117,6 +117,27 @@ public class RoutesServiceImpl implements RoutesService {
 		}
 	}
 	
+	@Override
+	public String routeList(@RequestParam(required=false, defaultValue="1") Integer page, Model model) {
+		// 전달된 파라미터를 로그로 출력 (디버깅용)
+		//System.out.println("Page Parameter: " + page);
+		int itemsPerPage = 10;  // 페이지당 항목 수
+		int offset = (page - 1) * itemsPerPage;
+		
+		List<RoutesDto> routeList = mapper.getRoutes(offset, itemsPerPage);
+		int totalRoutes = mapper.countRoutes();
+		
+		// 전체 페이지 수 계산
+		int totalPages = (int) Math.ceil((double) totalRoutes / itemsPerPage);
+		
+		// 모델에 항공편 데이터 추가
+		model.addAttribute("routeList", routeList);
+		model.addAttribute("currentPage", page);
+		model.addAttribute("totalPages", totalPages);
+		
+		return "/routes/list";
+	}
+	
 
 	
 	

@@ -72,6 +72,7 @@
 	    align-items: right;
 	    width: 1030px;
 	    justify-content: flex-end;
+	    z-index: 111;
 	}
 	#s1container #loginMenu a {
 		text-decoration: none;
@@ -780,9 +781,9 @@
 					<div class="menu">
 						<div id="subtitle" style="font-size: 22px; border-right: solid 1px lightgray;">승차권</div>
 						<div id="submenu">
-							<div><a href="../reserv/reservation">예약</a></div>
-							<div><a href="../reserv/reserveInfo">예약 조회</a></div>
-							<div><a href="../reserv/routeList">운행 정보</a></div>
+							<div><a href="../reserv/reserv">예약</a></div>
+							<div><a href="../reserv/reservInfo">예약 조회</a></div>
+							<div><a href="../routes/list">운행 정보</a></div>
 						</div>
 					</div>
 				</div>

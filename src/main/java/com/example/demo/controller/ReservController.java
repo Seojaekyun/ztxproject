@@ -19,7 +19,7 @@ public class ReservController {
 	
 	@Autowired
 	@Qualifier("ress")
-	private ReservService resService;
+	private ReservService service;
 	
 	@PostMapping("/reserv/reservCheck")
 	public String reservCheck(@RequestParam int routeid, @RequestParam String routeDeparture,
@@ -27,7 +27,7 @@ public class ReservController {
 			@RequestParam String routeArrivalTime, @RequestParam String selectedSeats,
 			@RequestParam int resnum, @RequestParam int charge, HttpServletRequest request, Model model, HttpSession session) {
 		// 예약 처리 로직 추가
-		return resService.reservCheck(routeid, routeDeparture, routeArrival, routeTime, routeArrivalTime, resnum, charge, selectedSeats, request, model, session);
+		return service.reservCheck(routeid, routeDeparture, routeArrival, routeTime, routeArrivalTime, resnum, charge, selectedSeats, request, model, session);
 	}
 	
 	@PostMapping("/reserv/reservConfirm")
@@ -37,27 +37,32 @@ public class ReservController {
 			@RequestParam String selectedSeats, @RequestParam int resnum, @RequestParam int charge,
 			Model model, HttpSession session) {
 		// 예약 처리 로직 추가
-		return resService.reservConfirm(userid, routeid, routeDeparture, routeArrival, routeTime, routeArrivalTime, resnum, charge, selectedSeats, model, session);
+		return service.reservConfirm(userid, routeid, routeDeparture, routeArrival, routeTime, routeArrivalTime, resnum, charge, selectedSeats, model, session);
 	}
 	
 	@GetMapping("/reserv/list")
 	public String list(HttpSession session, Model model, HttpServletRequest request) {
-		return resService.list(session, model, request);
+		return service.list(session, model, request);
 	}
 	
 	@GetMapping("/reserv/payment")
 	public String payment(HttpSession session, HttpServletRequest request, Model model) {
-		return resService.payment(session, request, model);
+		return service.payment(session, request, model);
 	}
 	
 	@PostMapping("/reserv/chargeOk")
 	public String chargeOk(ReservDto rdto) {
-		return resService.chargeOk(rdto);
+		return service.chargeOk(rdto);
 	}
 	
 	@GetMapping("/reserv/cancelOffer")
 	public String cancelOffer(ReservDto rdto) {
-		return resService.cancelOffer(rdto);
+		return service.cancelOffer(rdto);
 	}
+	
+	@GetMapping("/reserv/oneRsvDetail")
+	public String oneRsvDetail(@RequestParam String PNR, Model model) {
+        return service.oneRsvDetail(PNR, model);
+    }
 	
 }

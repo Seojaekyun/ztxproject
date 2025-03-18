@@ -49,5 +49,9 @@ public class RoutesController {
 		return service.confirmSeats(routeid, selectedSeats, resnum, session, model);
 	}
 	
+	@GetMapping("/routes/list")
+	public String routeList(@RequestParam(required=false, defaultValue="1") Integer page, Model model) {
+		return service.routeList(page, model);
+	}
 
 }

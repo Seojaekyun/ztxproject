@@ -12,6 +12,7 @@ public interface RoutesService {
 	String showSeatSelection(int routeid, int resnum, int page, int size, Model model);
 	String confirmSeats(int routeid, String selectedSeats, int resnum, HttpSession session, Model model);
 	int[] getRouteTime(String departure, String arrival);
+	String routeList(Integer page, Model model);
 	
 	
 }

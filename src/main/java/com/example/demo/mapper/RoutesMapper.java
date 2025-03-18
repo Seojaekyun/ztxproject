@@ -5,7 +5,6 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-
 import com.example.demo.dto.RouteTimeDto;
 import com.example.demo.dto.RoutesDto;
 import com.example.demo.dto.SeatDto;
@@ -33,6 +32,8 @@ public interface RoutesMapper {
 	void addRoutes(String departure, String arrival, String departureTime, String arrivalTime, String ftime, int trainid,
 			int unitPrice);
 	void addSeats();
+	List<RoutesDto> getRoutes(int offset, int itemsPerPage);
+	int countRoutes();
 	
 	
 }
