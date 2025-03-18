@@ -17,7 +17,7 @@
 		background-color: #f4f4f4;
 	}
 	.main_content {
-		height: 1010px;
+		height: 640px;
 		z-index: 2;
 	}
 	.train_service {
@@ -26,7 +26,7 @@
 		background-position: bottom;
 		background-size: cover;
 		width: 100%;
-		height: 1130px;
+		height: 755px;
 		background-repeat: no-repeat;
 		margin: auto;
 		top: -95px;
@@ -108,10 +108,14 @@
 		display: flex;
 		height: 35px;
 	}
-	#schbtn > div > img {
+	#schbtn > div > a {
+		display: flex;
+		align-items: center;
+	}
+	#schbtn > div > a > img {
 		margin: 5px 10px 0 0; 
 		height: 25px;
-		line-height: 35px;
+
 	}
 	@keyframes slideBackground {
 		0% {
@@ -132,7 +136,7 @@
 	}	
 	.booking_contents {
 		position: relative;
-		top: 41.0rem;
+		top: 17.8rem;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -865,11 +869,21 @@
 					</div>
 					<div class="dairy">
 						<div id="schbtn">
-							<div><img src="../static/resources/directions_railway.png">승차권 예매</div>
-							<div><img src="../static/resources/transit_ticket.png">승차권 확인</div>
-							<div><img src="../static/resources/confirmation_number.png">예약 승차권 조회/취소</div>
-							<div><img src="../static/resources/dictionary.png">승차권 이용안내</div>
-							<div><img src="../static/resources/support_agent.png">고객센터</div>
+							<div><a href="">
+								<img src="../static/resources/directions_railway.png">승차권 예매
+							</a></div>
+							<div><a href="../reserv/reservInfo">
+								<img src="../static/resources/transit_ticket.png">승차권 확인
+							</a></div>
+							<div><a href="../reserv/list">
+								<img src="../static/resources/confirmation_number.png">예약 승차권 조회/취소
+							</a></div>
+							<div><a href="">
+								<img src="../static/resources/dictionary.png">승차권 이용안내
+							</a></div>
+							<div><a href="csCustomer">
+								<img src="../static/resources/support_agent.png">고객센터
+							</a></div>
 						</div>
 					</div>
 				</div>

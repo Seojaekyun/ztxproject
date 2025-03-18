@@ -16,25 +16,25 @@
 	.csc {
 		background-color: #078EB9;
 		color: white;
-		padding: 15px;
+		padding: 20px;
 		text-align: center;
-		font-size: 18px;
+		font-size: 24px;
 		font-weight: 600;
 	}
 	.cscmc {
 		width: 100%;
-		background: #078EB9;
+		background: white;
 	}
 	.cscmenu {
 		width: 600px;
 		display: flex;
 		justify-content: space-around;
-		background: #078EB9;
+		background: white;
 		padding: 10px;
 		margin: auto;
 	}
 	.cscmenu a {
-		color: white;
+		color: black;
 		text-decoration: none;
 		font-weight: bold;
 	}
@@ -52,7 +52,7 @@
 </style>
 </head>
 <body>
-	<div class="csc">꼬레일 고객센터</div>
+	<div class="csc">고객센터</div>
 	<div class="cscmc">
 		<div class="cscmenu">
 		    <a href="../gongji/list">공지 사항</a>

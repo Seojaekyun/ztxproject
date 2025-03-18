@@ -16,7 +16,7 @@ import jakarta.servlet.http.HttpSession;
 @Service("ress")
 public class ReservServiceImpl implements ReservService {
 	@Autowired
-	private ReservMapper resMapper;
+	private ReservMapper mapper;
 
 	@Override
 	public String reservCheck(int routeid, String routeDeparture, String routeArrival, String routeTime,
@@ -61,7 +61,7 @@ public class ReservServiceImpl implements ReservService {
 				routeArrivalTime, resnum, charge, PNR);
 		
 		try {
-		    resMapper.addReserv(resDto);
+			mapper.addReserv(resDto);
 		    
 		}
 		catch (Exception e) {
@@ -74,9 +74,9 @@ public class ReservServiceImpl implements ReservService {
 		int reservid = resDto.getReservid();
 				
 		for (String seat : seatsArray) {
-			int seatid = resMapper.getSeatid(seat.trim(),routeid); // 좌석 번호를 통해 seat_id 조회
+			int seatid = mapper.getSeatid(seat.trim(),routeid); // 좌석 번호를 통해 seat_id 조회
 			if (seatid > 0) {
-				resMapper.upTrainSeatAvai(routeid, seatid, reservid); // 좌석 가용성 업데이트
+				mapper.upTrainSeatAvai(routeid, seatid, reservid); // 좌석 가용성 업데이트
 			}
 			else {
 				model.addAttribute("errorMessage", "잘못된 좌석 번호: " + seat);
@@ -84,7 +84,7 @@ public class ReservServiceImpl implements ReservService {
 			}
 		}
 		
-		resMapper.upRouteSeat(routeid, resnum);
+		mapper.upRouteSeat(routeid, resnum);
 		
 		model.addAttribute("PNR", PNR);
 		model.addAttribute("routeid", routeid);
@@ -102,7 +102,9 @@ public class ReservServiceImpl implements ReservService {
 	@Override
 	public String list(HttpSession session, Model model, HttpServletRequest request) {
 		String userid=(String)session.getAttribute("userid");
-		
+		if(userid == null) {
+			return "redirect:/login/login";
+		}
 		int page=1;
 		if(request.getParameter("page") != null)
 			page=Integer.parseInt(request.getParameter("page"));
@@ -115,13 +117,13 @@ public class ReservServiceImpl implements ReservService {
 		pstart=(pstart*10)+1;
 		pend=pstart+9;
 		
-		chong=resMapper.getChong(userid);
+		chong=mapper.getChong(userid);
 		
 		if(pend > chong)
 			pend=chong;
 		
 		int index=(page-1)*10;
-		List<ReservDto> reslist=resMapper.list(index, userid);
+		List<ReservDto> reslist=mapper.list(index, userid);
 		
 		model.addAttribute("userid", userid);
 		model.addAttribute("reslist", reslist);
@@ -140,9 +142,9 @@ public class ReservServiceImpl implements ReservService {
 				
 		// 예약 리스트 가져오기
 		List<Map<String, Object>> rsvClist;
-		rsvClist = resMapper.getRsvcPay(PNR);
+		rsvClist = mapper.getRsvcPay(PNR);
 		List<Map<String, Object>> rsvSeatInfo;
-		rsvSeatInfo = resMapper.getReservSeatInfo(PNR);
+		rsvSeatInfo = mapper.getReservSeatInfo(PNR);
 		int scount = rsvSeatInfo.size();
 		
 		// JSP로 데이터 전달
@@ -156,15 +158,15 @@ public class ReservServiceImpl implements ReservService {
 	
 	@Override
 	public String chargeOk(ReservDto rdto) {
-		resMapper.payOk(rdto);
-		resMapper.chargeOk(rdto);
+		mapper.payOk(rdto);
+		mapper.chargeOk(rdto);
 		return "redirect:/reserv/list";
 	}
 
 	@Override
 	public String myRsvDetail(String PNR, Model model) {
-		List<Map<String, Object>> rsvList = resMapper.getMyRsvDetail(PNR);
-		List<Map<String, Object>> rsvSeatList = resMapper.getMyRsvDetailSeat(PNR);
+		List<Map<String, Object>> rsvList = mapper.getMyRsvDetail(PNR);
+		List<Map<String, Object>> rsvSeatList = mapper.getMyRsvDetailSeat(PNR);
 		model.addAttribute("rsvList", rsvList);
 		model.addAttribute("rsvSeatList", rsvSeatList);
 		System.out.println(rsvList);
@@ -175,8 +177,17 @@ public class ReservServiceImpl implements ReservService {
 
 	@Override
 	public String cancelOffer(ReservDto rdto) {
-		resMapper.cancelOffer(rdto);
+		mapper.cancelOffer(rdto);
 		return "redirect:/reserv/list";
+	}
+
+	@Override
+	public String oneRsvDetail(String PNR, Model model) {
+		List<Map<String, Object>> rsvList = mapper.getMyRsvDetail(PNR);
+		List<Map<String, Object>> rsvSeatList = mapper.getMyRsvDetailSeat(PNR);
+		model.addAttribute("rsvList", rsvList);
+		model.addAttribute("rsvSeatList", rsvSeatList);
+		return "/reserv/oneRsvDetail";
 	}
 	
 	

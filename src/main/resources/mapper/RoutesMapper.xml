@@ -85,7 +85,14 @@
 			(#{routeid}, #{seat.seatid}, #{seat.seatnum})
 		</foreach>
 	</insert>
-	
+	<select id="getRoutes" parameterType="map" resultType="com.example.demo.dto.RoutesDto">
+		SELECT * FROM routes where departure_time >= now()
+		order by departure_time desc LIMIT #{offset}, #{itemsPerPage}
+	</select>
+	<!-- 항공편 총 개수 조회 -->
+	<select id="countRoutes" resultType="int">
+		SELECT COUNT(*) FROM routes WHERE departure_time >=now()
+	</select>
 	
 </mapper>
 

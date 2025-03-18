@@ -13,6 +13,7 @@ public interface MainService {
 	String clearChatMessages();
 	String csCustomer(HttpServletRequest request, Model model);
 	String pickup();
+	String reservInfo();
 	
 	
 	

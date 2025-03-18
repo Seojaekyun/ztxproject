@@ -50,4 +50,9 @@ public class MainServiceImpl implements MainService {
 		return "/main/pickup";
 	}
 
+	@Override
+	public String reservInfo() {
+		return "/reserv/reservInfo";
+	}
+
 }

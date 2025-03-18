@@ -64,8 +64,12 @@ public class MainController {
 	}
 	
 	@GetMapping("/main/trainservice")
-	public String trainservice()
-	{
+	public String trainservice() {
 		return "/main/trainservice";
+	}
+	
+	@GetMapping("/reserv/reservInfo")
+	public String reservInfo() {
+		return service.reservInfo();
 	}
 }
