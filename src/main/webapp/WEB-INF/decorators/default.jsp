@@ -369,24 +369,34 @@
 	footer {
 		width: 100%;
 		min-width: 1200px;
-		height: 50px;
-		background: lightgray;
-		color: #5F6368;
+		height: 150px;
+		background: #343c45;
+		color: white;
 		text-align: center;
 		font-family: 'Hahmlet';
 		font-size: 10px;
 		margin-top: 40px;
 	}
-	.footer-container {
+	#footerbox {
 		display: flex;
 		justify-content: space-around;
+	}
+	.footer-container {
+		display: flex;
+		justify-content: flex-start;
 		align-items: center;
-		min-width: 1000px;
-		max-width: 1200px;
+		width: 1000px;
 		margin: auto;
 		flex-wrap: wrap;
+		font-size: 15px;
+	}
+	#famsite {
+		width: 400px;
+		display: flex;
+		justify-content: center;
 	}
 	.footer-logo {
+		margin-left: 40px;
 		font-size: 25px;
 		line-height: 50px;
 		font-weight: 900;
@@ -399,14 +409,14 @@
 		width: 100%;
 		min-width: 1000px;
 		height: 50px;
-		background: lightgray;
+		background: #343c45;
 		align-items: center;
 		display: flex;
 	}
 	#logof > #logotext {
 		height: 50px;
 		width: 200px;
-		background: lightgray;
+		background: #343c45;
 		font-size: 25px;
 		font-weight: 900;
 		line-height: 50px;
@@ -418,9 +428,12 @@
 		margin-bottom: 5px;
 	}
 	.footer {
-		background: #083B82;
+		width: 850px;
+		height: 60px;
 		color: white !important;
-		text-align: center;
+		text-align: right;
+		font-size: 14px;
+		line-height: 60px;
 	}
 	
 	@media (max-width: 768px) {
@@ -620,7 +633,20 @@
 		text-decoration: none;
 		color:#004EA2;
 	}
-
+	select {
+		background: #343c45;
+		width: 150px;
+		border-radius: 25px;
+		text-align: center;
+		border: 2px solid white;
+		color: white;
+		font-size: 16px;
+		font-weight: bold;
+	}
+	option {
+		font-size: 14px;
+		border-radius: 10px;
+	}
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
@@ -940,36 +966,31 @@
 <sitemesh:write property="body" />
 	
 	<footer>
-		<div class="footer-container">
-			<div class="footer-logo">
-				<img alt="logo" src="../static/resources/train(gray).png" align="top">
-				Let's GGoRail
+		<div class="footer" style="color: white">
+			이용약관 ㆍ 여객운송약관 및 부속약관 ㆍ 개인정보처리방침 ㆍ 이메일무단수집거부 ㆍ 저작권정책지원 ㆍ 브라우저 안내
+		</div>
+		<div id="footerbox">
+			<div class="footer-container">
+				<div class="footer-info">
+					<div>(주)MonoRail | 대표이사 : 철이 | 사업자등록 : 314-82-99999 | 통신판매업신고 : 은하철도-999</div>
+					<div>본사 : 경기도 파주시 야당동 | TEL: 090-888-1234(유료) | 전화번호 : 010-1234-5678</div>
+				</div>
+				<div class="footer-logo">
+						<img alt="logo" src="../static/resources/train(white).png" align="top">
+						Let's GGoRail
+					</div>
 			</div>
-			<div class="footer-info">
-				<div>(주)MonoRail</div>
-			</div>
-			<div class="footer-info">
-				<div>대표이사 : 철이</div>
-			</div>
-			<div class="footer-info">
-				<div>사업자등록 : 314-82-99999</div>
-			</div>
-			<div class="footer-info">
-				<div>통신판매업신고 : 은하철도-999</div>
-			</div>
-			<div class="footer-info">
-				<div>본사 : 경기도 파주시 야당동</div>
-			</div>
-			<div class="footer-info">
-				<div>TEL: 090-888-1234(유료)</div>
-			</div>
-			<div class="footer-info">
-				<div>전화번호 : 010-1234-5678</div>
+			<div id="famsite">
+				<select>
+					<option>패밀리 사이트</option>
+					<option>eLT항공</option>
+					<option>차차고속</option>
+					<option>모두의 렌탈</option>
+					<option>아고다</option>
+				</select>
 			</div>
 		</div>
 	</footer>
-	<div class="footer" style="color: white">
-		<p>&copy; 2025 꼬레일. 모든 권리 보유.</p>
-	</div>
+	
 </body>
 </html>
