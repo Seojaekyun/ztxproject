@@ -17,7 +17,15 @@
 		margin: 0;
 		padding: 0;
 	}
-	/* 헤더 디자인 */
+	main {
+		top: -95px;
+		position: relative;
+	}
+	.nullbox {
+		height: 95px;
+		display: flex;
+		background-color: #078EB9;
+	}
 	section header {
 		background-color: #078EB9;
 		padding: 20px;
@@ -161,57 +169,60 @@ $(function() {
 </script>
 </head>
 <body>
-<section>
-	<header>
-		<h1>운행 정보</h1>
-	</header>
-	<nav>
-		<div><a href="../reserv/reserv">예약</a></div>
-		<div><a href="../reserv/reservInfo">예약 조회</a></div>
-		<div><a href="../routes/list">운행 정보</a></div>
-	</nav>
-	<div class="container">
-	    <table class="table table-hover">
-	        <thead>
-	            <tr>
-	                <th>NO.</th>
-	                <th>출발지</th>
-	                <th>도착지</th>
-	                <th>출발시간</th>
-	                <th>도착시간</th>
-	                <th>열차명</th>
-	            </tr>
-	        </thead>
-	        <tbody>
-	            <c:forEach var="route" items="${routeList}">
-	                <tr>
-	                    <td>${route.routeid}</td>
-	                    <td>${route.departure}</td>
-	                    <td>${route.arrival}</td>
-	                    <td>${route.departureTime}</td>
-	                    <td>${route.arrivalTime}</td>
-	                    <td>은하-${route.trainid}호</td>
-	                </tr>
-	            </c:forEach>
-	        </tbody>
-	    </table>
-    	<!-- 페이지 네이션 -->
-	    <div class="pagination">
-		    <c:if test="${currentPage > 1}">
-		        <a href="?page=${currentPage - 1}&selectedDate=${selectedDate}&departureAirport=${departureAirport}&arrivalAirport=${arrivalAirport}">이전</a>
-		    </c:if>
-		    <c:set var="startPage" value="${currentPage - (currentPage - 1) % 10}"/>
-		    <c:forEach begin="${startPage}" end="${startPage + 9}" var="i">
-		        <c:if test="${i <= totalPages}">
-		            <a href="?page=${i}&selectedDate=${selectedDate}&departureAirport=${departureAirport}&arrivalAirport=${arrivalAirport}" 
-		               class="${i == currentPage ? 'active' : ''}">${i}</a>
-		        </c:if>
-		    </c:forEach>
-		    <c:if test="${currentPage < totalPages}">
-		        <a href="?page=${currentPage + 1}&selectedDate=${selectedDate}&departureAirport=${departureAirport}&arrivalAirport=${arrivalAirport}">다음</a>
-		    </c:if>
+<main>
+	<div class="nullbox"></div>
+	<section>
+		<header>
+			<h1>운행 정보</h1>
+		</header>
+		<nav>
+			<div><a href="../reserv/reserv">예약</a></div>
+			<div><a href="../reserv/reservInfo">예약 조회</a></div>
+			<div><a href="../routes/list">운행 정보</a></div>
+		</nav>
+		<div class="container">
+		    <table class="table table-hover">
+		        <thead>
+		            <tr>
+		                <th>NO.</th>
+		                <th>출발지</th>
+		                <th>도착지</th>
+		                <th>출발시간</th>
+		                <th>도착시간</th>
+		                <th>열차명</th>
+		            </tr>
+		        </thead>
+		        <tbody>
+		            <c:forEach var="route" items="${routeList}">
+		                <tr>
+		                    <td>${route.routeid}</td>
+		                    <td>${route.departure}</td>
+		                    <td>${route.arrival}</td>
+		                    <td>${route.departureTime}</td>
+		                    <td>${route.arrivalTime}</td>
+		                    <td>은하-${route.trainid}호</td>
+		                </tr>
+		            </c:forEach>
+		        </tbody>
+		    </table>
+	    	<!-- 페이지 네이션 -->
+		    <div class="pagination">
+			    <c:if test="${currentPage > 1}">
+			        <a href="?page=${currentPage - 1}&selectedDate=${selectedDate}&departureAirport=${departureAirport}&arrivalAirport=${arrivalAirport}">이전</a>
+			    </c:if>
+			    <c:set var="startPage" value="${currentPage - (currentPage - 1) % 10}"/>
+			    <c:forEach begin="${startPage}" end="${startPage + 9}" var="i">
+			        <c:if test="${i <= totalPages}">
+			            <a href="?page=${i}&selectedDate=${selectedDate}&departureAirport=${departureAirport}&arrivalAirport=${arrivalAirport}" 
+			               class="${i == currentPage ? 'active' : ''}">${i}</a>
+			        </c:if>
+			    </c:forEach>
+			    <c:if test="${currentPage < totalPages}">
+			        <a href="?page=${currentPage + 1}&selectedDate=${selectedDate}&departureAirport=${departureAirport}&arrivalAirport=${arrivalAirport}">다음</a>
+			    </c:if>
+			</div>
 		</div>
-	</div>
-</section>
+	</section>
+</main>
 </body>
 </html>

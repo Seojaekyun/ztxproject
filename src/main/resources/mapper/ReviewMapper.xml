@@ -4,8 +4,25 @@
 <mapper namespace="com.example.demo.mapper.ReviewMapper">
 
   <select id="list" resultType="com.example.demo.dto.ReviewDto">
-    select * from review order by id desc 
+    select * from review order by id desc  limit #{index},10
   </select>
+  
+  <select id="getChong" resultType="Integer">
+    select ceil( count(*)/10 ) from review
+  </select>
+  
+  <update id="readnum">
+    update review set readnum=readnum+1 where id=#{id}
+  </update>
+  
+  <select id="content" resultType="com.example.demo.dto.ReviewDto">
+    select * from review where id=#{id}
+  </select>
+  
+  <insert id="writeOk">
+    insert into review(title,fname,userid,content,writeday)
+    values(#{title},#{fname},#{userid},#{content},now())
+  </insert>
 
 
 
