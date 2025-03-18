@@ -68,4 +68,10 @@ public class MainController {
 	{
 		return "/main/trainservice";
 	}
+	
+	@GetMapping("/main/theme")
+	public String theme()
+	{
+		return "/main/theme";
+	}
 }
