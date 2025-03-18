@@ -263,7 +263,7 @@
 					</div>
 
 
-					<div class="swiper mySwiper1" align="center">
+					<div class="swiper mySwiper2" align="center">
 						<div class="swiper-wrapper">
 							<div class="swiper-slide">
 								<img src="../static/resources/slide/1-1.jpg" alt="좌석안내1">
@@ -287,8 +287,8 @@
 						</div>
 						<!-- 버튼을 swiper 안쪽으로 배치 -->
 						<div class="swiper-nav-wrapper">
-							<div class="swiper-button-prev swiper-button-prev1"></div>
-							<div class="swiper-button-next swiper-button-next1"></div>
+							<div class="swiper-button-prev swiper-button-prev2"></div>
+							<div class="swiper-button-next swiper-button-next2"></div>
 						</div>
 					</div>
 				</div>
