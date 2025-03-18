@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -7,6 +8,67 @@
 <title>유실물신고안내</title>
 <link rel="stylesheet" href="/resources/css/style.css">
 <style>
+.membership-container {
+	width: 1100px;
+	margin: auto;
+	padding: 20px;
+}
+
+.section-title {
+	font-size: 22px;
+	font-weight: bold;
+	margin-bottom: 15px;
+	color: #003366;
+	border-bottom: 2px solid #003366;
+	padding-bottom: 5px;
+}
+
+.exclusion-box {
+	background-color: #f9f9f9;
+	padding: 20px;
+	border-left: 5px solid #cc0000;
+	margin-top: 20px;
+	border-radius: 8px;
+}
+
+.info-box {
+	background-color: #f9f9f9;
+	padding: 30px;
+	border-left: 5px solid #003366;
+	margin-bottom: 20px;
+}
+
+.highlight {
+	font-weight: bold;
+	color: #cc0000;
+}
+
+.benefit-table {
+	width: 90%;
+	border-collapse: collapse;
+	margin-top: 20px;
+}
+
+.benefit-table th, .benefit-table td {
+	border: 1px solid #ddd;
+	padding: 12px;
+	text-align: center;
+}
+
+.benefit-table th {
+	background-color: #003366;
+	color: white;
+}
+
+.button {
+	display: inline-block;
+	padding: 10px 15px;
+	background-color: #0073e6;
+	color: white;
+	text-decoration: none;
+	border-radius: 5px;
+	margin-top: 10px;
+}
 	main {
 		top: -95px;
 		position: relative;

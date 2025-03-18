@@ -1,59 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.mapper.InquiryMapper">
-	<insert id="inquiryWriteOk" parameterType="com.example.demo.dto.InquiryDto">
-		INSERT INTO inquiry (userid, name, category, title, content, phone, pwd, status, writeday)
-		VALUES (#{userid}, #{name}, #{category}, #{title}, #{content}, #{phone}, #{pwd}, 1, NOW());
+	<insert id="inquiryWriteOk"
+		parameterType="com.example.demo.dto.InquiryDto">
+		INSERT INTO inquiry (userid, name, category, title,
+		content, phone, pwd, status, writeday)
+		VALUES (#{userid}, #{name},
+		#{category}, #{title}, #{content}, #{phone}, #{pwd}, 1, NOW());
 	</insert>
 
-    <select id="inquiryList" resultType="com.example.demo.dto.InquiryDto">
-    	SELECT * FROM inquiry ORDER BY id DESC LIMIT #{index}, 10;
+	<select id="inquiryList"
+		resultType="com.example.demo.dto.InquiryDto">
+		SELECT * FROM inquiry ORDER BY id DESC LIMIT #{index}, 10;
 	</select>
 
-	<select id="inquiryMyList" resultType="com.example.demo.dto.InquiryDto">
-    	SELECT * FROM inquiry WHERE userid = #{userid}
-    	ORDER BY writeday DESC LIMIT #{index}, 10;
+	<select id="inquiryMyList"
+		resultType="com.example.demo.dto.InquiryDto">
+		SELECT * FROM inquiry WHERE userid = #{userid}
+		ORDER BY writeday DESC LIMIT #{index}, 10;
 	</select>
-	
-    <select id="getChong" resultType="Integer">
-        SELECT COUNT(*) FROM inquiry;
-    </select>
 
-    <select id="getChongByUser" resultType="Integer">
-        SELECT COUNT(*) FROM inquiry WHERE userid = #{userid};
-    </select>
+	<select id="getChong" resultType="Integer">
+		SELECT COUNT(*) FROM inquiry;
+	</select>
 
-    <update id="readnum">
-		update inquiry set readnum=readnum+1 where id=#{param}
+	<select id="getChongByUser" resultType="Integer">
+		SELECT COUNT(*) FROM inquiry WHERE userid = #{userid};
+	</select>
+
+	<update id="readnum">
+		update inquiry set readnum=readnum+1 where
+		id=#{param}
 	</update>
-	
-	<select id="content" resultType="com.example.demo.dto.InquiryDto">
+
+	<select id="content"
+		resultType="com.example.demo.dto.InquiryDto">
 		select * from inquiry where id=#{param}
 	</select>
 
-    <delete id="inquiryDelete">
-        DELETE FROM inquiry WHERE id = #{id};
-    </delete>
+	<delete id="inquiryDelete">
+		DELETE FROM inquiry WHERE id = #{id};
+	</delete>
 
-    <select id="getInquiryById" resultType="com.example.demo.dto.InquiryDto">
-        SELECT * FROM inquiry WHERE id = #{id};
-    </select>
-    
-    <update id="inquiryUpdate">
-    	UPDATE inquiry 
-    	SET title = #{title}, content = #{content}, category = #{category}, phone = #{phone}, status = #{status}
-    	WHERE id = #{id}
+	<select id="getInquiryById"
+		resultType="com.example.demo.dto.InquiryDto">
+		SELECT * FROM inquiry WHERE id = #{id};
+	</select>
+
+	<update id="inquiryUpdate">
+		UPDATE inquiry
+		SET title = #{title}, content = #{content}, category = #{category}, phone
+		= #{phone}, status = #{status}
+		WHERE id = #{id}
 	</update>
-	
+
 	<select id="ilist" resultType="com.example.demo.dto.InquiryDto">
-		select * from inquiry order by id desc limit 3
+		select * from inquiry order by id
+		desc limit 3
 	</select>
-	<select id="listCountsPerCategory" resultType="com.example.demo.dto.InquiryDto">
-		SELECT category, COUNT(*) AS count FROM inquiry GROUP BY category ORDER BY category DESC limit 3
+	<select id="listCountsPerCategory"
+		resultType="com.example.demo.dto.InquiryDto">
+		SELECT category, COUNT(*) AS count FROM inquiry GROUP BY
+		category ORDER BY category DESC limit 3
 	</select>
-	<resultMap id="categoryCountMap" type="com.example.demo.dto.InquiryDto">
-		<result property="category" column="category"/>
-		<result property="count" column="count"/>
+	
+	<resultMap id="categoryCountMap"
+		type="com.example.demo.dto.InquiryDto">
+		<result property="category" column="category" />
+		<result property="count" column="count" />
 	</resultMap>
 
 </mapper>

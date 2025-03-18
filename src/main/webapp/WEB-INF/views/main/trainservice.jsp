@@ -1,5 +1,5 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -7,6 +7,74 @@
 <title>열차 이용안내</title>
 <link rel="stylesheet" href="/resources/css/style.css">
 <style>
+.service-container {
+	width: 1100px;
+	margin: auto;
+	padding: 20px 0;
+}
+
+.section-title {
+	font-size: 24px;
+	font-weight: bold;
+	margin-bottom: 15px;
+	color: #003366;
+	border-bottom: 2px solid #003366;
+	padding-bottom: 5px;
+}
+
+.tab-menu {
+	display: flex;
+	gap: 10px;
+	margin-bottom: 25px;
+}
+
+.tab-menu button {
+	padding: 12px 25px;
+	background: #f1f1f1;
+	border: 1px solid #ccc;
+	cursor: pointer;
+	font-size: 16px;
+}
+
+.tab-menu button.active {
+	background: #003366;
+	color: #fff;
+}
+
+.tab-content {
+	display: none;
+	padding: 20px;
+	border: 1px solid #ddd;
+	background: #fafafa;
+}
+
+.tab-content.active {
+	display: block;
+}
+
+.info-row {
+	display: flex;
+	align-items: flex-start;
+	justify-content: flex-start;
+	padding: 12px 0;
+	border-bottom: 1px solid #e0e0e0;
+}
+
+.info-row span:first-child {
+	min-width: 150px;
+	font-weight: bold;
+	font-size: 16px;
+	color: #333;
+}
+
+.info-row span:last-child {
+	font-size: 16px;
+	color: #555;
+	line-height: 1.8;
+	border: none;
+	background: transparent;
+	padding: 0;
+}
 	main {
 		top: -95px;
 		position: relative;

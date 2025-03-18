@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -31,64 +32,65 @@
      text-align: center;
    }
 
-   h3 {
-     margin-bottom: 20px;
-   }
+h3 {
+	margin-bottom: 20px;
+}
 
-   table {
-     width: 100%;
-     border-collapse: collapse;
-     background-color: white;
-   }
+table {
+	width: 100%;
+	border-collapse: collapse;
+	background-color: white;
+}
 
-   th, td {
-     padding: 12px;
-     text-align: center;
-     border-bottom: 1px solid #ddd;
-   }
+th, td {
+	padding: 12px;
+	text-align: center;
+	border-bottom: 1px solid #ddd;
+}
 
-   th {
-     background-color: #003b8b;
-     color: white;
-     font-weight: bold;
-   }
+th {
+	background-color: #003b8b;
+	color: white;
+	font-weight: bold;
+}
 
-   tr:last-child td {
-     border-bottom: 2px solid black;
-   }
+tr:last-child td {
+	border-bottom: 2px solid black;
+}
 
-   .btn {
-     display: inline-block;
-     padding: 10px 15px;
-     background-color: #0078d7;
-     color: white;
-     border: none;
-     cursor: pointer;
-     font-size: 16px;
-     border-radius: 5px;
-     text-decoration: none;
-   }
+.btn {
+	display: inline-block;
+	padding: 10px 15px;
+	background-color: #0078d7;
+	color: white;
+	border: none;
+	cursor: pointer;
+	font-size: 16px;
+	border-radius: 5px;
+	text-decoration: none;
+}
 
-   .btn:hover {
-     background-color: #005bb5;
-   }
-   
-   .badge-unanswered {
-        background-color: #DF251F;
-        color: white;
-        font-size: 12px;
-        padding: 3px 8px;
-        border-radius: 3px;
-        font-weight: 700;
-    }
-    .badge-answered {
-        background-color: #4CAF50;
-        color: white;
-        font-size: 12px;
-        padding: 3px 8px;
-        border-radius: 3px;
-        font-weight: 700;
-    }
+.btn:hover {
+	background-color: #005bb5;
+}
+
+.badge-unanswered {
+	background-color: #DF251F;
+	color: white;
+	font-size: 12px;
+	padding: 3px 8px;
+	border-radius: 3px;
+	font-weight: 700;
+}
+
+.badge-answered {
+	background-color: #4CAF50;
+	color: white;
+	font-size: 12px;
+	padding: 3px 8px;
+	border-radius: 3px;
+	font-weight: 700;
+}
 </style>
 </head>
 <body>

@@ -69,14 +69,26 @@ public class MainController {
 	}
 	
 	@GetMapping("/main/theme")
-	public String theme() {
-    return "/main/theme";
-  }
+	public String theme() 
+	{
+		return "/main/theme";
+    }
+	
+	@GetMapping("/main/free")
+	public String free()
+	{
+		return "/main/free";
+	}
+	
+	@GetMapping("/main/hot")
+	public String hot()
+	{
+		return "/main/hot";
+	}
  
 	@GetMapping("/reserv/reservInfo")
 	public String reservInfo() {
 		return service.reservInfo();
 	}
-  
   
 }
