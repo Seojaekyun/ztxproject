@@ -151,6 +151,14 @@
 		top: 0; /* 부모 요소의 중앙 */
 		right: 0; /* 부모 요소의 중앙 */
 	}
+	#loginMenu > #langMenu > select {
+		font-size: 16px;
+		width: 100px;
+		background: white;
+		color: black;
+		border: none;
+		font-weight: 400;
+	}
 	#section2 {
 		width: 100%;
 		height: 95px;
@@ -691,24 +699,24 @@
 		<div id="section1">
 			<div id="s1container">
 				<div id="titleMenu">
-					<div>🛤️은하철도</div>
+					<div>🌎은하철도</div>
 					<div style="background: #078EB9; color: white;">승차권예매</div>
 					<div>기차여행</div>
 				</div>
 				<div id="loginMenu">
 					<c:if test="${userid!=null&&userid=='administrator'}">
-						<a href="../admin/index" style="color: orange;"> 관리자 홈 </a>&nbsp;|&nbsp;
+						<a href="../admin/index" style="color: orange;"> 관리자 홈 </a>&nbsp;&nbsp;&nbsp;
 					</c:if>
 					<c:if test="${userid==null}">
-						<a href="../user/user" id="into"> <span class="iconmem">📋</span>회원가입 </a>&nbsp;&nbsp;|&nbsp;&nbsp;
+						<a href="../user/user" id="into"> <span class="iconmem">📋</span>회원가입 </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<!-- <a href="../login/login"> 로그인 </a>&nbsp;|&nbsp; -->
 					</c:if>
 					<c:if test="${userid==null}">
-						<a href="/login/login"> 로그인 </a>&nbsp;&nbsp;|&nbsp;&nbsp;
+						<a href="/login/login"> 로그인 </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					</c:if>
 					<c:if test="${userid!=null&&userid!='administrator'}">
 					<div id="myInfo" onmouseover="viewMmenu(0)" onmouseout="hideMmenu(0)">
-						<span> ${name}님 &nbsp;|&nbsp; </span>
+						<span> ${name}님 &nbsp;&nbsp;&nbsp; </span>
 						<ul class="mmenu">
 							<li><a href="../user/userView">나의정보</a></li>
 							<li><a href="../reserv/list">예약정보</a></li>
@@ -716,16 +724,22 @@
 							<li><a href="../member/myRev">나의후기</a></li>
 						</ul>
 					</div>
-					<a href="/login/logout">로그아웃</a>&nbsp;|&nbsp;
+					<a href="/login/logout">로그아웃</a>&nbsp;&nbsp;&nbsp;
 					</c:if>
 					<div id="supMenu" onmouseover="viewCmenu(0)" onmouseout="hideCmenu(0)">
-						<span>고객센터</span>
+						<span>고객센터</span>&nbsp;&nbsp;&nbsp;
 						<ul class="cmenu">
 							<li><a href="../gongji/list"> 공지사항 </a></li>
 							<li><a href="../inquiry/inquiryList"> Q＆A </a></li>
 							<li><a href="../promot/list"> 이벤트 </a></li>
 							<li><a href="../review/list"> 여행후기 </a></li>
 						</ul>
+					</div>
+					<div id="langMenu">
+						<select>
+							<option>Language</option>
+							<option>KOREAN</option>
+						</select>
 					</div>
 				</div>
 				<div id="nullbox"></div>
@@ -741,7 +755,7 @@
 					</div>
 					<div id="logotext">
 						<a href="/main/index">
-							Let's GGoRail
+							GGoRail
 						</a>
 					</div>
 				</div>
@@ -977,7 +991,7 @@
 				</div>
 				<div class="footer-logo">
 						<img alt="logo" src="../static/resources/train(white).png" align="top">
-						Let's GGoRail
+						GGoRail
 					</div>
 			</div>
 			<div id="famsite">
