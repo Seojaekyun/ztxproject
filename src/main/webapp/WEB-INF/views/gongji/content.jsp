@@ -7,73 +7,47 @@
 <title>Insert title here</title>
   <style>
     body {
-		font-family: 'Noto Sans KR', sans-serif;
-		background-color: #f9f9f9;
+		font-family: Arial, sans-serif;
 		margin: 0;
 		padding: 0;
+		background-color: #f4f4f4;
 	}
-	h3 {
-		font-size: 24px;
-		color: #333;
-		border-bottom: 2px solid #4CAF50;
-		padding-bottom: 10px;
-		margin-bottom: 20px;
-		text-align: center;
-		width: 90%;
-		max-width: 600px;
-		margin: 50px auto 20px;
+	.container {
+		max-width: 800px;
+		margin: 20px auto;
+		background-color: white;
+		padding: 20px;
+		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 	}
 	table {
-		width: 90%;
-		max-width: 600px;
-		margin: 0 auto 20px;
+		width: 100%;
 		border-collapse: collapse;
+		margin-bottom: 20px;
 	}
-	table th, table td {
-		border: 1px solid #ddd;
-		padding: 8px;
+	table, th, td {
+		border-bottom: 1px solid #ddd;
+		padding: 12px;
 		text-align: left;
-		vertical-align: top;
 	}
-	table th {
-		background-color: #f4f4f4;
-		font-weight: 600;
-		width: 150px;
-		text-align: center;
+	th {
+		background-color: #004EA2;
+		color:white;
 	}
-	table td {
-		background-color: #fff;
-		color: #333;
-		word-wrap: break-word;
-		white-space: pre-wrap;
-	}
-	#content {
-		min-height: 200px;
-		line-height: 1.6;
-		word-wrap: break-word;
-		white-space: pre-wrap;
-	}
-	/* 버튼 스타일 */
 	#btn {
-		text-align: right;
-		width: 90%;
-		max-width: 600px;
-		margin: 20px auto;
+		text-align: center;
+		margin-top: 20px;
 	}
 	#btn a {
 		display: inline-block;
+		padding: 10px 15px;
+		background-color:#004EA2;
+		color: white;
 		text-decoration: none;
-		padding: 5px 10px;
-		border: 1px solid #4CAF50;
-		color: #4CAF50;
-		margin-left: 10px;
-		border-radius: 4px;
-		transition: all 0.3s ease;
-		font-size: 12px;
+		border-radius: 5px;
+		margin: 0 5px;
 	}
 	#btn a:hover {
-		background-color: #4CAF50;
-		color: white;
+		background-color: #003A66;
 	}
 	main {
 		top: -95px;
@@ -109,7 +83,6 @@
 		text-decoration: none;
 		font-weight: bold;
 	}
-	
   </style>
 </head>
 <body> <!-- gongji/content.jsp -->
@@ -124,20 +97,19 @@
 		    <a href="../review/list">여행 후기</a>
 		</div>
 	</div>
-  <h3>공지사항</h3>
 	<table>
-		<tr>
-			<th>제목</th>
-			<td>${gdto.title}</td>
-		</tr>
-		<tr>
-			<th>조회수</th>
-			<td>${gdto.readnum}</td>
-		</tr>
-		<tr>
-			<th>내용</th>
-			<td id="content">${gdto.content}</td>
-		</tr>
+	  <tr>
+		<th>제목</th>
+		<td>${gdto.title}</td>
+	  </tr>
+	  <tr>
+		<th>조회수</th>
+		<td>${gdto.readnum}</td>
+	  </tr>
+	  <tr>
+		<th>내용</th>
+		<td id="content">${gdto.content}</td>
+	  </tr>
 	</table>
 	<div id="btn">
 		<a href="list">목록</a>

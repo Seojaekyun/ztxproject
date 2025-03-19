@@ -6,83 +6,83 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>여행 후기</title>
-<style>
+  <style>
 	body {
-		font-family: Arial, sans-serif;
-		margin: 0;
-		padding: 0;
-		background-color: #f4f4f4;
+	  font-family: Arial, sans-serif;
+	  margin: 0;
+	  padding: 0;
+	  background-color: #f4f4f4;
 	}
 	.container {
-		max-width: 800px;
-		margin: 20px auto;
-		background-color: white;
-		padding: 20px;
-		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	  max-width: 800px;
+	  margin: 20px auto;
+	  background-color: white;
+	  padding: 20px;
+	  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 	}
 	table {
-		width: 100%;
-		border-collapse: collapse;
-		margin-bottom: 20px;
+	  width: 100%;
+	  border-collapse: collapse;
+	  margin-bottom: 20px;
 	}
 	table, th, td {
-		border-bottom: 1px solid #ddd;
-		padding: 12px;
-		text-align: left;
+	  border-bottom: 1px solid #ddd;
+	  padding: 12px;
+	  text-align: left;
 	}
 	th {
-		background-color: #004EA2;
-		color:white;
+	  background-color: #004EA2;
+	  color:white;
 	}
 	#btn {
-		text-align: center;
-		margin-top: 20px;
+	  text-align: center;
+	  margin-top: 20px;
 	}
 	#btn a {
-		display: inline-block;
-		padding: 10px 15px;
-		background-color:#004EA2;
-		color: white;
-		text-decoration: none;
-		border-radius: 5px;
-		margin: 0 5px;
+	  display: inline-block;
+	  padding: 10px 15px;
+	  background-color:#004EA2;
+	  color: white;
+	  text-decoration: none;
+	  border-radius: 5px;
+	  margin: 0 5px;
 	}
 	#btn a:hover {
-		background-color: #003A66;
+	  background-color: #003A66;
 	}
 	main {
-		top: -95px;
-		position: relative;
+	  top: -95px;
+	  position: relative;
 	}
 	.nullbox {
-		height: 95px;
-		display: flex;
-		background-color: #078EB9;
+	  height: 95px;
+	  display: flex;
+	  background-color: #078EB9;
 	}
 	.csc {
-		background-color: #078EB9;
-		color: white;
-		padding: 20px;
-		text-align: center;
-		font-size: 24px;
-		font-weight: 600;
+	  background-color: #078EB9;
+	  color: white;
+	  padding: 20px;
+	  text-align: center;
+	  font-size: 24px;
+	  font-weight: 600;
 	}
 	.cscmc {
-		width: 100%;
-		background: white;
+	  width: 100%;
+	  background: white;
 	}
 	.cscmenu {
-		width: 600px;
-		display: flex;
-		justify-content: space-around;
-		background: white;
-		padding: 10px;
-		margin: auto;
+	  width: 600px;
+	  display: flex;
+	  justify-content: space-around;
+	  background: white;
+	  padding: 10px;
+	  margin: auto;
 	}
 	.cscmenu a {
-		color: black;
-		text-decoration: none;
-		font-weight: bold;
+	  color: black;
+	  text-decoration: none;
+	  font-weight: bold;
 	}
 </style>
 </head>
@@ -117,7 +117,9 @@
 		<tr>
 		  <th>내 용</th>
 		  <td colspan="3">
+		   <c:if test="${revdto.fname != null}">
 		    <img src="../static/resources/files/${revdto.fname}" style="max-width:100%; height:auto;"> <p>
+		   </c:if> 
 		    ${revdto.content}
 		  </td>
 		</tr>
