@@ -20,12 +20,6 @@
 		padding: 20px;
 		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 	}
-	h2 {
-		font-size: 22px;
-		color: #00467F;
-		margin-bottom: 10px;
-		text-align: center;
-	}
 	table {
 		width: 100%;
 		border-collapse: collapse;
@@ -46,7 +40,7 @@
 	#btn a {
 		display: inline-block;
 		padding: 10px 15px;
-		background-color: #00467F;
+		background-color:#004EA2;
 		color: white;
 		text-decoration: none;
 		border-radius: 5px;

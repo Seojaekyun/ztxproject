@@ -5,129 +5,85 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>여행후기</title>
+<title>여행 후기</title>
 <style>
-	body {
-		font-family: Arial, sans-serif;
-		margin: 0;
-		padding: 0;
-		background-color: #f4f4f4;
-	}
-	main {
-		top: -95px;
-		position: relative;
-	}
-	.nullbox {
-		height: 95px;
-		display: flex;
-		background-color: #078EB9;
-	}
-	section header {
-		background-color: #00467F;
-		padding: 20px;
-		text-align: center;
-		color: white;
-	}
-	section header h1 {
-		margin: 0;
-		font-size: 24px;
-	}
-	section nav {
-		background-color: #0059A3;
-		padding: 10px;
-		text-align: center;
-	}
-	section nav a {
-		color: white;
-		margin: 0 15px;
-		text-decoration: none;
-		font-size: 16px;
-	}
-	section nav a:hover {
-		text-decoration: underline;
-	}
-	.container {
-		max-width: 1200px;
-		margin: 20px auto;
-		background-color: white;
-		padding: 20px;
-		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-	}
-	.content {
-		height: 500px;
-	}
-	.content h2 {
-		font-size: 22px;
-		color: #00467F;
-		margin-bottom: 10px;
-	}
-	table {
-		width: 100%;
-		height: 500px;
-		border-collapse: collapse;
-	}
-	table, th, td {
-		border-bottom: 1px solid #ddd;
-		height: 30px;
-	}
-	th, td {
-		padding: 12px;
-		text-align: center;
-	}
-	th {
-		background-color: #f2f2f2;
-	}
-	td {
-		font-size: 12px;
-	}
-	.cta-button {
-		display: inline-block;
-		padding: 10px 15px;
-		background-color: #00467F;
-		color: white;
-		text-decoration: none;
-		border-radius: 5px;
-		margin-top: 20px;
-	}
-	.cta-button:hover {
-		background-color: #003A66;
-	}
-	.qna-table a {
-		color: #00467F;
-		text-decoration: none;
-	}
-	.qna-table a:hover {
-		text-decoration: underline;
-	}
-	#write {
-		display: inline-block;
-		width: 100px;
-		background: #23297A;
-		color: white;
-		text-align: center;
-		text-decoration: none;
-		padding: 10px 0;
-		box-sizing: border-box;
-		border-radius: 5px;
-		cursor: pointer;
-	}
-	#write:hover {
-		background: #1A1F6B;
-	}
-	.pagination {
-		text-align: center;
-		margin-top: 20px;
-	}
-	.pagination a {
-		display: inline-block;
-		padding: 5px 10px;
-		margin: 0 3px;
-		background-color: #4CAF50;
-		color: white;
-		text-decoration: none;
-		border-radius: 5px;
-		font-size: 12px;
-	}
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+	margin: 0;
+	padding: 0;
+	background-color: #f4f6f9;
+  }
+  main {
+	top: -95px;
+	position: relative;
+  }
+  .nullbox {
+	height: 95px;
+	display: flex;
+	background-color: #078EB9;
+  }
+  section {
+    width:1000px;
+	height:550px;
+	margin:10px auto;
+	padding:20px;
+	background-color:#fff;
+	border-radius:8px;
+	box-shadow:0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  table {
+	width:100%;
+	border-collapse: collapse;
+	margin-bottom: 20px;
+  }
+  th, td {
+	padding: 6px;
+	text-align: center;
+	border-bottom: 1px solid #ddd;
+  }
+  th {
+	background-color: #004EA2;
+	color: #fff;
+	font-weight: 500;
+	text-transform: uppercase;
+  }
+  td {
+	background-color: #fff;
+	color: #333;
+	font-size: 14px;
+  }
+  a:hover {
+	color:#004EA2;
+  }
+  #write {
+	display: inline-block;
+	width: 100px;
+	background:#004EA2;
+	color: white;
+	text-align: center;
+	text-decoration: none;
+	padding: 10px 0;
+	box-sizing: border-box;
+	border-radius: 5px;
+	cursor: pointer;
+  }
+  #write:hover {
+	background: #1A1F6B;
+  }
+  .pagination {
+	text-align: center;
+	margin-top: 20px;
+  }
+  .pagination a {
+	display: inline-block;
+	padding: 5px 10px;
+	margin: 0 3px;
+	background-color: #4CAF50;
+	color: white;
+	text-decoration: none;
+	border-radius: 5px;
+	font-size: 12px;
+  }
 	.pagination a.active, .pagination span.active {
 		background-color: #333;
 		color: white;
@@ -145,53 +101,45 @@
 		font-size: 12px;
 		cursor: default;
 	}
-	#badge1 {
-		background: #DF251F;
-		padding: 3px;
-		font-size: 11px;
-		font-weight: 900;
-		margin-right: 5px;
-		border-radius: 3px;
-		color: white;
-	}
-	#badge2 {
-		background: #65FF5E;
-		padding: 3px;
-		font-size: 11px;
-		margin-right: 5px;
-		border-radius: 3px;
-		color: white;
-	}
-	.csc {
-		background-color: #078EB9;
-		color: white;
-		padding: 20px;
-		text-align: center;
-		font-size: 24px;
-		font-weight: 600;
-	}
-	.cscmc {
-		width: 100%;
-		background: white;
-	}
-	.cscmenu {
-		width: 600px;
-		display: flex;
-		justify-content: space-around;
-		background: white;
-		padding: 10px;
-		margin: auto;
-	}
-	.cscmenu a {
-		color: black;
-		text-decoration: none;
-		font-weight: bold;
-	}
+  .csc {
+	background-color: #078EB9;
+	color: white;
+	padding: 20px;
+	text-align: center;
+	font-size: 24px;
+	font-weight: 600;
+  }
+  .cscmc {
+	width: 100%;
+	background: white;
+  }
+  .cscmenu {
+	width: 600px;
+	display: flex;
+	justify-content: space-around;
+	background: white;
+	padding: 10px;
+	margin: auto;
+  }
+  .cscmenu a {
+	color: black;
+	text-decoration: none;
+	font-weight: bold;
+  }
 </style>
 </head>
 <body>
 <main>
 	<div class="nullbox"></div>
+	<div class="csc"> 여행후기 </div>
+	<div class="cscmc">
+	  <div class="cscmenu">
+	    <a href="../gongji/list">공지 사항</a>
+	    <a href="../inquiry/inquiryList">Q＆A</a>
+	    <a href="#">이벤트</a>
+	    <a href="../review/list">여행 후기</a>
+	  </div>
+	</div>
 	<section>
 		<div class="csc">여행 후기</div>
 		<div class="cscmc">
@@ -256,6 +204,7 @@
 				<a href="write" id="write" style='align: right'> 후기 등록 </a>
 			</div>
 		</div>
+	  </div>
 	</section>
 </main>
 </body>
