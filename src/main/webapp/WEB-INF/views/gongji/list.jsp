@@ -139,10 +139,10 @@
 	   <table>
 	     <tr>
 	       <th>  </th>
-	       <th width="40%">제목</th>
-	       <th>작성자</th>
-	       <th>조회수</th>
-	       <th>작성일</th>
+	       <th width="60%"> 제목 </th>
+	       <th> 작성자 </th>
+	       <th> 작성일 </th>
+	       <th> 조회 </th>
 	     </tr>
 	    <c:forEach items="${glist}" var="gdto">
 	     <tr>
@@ -158,8 +158,8 @@
 	         <a href="readnum?id=${gdto.id}"> ${gdto.title }</a>
 	       </td>
 	       <td>${gdto.writer}</td>
-	       <td>${gdto.readnum}</td>
 	       <td>${gdto.writeday}</td>
+	       <td>${gdto.readnum}</td>
 	     </tr>
 	    </c:forEach>
 	   </table>

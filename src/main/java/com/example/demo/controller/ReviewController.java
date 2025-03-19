@@ -65,6 +65,13 @@ public class ReviewController {
 		return service.update(request, model);
 	}
 	
+	@PostMapping("/review/updateOk")
+	public String updateOk(HttpSession session, ReviewDto revdto,
+			MultipartFile file) throws Exception
+	{
+		return service.updateOk(session, revdto, file);
+	}
+	
 	@GetMapping("/review/delete")
 	public String delete(HttpServletRequest request)
 	{

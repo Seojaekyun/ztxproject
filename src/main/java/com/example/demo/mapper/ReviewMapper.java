@@ -15,4 +15,6 @@ public interface ReviewMapper {
 	public ReviewDto content(String id);
 	public void writeOk(ReviewDto revdto);
 	public List<ReviewDto> rvlist();
+	public void updateOk1(ReviewDto revdto);
+	public void updateOk2(ReviewDto revdto);
 }

@@ -15,4 +15,5 @@ public interface ReviewService {
 	String content(HttpSession session, HttpServletRequest request, Model model);
 	String writeOk(ReviewDto revdto, MultipartFile file, HttpSession session) throws IOException;
 	String update(HttpServletRequest request, Model model);
+	String updateOk(HttpSession session, ReviewDto revdto, MultipartFile file) throws Exception;
 }
