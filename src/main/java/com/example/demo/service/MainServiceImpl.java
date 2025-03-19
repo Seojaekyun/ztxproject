@@ -68,5 +68,6 @@ public class MainServiceImpl implements MainService {
 	public String reservInfo() {
 		return "/reserv/reservInfo";
 	}
-
+	
+	
 }

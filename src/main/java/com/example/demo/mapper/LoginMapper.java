@@ -7,9 +7,9 @@ import com.example.demo.dto.UserDto;
 
 @Mapper
 public interface LoginMapper {
-	public String loginOk(UserDto udto);
-	public String getUserid(UserDto udto);
-	public String getPwd(UserDto udto);
-	public int chgPwd(@Param("userid") String userid, @Param("pwd") String newPwd);
-	public String loginAdmin(UserDto udto);
+	String loginOk(UserDto udto);
+	String getUserid(UserDto udto);
+	String getPwd(UserDto udto);
+	int chgPwd(@Param("userid") String userid, @Param("pwd") String newPwd);
+	String loginAdmin(UserDto udto);
 }

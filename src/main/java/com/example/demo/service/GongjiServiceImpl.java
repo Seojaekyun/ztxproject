@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -20,8 +20,7 @@ public class GongjiServiceImpl implements GongjiService{
 	private GongjiMapper mapper;
 
 	@Override
-	public String gongjiList(GongjiDto gdto, Model model, HttpServletRequest request)
-	{	
+	public String gongjiList(GongjiDto gdto, Model model, HttpServletRequest request) {	
 		int page=1;
 		if(request.getParameter("page") != null)
 			page=Integer.parseInt(request.getParameter("page"));
@@ -40,7 +39,7 @@ public class GongjiServiceImpl implements GongjiService{
 			pend=chong;
 		
 		int index=(page-1)*10;
-		ArrayList<GongjiDto> glist=mapper.list(index);
+		List<GongjiDto> glist=mapper.list(index);
 		
 		model.addAttribute("glist", glist);
 		model.addAttribute("page", page);
@@ -52,9 +51,7 @@ public class GongjiServiceImpl implements GongjiService{
 	}
 
 	@Override
-	public String list(GongjiDto gdto, Model model, HttpServletRequest request)
-	{	
-		
+	public String list(GongjiDto gdto, Model model, HttpServletRequest request) {	
 		int page=1;
 		if(request.getParameter("page") != null)
 			page=Integer.parseInt(request.getParameter("page"));
@@ -73,7 +70,7 @@ public class GongjiServiceImpl implements GongjiService{
 			pend=chong;
 		
 		int index=(page-1)*10;
-		ArrayList<GongjiDto> glist=mapper.list(index);
+		List<GongjiDto> glist=mapper.list(index);
 		
 		model.addAttribute("glist", glist);
 		model.addAttribute("page", page);
@@ -85,25 +82,20 @@ public class GongjiServiceImpl implements GongjiService{
 	}
 
 	@Override
-	public String gongjiWrite()
-	{
+	public String gongjiWrite() {
 		return "/admin/gongjiWrite";
 	}
 
 	@Override
-	public String gongjiWriteOk(GongjiDto gdto)
-	{
+	public String gongjiWriteOk(GongjiDto gdto) {
 		mapper.writeOk(gdto);
-		
 		return "redirect:/admin/gongjiList";
 	}
 
 	@Override
-	public String gongjiContent(HttpServletRequest request, Model model)
-	{
+	public String gongjiContent(HttpServletRequest request, Model model) {
 		String id=request.getParameter("id");
 		String page=request.getParameter("page");
-		
 		GongjiDto gdto=mapper.content(id);
 		
 		gdto.setContent(gdto.getContent().replace("\r\n", "<br>"));
@@ -115,26 +107,23 @@ public class GongjiServiceImpl implements GongjiService{
 	}
 	
 	@Override
-	public String readnum(HttpServletRequest request)
-	{
+	public String readnum(HttpServletRequest request) {
 		String id=request.getParameter("id");
 		String page=request.getParameter("page");
 		
 		mapper.readnum(id);
-				
+		
 		return "redirect:/gongji/content?id="+id+"&page="+page;
 	}
 
 	@Override
-	public String content(HttpServletRequest request, Model model)
-	{
+	public String content(HttpServletRequest request, Model model) {
 		String id=request.getParameter("id");
 		String page=request.getParameter("page");
-			
 		GongjiDto gdto=mapper.content(id);
-			
+		
 		gdto.setContent(gdto.getContent().replace("/r/n", "<br>"));
-			
+		
 		model.addAttribute("gdto", gdto);
 		model.addAttribute("page", page);
 			
@@ -142,8 +131,7 @@ public class GongjiServiceImpl implements GongjiService{
 	}
 
 	@Override
-	public String gongjiUpdate(HttpServletRequest request, Model model)
-	{
+	public String gongjiUpdate(HttpServletRequest request, Model model) {
 		String id=request.getParameter("id");
 		String page=request.getParameter("page");
 		
@@ -156,8 +144,7 @@ public class GongjiServiceImpl implements GongjiService{
 	}
 
 	@Override
-	public String gongjiUpdateOk(HttpServletRequest request, GongjiDto gdto)
-	{
+	public String gongjiUpdateOk(HttpServletRequest request, GongjiDto gdto) {
 		String id=request.getParameter("id");
 		String page=request.getParameter("page");
 		
@@ -167,8 +154,7 @@ public class GongjiServiceImpl implements GongjiService{
 	}
 
 	@Override
-	public String gongjiDelete(HttpServletRequest request)
-	{
+	public String gongjiDelete(HttpServletRequest request) {
 		String id=request.getParameter("id");
 		String page=request.getParameter("page");
 		
@@ -176,5 +162,6 @@ public class GongjiServiceImpl implements GongjiService{
 		
 		return "redirect:/admin/gongjiList?page="+page;
 	}
-
+	
+	
 }

@@ -5,13 +5,13 @@
 		INSERT INTO inquiry (userid, name, category, title, content, phone, pwd, writeday)
 		VALUES (#{userid}, #{name}, #{category}, #{title}, #{content}, #{phone}, #{pwd}, NOW());
 	</insert>
-	<select id="inquiryList" resultType="com.example.demo.dto.InquiryDto">
+	<select id="list" resultType="com.example.demo.dto.InquiryDto">
 		SELECT * FROM inquiry ORDER BY id DESC LIMIT #{index}, 10;
 	</select>
 	<select id="getUserInfo" resultType="com.example.demo.dto.InquiryDto">
 		SELECT name, phone FROM user WHERE userid = #{userid}
 	</select>
-	<select id="inquiryMyList" resultType="com.example.demo.dto.InquiryDto">
+	<select id="myList" resultType="com.example.demo.dto.InquiryDto">
 		SELECT * FROM inquiry WHERE userid = #{userid} ORDER BY writeday DESC LIMIT #{index}, 10;
 	</select>
 	<select id="getChong" resultType="Integer">
@@ -26,7 +26,7 @@
 	<select id="content" resultType="com.example.demo.dto.InquiryDto">
 		select * from inquiry where id=#{param}
 	</select>
-	<delete id="inquiryDelete">
+	<delete id="delete">
 		DELETE FROM inquiry WHERE id = #{id};
 	</delete>
 	<select id="getInquiryById" resultType="com.example.demo.dto.InquiryDto">

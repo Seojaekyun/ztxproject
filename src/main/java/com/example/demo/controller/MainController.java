@@ -58,6 +58,11 @@ public class MainController {
 		return service.csCustomer(request, model);
 	}
 	
+	@GetMapping("/reserv/reservInfo")
+	public String reservInfo() {
+		return service.reservInfo();
+	}
+	
 	@GetMapping("/main/pickup")
 	public String pickup() {
 		return service.pickup();
@@ -69,32 +74,39 @@ public class MainController {
 	}
 	
 	@GetMapping("/main/theme")
-	public String theme() 
-	{
+	public String theme() {
 		return "/main/theme";
     }
 	
 	@GetMapping("/main/free")
-	public String free()
-	{
+	public String free() {
 		return "/main/free";
 	}
 	
 	@GetMapping("/main/etiquette")
-	public String etiquette()
-	{
+	public String etiquette() {
 		return "/main/etiquette";
 	}
 	
 	@GetMapping("/main/station")
-	public String station()
-	{
+	public String station() {
 		return "/main/station";
 	}
 	
-	@GetMapping("/reserv/reservInfo")
-	public String reservInfo() {
-		return service.reservInfo();
-	}
-  
+	@GetMapping("/membership/membership")
+    public String membershipPage() {
+        return "/membership/membership";  
+    }
+    
+    @GetMapping("/membership/membershipsogae")
+    public String membershipsogae() {
+    	return "/membership/membershipsogae";
+    }
+    
+    @GetMapping("/membership/membershipcoupon")
+    public String membershipcoupon() {
+    	return "/membership/membershipcoupon";
+    }
+	
+	
 }

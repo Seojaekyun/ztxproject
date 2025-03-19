@@ -343,50 +343,6 @@ public class AdminServiceImpl implements AdminService{
 	}
 	
 	@Override
-	public String inquiryList(int page, Model model) {
-		int index = (page - 1) * 10;
-		int total = imapper.getChong();
-		int totalPage = (int)Math.ceil((double) total / 10);
-		
-		List<InquiryDto> inquiries = imapper.inquiryList(index);
-		
-		System.out.println("adminInquiryList 조회된 문의 개수: " + (inquiries != null ? inquiries.size() : "null"));
-		
-		// 🛠 inquiries 리스트 내부 데이터를 자세히 출력
-		for(InquiryDto inquiry : inquiries) {
-			System.out.println("문의 ID: " + inquiry.getId() + ", 제목: " + inquiry.getTitle());
-		}
-		
-		model.addAttribute("inquiries", inquiries);
-		model.addAttribute("page", page);
-		model.addAttribute("totalPage", totalPage);
-		
-		return "/admin/inquiryList";
-	}
-
-	@Override
-	public String answer(int id, Model model) {
-		InquiryDto inquiry = imapper.getInquiryById(id);
-		if(inquiry == null) {
-			return "redirect:/admin/inquiryList"; // 존재하지 않는 경우 리스트로 이동
-		}
-		model.addAttribute("inquiry", inquiry);
-		return "/admin/inquiryAnswer"; // JSP 파일 이름과 일치해야 함
-	}
-
-	@Override
-	public String answerOk(int id, String answer) {
-		imapper.answerOk(id, answer, 1); // ref 값을 1(답변완료)로 변경
-		return "redirect:/admin/inquiryList";
-	}
-	 
-	@Override
-	public String answerDel(int id) {
-		imapper.answerDel(id, null, 0); // ref 값을 0(미답변)으로 변경
-		return "redirect:/admin/inquiryList";
-	}
-	
-	@Override
 	public String memberList(HttpServletRequest request, Model model) {
 		// 페이지 값 받기 (기본값 1)
 		String pageParam = request.getParameter("page");

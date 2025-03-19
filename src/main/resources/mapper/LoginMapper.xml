@@ -16,12 +16,6 @@
 	<select id="loginAdmin" resultType="String">
 		select name from admin where adminid=#{adminid} and pwd=#{pwd}
 	</select>
-
-
-
-
+	
+	
 </mapper>
-
-
-
-

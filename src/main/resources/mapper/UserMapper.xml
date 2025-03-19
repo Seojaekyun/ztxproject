@@ -1,87 +1,77 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.mapper.UserMapper">
-
-  <select id="useridCheck" resultType="Integer">
-    select count(*) from user where userid=#{userid}
-  </select>
-	
-  <insert id="userOk" parameterType="com.example.demo.dto.UserDto">
-    insert into user(userid,name,pwd,email,phone,writeday)
-	values(#{userid},#{name},#{pwd},#{email},#{phone},now())
-  </insert>
-  
-  <select id="userView" resultType="com.example.demo.dto.UserDto">
-    select * from user where userid=#{userid}
-  </select>
-
-  <update id="updateOk1" parameterType="com.example.demo.dto.UserDto">
-    update user set phone=#{phone}, email=#{email}
-    where userid=#{userid}
-  </update>
-  
-  <update id="updateOk2" parameterType="com.example.demo.dto.UserDto">
-    update user set phone=#{phone}, email=#{email} , pwd=#{pwd}  
-    where userid=#{userid}
-  </update>
-  
-  <select id="pwdCheck" resultType="String">
-    select pwd from user where userid=#{userid}
-  </select>
-	
+	<select id="useridCheck" resultType="Integer">
+		select count(*) from user where userid=#{userid}
+	</select>
+	<insert id="userOk" parameterType="com.example.demo.dto.UserDto">
+		insert into user(userid,name,pwd,email,phone,writeday)
+		values(#{userid},#{name},#{pwd},#{email},#{phone},now())
+	</insert>
+	<select id="userView" resultType="com.example.demo.dto.UserDto">
+		select * from user where userid=#{userid}
+	</select>
+	<update id="updateOk1" parameterType="com.example.demo.dto.UserDto">
+		update user set phone=#{phone}, email=#{email} where userid=#{userid}
+	</update>
+	<update id="updateOk2" parameterType="com.example.demo.dto.UserDto">
+		update user set phone=#{phone}, email=#{email}, pwd=#{pwd} where userid=#{userid}
+	</update>
+	<select id="pwdCheck" resultType="String">
+		select pwd from user where userid=#{userid}
+	</select>
 	<select id="selectAllUsers" resultType="com.example.demo.dto.UserDto">
-		SELECT userid, name FROM user
+		select userid, name from user
 	</select>
 	<select id="getUserList" resultType="com.example.demo.dto.UserDto">
-		SELECT * FROM user LIMIT #{itemsPerPage} OFFSET #{offset}
+		select * from user limit #{itemsPerPage} OFFset #{offset}
 	</select>
-	<select id="getTotalUserCount" resultType="int">
-		SELECT COUNT(*) FROM user
+	<select id="getTotalUsercount" resultType="int">
+		select count(*) from user
 	</select>
 	<update id="updateUserLevelByUserid" parameterType="String">
 		update user set level=3 where userid=#{userid}
 	</update>
 	<select id="getPreviousLevel" parameterType="String" resultType="int">
-		SELECT previous_level FROM user WHERE userid = #{userid}
+		select previous_level from user where userid = #{userid}
 	</select>
 	<select id="selectUsers" resultType="com.example.demo.dto.UserDto">
-		SELECT userid, name, level, previous_level FROM user
+		select userid, name, level, previous_level from user
 	</select>
 	<!-- 현재 level 가져오기 -->
 	<select id="getCurrentLevel" resultType="int" parameterType="String">
-		SELECT level FROM user WHERE userid = #{userid}
+		select level from user where userid = #{userid}
 	</select>
 	<update id="updatePreviousLevel">
-		UPDATE user SET previous_level = #{currentLevel} WHERE userid = #{userid}
+		update user set previous_level = #{currentLevel} where userid = #{userid}
 	</update>
 	<update id="updateUserLevel">
-		UPDATE user SET level = #{level} WHERE userid = #{userid}
+		update user set level = #{level} where userid = #{userid}
 	</update>
 	<update id="memberUp" parameterType="com.example.demo.dto.UserDto">
 		update user set level=#{level} where id=#{id}
 	</update>
 	<select id="checkPwd" resultType="boolean">
-		SELECT COUNT(*) FROM user WHERE userid = #{userid} AND pwd = #{pwd};
+		select count(*) from user where userid = #{userid} and pwd = #{pwd};
 	</select>
 	<update id="reMember" parameterType="com.example.demo.dto.UserDto">
-		UPDATE user SET level=5 WHERE userid = #{userid} AND level!=5
+		update user set level=5 where userid = #{userid} and level!=5
 	</update>
 	<select id="getUserById" parameterType="String" resultType="com.example.demo.dto.UserDto">
 		select * from user where userid = #{userid};
 	</select>
 	<select id="getPwdByUserid" parameterType="String" resultType="String">
-		SELECT pwd FROM user WHERE userid = #{userid}
+		select pwd from user where userid = #{userid}
 	</select>
 	<update id="pwdChg">
-		UPDATE user SET pwd = #{newPwd} WHERE userid = #{userid}
+		update user set pwd = #{newPwd} where userid = #{userid}
 	</update>
 	<update id="editEmail">
-		UPDATE user SET email = #{email} WHERE userid = #{userid}
+		update user set email = #{email} where userid = #{userid}
 	</update>
 	<update id="editPhone">
-		UPDATE user SET phone = #{phone} WHERE userid = #{userid}
+		update user set phone = #{phone} where userid = #{userid}
 	</update>
-	
 	
 	
 </mapper>

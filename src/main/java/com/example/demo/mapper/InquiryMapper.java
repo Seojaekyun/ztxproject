@@ -7,22 +7,21 @@ import java.util.List;
 
 @Mapper
 public interface InquiryMapper {
-	public List<InquiryDto> inquiryList(@Param("index") int index);
-	public List<InquiryDto> inquiryMyList(@Param("userid") String userid, @Param("index") int index);
-	public void inquiryWriteOk(InquiryDto idto);
-	public InquiryDto getInquiryById(@Param("id") int id);
-	public void inquiryDelete(@Param("id") int id);
-	public int getChong();
-	public int getChongByUser(@Param("userid") String userid);
-	public void inquiryUpdate(InquiryDto idto);
-	public InquiryDto getUserInfo(String userid);
-	public InquiryDto content(String id);
-	public void readnum(String id);
-	public List<InquiryDto> ilist();
-	public List<InquiryDto> listCountsPerCategory();
-	public void answerOk(int id, String answer, int i);
-	public void answerDel(int id, String answer, int i);
-	
+	List<InquiryDto> list(@Param("index") int index);
+	List<InquiryDto> myList(@Param("userid") String userid, @Param("index") int index);
+	void writeOk(InquiryDto idto);
+	InquiryDto getInquiryById(@Param("id") int id);
+	void delete(@Param("id") int id);
+	int getChong();
+	int getChongByUser(@Param("userid") String userid);
+	void inquiryUpdate(InquiryDto idto);
+	InquiryDto getUserInfo(String userid);
+	InquiryDto content(String id);
+	void readnum(String id);
+	List<InquiryDto> ilist();
+	List<InquiryDto> listCountsPerCategory();
+	void answerOk(int id, String answer, int i);
+	void answerDel(int id, String answer, int i);
 	
 	
 }

@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import com.example.demo.dto.InquiryDto;
@@ -13,84 +14,79 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Qualifier("is")
 public class InquiryServiceImpl implements InquiryService {
 
 	@Autowired
 	private InquiryMapper mapper;
 
 	@Override
-	public String inquiryList(int page, HttpSession session, Model model) {
+	public String list(int page, HttpSession session, Model model) {
 		int index = (page - 1) * 10;
 		int total = mapper.getChong();
 		int totalPage = (int) Math.ceil((double) total / 20);
 
-		List<InquiryDto> inquiries = mapper.inquiryList(index);
+		List<InquiryDto> inquiries = mapper.list(index);
 		model.addAttribute("inquiries", inquiries);
 		model.addAttribute("page", page);
 		model.addAttribute("totalPage", totalPage);
-		return "/inquiry/inquiryList";
+		return "/inquiry/list";
 	}
 
 	@Override
-	public String inquiryMyList(int page, HttpSession session, Model model) {
-
+	public String myList(int page, HttpSession session, Model model) {
 		String userid = (session.getAttribute("userid") != null
 				&& !session.getAttribute("userid").toString().trim().isEmpty())
-						? session.getAttribute("userid").toString().trim()
-						: null;
-
+				? session.getAttribute("userid").toString().trim(): null;
 		int index = Math.max((page - 1) * 10, 0);
 		int total = (userid != null) ? mapper.getChongByUser(userid) : 0;
 		int totalPage = (total > 0) ? (int) Math.ceil((double) total / 10) : 1;
 
-		List<InquiryDto> myInquiries = (userid != null) ? mapper.inquiryMyList(userid, index) : new ArrayList<>();
-
-		System.out.println("현재 세션 userid: " + session.getAttribute("userid"));
-		System.out.println("조회에 사용된 userid: " + userid);
-		System.out.println("조회된 문의 개수: " + (myInquiries != null ? myInquiries.size() : 0));
-
+		List<InquiryDto> myInquiries = (userid != null) ? mapper.
+				myList(userid, index) : new ArrayList<>();
+		
 		model.addAttribute("myInquiries", myInquiries);
 		model.addAttribute("page", page);
 		model.addAttribute("totalPage", totalPage);
-		return "/inquiry/inquiryMyList";
+		
+		return "/inquiry/myList";
 	}
-
+	
 	@Override
-	public String inquiryWrite(HttpSession session, Model model) {
-		if (session.getAttribute("userid") != null) {
+	public String write(HttpSession session, Model model) {
+		if(session.getAttribute("userid") != null) {
 			String userid = session.getAttribute("userid").toString();
 			model.addAttribute("userid", userid);
 			InquiryDto userInfo = mapper.getUserInfo(userid);
 			model.addAttribute("userInfo", userInfo);
 		}
 		
-		return "/inquiry/inquiryWrite";
+		return "/inquiry/write";
 	}
 
 	@Override
-	public String inquiryWriteOk(InquiryDto idto, HttpSession session, Model model) {
-		String userid = (session.getAttribute("userid") != null) ? session.getAttribute("userid").toString() : "guest";
-
+	public String writeOk(InquiryDto idto, HttpSession session, Model model) {
+		String userid = (session.getAttribute("userid") != null)
+				? session.getAttribute("userid").toString() : "guest";
 		idto.setUserid(userid);
-
-		if (idto.getPwd() == null || idto.getPwd().isEmpty()) {
+		if(idto.getPwd() == null || idto.getPwd().isEmpty()) {
 			model.addAttribute("error", "비밀번호를 입력해야 합니다.");
-			return "/inquiry/inquiryWrite";
+			return "/inquiry/write";
 		}
-
-		mapper.inquiryWriteOk(idto);
-		return "redirect:/inquiry/inquiryList";
+		
+		mapper.writeOk(idto);
+		return "redirect:/inquiry/list";
 	}
-
+	
 	@Override
 	public String readnum(HttpServletRequest request) {
 		String id = request.getParameter("id");
 		mapper.readnum(id);
-		return "redirect:/inquiry/inquiryContent?id=" + id;
+		return "redirect:/inquiry/content?id=" + id;
 	}
 
 	@Override
-	public String inquiryContent(HttpServletRequest request, HttpSession session, Model model) {
+	public String content(HttpServletRequest request, HttpSession session, Model model) {
 		String userid = (String) session.getAttribute("userid");
 		if (userid != null) {
 			model.addAttribute(userid);
@@ -101,39 +97,38 @@ public class InquiryServiceImpl implements InquiryService {
 		System.out.println(idto);
 		model.addAttribute("idto", idto);
 
-		return "/inquiry/inquiryContent";
+		return "/inquiry/content";
 	}
 
 	@Override
-	public String inquiryDelete(int id, String pwd, HttpSession session, Model model) {
+	public String delete(int id, String pwd, HttpSession session, Model model) {
 		InquiryDto existingInquiry = mapper.getInquiryById(id);
 
 		if (existingInquiry == null) {
 			model.addAttribute("error", "존재하지 않는 문의입니다.");
-			return "redirect:/inquiry/inquiryList";
+			return "redirect:/inquiry/list";
 		}
 
-		String sessionUserId = (session.getAttribute("userid") != null) ? session.getAttribute("userid").toString()
-				: null;
-
+		String sessionUserId = (session.getAttribute("userid") != null)
+				? session.getAttribute("userid").toString() : null;
 		if (!"guest".equals(existingInquiry.getUserid())) {
 			if (sessionUserId == null || !sessionUserId.equals(existingInquiry.getUserid())) {
 				return "redirect:/login/login";
 			}
-		} else {
-
+		}
+		else {
 			if (pwd == null || !pwd.equals(existingInquiry.getPwd())) {
 				model.addAttribute("error", "비밀번호가 일치하지 않습니다.");
-				return "redirect:/inquiry/detail/" + id;
+				return "redirect:/inquiry/content/" + id;
 			}
 		}
 
-		mapper.inquiryDelete(id);
-		return "redirect:/inquiry/inquiryList";
+		mapper.delete(id);
+		return "redirect:/inquiry/list";
 	}
 
 	@Override
-	public String inquiryUpdate(int id, Model model, HttpSession session) {
+	public String update(int id, Model model, HttpSession session) {
 		InquiryDto inquiry = mapper.getInquiryById(id);
 		if (inquiry == null) {
 			model.addAttribute("error", "존재하지 않는 문의입니다.");
@@ -141,26 +136,70 @@ public class InquiryServiceImpl implements InquiryService {
 		}
 
 		model.addAttribute("inquiry", inquiry);
-		return "inquiry/inquiryUpdate";
+		return "inquiry/update";
 	}
 
 	@Override
-	public String inquiryUpdateOk(InquiryDto idto, HttpSession session, HttpServletRequest request) {
-
+	public String updateOk(InquiryDto idto, HttpSession session, HttpServletRequest request) {
 		InquiryDto existingInquiry = mapper.getInquiryById(idto.getId());
 		if (existingInquiry == null) {
 			request.setAttribute("error", "존재하지 않는 문의입니다.");
-			return "redirect:/inquiry/inquiryList";
+			return "redirect:/inquiry/list";
 		}
-
+		
 		mapper.inquiryUpdate(idto);
-		return "redirect:/inquiry/inquiryContent?id=" + idto.getId();
+		return "redirect:/inquiry/content?id=" + idto.getId();
 	}
 
 	@Override
 	public InquiryDto getUserInfo(String userid) {
-
 		return mapper.getUserInfo(userid);
 	}
+	
+	@Override
+	public String inquiryList(int page, Model model) {
+		int index = (page - 1) * 10;
+		int total = mapper.getChong();
+		int totalPage = (int)Math.ceil((double) total / 10);
+		
+		List<InquiryDto> inquiries = mapper.list(index);
+		
+		System.out.println("adminInquiryList 조회된 문의 개수: " + (inquiries != null ? inquiries.size() : "null"));
+		
+		// 🛠 inquiries 리스트 내부 데이터를 자세히 출력
+		for(InquiryDto inquiry : inquiries) {
+			System.out.println("문의 ID: " + inquiry.getId() + ", 제목: " + inquiry.getTitle());
+		}
+		
+		model.addAttribute("inquiries", inquiries);
+		model.addAttribute("page", page);
+		model.addAttribute("totalPage", totalPage);
+		
+		return "/admin/inquiryList";
+	}
+
+	@Override
+	public String answer(int id, Model model) {
+		InquiryDto inquiry = mapper.getInquiryById(id);
+		if(inquiry == null) {
+			return "redirect:/admin/inquiryList"; // 존재하지 않는 경우 리스트로 이동
+		}
+		model.addAttribute("inquiry", inquiry);
+		return "/admin/inquiryAnswer"; // JSP 파일 이름과 일치해야 함
+	}
+
+	@Override
+	public String answerOk(int id, String answer) {
+		mapper.answerOk(id, answer, 1); // ref 값을 1(답변완료)로 변경
+		return "redirect:/admin/inquiryList";
+	}
+	 
+	@Override
+	public String answerDel(int id) {
+		mapper.answerDel(id, null, 0); // ref 값을 0(미답변)으로 변경
+		return "redirect:/admin/inquiryList";
+	}
+	
+	
 
 }

@@ -16,5 +16,4 @@ public interface MainService {
 	String reservInfo();
 	
 	
-	
 }

@@ -19,8 +19,7 @@ public class LoginServiceImpl implements LoginService {
 	private LoginMapper mapper;
 
 	@Override
-	public String login(HttpServletRequest request, Model model)
-	{
+	public String login(HttpServletRequest request, Model model) {
 		String err=request.getParameter("err");
 		String rev=request.getParameter("rev");
 		
@@ -32,86 +31,63 @@ public class LoginServiceImpl implements LoginService {
 
 	@Override
 	public String loginOk(UserDto udto, HttpServletRequest request,
-			HttpServletResponse response, HttpSession session)
-	{
+			HttpServletResponse response, HttpSession session) {
 		String name=mapper.loginOk(udto);
-		if(name == null)
-		{
+		if(name == null) {
 			return "redirect:/login/login?err=1";
 		}
-		else
-		{
+		else {
 			session.setAttribute("userid", udto.getUserid());
 			session.setAttribute("name", name);
 			
-			if(request.getParameter("rev") == null)
-			{
+			if(request.getParameter("rev") == null) {
 				return "redirect:/main/index";
 			}
-			else
-			{
+			else {
 				return "redirect:/review/write";
 			}
-			
 		}
-		
 	}
 	
 	@Override
-	public String logout(HttpSession session)
-	{	
+	public String logout(HttpSession session) {	
 		session.invalidate();
-		
 		return "redirect:/main/index";
 	}
 
 	@Override
-	public String fUserid()
-	{
+	public String fUserid() {
 		return "/login/fUserid";
 	}
 	
 	@Override
-	public String getUserid(UserDto udto)
-	{
-	    String userid = mapper.getUserid(udto);
-	    
-	    return userid != null ? userid : "존재하지 않는 사용자입니다.";
+	public String getUserid(UserDto udto) {
+		String userid = mapper.getUserid(udto);
+		return userid != null ? userid : "존재하지 않는 사용자입니다.";
 	}
-
+	
 	@Override
-	public String fPassword()
-	{
+	public String fPassword() {
 		return "/login/fPassword";
 	}
 
 	@Override
-	public String getPwd(UserDto udto) throws Exception
-	{
+	public String getPwd(UserDto udto) throws Exception {
 		String pwd=mapper.getPwd(udto);
 		
-		if(pwd != null)
-		{
+		if(pwd != null) {
 			String newPwd="";
-			
-			for(int i=1;i<5;i++)
-			{
+			for(int i=1;i<5;i++) {
 				int num=(int)(Math.random()*90);
-				
 				num=num+33;
-				
 				newPwd=newPwd+(char)num;
 			}
-			
 			mapper.chgPwd(udto.getUserid(),newPwd);
-			
 			return "임시 비밀번호 : "+newPwd;
 		}
-		else
-		{
+		else {
 			return "정보가 일치하지 않습니다";
 		}
-		
 	}
 
 	@Override
@@ -122,12 +98,11 @@ public class LoginServiceImpl implements LoginService {
 	}
 	
 	@Override
-	public String loginAdmin(
-			UserDto udto, HttpSession session,
+	public String loginAdmin(UserDto udto, HttpSession session,
 			HttpServletRequest request, HttpServletResponse response) {
 		String name = mapper.loginAdmin(udto);
 		
-		if (name != null) {
+		if(name != null) {
 			// 로그인 성공 시 세션에 사용자 정보 저장
 			session.setAttribute("userid", udto.getAdminid());
 			session.setAttribute("name", name);

@@ -4,7 +4,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -25,8 +26,7 @@ public class ReviewServiceImpl implements ReviewService {
 	private ReviewMapper mapper;
 
 	@Override
-	public String list(HttpServletRequest request, Model model)
-	{
+	public String list(HttpServletRequest request, Model model) {
 		int page=1;
 		if (page <= 0) page = 1;
 
@@ -44,7 +44,7 @@ public class ReviewServiceImpl implements ReviewService {
 		// 해당 페이지에 맞는 데이터 가져오기
 		int index = (page - 1) * 10;
 		    
-		ArrayList<ReviewDto> revlist=mapper.list(index);
+		List<ReviewDto> revlist=mapper.list(index);
 			
 		model.addAttribute("revlist", revlist);
 		model.addAttribute("page", page);
@@ -55,14 +55,11 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	@Override
-	public String readnum(HttpSession session, HttpServletRequest request)
-	{
-		if(session.getAttribute("userid") == null)
-		{
+	public String readnum(HttpSession session, HttpServletRequest request) {
+		if(session.getAttribute("userid") == null) {
 			return  "redirect:/login/login";
 		}
-		else
-		{
+		else {
 			String page=request.getParameter("page");
 			String id=request.getParameter("id");
 			
@@ -73,14 +70,11 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	@Override
-	public String content(HttpSession session, HttpServletRequest request, Model model)
-	{
-		if(session.getAttribute("userid") == null)
-		{
+	public String content(HttpSession session, HttpServletRequest request, Model model) {
+		if(session.getAttribute("userid") == null) {
 			return  "redirect:/login/login";
 		}
-		else
-		{
+		else {
 			String id=request.getParameter("id");
 			String page=request.getParameter("page");
 			
@@ -94,16 +88,23 @@ public class ReviewServiceImpl implements ReviewService {
 			return "/review/content";
 		}
 	}
-
+	
 	@Override
-	public String writeOk(ReviewDto revdto, MultipartFile file, HttpSession session) throws IOException
-	{
-		if(session.getAttribute("userid") == null)
-		{
+	public String write(HttpSession session) {
+		if(session.getAttribute("userid") == null) {
+			return "redirect:/login/login?rev=1";
+		}
+		else {
+			return "/review/write";
+		}
+	}
+	
+	@Override
+	public String writeOk(ReviewDto revdto, MultipartFile file, HttpSession session) throws IOException {
+		if(session.getAttribute("userid") == null) {
 			return  "redirect:/login/login";
 		}
-		else
-		{
+		else {
 			String userid=session.getAttribute("userid").toString();
 			String fname=file.getOriginalFilename();
 			String imsi=ResourceUtils.getFile("classpath:static/resources/files").toPath().toString()+"/"+fname;
@@ -121,8 +122,7 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 	
 	@Override
-	public String update(HttpServletRequest request, Model model)
-	{
+	public String update(HttpServletRequest request, Model model) {
 		String id=request.getParameter("id");
 		String page=request.getParameter("page");
 		
@@ -135,23 +135,18 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	@Override
-	public String updateOk(HttpSession session, ReviewDto revdto, MultipartFile file) throws Exception
-	{
-		if(session.getAttribute("userid") == null)
-		{
+	public String updateOk(HttpSession session, ReviewDto revdto, MultipartFile file) throws Exception {
+		if(session.getAttribute("userid") == null) {
 			return "redirect:/login/login";
 		}
-		else
-		{
+		else {
 			//System.out.println("updateOk : "+file.isEmpty()+" "+file.getOriginalFilename());
-			if(file.isEmpty())
-			{
+			if(file.isEmpty()) {
 				mapper.updateOk1(revdto);
 				
 				return "redirect:/review/list";
 			}
-			else
-			{
+			else {
 				String fname=file.getOriginalFilename();
 				String imsi=ResourceUtils.getFile("classpath:static/resources/files").toPath().toString()+"/"+fname;
 				

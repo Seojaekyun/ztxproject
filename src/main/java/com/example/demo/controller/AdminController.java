@@ -12,6 +12,7 @@ import com.example.demo.dto.GongjiDto;
 import com.example.demo.dto.UserDto;
 import com.example.demo.service.AdminService;
 import com.example.demo.service.GongjiService;
+import com.example.demo.service.InquiryService;
 import com.example.demo.service.RoutesService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -37,6 +38,10 @@ public class AdminController {
 	@Qualifier("gs")
 	private GongjiService gservice;
 	
+	@Autowired
+	@Qualifier("is")
+	private InquiryService iservice;
+	
 	@GetMapping("/admin/index")
 	public String adminIndex(HttpSession session, HttpServletRequest request, Model model) {
 		return service.adminIndex(session, request, model);
@@ -54,6 +59,36 @@ public class AdminController {
 	@GetMapping("/admin/rsvdList")
 	public String rsvdList(HttpServletRequest request, Model model) {
 		return service.rsvdList(request, model);
+	}
+	
+	@GetMapping("/admin/memberList")
+	public String memberList(HttpServletRequest request, Model model) {
+		return service.memberList(request, model);
+	}
+	
+	@GetMapping("/admin/memberUp")
+	public String memberUp(UserDto mdto, @RequestParam int id, @RequestParam int level, Model model) {
+		return service.memberUp(mdto, id, level, model);
+	}
+	
+	@GetMapping("/admin/oneMeminfo")
+	public String oneMeminfo(HttpServletRequest request, Model model) {
+		return service.oneMeminfo(request, model);
+	}
+	
+	@GetMapping("/admin/cancelConfirm")
+	public String cancelConfirm(HttpServletRequest request) {
+		return service.cancelConfirm(request);
+	}
+	
+	@GetMapping("/admin/cancelRejection")
+	public String cancelRejection(HttpServletRequest request, Model model) {
+		return service.cancelRejection(request, model);
+	}
+	
+	@GetMapping("/admin/payReturn")
+	public String payReturn(HttpServletRequest request, Model model) {
+		return service.payReturn(request, model);
 	}
 	
 	@GetMapping("/admin/routesList")
@@ -134,56 +169,27 @@ public class AdminController {
 		return gservice.gongjiDelete(request);
 	}
 	
-	
 	@GetMapping("/admin/inquiryList")
 	public String inquiryList(@RequestParam(defaultValue = "1") int page, Model model) {
-		return service.inquiryList(page,model);
+		return iservice.inquiryList(page,model);
 	}
 	
 	@GetMapping("/admin/inquiryAnswer")
 	public String answer(@RequestParam int id, Model model) {
-		return service.answer(id, model);
+		return iservice.answer(id, model);
 	}
 	
 	@PostMapping("/admin/answerOk")
 	public String answerOk(@RequestParam int id, @RequestParam String answer) {
-		return service.answerOk(id, answer);
+		return iservice.answerOk(id, answer);
 	}
 	
 	@GetMapping("/admin/answerDel")
 	public String answerDel(@RequestParam int id) {
-		return service.answerDel(id);
+		return iservice.answerDel(id);
 	}
 	
-	@GetMapping("/admin/memberList")
-	public String memberList(HttpServletRequest request, Model model) {
-		return service.memberList(request, model);
-	}
 	
-	@GetMapping("/admin/memberUp")
-	public String memberUp(UserDto mdto, @RequestParam int id, @RequestParam int level, Model model) {
-		return service.memberUp(mdto, id, level, model);
-	}
-	
-	@GetMapping("/admin/oneMeminfo")
-	public String oneMeminfo(HttpServletRequest request, Model model) {
-		return service.oneMeminfo(request, model);
-	}
-	
-	@GetMapping("/admin/cancelConfirm")
-	public String cancelConfirm(HttpServletRequest request) {
-		return service.cancelConfirm(request);
-	}
-	
-	@GetMapping("/admin/cancelRejection")
-	public String cancelRejection(HttpServletRequest request, Model model) {
-		return service.cancelRejection(request, model);
-	}
-	
-	@GetMapping("/admin/payReturn")
-	public String payReturn(HttpServletRequest request, Model model) {
-		return service.payReturn(request, model);
-	}
 
 
 

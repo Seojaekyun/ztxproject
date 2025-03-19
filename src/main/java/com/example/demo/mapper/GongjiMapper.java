@@ -1,6 +1,6 @@
 package com.example.demo.mapper;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -8,11 +8,13 @@ import com.example.demo.dto.GongjiDto;
 
 @Mapper
 public interface GongjiMapper {
-	public ArrayList<GongjiDto> list(int index);
-	public int getChong();
-	public void writeOk(GongjiDto gdto);
-	public void readnum(String id);
-	public GongjiDto content(String id);
-	public void updateOk(GongjiDto gdto);
-	public void delete(String id);
+	List<GongjiDto> list(int index);
+	int getChong();
+	void writeOk(GongjiDto gdto);
+	void readnum(String id);
+	GongjiDto content(String id);
+	void updateOk(GongjiDto gdto);
+	void delete(String id);
+	
+	
 }

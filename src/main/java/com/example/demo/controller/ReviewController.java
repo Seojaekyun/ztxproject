@@ -23,60 +23,44 @@ public class ReviewController {
 	private ReviewService service;
 	
 	@GetMapping("/review/list")
-	public String list(HttpServletRequest request, Model model)
-	{
+	public String list(HttpServletRequest request, Model model) {
 		return service.list(request, model);
 	}
 	
 	@GetMapping("/review/readnum")
-	public String readnum(HttpSession session, HttpServletRequest request)
-	{
+	public String readnum(HttpSession session, HttpServletRequest request) {
 		return service.readnum(session, request);
 	}
 	
 	@GetMapping("/review/content")
-	public String content(HttpSession session, HttpServletRequest request, Model model)
-	{
+	public String content(HttpSession session, HttpServletRequest request, Model model) {
 		return service.content(session, request, model);
 	}
 	
 	@GetMapping("/review/write")
-	public String write(HttpSession session)
-	{
-		if(session.getAttribute("userid") == null)
-		{
-			return "redirect:/login/login?rev=1";
-		}
-		else
-		{
-			return "/review/write";
-		}
+	public String write(HttpSession session) {
+		return service.write(session);
 	}
 	
 	@PostMapping("/review/writeOk")
-	public String writeOk(ReviewDto revdto, MultipartFile file, HttpSession session) throws IOException
-	{
+	public String writeOk(ReviewDto revdto, MultipartFile file, HttpSession session) throws IOException {
 		return service.writeOk(revdto, file, session);
 	}
 	
 	@GetMapping("/review/update")
-	public String update(HttpServletRequest request, Model model)
-	{
+	public String update(HttpServletRequest request, Model model) {
 		return service.update(request, model);
 	}
 	
 	@PostMapping("/review/updateOk")
-	public String updateOk(HttpSession session, ReviewDto revdto,
-			MultipartFile file) throws Exception
-	{
+	public String updateOk(HttpSession session, ReviewDto revdto, MultipartFile file) throws Exception {
 		return service.updateOk(session, revdto, file);
 	}
 	
 	@GetMapping("/review/delete")
-	public String delete(HttpServletRequest request)
-	{
+	public String delete(HttpServletRequest request) {
 		return "redirect:/review/list";
 	}
 	
-
+	
 }

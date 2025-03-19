@@ -4,6 +4,8 @@ import lombok.Data;
 
 @Data
 public class ReviewDto {
-	private int id,readnum;
-	private String userid,title,content,fname,writeday;
+	private int id, readnum;
+	private String userid, title, content, fname, writeday;
+	
+	
 }
