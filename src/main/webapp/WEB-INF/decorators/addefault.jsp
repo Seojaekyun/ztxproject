@@ -41,25 +41,24 @@
 		display: flex;
 		height: 50px;
 		align-items: center;
-		justify-content: space-between;
+		justify-content: flex-start;
 		background-color: #001160;
 		padding: 10px 20px;
 		box-sizing: border-box;
 		color: white;
 	}
 	header #logo {
-		display: flex;
-		justify-content: space-between;
+		display: inline-block;
 		width: 250px;
-		flex-shrink: 0;
 		margin-left: 10px;
-		margin-bottom: 20px;
+		margin-bottom: 25px;
 	}
 	header #logo a{
 		font-size: 24px;
 		color: white;
 		text-decoration: none;
 		font-weight: bold;
+		line-height: 20px;
 	}
 	header #two {
 		display: flex;
@@ -73,13 +72,12 @@
 		font-size: 17px;
 		cursor: pointer;
 		position: relative;
-	}
-	header #two button {
 		text-decoration: none;
+		font-weight: 550;
 		color: white;
 	}
 	header #two button:hover {
-		font-weight: bold;
+		color: #078EB9;
 	}
     #chatbot {
 		width: 95%;
@@ -202,13 +200,12 @@
 			<div id="logo">
 				<div id="logoimg">
 					<a href="../admin/index">
-						<img src="../static/resources/train(white).png" height="70px" align="middle">
+						<img src="../static/resources/ggologo(white).png" height="30px" align="top">
 					</a>
 				</div>
 				<div id="logotext">
 					<a href="../admin/index">
-						GGoRail				
-						Administrator
+						&nbsp;Administrator
 					</a>
 				</div>
 			</div>
