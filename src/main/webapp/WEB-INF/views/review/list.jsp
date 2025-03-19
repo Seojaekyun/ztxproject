@@ -141,15 +141,6 @@
 	  </div>
 	</div>
 	<section>
-		<div class="csc">여행 후기</div>
-		<div class="cscmc">
-			<div class="cscmenu">
-			    <a href="../gongji/list">공지 사항</a>
-			    <a href="../inquiry/inquiryList">Q＆A</a>
-			    <a href="../promot/list">이벤트</a>
-			    <a href="../review/list">여행 후기</a>
-			</div>
-		</div>
 		<div class="container">
 			<div class="content">
 				<table class="qna-table">
