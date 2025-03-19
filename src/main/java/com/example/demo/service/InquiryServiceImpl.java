@@ -42,10 +42,10 @@ public class InquiryServiceImpl implements InquiryService {
 		int total = (userid != null) ? mapper.getChongByUser(userid) : 0;
 		int totalPage = (total > 0) ? (int) Math.ceil((double) total / 10) : 1;
 
-		List<InquiryDto> myInquiries = (userid != null) ? mapper.
+		List<InquiryDto> myList = (userid != null) ? mapper.
 				myList(userid, index) : new ArrayList<>();
 		
-		model.addAttribute("myInquiries", myInquiries);
+		model.addAttribute("myInquiries", myList);
 		model.addAttribute("page", page);
 		model.addAttribute("totalPage", totalPage);
 		
@@ -102,22 +102,22 @@ public class InquiryServiceImpl implements InquiryService {
 
 	@Override
 	public String delete(int id, String pwd, HttpSession session, Model model) {
-		InquiryDto existingInquiry = mapper.getInquiryById(id);
+		InquiryDto idto = mapper.getInquiryById(id);
 
-		if (existingInquiry == null) {
+		if (idto == null) {
 			model.addAttribute("error", "존재하지 않는 문의입니다.");
 			return "redirect:/inquiry/list";
 		}
 
 		String sessionUserId = (session.getAttribute("userid") != null)
 				? session.getAttribute("userid").toString() : null;
-		if (!"guest".equals(existingInquiry.getUserid())) {
-			if (sessionUserId == null || !sessionUserId.equals(existingInquiry.getUserid())) {
+		if (!"guest".equals(idto.getUserid())) {
+			if (sessionUserId == null || !sessionUserId.equals(idto.getUserid())) {
 				return "redirect:/login/login";
 			}
 		}
 		else {
-			if (pwd == null || !pwd.equals(existingInquiry.getPwd())) {
+			if (pwd == null || !pwd.equals(idto.getPwd())) {
 				model.addAttribute("error", "비밀번호가 일치하지 않습니다.");
 				return "redirect:/inquiry/content/" + id;
 			}
@@ -129,25 +129,25 @@ public class InquiryServiceImpl implements InquiryService {
 
 	@Override
 	public String update(int id, Model model, HttpSession session) {
-		InquiryDto inquiry = mapper.getInquiryById(id);
-		if (inquiry == null) {
+		InquiryDto idto = mapper.getInquiryById(id);
+		if (idto == null) {
 			model.addAttribute("error", "존재하지 않는 문의입니다.");
 			return "redirect:/inquiry/inquiryList";
 		}
 
-		model.addAttribute("inquiry", inquiry);
+		model.addAttribute("inquiry", idto);
 		return "inquiry/update";
 	}
 
 	@Override
 	public String updateOk(InquiryDto idto, HttpSession session, HttpServletRequest request) {
-		InquiryDto existingInquiry = mapper.getInquiryById(idto.getId());
-		if (existingInquiry == null) {
+		InquiryDto exIdto = mapper.getInquiryById(idto.getId());
+		if (exIdto == null) {
 			request.setAttribute("error", "존재하지 않는 문의입니다.");
 			return "redirect:/inquiry/list";
 		}
 		
-		mapper.inquiryUpdate(idto);
+		mapper.update(idto);
 		return "redirect:/inquiry/content?id=" + idto.getId();
 	}
 
@@ -164,11 +164,9 @@ public class InquiryServiceImpl implements InquiryService {
 		
 		List<InquiryDto> inquiries = mapper.list(index);
 		
-		System.out.println("adminInquiryList 조회된 문의 개수: " + (inquiries != null ? inquiries.size() : "null"));
-		
 		// 🛠 inquiries 리스트 내부 데이터를 자세히 출력
-		for(InquiryDto inquiry : inquiries) {
-			System.out.println("문의 ID: " + inquiry.getId() + ", 제목: " + inquiry.getTitle());
+		for(InquiryDto idto : inquiries) {
+			System.out.println("문의 ID: " + idto.getId() + ", 제목: " + idto.getTitle());
 		}
 		
 		model.addAttribute("inquiries", inquiries);

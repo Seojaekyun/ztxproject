@@ -14,7 +14,7 @@ public interface InquiryMapper {
 	void delete(@Param("id") int id);
 	int getChong();
 	int getChongByUser(@Param("userid") String userid);
-	void inquiryUpdate(InquiryDto idto);
+	void update(InquiryDto idto);
 	InquiryDto getUserInfo(String userid);
 	InquiryDto content(String id);
 	void readnum(String id);

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.mapper.InquiryMapper">
-	<insert id="inquiryWriteOk" parameterType="com.example.demo.dto.InquiryDto">
+	<insert id="writeOk" parameterType="com.example.demo.dto.InquiryDto">
 		INSERT INTO inquiry (userid, name, category, title, content, phone, pwd, writeday)
 		VALUES (#{userid}, #{name}, #{category}, #{title}, #{content}, #{phone}, #{pwd}, NOW());
 	</insert>

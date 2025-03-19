@@ -97,5 +97,16 @@
 		SELECT COUNT(*) FROM routes WHERE departure_time >=now()
 	</select>
 	
+	<select id="getAvaiRoutes" resultType="com.example.demo.dto.RoutesDto">
+		SELECT * FROM routes
+	</select>
+	<select id="getDepByDate" resultType="string" parameterType="string">
+		SELECT DISTINCT departure FROM routes WHERE DATE(departure_time) = #{date}
+	</select>
+	<select id="getArrivalByDepAndDate" resultType="string" parameterType="map">
+		SELECT DISTINCT arrival FROM routes WHERE departure = #{departure}
+		AND DATE(departure_time) = #{date}
+	</select>
+	
 </mapper>
 

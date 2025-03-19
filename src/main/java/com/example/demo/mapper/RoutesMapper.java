@@ -34,6 +34,9 @@ public interface RoutesMapper {
 	void addSeats();
 	List<RoutesDto> getRoutes(int offset, int itemsPerPage);
 	int countRoutes();
+	List<RoutesDto> getAvaiRoutes();
+	List<String> getDepByDate(String date);
+	List<String> getArrivalByDepAndDate(String departure, String date);
 	
 	
 }

@@ -1,14 +1,22 @@
 package com.example.demo.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.example.demo.dto.ReservDto;
+import com.example.demo.dto.RoutesDto;
 import com.example.demo.mapper.ReservMapper;
+import com.example.demo.mapper.RoutesMapper;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -17,6 +25,29 @@ import jakarta.servlet.http.HttpSession;
 public class ReservServiceImpl implements ReservService {
 	@Autowired
 	private ReservMapper mapper;
+	@Autowired
+	private RoutesMapper roMapper;
+	
+	public String reserv(Model model) {
+		List<RoutesDto> routes = roMapper.getAvaiRoutes();
+		model.addAttribute("routes", routes);
+		return "/reserv/reserv";
+	}
+	
+	@Override
+    public Map<String, List<String>> getRoutesByDate(@RequestParam String date) {
+        List<String> departure = roMapper.getDepByDate(date);
+        Map<String, List<String>> result = new HashMap<>();
+        result.put("departure", departure);
+        return result;
+    }
+	
+	@Override
+	public ResponseEntity<List<String>> getArrivalByDepAndDate(@RequestParam String departure,
+			@RequestParam String date) {
+		List<String> arrivalAirports = roMapper.getArrivalByDepAndDate(departure, date);
+		return ResponseEntity.ok(arrivalAirports);
+	}
 
 	@Override
 	public String reservCheck(int routeid, String routeDeparture, String routeArrival, String routeTime,

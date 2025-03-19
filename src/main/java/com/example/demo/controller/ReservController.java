@@ -1,18 +1,26 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.ReservDto;
+import com.example.demo.dto.RoutesDto;
 import com.example.demo.service.ReservService;
+import com.example.demo.service.RoutesService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class ReservController {
@@ -20,6 +28,23 @@ public class ReservController {
 	@Autowired
 	@Qualifier("ress")
 	private ReservService service;
+	
+	@GetMapping("/reserv/reserv")
+	public String reserv(Model model) {
+		return service.reserv(model);
+	}
+	
+	@GetMapping("/reserv/stations")
+	@ResponseBody
+	public Map<String, List<String>> getRoutesByDate(@RequestParam String date) {
+		return service.getRoutesByDate(date);
+	}
+	
+	@GetMapping("/reserv/stations/arrival")
+	public ResponseEntity<List<String>> getArrivalByDepAndDate(@RequestParam String departure,
+			@RequestParam String date) {
+        return service.getArrivalByDepAndDate(departure, date);
+    }
 	
 	@PostMapping("/reserv/reservCheck")
 	public String reservCheck(@RequestParam int routeid, @RequestParam String routeDeparture,
