@@ -8,7 +8,6 @@
 <title>결제</title>
 <style>
     body {
-        font-family: Arial, sans-serif;
         background-color: #f7f8fa;
         margin: 20px;
         color: #333;

@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +6,6 @@
 <title>Insert title here</title>
   <style>
     body {
-		font-family: 'Noto Sans KR', sans-serif;
 		background-color: #f9f9f9;
 		margin: 0;
 		padding: 0;

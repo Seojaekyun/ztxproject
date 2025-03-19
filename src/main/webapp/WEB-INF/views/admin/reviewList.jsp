@@ -9,7 +9,6 @@
 <style>
     /* 전체적인 레이아웃 */
     body {
-        font-family: 'Noto Sans KR', sans-serif;
         margin: 0;
         padding: 0;
         background-color: #f4f6f9;

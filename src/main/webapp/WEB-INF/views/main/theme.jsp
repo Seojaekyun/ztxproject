@@ -7,7 +7,6 @@
 <title>추천 여행 상품</title>
 <style>
 	body { 
-		font-family: Arial, sans-serif;
 		background: #f9f9f9; 
 		margin: 0; 
 		padding: 0; 

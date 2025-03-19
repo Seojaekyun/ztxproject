@@ -8,7 +8,6 @@
 <title>여행 후기</title>
 <style>
   body {
-    font-family: 'Noto Sans KR', sans-serif;
 	margin: 0;
 	padding: 0;
 	background-color: #f4f6f9;

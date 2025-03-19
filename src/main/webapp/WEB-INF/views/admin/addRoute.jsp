@@ -9,7 +9,6 @@
 <title>열차편 추가</title>
 <style>
 	body {
-		font-family: 'Noto Sans KR', sans-serif;
 		background-color: #f9f9f9;
 		margin: 0;
 		padding: 0;

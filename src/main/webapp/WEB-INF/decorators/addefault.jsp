@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>관리자 페이지</title>
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
 	body {
 		margin: 0;
 		font-family: "Noto Sans KR", arial, sans-serif;

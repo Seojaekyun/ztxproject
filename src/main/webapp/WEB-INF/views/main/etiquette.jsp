@@ -166,7 +166,7 @@ main {
 					<p>꼬레일에서는 올바른 철도여행문화를 선도해 나가기 위해 '열차이용 기초 질서 지키기' 캠페인을 연중 시행하고 있습니다.</p>
 					<p>모두의 즐거운 기차여행을 위하여 코레일과 함께 하나씩 실천해 보시는 건 어떨까요?</p> <br><br><br><br>
 					<p>이달의 기초질서 지키기</p>
-					<p style="font-size: 30px; color: #003366; font-weight: bold; font-family: 'Noto Sans KR', Arial, sans-serif;">객실안에서 조용히 하기</p>
+					<p style="font-size: 30px; color: #003366; font-weight: bold;">객실안에서 조용히 하기</p>
 					<p align="left"><img src="../static/resources/manners/chapter.png"></p>
 
 					<div>
@@ -192,7 +192,7 @@ main {
 				</div>	<br><br><br>
 
 				<div style="text-align: center; margin-top: 40px;">
-					<h2 style="font-size: 30px; color: #003366; font-weight: bold; font-family: 'Noto Sans KR', Arial, sans-serif;">고객님 한분 한분의 작은 실천이 모두의 기차여행을 더욱 즐겁게 합니다.</h2>
+					<h2 style="font-size: 30px; color: #003366; font-weight: bold;">고객님 한분 한분의 작은 실천이 모두의 기차여행을 더욱 즐겁게 합니다.</h2>
 				</div>
 			</div>
 		</div>

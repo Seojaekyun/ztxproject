@@ -16,7 +16,6 @@
 		height:50px;
 		border:1px solid green;
 		outline:none;
-		font-family: 'GmarketSansMedium';
 		font-size:16px;
 	}
 	section textarea {
@@ -24,7 +23,6 @@
 		height:300px;
 		border:1px solid green;
 		outline:none;
-		font-family: 'GmarketSansMedium';
 		font-size:16px;
 	}
 	section input[type=submit] {
@@ -34,7 +32,6 @@
 		outline:none;
 		background:green;
 		color:white;
-		font-family: 'GmarketSansMedium';
 		font-size:16px;
 	}
 	section div {

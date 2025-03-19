@@ -7,9 +7,7 @@
 <meta charset="UTF-8">
 <title>administrator</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
 	body {
-		font-family: "Noto Sans KR", arial, sans-serif
 		background-color: #f0f4f8;
 		margin: 0;
 		padding: 0;

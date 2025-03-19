@@ -13,7 +13,6 @@
 <style>
 	body {
 		margin: 0;
-		font-family: "Noto Sans KR", arial, sans-serif;
 		background-color: #f4f4f4;
 	}
 	.main_content {

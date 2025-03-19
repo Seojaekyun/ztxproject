@@ -7,7 +7,6 @@
 <title>아이디 찾기</title>
   <style>
     body {
-      font-family:'Arial', sans-serif;
       background-color:#f4f7fa;
       display:flex;
       justify-content:center;

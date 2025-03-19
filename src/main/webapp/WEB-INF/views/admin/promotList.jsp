@@ -4,30 +4,30 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>공지사항 관리</title>
+<title>프로모션 관리</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-    /* 전체적인 레이아웃 */
     body {
-        font-family: 'Noto Sans KR', sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #f4f6f9;
+		background-color: #f0f4f8;
+		margin: 0;
+		padding: 0;
+	}
+	h3 {
+      font-size:24px;
+      font-weight: 700;
+      color:#333;
+      margin-bottom:20px;
     }
-    h2 {
-        font-size: 24px;
-        font-weight: 700;
-        margin-top: 20px;
-        text-align: center;
-    }
-    section {
-        max-width: 800px;
-        margin: 30px auto;
-        padding: 20px;
-        background-color: #fff;
-        border-radius: 8px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    }
+	section {
+		width: 90%;
+		max-width: 900px;
+		margin: auto;
+		padding-bottom: 40px;
+		background-color: #fff;
+		border-radius: 8px;
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+		padding: 20px;
+	}
     table {
         width: 100%;
         border-collapse: collapse;
@@ -131,11 +131,8 @@
 </style>
 </head>
 <body>
-
-<div>
-    <h2>프로모션 관리</h2>
-</div>
 <section>
+	<h3>프로모션 관리</h3>
     <div align="right"><a href="promotAdd" id="write">작성하기</a></div>
     <table>
         <tr>
