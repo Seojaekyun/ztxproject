@@ -53,6 +53,7 @@
   table {
 	width:100%;
 	border-collapse: collapse;
+	margin-top:20px;
 	margin-bottom: 20px;
   }
   th, td {
@@ -70,7 +71,36 @@
 	background-color: #fff;
 	color: #333;
 	font-size: 14px;
-  }    
+  }
+    input[type="text"], textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+  textarea {
+    height: 120px;
+    resize: vertical;
+  }
+  input[type="submit"], input[type="button"] {
+    background-color: #004EA2;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+  input[type="submit"]:hover, input[type="button"]:hover {
+    background-color: #003A80;
+  }
+  #ori img {
+    width: 80px;
+    height: 80px;
+    border-radius: 5px;
+    object-fit: cover;
+  }
   </style>
 </head>
 <body> <!-- review/update.jsp -->
@@ -102,16 +132,14 @@
 	  <tr>
 	    <th> 파 일 </th>
 	    <td> 
-	      
 	      <div id="ori">
-	        <img src="../static/resources/files/${revdto.fname}" width="40" height="40">
+	        <img src="../static/resources/files/${revdto.fname}">
 	        <input type="button" value="그림변경" onclick="chg(0)">
 	      </div>
 	      <div id="chgImg" id="chgImg" style="display:none;">
 	        <input type="file" name="file" id="file">
 	        <input type="button" value="그림취소" onclick="chg(1)">
 	      </div>
-	       
 	    </td>
 	  </tr>
 	  <tr>
@@ -119,7 +147,7 @@
    	    <td> <textarea name="content" id="content"> ${revdto.content} </textarea> </td>
 	  </tr>
 	  <tr>
-	    <td> <input type="submit" value="수정" id="submit"> </td>
+	    <td colspan="3"> <input type="submit" value="수정" id="submit"> </td>
 	  </tr>
     </table>
   </form>
@@ -138,8 +166,6 @@
     		document.getElementById("ori").style.display="block";
     		document.getElementById("file").value="";
     	}	
-     
-    	
     }
   </script>
 </body>
