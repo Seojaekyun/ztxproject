@@ -11,7 +11,6 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <style>
 	body {
-		font-family: 'Noto Sans KR', sans-serif;
 		background-color: #f9f9f9;
 		margin: 0;
 		padding: 0;

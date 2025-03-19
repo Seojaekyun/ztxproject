@@ -7,7 +7,6 @@
 <title>문의 답변</title>
 <style>
     body { 
-    font-family: 'Noto Sans KR', sans-serif; 
     background-color: #f4f6f9; 
     margin: 0; 
     padding: 0; 

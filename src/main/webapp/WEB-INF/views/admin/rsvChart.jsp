@@ -8,7 +8,6 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 	body {
-		font-family: 'Noto Sans KR', sans-serif;
 		background-color: #f9f9f9;
 		margin: 0;
 		padding: 0;

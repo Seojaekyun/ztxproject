@@ -7,7 +7,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 	body {
-		font-family: 'Noto Sans KR', sans-serif;
 		background-color: #f9f9f9;
 		margin: 0;
 		padding: 0;
@@ -32,7 +31,6 @@
 		max-width: 95%;
 		border: 1px solid #007BFF;
 		outline: none;
-		font-family: 'Noto Sans KR', sans-serif;
 		font-size: 16px;
 		border-radius: 8px;
 		padding: 10px;
@@ -47,7 +45,6 @@
 		border: none;
 		background-color: #007BFF;
 		color: white;
-		font-family: 'Noto Sans KR', sans-serif;
 		font-size: 16px;
 		border-radius: 8px;
 		cursor: pointer;

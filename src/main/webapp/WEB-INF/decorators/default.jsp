@@ -16,6 +16,7 @@
 		margin: 0;
 		padding: 0;
 		box-sizing: border-box;
+		font-family: "Noto Sans KR", arial, sans-serif !important;
 	}
 	body {
 		margin: auto;
@@ -793,8 +794,8 @@
 						<div id="subtitle" style="font-size: 22px; border-right: solid 1px lightgray;">철도역·열차</div>
 						<div id="submenu">
 							<div><a href="../main/etiquette">탑승 안내</a></div>
-							<div><a href="../guide/seatGuide">좌석 안내</a></div>
-							<div><a href="../guide/baggageGuide">수하물 안내</a></div>
+							<div><a href="../main/station">철도역 안내</a></div>
+							<div><a href="../guide/baggageGuide">열차 안내</a></div>
 						</div>
 					</div>
 				</div>

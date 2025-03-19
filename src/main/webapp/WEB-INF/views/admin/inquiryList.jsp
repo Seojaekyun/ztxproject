@@ -7,28 +7,28 @@
 <title>Q＆A 관리</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-    /* 기본 스타일 */
     body {
-        font-family: 'Noto Sans KR', sans-serif;
-        background-color: #f4f6f9;
-        margin: 0;
-        padding: 0;
+		font-family: 'Noto Sans KR', sans-serif;
+		background-color: #f0f4f8;
+		margin: 0;
+		padding: 0;
+	}
+	h3 {
+      font-size:24px;
+      font-weight: 700;
+      color:#333;
+      margin-bottom:20px;
     }
-    h2 {
-        font-size: 24px;
-        font-weight: 700;
-        text-align: center;
-        margin-top: 20px;
-        color: #333;
-    }
-    section {
-        max-width: 800px;
-        margin: 30px auto;
-        padding: 20px;
-        background-color: #fff;
-        border-radius: 8px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    }
+	section {
+		width: 90%;
+		max-width: 900px;
+		margin: auto;
+		padding-bottom: 40px;
+		background-color: #fff;
+		border-radius: 8px;
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+		padding: 20px;
+	}
     table {
         width: 100%;
         border-collapse: collapse;
@@ -110,9 +110,8 @@
 </style>
 </head>
 <body>
-
-<h2>Q ＆ A 관리</h2>
 <section>
+	<h3>Q ＆ A 관리</h3>
     <table>
         <tr>
             <th>no.</th>

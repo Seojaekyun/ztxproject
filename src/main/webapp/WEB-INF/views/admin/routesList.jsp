@@ -8,7 +8,6 @@
 <title> 열차편 현황 </title>
 <style>
 	body {
-		font-family: 'Noto Sans KR', sans-serif;
 		background-color: #f9f9f9;
 		margin: 0;
 		padding: 0;
@@ -140,17 +139,20 @@
 		color: #333;
 		margin-top: 10px;
 	}
-	.button {
-		background-color: #000A8E;
-		color: white;
-		border: none;
-		padding: 10px 15px;
-		font-size: 16px;
-		border-radius: 10px;
-		box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-		cursor: pointer;
-		transition: background-color 0.3s ease, transform 0.3s ease;
-		margin: 5px 10px 0 0;
+	.addbutton {
+		position: fixed;
+        top: 100px;
+        right: 20px;
+        background-color: #23297A;
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+        border-radius: 15px;
+        display: flex; /* 알림 아이콘 위치를 위해 flex로 설정 */
+        align-items: center; /* 버튼과 알림 아이콘 정렬 */
+        padding: 10px 15px;
+        z-index: 2000;
 	}
 	.button:hover {
 		background-color: #333;
@@ -165,7 +167,7 @@
 </head>
 <body>
 	<div style="text-align: right; margin-bottom: 20px;">
-		<button class="button" onclick="location.href='/admin/addRoute'">열차편 추가</button>
+		<button class="addbutton" onclick="location.href='/admin/addRoute'">열차편 추가</button>
 	</div>
 	<!-- 열차편 리스트 -->
 	<div style="width: 100%; text-align: center"><h2>열차편 리스트</h2></div>

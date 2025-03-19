@@ -7,8 +7,7 @@
 <title>Insert title here</title>
   <style>
   body {
-    font-family: 'Noto Sans KR', sans-serif;
-	margin: 0;
+    margin: 0;
 	padding: 0;
 	background-color: #f4f6f9;
   }

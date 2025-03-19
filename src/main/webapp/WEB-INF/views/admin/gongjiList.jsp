@@ -5,28 +5,27 @@
 <head>
 <meta charset="UTF-8">
 <title>공지사항 관리</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 	body {
-		font-family: 'Noto Sans KR', sans-serif;
+		background-color: #f0f4f8;
 		margin: 0;
 		padding: 0;
-		background-color: #f4f6f9;
 	}
 	h3 {
       font-size:24px;
-      font-weight:bold;
+      font-weight: 700;
       color:#333;
-      text-align:center;
       margin-bottom:20px;
     }
 	section {
-		max-width: 800px;
-		margin: 30px auto;
-		padding: 20px;
+		width: 90%;
+		max-width: 900px;
+		margin: auto;
+		padding-bottom: 40px;
 		background-color: #fff;
 		border-radius: 8px;
-		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+		padding: 20px;
 	}
 	table {
 		width: 100%;
@@ -117,8 +116,8 @@
 </style>
 </head>
 <body>
- <section>
-  <h3> 공지사항 관리 </h3>
+<section>
+	<h3> 공지사항 관리 </h3>
     <div align="right"><a href="gongjiWrite" id="write">작성하기</a></div>
     <table>
         <tr>

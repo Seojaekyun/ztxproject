@@ -86,6 +86,12 @@ public class MainController {
 		return "/main/etiquette";
 	}
 	
+	@GetMapping("/main/station")
+	public String station()
+	{
+		return "/main/station";
+	}
+	
 	@GetMapping("/reserv/reservInfo")
 	public String reservInfo() {
 		return service.reservInfo();

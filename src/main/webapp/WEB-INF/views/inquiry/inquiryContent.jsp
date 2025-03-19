@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="ko">
@@ -8,7 +7,6 @@
 <title>문의 상세보기</title>
 <style>
 body {
-	font-family: 'Noto Sans KR', sans-serif;
 	background-color: #f8f8f8;
 	margin: 0;
 	padding: 0;

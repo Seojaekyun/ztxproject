@@ -5,10 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>공지사항</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 	body {
-		font-family: 'Noto Sans KR', sans-serif;
 		margin: 0;
 		padding: 0;
 		background-color: #f4f6f9;
