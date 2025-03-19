@@ -215,7 +215,7 @@
 					<c:forEach items="${revlist}" var="revdto">
 						<tr>
 							<td style="text-align: left" colspan="2">
-								<a href="readnum?id=${revdto.id}">
+								<a href="readnum?id=${revdto.id}&page=${page}">
 									${revdto.title}
 								</a>
 							</td>
@@ -254,7 +254,7 @@
 				</c:if>
 			</div>
 			<div align="right">
-				<a href="write" id="write" style='align: right'>후기 등록</a>
+				<a href="write" id="write" style='align: right'> 후기 등록 </a>
 			</div>
 		</div>
 	</section>

@@ -10,9 +10,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 public interface ReviewService {
-	String list(HttpServletRequest request, Model model, HttpSession session);
+	String list(HttpServletRequest request, Model model);
 	String readnum(HttpSession session, HttpServletRequest request);
 	String content(HttpSession session, HttpServletRequest request, Model model);
 	String writeOk(ReviewDto revdto, MultipartFile file, HttpSession session) throws IOException;
-
+	String update(HttpServletRequest request, Model model);
 }
