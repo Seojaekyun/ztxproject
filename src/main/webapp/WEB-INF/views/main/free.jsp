@@ -18,10 +18,12 @@
 	border: 1px solid #ccc;
 	cursor: pointer;
 	font-size: 16px;
+	border-radius: 5px;
+	text-decoration: none;
 }
 
 .tab-menu button.active {
-	background: #003366;
+	background: #003b8b;
 	color: #fff;
 }
 
@@ -41,7 +43,6 @@
 	padding: 10px 20px;
 	border: none;
 	cursor: pointer;
-	text-decoration: none;
 	display: inline-block;
 }
 
@@ -72,7 +73,7 @@
 .button {
 	display: inline-block;
 	padding: 10px 15px;
-	background-color: #0073e6;
+	background-color: #003b8b;
 	color: white;
 	text-decoration: none;
 	border-radius: 5px;
@@ -113,6 +114,7 @@
 .swiper-container, .mySwiper1, .mySwiper2 {
 	width: 38%;
 	box-sizing: border-box;
+
 }
 
 .swiper-slide img {
@@ -125,6 +127,7 @@
 	margin-top: 10px;
 	text-align: center;
 	position: static;
+	
 }
 
 .csc {

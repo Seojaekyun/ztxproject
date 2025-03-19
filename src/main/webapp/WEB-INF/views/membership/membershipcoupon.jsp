@@ -35,7 +35,6 @@
         padding: 20px;
         border-left: 5px solid #cc0000;
         margin-top: 20px;
-        border-radius: 8px;
     }
     .info-box {
         background-color: #f9f9f9;
@@ -64,7 +63,7 @@
     .button {
         display: inline-block;
         padding: 10px 15px;
-        background-color: #0073e6;
+        background-color: #003366;
         color: white;
         text-decoration: none;
         border-radius: 5px;
