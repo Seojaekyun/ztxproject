@@ -792,7 +792,7 @@
 					<div class="menu">
 						<div id="subtitle" style="font-size: 22px; border-right: solid 1px lightgray;">철도역·열차</div>
 						<div id="submenu">
-							<div><a href="../guide/boardingGuide">탑승 안내</a></div>
+							<div><a href="../main/etiquette">탑승 안내</a></div>
 							<div><a href="../guide/seatGuide">좌석 안내</a></div>
 							<div><a href="../guide/baggageGuide">수하물 안내</a></div>
 						</div>
