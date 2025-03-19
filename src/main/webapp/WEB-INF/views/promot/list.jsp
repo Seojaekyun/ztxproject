@@ -14,31 +14,32 @@
         padding: 0;
         background-color: #f4f4f4;
     }
-    section header {
+    main header {
         background-color: #00467F;
         padding: 20px;
         text-align: center;
         color: white;
     }
-    section header h1 {
+    main header h1 {
         margin: 0;
         font-size: 24px;
     }
-    section nav {
+    main nav {
         background-color: #0059A3;
         padding: 10px;
         text-align: center;
     }
-    section nav a {
+    main nav a {
         color: white;
         margin: 0 15px;
         text-decoration: none;
         font-size: 16px;
     }
-    section nav a:hover {
-        text-decoration: underline;
+    main nav a:hover {
+        color: white;
+        font-weight: 600;
     }
-    section .container {
+    main .container {
         max-width: 900px;
         margin: 20px auto;
         background-color: white;
@@ -46,29 +47,29 @@
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         text-align: center;
     }
-    section .content h2 {
+    main .content h2 {
         font-size: 22px;
         color: #00467F;
         margin-bottom: 20px;
     }
-    section .content p {
+    main .content p {
         font-size: 16px;
         line-height: 1.6;
         margin-bottom: 20px;
     }
-    section .content ul {
+    main .content ul {
         list-style-type: disc;
         margin-left: 20px;
     }
-    section .content ul li {
+    main .content ul li {
         margin-bottom: 10px;
     }
-    section .event-list {
+    main .event-list {
         display: flex;
         flex-wrap: wrap;
         gap: 20px;
     }
-    section .event-item {
+    main .event-item {
     	height: 520px;
         flex: 1 1 calc(50% - 20px);
         background-color: #f9f9f9;
@@ -77,27 +78,27 @@
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         display: none; /* 초기에는 숨김 처리 */
     }
-    section .event-item div {
+    main .event-item div {
     	height: 350px;
     	overflow: hidden;
     }
-    section .event-item div img {
+    main .event-item div img {
         width: 400px;
     }
-    section .event-item .event-content {
+    main .event-item .event-content {
         padding: 15px;
     }
-    section .event-item h3 {
+    main .event-item h3 {
         font-size: 20px;
         color: #00467F;
         margin-bottom: 10px;
     }
-    section .event-item p {
+    main .event-item p {
         font-size: 14px;
         color: #555;
         margin-bottom: 15px;
     }
-    section .event-item a {
+    main .event-item a {
         display: inline-block;
         padding: 8px 12px;
         background-color: #00467F;
@@ -105,14 +106,14 @@
         text-decoration: none;
         border-radius: 4px;
     }
-    section .event-item a:hover {
+    main .event-item a:hover {
         background-color: #003A66;
     }
-    section .more-button {
+    main .more-button {
         text-align: center;
         margin-top: 30px;
     }
-    section .more-button button {
+    main .more-button button {
         padding: 10px 20px;
         background-color: #00467F;
         color: white;
@@ -120,7 +121,7 @@
         border-radius: 5px;
         cursor: pointer;
     }
-    section .more-button button:hover {
+    main .more-button button:hover {
         background-color: #003A66;
     }
     .event-item:hover {
@@ -130,15 +131,49 @@
 
     /* 반응형 디자인 */
     @media screen and (max-width: 768px) {
-        section .event-item {
+        main .event-item {
             flex: 1 1 calc(50% - 20px);
         }
     }
     @media screen and (max-width: 480px) {
-        section .event-item {
+        main .event-item {
             flex: 1 1 100%;
         }
     }
+    main {
+		top: -95px;
+		position: relative;
+	}
+    .nullbox {
+		height: 95px;
+		display: flex;
+		background-color: #078EB9;
+	}
+	.csc {
+		background-color: #078EB9;
+		color: white;
+		padding: 20px;
+		text-align: center;
+		font-size: 24px;
+		font-weight: 600;
+	}
+	.cscmc {
+		width: 100%;
+		background: white;
+	}
+	.cscmenu {
+		width: 600px;
+		display: flex;
+		justify-content: space-around;
+		background: white;
+		padding: 10px;
+		margin: auto;
+	}
+	.cscmenu a {
+		color: black;
+		text-decoration: none;
+		font-weight: bold;
+	}
     
 </style>
 <script>
@@ -177,16 +212,23 @@
 </head>
 <body>
 
-<section>
-    <header>
-        <h1>이벤트 안내</h1>
-    </header>
-    <nav>
-        <a href="eventList">전체 이벤트</a>
+<main>
+	<div class="nullbox"></div>
+	<div class="csc">이벤트</div>
+	<div class="cscmc">
+		<div class="cscmenu">
+		    <a href="../gongji/list">공지 사항</a>
+		    <a href="../inquiry/inquiryList">Q＆A</a>
+		    <a href="../promot/list">이벤트</a>
+		    <a href="../review/list">여행 후기</a>
+		</div>
+	</div>
+	<nav>
+		<a href="eventList">전체 이벤트</a>
         <a href="ongoingEvents">진행 중인 이벤트</a>
         <a href="pastEvents">지난 이벤트</a>
         <a href="faq">FAQ</a>
-    </nav>
+	</nav>
     <div class="container">
         <div class="content">
             <h2>진행 중인 이벤트</h2>
@@ -211,7 +253,7 @@
             </div>
         </div>
     </div>
-</section>
+</main>
 
 </body>
 </html>

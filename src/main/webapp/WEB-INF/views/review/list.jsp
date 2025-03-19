@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Q＆A</title>
+<title>여행후기</title>
 <style>
 	body {
 		font-family: Arial, sans-serif;
@@ -193,18 +193,17 @@
 <main>
 	<div class="nullbox"></div>
 	<section>
-		<div class="csc">고객센터</div>
+		<div class="csc">여행 후기</div>
 		<div class="cscmc">
 			<div class="cscmenu">
 			    <a href="../gongji/list">공지 사항</a>
 			    <a href="../inquiry/inquiryList">Q＆A</a>
-			    <a href="#">이벤트</a>
+			    <a href="../promot/list">이벤트</a>
 			    <a href="../review/list">여행 후기</a>
 			</div>
 		</div>
 		<div class="container">
 			<div class="content">
-				<h2>여행 후기</h2>
 				<table class="qna-table">
 					<tr>
 						<th colspan="2"> 제 목</th>

@@ -999,15 +999,15 @@
 		<div id="sec3" class="sec3 customer-review-section fade-in-section">
 			<h3 style="text-align: center;">고객 후기</h3>
 			<div class="review-container">
-				<c:forEach items="${relist}" var="redto">
-				<div class="review" onclick="window.location.href='../review/readnum?id=${redto.id }'">
+				<c:forEach items="${rvlist}" var="rvdto">
+				<div class="review" onclick="window.location.href='../review/readnum?id=${rvdto.id }'">
 					<div>
-						<h3>${redto.name}</h3>
-						<p>${redto.content}</p>
+						<h3>${rvdto.userid}</h3>
+						<p>${rvdto.content}</p>
 					</div>
-					<c:if test="${redto.fname != null}">
+					<c:if test="${rvdto.fname != null}">
 					<div>
-						<img src="../static/resources/${redto.fname}" style="width: 100px;" alt="리뷰 이미지">
+						<img src="../static/resources/files/${rvdto.fname}" style="width: 100px;" alt="리뷰 이미지">
 					</div>
 					</c:if>
 				</div>

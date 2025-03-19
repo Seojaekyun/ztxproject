@@ -1,6 +1,7 @@
 package com.example.demo.mapper;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -13,4 +14,5 @@ public interface ReviewMapper {
 	public int getChong();
 	public ReviewDto content(String id);
 	public void writeOk(ReviewDto revdto);
+	public List<ReviewDto> rvlist();
 }
