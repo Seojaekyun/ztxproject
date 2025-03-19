@@ -28,5 +28,13 @@
 		select * from review order by id desc limit 3
 	</select>
 
+  <update id="updateOk1">
+    update review set title=#{title}, content=#{content} where id=#{id}
+  </update>
+  
+  <update id="updateOk2">
+    update review set title=#{title}, content=#{content}, fname=#{fname}
+    where id=#{id}
+  </update>
 
 </mapper>

@@ -130,73 +130,58 @@
 </head>
 <body>
 <main>
-	<div class="nullbox"></div>
-	<div class="csc"> 여행후기 </div>
-	<div class="cscmc">
-	  <div class="cscmenu">
-	    <a href="../gongji/list">공지 사항</a>
-	    <a href="../inquiry/inquiryList">Q＆A</a>
-	    <a href="#">이벤트</a>
-	    <a href="../review/list">여행 후기</a>
-	  </div>
+  <div class="nullbox"></div>
+  <div class="csc"> 여행 후기 </div>
+  <div class="cscmc">
+    <div class="cscmenu">
+	  <a href="../gongji/list">공지 사항</a>
+	  <a href="../inquiry/inquiryList">Q＆A</a>
+	  <a href="#">이벤트</a>
+	  <a href="../review/list">여행 후기</a>
 	</div>
-	<section>
-		<div class="container">
-			<div class="content">
-				<table class="qna-table">
-					<tr>
-						<th colspan="2"> 제 목</th>
-						<th>작성자</th>
-						<th>조회수</th>
-						<th>작성일</th>
-					</tr>
-					<c:forEach items="${revlist}" var="revdto">
-						<tr>
-							<td style="text-align: left" colspan="2">
-								<a href="readnum?id=${revdto.id}&page=${page}">
-									${revdto.title}
-								</a>
-							</td>
-							<td>${revdto.userid}</td>
-							<td>${revdto.readnum}</td>
-							<td>${revdto.writeday}</td>
-						</tr>
-					</c:forEach>
-				</table>
-			</div>
-			<!-- 페이징 처리 -->
-			<div class="pagination">
-				<c:if test="${currentPage > 10}">
-					<a href="?page=${currentPage - 10}">&laquo; 이전 10</a>
-				</c:if>
-				<c:set var="startPage" value="${currentPage - 5}" />
-				<c:set var="endPage" value="${currentPage + 4}" />
-				<c:if test="${startPage < 1}">
-					<c:set var="startPage" value="1" />
-				</c:if>
-				<c:if test="${endPage > totalPages}">
-					<c:set var="endPage" value="${totalPages}" />
-				</c:if>
-				<c:forEach begin="${startPage}" end="${endPage}" var="i">
-					<c:choose>
-						<c:when test="${i == currentPage}">
-							<span class="active">${i}</span>
-						</c:when>
-						<c:otherwise>
-							<a href="?page=${i}">${i}</a>
-						</c:otherwise>
-					</c:choose>
-				</c:forEach>
-				<c:if test="${currentPage + 10 <= totalPages}">
-					<a href="?page=${currentPage + 10}">다음 10 &raquo;</a>
-				</c:if>
-			</div>
-			<div align="right">
-				<a href="write" id="write" style='align: right'> 후기 등록 </a>
-			</div>
-		</div>
+  </div>
+  <section>
+	<div class="container">
+	<div class="content">
+	  <table class="qna-table">
+	    <tr>
+	      <th colspan="2" width="65%"> 제 목</th>
+	      <th> 작성자 </th>
+	      <th> 작성일 </th>
+  	      <th> 조회 </th>
+	    </tr>
+	   <c:forEach items="${revlist}" var="revdto">
+	    <tr>
+	      <td colspan="2">
+		    <a href="readnum?id=${revdto.id}&page=${page}"> ${revdto.title} </a>
+		  </td>
+		  <td>${revdto.userid}</td>
+		  <td>${revdto.writeday}</td>
+	   	  <td>${revdto.readnum}</td>
+	    </tr>
+	   </c:forEach>
+	  </table>
+	</div>
+	  <!-- 페이징 처리 -->
+	  <div class="pagination">
+	    <c:if test="${currentPage > 1}">
+		 <a href="?page=${currentPage - 1}&selectedDate=${selectedDate}&departureAirport=${departureAirport}&arrivalAirport=${arrivalAirport}">이전</a>
+		</c:if>
+		<c:set var="startPage" value="${currentPage - (currentPage - 1) % 10}"/>
+		  <c:forEach begin="${startPage}" end="${startPage + 9}" var="i">
+			<c:if test="${i <= totalPages}">
+			  <a href="?page=${i}&selectedDate=${selectedDate}&departureAirport=${departureAirport}&arrivalAirport=${arrivalAirport}" 
+			  class="${i == currentPage ? 'active' : ''}">${i}</a>
+			</c:if>
+		  </c:forEach>
+		  <c:if test="${currentPage < totalPages}">
+			<a href="?page=${currentPage + 1}&selectedDate=${selectedDate}&departureAirport=${departureAirport}&arrivalAirport=${arrivalAirport}">다음</a>
+		  </c:if>
 	  </div>
-	</section>
+	<div align="right">
+	  <a href="write" id="write" style='align: right'> 후기 등록 </a>
+	</div>
+  </section>
 </main>
 </body>
 </html>

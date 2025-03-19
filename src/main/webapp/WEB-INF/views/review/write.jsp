@@ -105,7 +105,7 @@
 		</div>
 	</div>
 	<div class="container">
-		<h3>여행 후기 작성</h3>
+		<h3> 후기 작성 </h3>
 		<form method="post" action="writeOk" enctype="multipart/form-data">
 			<input type="text" name="title" placeholder="제 목" required>
 			<input type="file" name="file">

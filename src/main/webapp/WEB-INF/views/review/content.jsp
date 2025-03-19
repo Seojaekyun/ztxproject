@@ -31,7 +31,8 @@
 		text-align: left;
 	}
 	th {
-		background-color: #f2f2f2;
+		background-color: #004EA2;
+		color:white;
 	}
 	#btn {
 		text-align: center;
@@ -90,43 +91,44 @@
 	<div class="nullbox"></div>
 	<div class="csc">여행 후기</div>
 	<div class="cscmc">
-		<div class="cscmenu">
-		    <a href="../gongji/list">공지 사항</a>
-		    <a href="../inquiry/inquiryList">Q＆A</a>
-		    <a href="../promot/list">이벤트</a>
-		    <a href="../review/list">여행 후기</a>
-		</div>
+	  <div class="cscmenu">
+	    <a href="../gongji/list">공지 사항</a>
+		<a href="../inquiry/inquiryList">Q＆A</a>
+		<a href="../promot/list">이벤트</a>
+		<a href="../review/list">여행 후기</a>
+	  </div>
 	</div>
 	<div class="container">
-		<table>
-			<tr>
-				<th>제 목</th>
-				<td colspan="3">${revdto.title}</td>
-			</tr>
-			<tr>
-				<th>작성자</th>
-				<td>${revdto.userid}</td>
-				<th>조회수</th>
-				<td>${revdto.readnum}</td>
-			</tr>
-			<tr>
-				<th>작성일</th>
-				<td colspan="3">${revdto.writeday}</td>
-			</tr>
-			<tr>
-				<th>내 용</th>
-				<td colspan="3">
-				<img src="../static/resources/files/${revdto.fname}"><p>
-				${revdto.content}</td>
-			</tr>
-		</table>
-		<div id="btn">
-			<a href="list">목록</a>
-			<c:if test="${userid == revdto.userid}">
-				<a href="update?id=${revdto.id}&page=${page}">수정</a>
-				<a href="delete?id=${revdto.id}&page=${page}">삭제</a>
-			</c:if>
-		</div>
+	  <table>
+	    <tr>
+		  <th width="100"> 제 목 </th>
+		  <td colspan="3">${revdto.title}</td>
+		</tr>
+		<tr>
+		  <th>작성자</th>
+		  <td>${revdto.userid}</td>
+		  <th>조회수</th>
+		  <td>${revdto.readnum}</td>
+		</tr>
+		<tr>
+		  <th>작성일</th>
+		  <td colspan="3">${revdto.writeday}</td>
+		</tr>
+		<tr>
+		  <th>내 용</th>
+		  <td colspan="3">
+		    <img src="../static/resources/files/${revdto.fname}" style="max-width:100%; height:auto;"> <p>
+		    ${revdto.content}
+		  </td>
+		</tr>
+	  </table>
+	  <div id="btn">
+	    <a href="list">목록</a>
+	   <c:if test="${userid == revdto.userid}">
+		<a href="update?id=${revdto.id}&page=${page}">수정</a>
+		<a href="delete?id=${revdto.id}&page=${page}">삭제</a>
+	   </c:if>
+	  </div>
 	</div>
 </main>
 </body>

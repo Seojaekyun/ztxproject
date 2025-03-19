@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -132,6 +133,39 @@ public class ReviewServiceImpl implements ReviewService {
 		model.addAttribute("page", page);
 		
 		return "/review/update";
+	}
+
+	@Override
+	public String updateOk(HttpSession session, ReviewDto revdto, MultipartFile file) throws Exception
+	{
+		if(session.getAttribute("userid") == null)
+		{
+			return "redirect:/login/login";
+		}
+		else
+		{
+			//System.out.println("updateOk : "+file.isEmpty()+" "+file.getOriginalFilename());
+			if(file.isEmpty())
+			{
+				mapper.updateOk1(revdto);
+				
+				return "redirect:/review/list";
+			}
+			else
+			{
+				String fname=file.getOriginalFilename();
+				String imsi=ResourceUtils.getFile("classpath:static/resources/files").toPath().toString()+"/"+fname;
+				
+				Path path=Paths.get(imsi);
+				Files.copy(file.getInputStream(), path);
+				
+				revdto.setFname(fname);
+				
+				mapper.updateOk2(revdto);
+				
+				return "redirect:/review/list";
+			}
+		}
 	}
 	
 	
