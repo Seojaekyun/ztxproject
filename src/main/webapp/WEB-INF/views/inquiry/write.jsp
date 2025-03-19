@@ -58,7 +58,7 @@ h2 {
 
 	<div class="container mt-5">
 		<h2 class="text-primary text-center">고객 의견 접수</h2>
-		<form action="/inquiry/inquiryWriteOk" method="post">
+		<form action="/inquiry/writeOk" method="post">
 
 			
 			<div class="mb-3">
@@ -137,7 +137,7 @@ h2 {
 
 			<div class="d-grid gap-2">
 				<button type="submit" class="btn btn-primary">문의 등록</button>
-				<a href="/inquiry/inquiryList" class="btn btn-secondary">목록으로
+				<a href="/inquiry/list" class="btn btn-secondary">목록으로
 					돌아가기</a>
 			</div>
 

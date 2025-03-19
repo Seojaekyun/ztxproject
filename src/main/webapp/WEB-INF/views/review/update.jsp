@@ -108,7 +108,7 @@
   <div class="cscmc">
     <div class="cscmenu">
 	  <a href="../gongji/list">공지 사항</a>
-	  <a href="../inquiry/inquiryList">Q＆A</a>
+	  <a href="../inquiry/list">Q＆A</a>
 	  <a href="../promot/list">이벤트</a>
 	  <a href="../review/list">여행 후기</a>
 	</div>

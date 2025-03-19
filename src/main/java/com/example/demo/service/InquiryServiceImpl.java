@@ -201,5 +201,4 @@ public class InquiryServiceImpl implements InquiryService {
 	}
 	
 	
-
 }

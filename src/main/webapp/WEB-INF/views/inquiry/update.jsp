@@ -11,7 +11,7 @@
 
 	<div class="container mt-5">
 		<h2 class="text-primary text-center">문의 수정</h2>
-		<form action="/inquiry/inquiryUpdateOk" method="POST">
+		<form action="/inquiry/updateOk" method="POST">
 
 
 			<input type="hidden" name="id" value="${inquiry.id}">
@@ -54,7 +54,7 @@
 
 			<div class="d-grid gap-2">
 				<button type="submit" class="btn btn-primary">문의 수정</button>
-				<a href="/inquiry/inquiryList" class="btn btn-secondary">목록으로
+				<a href="/inquiry/list" class="btn btn-secondary">목록으로
 					돌아가기</a>
 			</div>
 

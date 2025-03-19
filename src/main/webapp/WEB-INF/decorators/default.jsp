@@ -692,7 +692,7 @@
 						<ul class="mmenu">
 							<li><a href="../user/userView">나의정보</a></li>
 							<li><a href="../reserv/list">예약정보</a></li>
-							<li><a href="/inquiry/inquiryMyList">나의문의</a></li>
+							<li><a href="../inquiry/myList">나의문의</a></li>
 							<li><a href="../member/myRev">나의후기</a></li>
 						</ul>
 					</div>
@@ -702,7 +702,7 @@
 						<span>고객센터</span>&nbsp;&nbsp;&nbsp;
 						<ul class="cmenu">
 							<li><a href="../gongji/list"> 공지사항 </a></li>
-							<li><a href="../inquiry/inquiryList"> Q＆A </a></li>
+							<li><a href="../inquiry/list"> Q＆A </a></li>
 							<li><a href="../promot/list"> 이벤트 </a></li>
 							<li><a href="../review/list"> 여행후기 </a></li>
 						</ul>
@@ -970,7 +970,7 @@
 			<div id="famsite">
 				<select onchange="goToSite(this)">
 					<option>패밀리 사이트</option>
-					<option value="https://www.koreanair.com/">대한항공</option>
+					<option value="http://localhost:8099/main/index">eLT항공</option>
 					<option value="https://www.kobus.co.kr/main.do">코버스</option>
 					<option value="https://kr.trip.com/?locale=ko-KR&curr=KRW">트립닷컴</option>
 					<option value="https://www.agoda.com/ko-kr/?ds=KhSAhFMDhlLeCC8Q">아고다</option>

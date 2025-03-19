@@ -141,7 +141,7 @@ tr:last-child td {
 	       </tbody>
 	   </table>
 	   <br>
-	   <a href="/inquiry/inquiryWrite" class="btn">문의 작성하기</a>
+	   <a href="/inquiry/write" class="btn">문의 작성하기</a>
 	</section>
 </main>
 </body>

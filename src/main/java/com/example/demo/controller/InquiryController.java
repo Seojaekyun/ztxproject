@@ -20,22 +20,22 @@ public class InquiryController {
 
 	@GetMapping("/inquiry/list")
 	public String list(@RequestParam(defaultValue = "1") int page, HttpSession session, Model model) {
-		return service.inquiryList(page, session, model);
+		return service.list(page, session, model);
 	}
 
 	@GetMapping("/inquiry/myList")
 	public String myList(@RequestParam(defaultValue = "1") int page, HttpSession session, Model model) {
-		return service.inquiryMyList(page, session, model);
+		return service.myList(page, session, model);
 	}
 
 	@GetMapping("/inquiry/write")
-	public String inquiryWrite(HttpSession session, Model model) {
-		return service.inquiryWrite(session, model);
+	public String write(HttpSession session, Model model) {
+		return service.write(session, model);
 	}
 
 	@PostMapping("/inquiry/writeOk")
-	public String inquiryWriteOk(InquiryDto idto, HttpSession session, Model model) {
-		return service.inquiryWriteOk(idto, session, model);
+	public String writeOk(InquiryDto idto, HttpSession session, Model model) {
+		return service.writeOk(idto, session, model);
 	}
 
 	@GetMapping("/inquiry/readnum")
@@ -44,24 +44,25 @@ public class InquiryController {
 	}
 
 	@GetMapping("/inquiry/content")
-	public String inquiryContent(HttpServletRequest request, HttpSession session, Model model) {
-		return service.inquiryContent(request, session, model);
+	public String content(HttpServletRequest request, HttpSession session, Model model) {
+		return service.content(request, session, model);
 	}
 
 	@GetMapping("/inquiry/update")
-	public String inquiryUpdate(@RequestParam int id, Model model, HttpSession session) {
-		return service.inquiryUpdate(id, model, session);
+	public String update(@RequestParam int id, Model model, HttpSession session) {
+		return service.update(id, model, session);
 	}
 
 	@PostMapping("/inquiry/updateOk")
-	public String inquiryUpdateCheckOk(InquiryDto idto, HttpSession session, HttpServletRequest request) {
-		return service.inquiryUpdateOk(idto, session, request);
+	public String updateOk(InquiryDto idto, HttpSession session, HttpServletRequest request) {
+		return service.updateOk(idto, session, request);
 	}
 
 	@GetMapping("/inquiry/delete")
-	public String inquiryDelete(@RequestParam int id, @RequestParam(required = false) String pwd,
+	public String delete(@RequestParam int id, @RequestParam(required = false) String pwd,
 			HttpSession session, Model model) {
-		return service.inquiryDelete(id, pwd, session, model);
+		return service.delete(id, pwd, session, model);
 	}
-
+	
+	
 }

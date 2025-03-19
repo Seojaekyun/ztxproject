@@ -170,7 +170,7 @@ function delform() {
 		<div class="cscmc">
 			<div class="cscmenu">
 			    <a href="../gongji/list">공지 사항</a>
-			    <a href="../inquiry/inquiryList">Q＆A</a>
+			    <a href="../inquiry/list">Q＆A</a>
 			    <a href="../promot/list">이벤트</a>
 			    <a href="../review/list">여행 후기</a>
 			</div>
@@ -213,7 +213,7 @@ function delform() {
 							<input type="password" id="inputPwd" class="pwd-input" name="pwd"
 								placeholder="비밀번호 입력" required>
 							<button type="button" class="btn"
-								onclick="validatePassword('/inquiry/inquiryUpdate', '${idto.pwd}')">수정</button>
+								onclick="validatePassword('/inquiry/update', '${idto.pwd}')">수정</button>
 						</div>
 	
 	
@@ -221,15 +221,15 @@ function delform() {
 							<input type="password" id="inputPwd" class="pwd-input" name="pwd"
 								placeholder="비밀번호 입력" required>
 							<button type="button" class="btn"
-								onclick="validatePassword('/inquiry/inquiryDelete', '${idto.pwd}')">삭제</button>
+								onclick="validatePassword('/inquiry/delete', '${idto.pwd}')">삭제</button>
 						</div>
 					</form>
 				</c:if>
 	
 	
 				<c:if test="${idto.userid eq userid}">
-					<a href="/inquiry/inquiryUpdate?id=${idto.id}" class="btn">수정</a>
-					<a href="/inquiry/inquiryDelete?id=${idto.id}" class="btn">삭제</a>
+					<a href="/inquiry/update?id=${idto.id}" class="btn">수정</a>
+					<a href="/inquiry/delete?id=${idto.id}" class="btn">삭제</a>
 				</c:if>
 	
 			</div>
@@ -240,7 +240,7 @@ function delform() {
 					<input type="button" value="삭제" id="delbtn" class="btn"
 						onclick="delform()">
 				</c:if>
-				<a href="/inquiry/inquiryList"><input type="button" value="목록으로"
+				<a href="/inquiry/list"><input type="button" value="목록으로"
 					class="btn"></a>
 			</div>
 		</div>
