@@ -365,7 +365,7 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public String inquiryAnswer(int id, Model model) {
+	public String answer(int id, Model model) {
 		InquiryDto inquiry = imapper.getInquiryById(id);
 		if(inquiry == null) {
 			return "redirect:/admin/inquiryList"; // 존재하지 않는 경우 리스트로 이동
@@ -375,14 +375,14 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public String inquiryAnswerOk(int id, String answer) {
-		imapper.updateInquiryAnswer(id, answer, 1); // ref 값을 1(답변완료)로 변경
+	public String answerOk(int id, String answer) {
+		imapper.answerOk(id, answer, 1); // ref 값을 1(답변완료)로 변경
 		return "redirect:/admin/inquiryList";
 	}
 	 
 	@Override
-	public String inquiryAnswerDel(int id) {
-		imapper.updateInquiryAnswer(id, null, 0); // ref 값을 0(미답변)으로 변경
+	public String answerDel(int id) {
+		imapper.answerDel(id, null, 0); // ref 값을 0(미답변)으로 변경
 		return "redirect:/admin/inquiryList";
 	}
 	

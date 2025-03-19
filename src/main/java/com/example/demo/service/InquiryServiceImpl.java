@@ -60,7 +60,10 @@ public class InquiryServiceImpl implements InquiryService {
 		if (session.getAttribute("userid") != null) {
 			String userid = session.getAttribute("userid").toString();
 			model.addAttribute("userid", userid);
+			InquiryDto userInfo = mapper.getUserInfo(userid);
+			model.addAttribute("userInfo", userInfo);
 		}
+		
 		return "/inquiry/inquiryWrite";
 	}
 

@@ -13,6 +13,15 @@
 		padding: 0;
 		background-color: #f4f4f4;
 	}
+	main {
+		top: -95px;
+		position: relative;
+	}
+	.nullbox {
+		height: 95px;
+		display: flex;
+		background-color: #078EB9;
+	}
 	section header {
 		background-color: #00467F;
 		padding: 20px;
@@ -114,39 +123,71 @@
 			text-align: center;
 		}
 	}
+	.csc {
+		background-color: #078EB9;
+		color: white;
+		padding: 20px;
+		text-align: center;
+		font-size: 24px;
+		font-weight: 600;
+	}
+	.cscmc {
+		width: 100%;
+		background: white;
+	}
+	.cscmenu {
+		width: 600px;
+		display: flex;
+		justify-content: space-around;
+		background: white;
+		padding: 10px;
+		margin: auto;
+	}
+	.cscmenu a {
+		color: black;
+		text-decoration: none;
+		font-weight: bold;
+	}
 </style>
 </head>
 <body>
-
-<section>
-	<header>
-		<h1>이벤트</h1>
-	</header>
-	<nav>
-		<a href="eventList">전체 이벤트</a>
-        <a href="ongoingEvents">진행 중인 이벤트</a>
-        <a href="pastEvents">지난 이벤트</a>
-        <a href="faq">FAQ</a>
-	</nav>
-	<div class="container">
-		<div class="content">
-		<h2>이벤트 상세</h2>
-			<div class="event-title">
-				<c:out value="${pdto.title}" />
-			</div>
-			<div class="event-meta">
-				조회수: <c:out value="${pdto.readnum}" />
-			</div>
-			<div class="event-content">
-				<img src="../static/resources/${pdto.fname}" alt="이벤트 이미지">
-				<c:out value="${pdto.content}" escapeXml="false" />
-			</div>
-			<div style="text-align: center;">
-				<a class="cta-button" href="list">목록으로</a>
-			</div>
+<main>
+	<div class="nullbox"></div>
+	<div class="csc">공지사항</div>
+	<div class="cscmc">
+		<div class="cscmenu">
+		    <a href="../gongji/list">공지 사항</a>
+		    <a href="../inquiry/inquiryList">Q＆A</a>
+		    <a href="../promot/list">이벤트</a>
+		    <a href="../review/list">여행 후기</a>
 		</div>
 	</div>
-</section>
-
+	<section>
+		<nav>
+			<a href="eventList">전체 이벤트</a>
+	        <a href="ongoingEvents">진행 중인 이벤트</a>
+	        <a href="pastEvents">지난 이벤트</a>
+	        <a href="faq">FAQ</a>
+		</nav>
+		<div class="container">
+			<div class="content">
+			<h2>이벤트 상세</h2>
+				<div class="event-title">
+					<c:out value="${pdto.title}" />
+				</div>
+				<div class="event-meta">
+					조회수: <c:out value="${pdto.readnum}" />
+				</div>
+				<div class="event-content">
+					<img src="../static/resources/${pdto.fname}" alt="이벤트 이미지">
+					<c:out value="${pdto.content}" escapeXml="false" />
+				</div>
+				<div style="text-align: center;">
+					<a class="cta-button" href="list">목록으로</a>
+				</div>
+			</div>
+		</div>
+	</section>
+</main>
 </body>
 </html>

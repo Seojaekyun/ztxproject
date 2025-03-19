@@ -104,7 +104,7 @@
 		color: white;
 	}
 	.ui-datepicker-header {
-		background-color: #4CAF50;
+		background-color: #000A8E;
 		color: white;
 		border: none;
 	}

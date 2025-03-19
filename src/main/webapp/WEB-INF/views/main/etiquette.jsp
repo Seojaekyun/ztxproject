@@ -7,6 +7,17 @@
 <title>열차 이용안내</title>
 <link rel="stylesheet" href="/resources/css/style.css">
 <style>
+main {
+	top: -95px;
+	position: relative;
+}
+
+.nullbox {
+	height: 95px;
+	display: flex;
+	background-color: #078EB9;
+}
+
 .service-container {
 	width: 1100px;
 	margin: auto;
@@ -34,16 +45,18 @@
 	border: 1px solid #ccc;
 	cursor: pointer;
 	font-size: 16px;
+	border-radius: 5px;
 }
 
 .tab-menu button.active {
-	background: #003366;
+	background: #003b8b;
 	color: #fff;
 }
 
 .tab-content {
 	display: none;
 	padding: 20px;
+	border: none;
 	background: white;
 }
 
@@ -51,256 +64,148 @@
 	display: block;
 }
 
-.info-row {
-	display: flex;
-	align-items: flex-start;
-	justify-content: flex-start;
-	padding: 12px 0;
-	border-bottom: 1px solid #e0e0e0;
+.csc {
+	background-color: #078EB9;
+	color: white;
+	padding: 20px;
+	text-align: center;
+	font-size: 24px;
+	font-weight: 600;
 }
 
-.info-row span:first-child {
-	min-width: 150px;
-	font-weight: bold;
-	font-size: 16px;
-	color: #333;
-}
-
-.info-row span:last-child {
-	font-size: 16px;
-	color: #555;
-	line-height: 1.8;
-	background: transparent;
-	padding: 0;
-}
-	main {
-		top: -95px;
-		position: relative;
-	}
-	.nullbox {
-		height: 95px;
-		display: flex;
-		background-color: #078EB9;
-	}
-	.service-container {
-	    width: 1100px;
-	    margin: auto;
-	    padding: 20px 0;
-	}
-	.section-title {
-	    font-size: 24px;
-	    font-weight: bold;
-	    margin-bottom: 15px;
-	    color: #003366;
-	    border-bottom: 2px solid #003366;
-	    padding-bottom: 5px;
-	}
-	.tab-menu {
-	    display: flex;
-	    gap: 10px;
-	    margin-bottom: 25px;
-	}
-	.tab-menu button {
-	    padding: 12px 25px;
-	    background: #f1f1f1;
-	    border: 1px solid #ccc;
-	    cursor: pointer;
-	    font-size: 16px;
-	    border-radius: 5px;
-	}
-	.tab-menu button.active {
-	    background: #003b8b;
-	    color: #fff;
-	}
-	.tab-content {
-	    display: none;
-	    padding: 20px;
-	    border: none;
-	    background: white;
-	}
-	.tab-content.active {
-	    display: block;
-	}
-	.info-row {
-	    display: flex;
-	    align-items: flex-start;
-	    justify-content: flex-start;
-	    padding: 12px 0;
-	    border-bottom: 1px solid #e0e0e0;
-	}
-	.info-row span:first-child {
-	    min-width: 150px;
-	    font-weight: bold;
-	    font-size: 16px;
-	    color: #333;
-	}
-	.info-row span:last-child {
-	    font-size: 16px;
-	    color: #555;
-	    line-height: 1.8;
-	    border: none;
-	    background: transparent;
-	    padding: 0;
-	}
-	.csc {
-		background-color: #078EB9;
-		color: white;
-		padding: 20px;
-		text-align: center;
-		font-size: 24px;
-		font-weight: 600;
-	}
-	.info-box {
+.info-box-1 {
 	background-color: #f9f9f9;
 	padding: 30px;
-	border-left: 5px solid #003366;
 	margin-bottom: 20px;
+}
+
+.chapter-item {
+	display: flex;
+	align-items: center;
+	margin-bottom: 10px;
+	font-weight: bold;
+	font-size: 22px;
+}
+
+.chapter-dot {
+	display: inline-block;
+	width: 25px;
+	height: 25px;
+	border-radius: 50%;
+	margin-right: 10px;
+	flex-shrink: 0;
+}
+
+.chapter-text {
+	font-size: 18px;
+	margin: 0 0 20px 35px;
 }
 </style>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-<main>
-	<div class="nullbox"></div>
-	<div class="csc">탑승 안내</div>
-	<div class="service-container">
-		<div class="tab-menu">
-			<button data-target="#service1" class="active">휴대품 세부승차 기준</button>
-			<button data-target="#service2">올바른철도 이용문화</button>
-			<button data-target="#service3">열차이용 기초질서 지키기</button>
-		</div>
-		
-		<div id="service1" class="tab-content active">
-			<br>
-			<div class="info-box">
-				<h2 font-size="40px;">자유롭게 떠나보자! ZTX 내일로 두번째 이야기</h2>
-				<br>
-				<p>전 국민 누구나 즐기는 7일간의 자유여행!</p>
-				<p>보다 더 자유롭고 편안해진 내일로를 경험해보세요.</p>
+	<main>
+		<div class="nullbox"></div>
+		<div class="csc">탑승 안내</div>
+		<div class="service-container">
+			<div class="tab-menu">
+				<button data-target="#service1" class="active">휴대품 세부승차 기준</button>
+				<button data-target="#service2">올바른철도 이용문화</button>
+				<button data-target="#service3">열차이용 기초질서 지키기</button>
 			</div>
-			<br> <br> <br>
-			<h2 class="section-title">무엇이 바뀌었나</h2>
-			<img src="../static/resources/what.png" width="1000px;" /> <br>
-			<br>
-			<h2 class="section-title">이용대상</h2>
-			<br>
-			<div>
-				<h2 font-size="20px;">전국민 누구나</h2>
+
+			<div id="service1" class="tab-content active">
+				<h2 class="section-title">휴대품 승차기준</h2>
+				<div>
+					<p>고객 1인이 스스로 운반할 수 있어야 하고, 좌석 또는 통로를 차지하지 않는 두 개 이내의 물품을 가지고 열차에 승차하실 수 있습니다.</p>
+					<p>소지하신 수화물은 객실사이에 있는 수화물 보관함 또는 객실 내 선반에 보관하여 주시기 바랍니다.</p>
+					<p align="center"><img src="../static/resources/manners/hyu.png"></p>
+				</div>
+
+				<h2 class="section-title">반려동물</h2>
+				<div>
+					<p>반려동물은 별도 운반 케이스에 넣어서 승차하셔야 합니다.</p>
+					<p>열차에 승차할 수 있는 반려동물은 개, 고양이, 새 등 무게 10kg 이내로, 길이 100cm(45cm × 30cm × 25cm) 이내 운반용기에 넣어 동행해 주시기 바랍니다.</p>
+					<div style="display: flex; justify-content: space-between; gap: 20px;">
+						<div style="flex: 1; padding: 15px; border-radius: 8px; text-align: center;">
+							<div class="info-box-1">
+								<p>반려동물은 반드시 필요한</p>
+								<p>예방접종을 하셔야 합니다.</p>
+							</div>
+							<div style="margin-top: 10px;">
+								<img src="../static/resources/manners/animal.png" alt="반려동물">
+							</div>
+						</div>
+						<div style="flex: 1; padding: 15px; border-radius: 8px; text-align: center;">
+							<div class="info-box-1">
+								<p>다른 고객에게 두려움과 혐오감을</p>
+								<p>줄 수 있는 맹수, 맹금류 등은</p>
+								<p>탑승이 제한됩니다.</p>
+							</div>
+							<div style="margin-top: 10px;">
+								<img src="../static/resources/manners/animal2.png" alt="맹수제한">
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<h2 class="section-title">자전거</h2>
+				<div>
+					<p>열차 승차 전에 반드시 접어서 열차에 승차 하셔야 합니다. 일체형 자전거의 경우 완전 분해하여 가방에 넣어야 승차가 가능합니다.</p>
+					<p align="center"><img src="../static/resources/manners/train.png"></p>
+				</div>
 			</div>
-			<br> <br> <br>
-			<h2 class="section-title">패스가격</h2>
-			<img src="../static/resources/price.png" width="1000px;" /> <br>
-			<br> <br>
-			<h2 class="section-title">이용열차</h2>
-			<div>
-				<ul>
-					<li>ZTX의 좌석, 일반열차(ITX-마음, ITX-청춘, ITX-새마을, 새마을, 무궁화, 누리로)의 좌석
-						및 입석 ㆍ자유석</li>
-				</ul>
+
+			<div id="service2" class="tab-content">
+				<p align="center"><img src="../static/resources/manners/manners.jpg" width="1000"></p>
 			</div>
-			<br> <br> <br>
-			<h2 class="section-title">운영기간</h2>
-			<div>
-				<ul>
-					<p>연중운영</p>
-					<li>단, 꼬레일이 지정한 명절 특별수송기간은 이용 불가</li>
-				</ul>
-			</div>
-			<br> <br> <br>
-			<h2 class="section-title">이용방법</h2>
-			<div>
-				<ul>
-					<p>패스 구매일 익일부터 7일 이내 이용시작일 지정</p>
-					<li>유효기간 중 ZTX의 좌석 2회(1일 1회, 총 2회), 일반열차의 좌석(1일 2회) 및
-						입석ㆍ자유석(횟수 제한없음)</li>
-					<li>열차의 좌석지정은 별도의 공석 범위내에서 이용되므로 일반좌석이 남아있더라도 패스좌석 매진 시 이용이
-						불가할 수 있습니다.</li>
-					<li>입석ㆍ자유석 이용 시 이용권을 반드시 발권하셔야 합니다.</li>
-				</ul>
-			</div>
-			<br> <br> <br>
-			<h2 class="section-title">운영기간</h2>
-			<div>
-				<ul>
-					<p>이용시작일 기준 7일전부터 구매 가능</p>
-					<li>패스 구매와 동시에 좌석지정권 및 입석ㆍ자유석 이용권 발매 가능 가능</li>
-					<li>각 권종별 <span style="color: red;">연간 4회</span>까지만 구매 가능
-					</li>
-				</ul>
-			</div>
-			<br> <br> <br>
-			<h2 class="section-title">판매처</h2>
-			<div>
-				<ul>
-					<p>역 창구, 꼬레일톡, 홈페이지</p>
-				</ul>
-			</div>
-			<br> <br> <br>
-			<h2 class="section-title">주의사항</h2>
-			<div class="info-box">
-				<ul>
-					<li>패스에 표기된 기명인만 사용 가능하며 타인 양도 절대 불가합니다.</li>
-					<br>
-					<li>열차 이용 시 ①본인임을 증명할 수 있는 신분증 ②내일로 두번째 이야기 패스 ③열차별 좌석지정권 또는
-						입석ㆍ자유석 이용권을 모두 소지해야 합니다.</li>
-					<p>미소지 시 최대 30배 부가운임이 징수됩니다.</p>
-					<br>
-					<li>종이승차권(MS중기권)은 분실 시 재발매되지 않습니다.</li>
-					<br>
-					<li>도중 여행중지, 열차 지연이나 운행 중지 등에 따른 보상 및 마일리지 적립 대상에서 제외되며, 서면상
-						기재하지 않은 사항은 철도 공사가 정한</li>
-					<p>여객운송약관 및 관련 규정을 적용합니다.</p>
-					<br>
-					<p>이용시작일 1일 전까지 최저수수료(400원) 공제 후 반환 가능합니다.</p>
-					<br>
-					<p>* 단, 구매 후 30분 이내에는 수수료 없이 반환 가능</p>
-					<br>
-					<li>이용시작일 이후, 좌석지정권 또는 입석ㆍ자유석 이용권을 사용하지 않은 경우 위약금(영수금액의 5%) 공제
-						후 유효기간 내 반환 가능합니다.</li>
-					<br>
-					<p>* 단, 좌석지정권 또는 입석ㆍ자유석 이용권을 사용한 경우 반환 불가</p>
-					<br>
-					<li>부정판매 또는 타인 양도 시, 민ㆍ형사상의 법적 책임을 질 수 있습니다.</li>
-				</ul>
+
+			<div id="service3" class="tab-content">
+				<div>
+					<h2 class="section-title">GGORAIL 열차이용 기초질서 지키기 캠페인</h2>
+					<p>꼬레일에서는 올바른 철도여행문화를 선도해 나가기 위해 '열차이용 기초 질서 지키기' 캠페인을 연중 시행하고 있습니다.</p>
+					<p>모두의 즐거운 기차여행을 위하여 코레일과 함께 하나씩 실천해 보시는 건 어떨까요?</p> <br><br><br><br>
+					<p>이달의 기초질서 지키기</p>
+					<p style="font-size: 30px; color: #003366; font-weight: bold; font-family: 'Noto Sans KR', Arial, sans-serif;">객실안에서 조용히 하기</p>
+					<p align="left"><img src="../static/resources/manners/chapter.png"></p>
+
+					<div>
+						<div class="chapter-item" style="color: #c08429;">
+							<span class="chapter-dot" style="background: #c08429;"></span> Chapter 01
+						</div>
+						<p class="chapter-text">객실 안에서는 소곤소곤~~ 조용히 대화해 주세요</p>
+					</div>
+
+					<div>
+						<div class="chapter-item" style="color: #1d3557;">
+							<span class="chapter-dot" style="background: #1d3557;"></span> Chapter 02
+						</div>
+						<p class="chapter-text">휴대전화 통화를 할 때에는 객실 밖 통로를 이용해 주시고,</p>
+					</div>
+
+					<div>
+						<div class="chapter-item" style="color: #8b0000;">
+							<span class="chapter-dot" style="background: #8b0000;"></span> Chapter 03
+						</div>
+						<p class="chapter-text">함께 여행하는 어린이들도 객실 예절을 지킬 수 있도록 보살펴 주시기 바랍니다.</p>
+					</div>
+				</div>	<br><br><br>
+
+				<div style="text-align: center; margin-top: 40px;">
+					<h2 style="font-size: 30px; color: #003366; font-weight: bold; font-family: 'Noto Sans KR', Arial, sans-serif;">고객님 한분 한분의 작은 실천이 모두의 기차여행을 더욱 즐겁게 합니다.</h2>
+				</div>
 			</div>
 		</div>
-		</div>
-		<div id="service2" class="tab-content">
-			<div class="info-row">
-				<span>대상열차</span>
-				<span>ZTX(ZTX-산천포함) 특실</span>
-			</div>
-			<div class="info-row">
-				<span>제공서비스</span>
-				<span>도착 5분전에 깨워줌으로써 편안한 여행서비스 제공</span>
-			</div>
-			<div class="info-row">
-				<span>이용방법</span>
-				<span>열차 승차 후 열차승무원에게 요청</span>
-			</div>
-		</div>
-		<div id="service3" class="tab-content">
-			<div class="info-row">
-				<span>서비스콜 안내</span>
-				<span>
-					서비스 콜 신청 시열차 내 긴급사항 및 고객 불편사항에 대해 승무원이 신속안내를 해드립니다.<br>
-					※ 서비스콜 버튼 클릭 → 해당사항 선택 또는 입력 → 전송
-				</span>
-			</div>
-			<div class="info-row" style="justify-content: flex-end;">
-				<span><img src="../static/resources/trainservice.png" alt="열차서비스"></span>
-			</div>
-		</div>
-	</div>
-</main>
-<script>
+	</main>
+
+	<script>
 	$('.tab-menu button').on('click', function() {
 	    $('.tab-menu button').removeClass('active');
 	    $(this).addClass('active');
-	
 	    const target = $(this).data('target');
 	    $('.tab-content').removeClass('active');
 	    $(target).addClass('active');
 	});
-</script>
+	</script>
 </body>
+</html>

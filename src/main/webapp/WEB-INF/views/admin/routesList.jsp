@@ -129,6 +129,11 @@
 		width: 95% !important;
 		height: 95%;
 	}
+	.ui-datepicker-header {
+		background-color: #000A8E;
+		color: white;
+		border: none;
+	}
 	#selectedDate {
 		font-size: 16px;
 		font-weight: bold;

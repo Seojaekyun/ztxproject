@@ -141,18 +141,18 @@ public class AdminController {
 	}
 	
 	@GetMapping("/admin/inquiryAnswer")
-	public String inquiryAnswer(@RequestParam int id, Model model) {
-		return service.inquiryAnswer(id, model);
+	public String answer(@RequestParam int id, Model model) {
+		return service.answer(id, model);
 	}
 	
-	@PostMapping("/admin/inquiryAnswerOk")
-	public String inquiryAnswerOk(@RequestParam int id, @RequestParam String answer) {
-		return service.inquiryAnswerOk(id, answer);
+	@PostMapping("/admin/answerOk")
+	public String answerOk(@RequestParam int id, @RequestParam String answer) {
+		return service.answerOk(id, answer);
 	}
 	
-	@PostMapping("/admin/inquiryAnswerDel")
-	public String inquiryAnswerDel(@RequestParam int id) {
-		return service.inquiryAnswerDel(id);
+	@GetMapping("/admin/answerDel")
+	public String answerDel(@RequestParam int id) {
+		return service.answerDel(id);
 	}
 	
 	@GetMapping("/admin/memberList")
