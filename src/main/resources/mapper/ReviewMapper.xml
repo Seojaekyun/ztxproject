@@ -23,7 +23,10 @@
     insert into review(title,fname,userid,content,writeday)
     values(#{title},#{fname},#{userid},#{content},now())
   </insert>
-
+  
+	<select id="rvlist" resultType="com.example.demo.dto.ReviewDto">
+		select * from review order by id desc limit 3
+	</select>
 
 
 </mapper>

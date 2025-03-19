@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.example.demo.dto.PromotDto;
+import com.example.demo.dto.ReviewDto;
 import com.example.demo.mapper.PromotMapper;
+import com.example.demo.mapper.ReviewMapper;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -20,12 +22,16 @@ public class MainServiceImpl implements MainService {
 	private List<String> chatMessages = new ArrayList<>();
 	@Autowired
 	private PromotMapper pmapper;
+	@Autowired
+	private ReviewMapper revMapper;
 
 	@Override
 	public String index(HttpServletRequest request, Model model) {
 		List<PromotDto> plist = pmapper.plist();
+		List<ReviewDto> rvlist = revMapper.rvlist();
 		
 		model.addAttribute("plist", plist);
+		model.addAttribute("rvlist", rvlist);
 		return "/main/index";
 	}
 	

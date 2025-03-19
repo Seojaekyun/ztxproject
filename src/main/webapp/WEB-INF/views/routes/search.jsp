@@ -11,6 +11,15 @@
     body {
         background-color: #f4f4f4;
     }
+    main {
+		top: -95px;
+		position: relative;
+	}
+    .nullbox {
+		height: 95px;
+		display: flex;
+		background-color: #078EB9;
+	}
     .container {
         max-width: 1000px;
         background-color: white;
@@ -45,57 +54,60 @@
 </style>
 </head>
 <body>
-<div class="container">
-    <h2 class="text-center">열차 시간표</h2>
-    <input type="button" class="btn btn-secondary" value="처음으로" onclick="location.href='../main/index'">
-    <c:if test="${not empty routes}">
-    <table class="table table-bordered text-center">
-        <thead>
-            <tr>
-                <th>열차 번호</th>
-                <th>출발역</th>
-                <th>도착역</th>
-                <th>출발일</th>
-                <th>출발시간</th>
-                <th>도착시간</th>
-                <th>잔여석</th>
-                <th>요금</th>
-                <th>선택</th>
-            </tr>
-        </thead>
-        <tbody>
-            <c:forEach var="route" items="${routes}">
-            <tr>
-                <td>${route.routeid}</td>
-                <td>${route.departure}</td>
-                <td>${route.arrival}</td>
-                <fmt:parseDate value="${route.departureTime}" var="departureDate" pattern="yyyy-MM-dd HH:mm:ss"/>
-                <fmt:parseDate value="${route.arrivalTime}" var="arrivalDate" pattern="yyyy-MM-dd HH:mm:ss"/>
-                <td><fmt:formatDate value="${departureDate}" pattern="yyyy-MM-dd" /></td>
-                <td><fmt:formatDate value="${departureDate}" pattern="HH:mm" /></td>
-                <td><fmt:formatDate value="${arrivalDate}" pattern="HH:mm" /></td>
-                <td>${route.seat}</td>
-                <td>${route.charge}</td>
-                <td>
-                    <form action="${pageContext.request.contextPath}/routes/resCheck" method="post">
-                        <input type="hidden" name="routeid" value="${route.routeid}">
-                        <input type="hidden" name="routeDeparture" value="${route.departure}">
-                        <input type="hidden" name="routeArrival" value="${route.arrival}">
-                        <input type="hidden" name="routeTime" value="${route.departureTime}">
-                        <input type="hidden" name="routeArrivalTime" value="${route.arrivalTime}">
-                        <input type="hidden" name="resnum" value="${resnum}">
-                        <input type="hidden" name="charge" value="${route.charge}">
-                        <button type="submit" class="btn btn-select">선택</button>
-                    </form>
-                </td>
-            </tr>
-            </c:forEach>
-        </tbody>
-    </table>
-    </c:if>
-    <c:if test="${empty routes }">
-        <p class="text-center mt-4">검색 조건에 부합하는 열차편이 없습니다.</p>
-    </c:if>
-</div>
+<main>
+	<div class="nullbox"></div>
+	<div class="container">
+	    <h2 class="text-center">열차 시간표</h2>
+	    <input type="button" class="btn btn-secondary" value="처음으로" onclick="location.href='../main/index'">
+	    <c:if test="${not empty routes}">
+	    <table class="table table-bordered text-center">
+	        <thead>
+	            <tr>
+	                <th>열차 번호</th>
+	                <th>출발역</th>
+	                <th>도착역</th>
+	                <th>출발일</th>
+	                <th>출발시간</th>
+	                <th>도착시간</th>
+	                <th>잔여석</th>
+	                <th>요금</th>
+	                <th>선택</th>
+	            </tr>
+	        </thead>
+	        <tbody>
+	            <c:forEach var="route" items="${routes}">
+	            <tr>
+	                <td>${route.routeid}</td>
+	                <td>${route.departure}</td>
+	                <td>${route.arrival}</td>
+	                <fmt:parseDate value="${route.departureTime}" var="departureDate" pattern="yyyy-MM-dd HH:mm:ss"/>
+	                <fmt:parseDate value="${route.arrivalTime}" var="arrivalDate" pattern="yyyy-MM-dd HH:mm:ss"/>
+	                <td><fmt:formatDate value="${departureDate}" pattern="yyyy-MM-dd" /></td>
+	                <td><fmt:formatDate value="${departureDate}" pattern="HH:mm" /></td>
+	                <td><fmt:formatDate value="${arrivalDate}" pattern="HH:mm" /></td>
+	                <td>${route.seat}</td>
+	                <td>${route.charge}</td>
+	                <td>
+	                    <form action="${pageContext.request.contextPath}/routes/resCheck" method="post">
+	                        <input type="hidden" name="routeid" value="${route.routeid}">
+	                        <input type="hidden" name="routeDeparture" value="${route.departure}">
+	                        <input type="hidden" name="routeArrival" value="${route.arrival}">
+	                        <input type="hidden" name="routeTime" value="${route.departureTime}">
+	                        <input type="hidden" name="routeArrivalTime" value="${route.arrivalTime}">
+	                        <input type="hidden" name="resnum" value="${resnum}">
+	                        <input type="hidden" name="charge" value="${route.charge}">
+	                        <button type="submit" class="btn btn-select">선택</button>
+	                    </form>
+	                </td>
+	            </tr>
+	            </c:forEach>
+	        </tbody>
+	    </table>
+	    </c:if>
+	    <c:if test="${empty routes }">
+	        <p class="text-center mt-4">검색 조건에 부합하는 열차편이 없습니다.</p>
+	    </c:if>
+	</div>
+</main>
 </body>
 </html>

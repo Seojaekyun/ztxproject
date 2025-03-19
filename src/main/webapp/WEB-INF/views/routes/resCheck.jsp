@@ -12,6 +12,15 @@
 		margin: 0;
 		padding: 0;
 	}
+	main {
+		top: -95px;
+		position: relative;
+	}
+    .nullbox {
+		height: 95px;
+		display: flex;
+		background-color: #078EB9;
+	}
 	.container {
 		max-width: 1200px;
 		margin: 30px auto;
@@ -108,6 +117,8 @@
 </script>
 </head>
 <body>
+<main>
+	<div class="nullbox"></div>
 	<div class="container">
 		<h2 class="mt-4">선택한 열차편 확인</h2>
 		<table class="table table-bordered">
@@ -185,6 +196,6 @@
 			</div>
 		</div>
 	</div>
-
+</main>
 </body>
 </html>

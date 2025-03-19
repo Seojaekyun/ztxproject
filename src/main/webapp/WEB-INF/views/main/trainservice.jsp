@@ -108,9 +108,10 @@
 	    border: 1px solid #ccc;
 	    cursor: pointer;
 	    font-size: 16px;
+	    border-radius: 5px;
 	}
 	.tab-menu button.active {
-	    background: #003366;
+	    background: #003b8b;
 	    color: #fff;
 	}
 	.tab-content {

@@ -106,7 +106,7 @@ public class ReviewServiceImpl implements ReviewService {
 		{
 			String userid=session.getAttribute("userid").toString();
 			String fname=file.getOriginalFilename();
-			String imsi=ResourceUtils.getFile("classpath:static/file").toPath().toString()+"/"+fname;
+			String imsi=ResourceUtils.getFile("classpath:static/resources/files").toPath().toString()+"/"+fname;
 			
 			Path path=Paths.get(imsi);
 			Files.copy(file.getInputStream(), path);

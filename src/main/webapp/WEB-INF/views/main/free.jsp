@@ -6,32 +6,31 @@
 <link rel="stylesheet" href="/css/common.css">
 <style>
 .tab-menu {
-	display: 100%;
-	margin-bottom: 20px;
+	display: flex;
+	gap: 10px;
+	margin-bottom: 25px;
+	margin-top: 30px; /* 추가 */
 }
 
 .tab-menu button {
-	flex: 1;
-	padding: 12px;
-	background: #f5f5f5;
-	border: none;
+	padding: 12px 25px;
+	background: #f1f1f1;
+	border: 1px solid #ccc;
 	cursor: pointer;
 	font-size: 16px;
-	transition: all 0.3s ease;
+	border-radius: 5px;
+	text-decoration: none;
 }
 
 .tab-menu button.active {
-	background: #ffffff;
-	font-weight: bold;
-	border-bottom: 2px solid #007bff;
-	color: #0073e6;
+	background: #003b8b;
+	color: #fff;
 }
 
 .tab-content {
 	display: none;
 	padding: 20px;
-	background: #fff;
-	border: 1px solid #ddd;
+	background: white;
 }
 
 .tab-content.active {
@@ -44,7 +43,6 @@
 	padding: 10px 20px;
 	border: none;
 	cursor: pointer;
-	text-decoration: none;
 	display: inline-block;
 }
 
@@ -56,6 +54,7 @@
 	width: 1100px;
 	margin: auto;
 	padding: 20px;
+	background: white;
 }
 
 .info-box {
@@ -74,7 +73,7 @@
 .button {
 	display: inline-block;
 	padding: 10px 15px;
-	background-color: #0073e6;
+	background-color: #003b8b;
 	color: white;
 	text-decoration: none;
 	border-radius: 5px;
@@ -95,7 +94,7 @@
 }
 
 .swiper-slide img {
-	width: 50%;
+	width: flex;
 	height: auto;
 	display: block;
 }
@@ -104,6 +103,41 @@
 	text-align: center;
 	margin-top: 10px;
 }
+
+.slider-wrapper {
+	display: 50%;
+	justify-content: space-between;
+	gap: 20px;
+	margin-top: 50px;
+}
+
+.swiper-container, .mySwiper1, .mySwiper2 {
+	width: 38%;
+	box-sizing: border-box;
+
+}
+
+.swiper-slide img {
+	width: 50%;
+	height: auto;
+	display: block;
+}
+
+.swiper-pagination1, .swiper-pagination2 {
+	margin-top: 10px;
+	text-align: center;
+	position: static;
+	
+}
+
+.csc {
+	background-color: #078EB9;
+	color: white;
+	padding: 20px;
+	text-align: center;
+	font-size: 24px;
+	font-weight: 600;
+}
 </style>
 <link rel="stylesheet"
 	href="https://unpkg.com/swiper/swiper-bundle.min.css">
@@ -111,14 +145,16 @@
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 </head>
 <body>
+	<div class="nullbox"></div>
+	<div class="csc">자유여행</div>
+	<div class="membership-container">
+		<div class="tab-menu">
+			<button data-target="#service1" class="active">패스소개</button>
+			<button data-target="#service2">좌석지정안내</button>
+		</div>
 
-	<div class="tab-menu">
-		<button data-target="#service1" class="active">패스소개</button>
-		<button data-target="#service2">좌석지정안내</button>
-	</div>
+		<div id="service1" class="tab-content active">
 
-	<div id="service1" class="tab-content active">
-		<div class="membership-container">
 			<br>
 			<div class="info-box">
 				<h2 font-size="40px;">자유롭게 떠나보자! ZTX 내일로 두번째 이야기</h2>
@@ -133,7 +169,8 @@
 			</div>
 			<br> <br> <br>
 			<h2 class="section-title">무엇이 바뀌었나</h2>
-			<img src="../static/resources/what.png" /> <br> <br>
+			<img src="../static/resources/what.png" width="1000px;" /> <br>
+			<br>
 			<h2 class="section-title">이용대상</h2>
 			<br>
 			<div>
@@ -141,7 +178,8 @@
 			</div>
 			<br> <br> <br>
 			<h2 class="section-title">패스가격</h2>
-			<img src="../static/resources/price.png" /> <br> <br> <br>
+			<img src="../static/resources/price.png" width="1000px;" /> <br>
+			<br> <br>
 			<h2 class="section-title">이용열차</h2>
 			<div>
 				<ul>
@@ -231,67 +269,72 @@
 				</div>
 				<div
 					style="display: flex; justify-content: space-between; gap: 20px; margin-top: 50px;">
-					<!-- 첫번째 슬라이더 -->
-					<!-- 슬라이더 1 -->
 					<div class="swiper mySwiper1" align="center">
+						<h2 class="section-title">STEP1</h2>
+						<p>꼬레일톡에서 “내일로2.0” 구매하기</p>
+						<br>
 						<div class="swiper-wrapper">
 							<div class="swiper-slide">
-								<img src="../static/resources/slide/1.jpg" alt="좌석안내1">
+								<img src="../static/resources/slide/1.jpg">
 							</div>
 							<div class="swiper-slide">
-								<img src="../static/resources/slide/2.jpg" alt="좌석안내2">
+								<img src="../static/resources/slide/2.jpg">
 							</div>
 							<div class="swiper-slide">
-								<img src="../static/resources/slide/3.jpg" alt="좌석안내2">
+								<img src="../static/resources/slide/3.jpg">
 							</div>
 							<div class="swiper-slide">
-								<img src="../static/resources/slide/4.jpg" alt="좌석안내2">
+								<img src="../static/resources/slide/4.jpg">
 							</div>
 							<div class="swiper-slide">
-								<img src="../static/resources/slide/5.jpg" alt="좌석안내2">
+								<img src="../static/resources/slide/5.jpg">
 							</div>
 							<div class="swiper-slide">
-								<img src="../static/resources/slide/6.jpg" alt="좌석안내2">
+								<img src="../static/resources/slide/6.jpg">
 							</div>
-
 						</div>
-						<!-- 버튼을 swiper 안쪽으로 배치 -->
 						<div class="swiper-nav-wrapper">
 							<div class="swiper-button-prev swiper-button-prev1"></div>
 							<div class="swiper-button-next swiper-button-next1"></div>
 						</div>
+						<div class="swiper-pagination swiper-pagination1"></div>
 					</div>
 
-
 					<div class="swiper mySwiper2" align="center">
+						<h2 class="section-title">STEP2</h2>
+						<p>꼬레일톡에서 “내일로2.0” 좌석지정하기</p>
+						<br>
 						<div class="swiper-wrapper">
 							<div class="swiper-slide">
-								<img src="../static/resources/slide/1-1.jpg" alt="좌석안내1">
+								<img src="../static/resources/slide/1-1.jpg">
 							</div>
 							<div class="swiper-slide">
-								<img src="../static/resources/slide/2-2.jpg" alt="좌석안내2">
+								<img src="../static/resources/slide/2-2.jpg">
 							</div>
 							<div class="swiper-slide">
-								<img src="../static/resources/slide/3-3.jpg" alt="좌석안내2">
+								<img src="../static/resources/slide/3-3.jpg">
 							</div>
 							<div class="swiper-slide">
-								<img src="../static/resources/slide/4-4.jpg" alt="좌석안내2">
+								<img src="../static/resources/slide/4-4.jpg">
 							</div>
 							<div class="swiper-slide">
-								<img src="../static/resources/slide/5-5.jpg" alt="좌석안내2">
+								<img src="../static/resources/slide/5-5.jpg">
 							</div>
 							<div class="swiper-slide">
-								<img src="../static/resources/slide/6-6.jpg" alt="좌석안내2">
+								<img src="../static/resources/slide/6-6.jpg">
 							</div>
-
 						</div>
-						<!-- 버튼을 swiper 안쪽으로 배치 -->
+
 						<div class="swiper-nav-wrapper">
 							<div class="swiper-button-prev swiper-button-prev2"></div>
 							<div class="swiper-button-next swiper-button-next2"></div>
 						</div>
+						<div class="swiper-pagination swiper-pagination2"></div>
 					</div>
 				</div>
+				<br>
+				<p align="right" style="font-size: 11px; color: gray;">※ 내일로는
+					좌석(또는 입석)지정 후 이용할 수 있으며, 좌석(또는 입석) 승차권 없이는 이용이 불가합니다.</p>
 			</div>
 		</div>
 	</div>
@@ -310,12 +353,20 @@
 				nextEl : ".swiper-nav-wrapper .swiper-button-next1",
 				prevEl : ".swiper-nav-wrapper .swiper-button-prev1"
 			},
+			pagination : {
+				el : ".swiper-pagination1",
+				clickable : true
+			},
 			loop : true
 		});
 		new Swiper(".mySwiper2", {
 			navigation : {
 				nextEl : ".swiper-nav-wrapper .swiper-button-next2",
 				prevEl : ".swiper-nav-wrapper .swiper-button-prev2"
+			},
+			pagination : {
+				el : ".swiper-pagination2",
+				clickable : true
 			},
 			loop : true
 		});
