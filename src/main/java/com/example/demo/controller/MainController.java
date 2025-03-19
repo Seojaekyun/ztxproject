@@ -80,12 +80,6 @@ public class MainController {
 		return "/main/free";
 	}
 	
-	@GetMapping("/main/hot")
-	public String hot()
-	{
-		return "/main/hot";
-	}
- 
 	@GetMapping("/reserv/reservInfo")
 	public String reservInfo() {
 		return service.reservInfo();
