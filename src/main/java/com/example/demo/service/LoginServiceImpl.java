@@ -21,10 +21,11 @@ public class LoginServiceImpl implements LoginService {
 	@Override
 	public String login(HttpServletRequest request, Model model)
 	{
-
 		String err=request.getParameter("err");
+		String rev=request.getParameter("rev");
 		
 		model.addAttribute("err", err);
+		model.addAttribute("rev", rev);
 		
 		return "/login/login";
 	}
@@ -42,8 +43,18 @@ public class LoginServiceImpl implements LoginService {
 		{
 			session.setAttribute("userid", udto.getUserid());
 			session.setAttribute("name", name);
+			
+			if(request.getParameter("rev") == null)
+			{
+				return "redirect:/main/index";
+			}
+			else
+			{
+				return "redirect:/review/write";
+			}
+			
 		}
-		return "redirect:/main/index";
+		
 	}
 	
 	@Override

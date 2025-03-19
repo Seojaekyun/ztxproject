@@ -128,6 +128,9 @@
  <section>
   <h3>로그인</h3>
   <form method="post" action="loginOk" name="lform" onsubmit="return check()">
+ <c:if test="${ rev != null}"> 
+  <input type="hidden" name="rev" value="${rev}">
+ </c:if> 
     <div> 
       <input type="text" name="userid" id="txt" placeholder="아이디"> 
     </div>
