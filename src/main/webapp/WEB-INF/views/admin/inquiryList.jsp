@@ -155,12 +155,12 @@
             <td>${inquiry.writeday}</td>
             <td>
                 <c:choose>
-                    <c:when test="${empty inquiry.answer}">
-                        <span class="badge-unanswered">미답변</span>
+                    <c:when test="${inquiry.status == 0}">
+                        <span class="badge-unanswered">답변대기</span>
                     </c:when>
-                    <c:otherwise>
+                    <c:when test="${inquiry.status == 1}">
                         <span class="badge-answered">답변완료</span>
-                    </c:otherwise>
+                    </c:when>
                 </c:choose>
             </td> 
         </tr>

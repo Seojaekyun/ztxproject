@@ -87,11 +87,11 @@
         <tr>
             <th>답변</th>
             <td>
-                <form action="/admin/inquiryAnswerOk" method="post">
+                <form action="/admin/answerOk" method="post">
                     <input type="hidden" name="id" value="${inquiry.id}">
                     <textarea name="answer">${inquiry.answer}</textarea>
                     <button type="submit">답변 저장</button>
-                    <a href="/admin/inquiryAnswerDel?id=${inquiry.id}">
+                    <a href="/admin/answerDel?id=${inquiry.id}">
                 	    <button type="button" class="delete-btn">답변 삭제</button>
                 	</a>
                 	<a href="inquiryList"><button>목록으로</button></a>

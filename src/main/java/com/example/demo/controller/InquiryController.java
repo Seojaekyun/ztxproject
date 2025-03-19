@@ -30,15 +30,7 @@ public class InquiryController {
 
 	@GetMapping("/inquiry/inquiryWrite")
 	public String inquiryWrite(HttpSession session, Model model) {
-		String userid = (String) session.getAttribute("userid");
-
-		if (userid != null) {
-
-			InquiryDto userInfo = service.getUserInfo(userid);
-			model.addAttribute("userInfo", userInfo);
-		}
-
-		return "/inquiry/inquiryWrite";
+		return service.inquiryWrite(session, model);
 	}
 
 	@PostMapping("/inquiry/inquiryWriteOk")

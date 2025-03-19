@@ -2,11 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.mapper.InquiryMapper">
 	<insert id="inquiryWriteOk" parameterType="com.example.demo.dto.InquiryDto">
-		INSERT INTO inquiry (userid, name, category, title, content, phone, pwd, status, writeday)
-		VALUES (#{userid}, #{name}, #{category}, #{title}, #{content}, #{phone}, #{pwd}, 1, NOW());
+		INSERT INTO inquiry (userid, name, category, title, content, phone, pwd, writeday)
+		VALUES (#{userid}, #{name}, #{category}, #{title}, #{content}, #{phone}, #{pwd}, NOW());
 	</insert>
 	<select id="inquiryList" resultType="com.example.demo.dto.InquiryDto">
 		SELECT * FROM inquiry ORDER BY id DESC LIMIT #{index}, 10;
+	</select>
+	<select id="getUserInfo" resultType="com.example.demo.dto.InquiryDto">
+		SELECT name, phone FROM user WHERE userid = #{userid}
 	</select>
 	<select id="inquiryMyList" resultType="com.example.demo.dto.InquiryDto">
 		SELECT * FROM inquiry WHERE userid = #{userid} ORDER BY writeday DESC LIMIT #{index}, 10;
@@ -29,9 +32,11 @@
 	<select id="getInquiryById" resultType="com.example.demo.dto.InquiryDto">
 		SELECT * FROM inquiry WHERE id = #{id};
 	</select>
-	<update id="inquiryUpdate">
-		UPDATE inquiry SET title = #{title}, content = #{content}, category = #{category},
-		phone = #{phone}, status = #{status} WHERE id = #{id}
+	<update id="answerOk">
+		UPDATE inquiry SET answer = #{answer}, status = #{i} WHERE id = #{id}
+	</update>
+	<update id="answerDel">
+		UPDATE inquiry SET answer = #{answer}, status = #{i} WHERE id = #{id}
 	</update>
 	<select id="ilist" resultType="com.example.demo.dto.InquiryDto">
 		select * from inquiry order by id desc limit 3

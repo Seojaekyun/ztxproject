@@ -16,9 +16,9 @@ public interface AdminService {
 	String routesList(Integer page, String selectedDate, String routeType, Model model);
 	String rsvChart(Model model);
 	String inquiryList(int page,Model model);
-	String inquiryAnswer(int id, Model model);
-	String inquiryAnswerOk(int id, String answer);
-    String inquiryAnswerDel(int id);
+	String answer(int id, Model model);
+	String answerOk(int id, String answer);
+    String answerDel(int id);
 	String memberList(HttpServletRequest request, Model model);
 	String memberUp(UserDto mdto, int id, int level, Model model);
 	String oneMeminfo(HttpServletRequest request, Model model);
