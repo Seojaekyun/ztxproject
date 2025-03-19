@@ -12,7 +12,6 @@ body {
 	background-color: #f8f8f8;
 	margin: 0;
 	padding: 0;
-	text-align: center;
 }
 
 .container {
@@ -22,6 +21,7 @@ body {
 	padding: 20px;
 	border-radius: 10px;
 	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+	text-align: center;
 }
 
 h2 {
@@ -107,6 +107,40 @@ h2 {
 #listbtn {
 	margin-top: 10px;
 }
+main {
+	top: -95px;
+	position: relative;
+}
+.nullbox {
+	height: 95px;
+	display: flex;
+	background-color: #078EB9;
+}
+.csc {
+	background-color: #078EB9;
+	color: white;
+	padding: 20px;
+	text-align: center;
+	font-size: 24px;
+	font-weight: 600;
+}
+.cscmc {
+	width: 100%;
+	background: white;
+}
+.cscmenu {
+	width: 600px;
+	display: flex;
+	justify-content: space-around;
+	background: white;
+	padding: 10px;
+	margin: auto;
+}
+.cscmenu a {
+	color: black;
+	text-decoration: none;
+	font-weight: bold;
+}
 </style>
 <script>
 function validatePassword(actionUrl, correctPwd) {
@@ -132,77 +166,87 @@ function delform() {
 </script>
 </head>
 <body>
-
-	<div class="container">
-		<h2>문의 상세보기</h2>
-
-		<table class="inquiry-table">
-			<tr>
-				<th>제목</th>
-				<td>${idto.title}</td>
-			</tr>
-			<tr>
-				<th>작성자</th>
-				<td>${idto.name}</td>
-			</tr>
-			<tr>
-				<th>작성일</th>
-				<td>${idto.writeday}</td>
-			</tr>
-			<tr>
-				<th>내용</th>
-				<td>${idto.content}</td>
-			</tr>
-		</table>
-
-
-		<div class="answer-box">
-			<strong>📢 관리자 답변</strong>
-			<textarea class="readonly" readonly>${idto.answer ne null ? idto.answer : "답변이 등록되지 않았습니다."}</textarea>
+<main>
+	<div class="nullbox"></div>
+	<div class="csc">Q＆A</div>
+		<div class="cscmc">
+			<div class="cscmenu">
+			    <a href="../gongji/list">공지 사항</a>
+			    <a href="../inquiry/inquiryList">Q＆A</a>
+			    <a href="../promot/list">이벤트</a>
+			    <a href="../review/list">여행 후기</a>
+			</div>
 		</div>
-
-		<div class="action-box">
-
-			<c:if test="${idto.userid eq 'guest'}">
-				<form id="actionForm" method="get">
-					<input type="hidden" name="id" value="${idto.id}">
-
-
-					<div id="upform">
-						<input type="password" id="inputPwd" class="pwd-input" name="pwd"
-							placeholder="비밀번호 입력" required>
-						<button type="button" class="btn"
-							onclick="validatePassword('/inquiry/inquiryUpdate', '${idto.pwd}')">수정</button>
-					</div>
-
-
-					<div id="delform">
-						<input type="password" id="inputPwd" class="pwd-input" name="pwd"
-							placeholder="비밀번호 입력" required>
-						<button type="button" class="btn"
-							onclick="validatePassword('/inquiry/inquiryDelete', '${idto.pwd}')">삭제</button>
-					</div>
-				</form>
-			</c:if>
-
-
-			<c:if test="${idto.userid eq userid}">
-				<a href="/inquiry/inquiryUpdate?id=${idto.id}" class="btn">수정</a>
-				<a href="/inquiry/inquiryDelete?id=${idto.id}" class="btn">삭제</a>
-			</c:if>
-
+	<section>
+		<div class="container">
+			<table class="inquiry-table">
+				<tr>
+					<th>제목</th>
+					<td>${idto.title}</td>
+				</tr>
+				<tr>
+					<th>작성자</th>
+					<td>${idto.name}</td>
+				</tr>
+				<tr>
+					<th>작성일</th>
+					<td>${idto.writeday}</td>
+				</tr>
+				<tr>
+					<th>내용</th>
+					<td>${idto.content}</td>
+				</tr>
+			</table>
+	
+	
+			<div class="answer-box">
+				<strong>📢 관리자 답변</strong>
+				<textarea class="readonly" readonly>${idto.answer ne null ? idto.answer : "답변이 등록되지 않았습니다."}</textarea>
+			</div>
+	
+			<div class="action-box">
+	
+				<c:if test="${idto.userid eq 'guest'}">
+					<form id="actionForm" method="get">
+						<input type="hidden" name="id" value="${idto.id}">
+	
+	
+						<div id="upform">
+							<input type="password" id="inputPwd" class="pwd-input" name="pwd"
+								placeholder="비밀번호 입력" required>
+							<button type="button" class="btn"
+								onclick="validatePassword('/inquiry/inquiryUpdate', '${idto.pwd}')">수정</button>
+						</div>
+	
+	
+						<div id="delform">
+							<input type="password" id="inputPwd" class="pwd-input" name="pwd"
+								placeholder="비밀번호 입력" required>
+							<button type="button" class="btn"
+								onclick="validatePassword('/inquiry/inquiryDelete', '${idto.pwd}')">삭제</button>
+						</div>
+					</form>
+				</c:if>
+	
+	
+				<c:if test="${idto.userid eq userid}">
+					<a href="/inquiry/inquiryUpdate?id=${idto.id}" class="btn">수정</a>
+					<a href="/inquiry/inquiryDelete?id=${idto.id}" class="btn">삭제</a>
+				</c:if>
+	
+			</div>
+			<div id="listbtn">
+				<c:if test="${idto.userid eq 'guest'}">
+					<input type="button" value="수정" id="upbtn" class="btn"
+						onclick="upform()">
+					<input type="button" value="삭제" id="delbtn" class="btn"
+						onclick="delform()">
+				</c:if>
+				<a href="/inquiry/inquiryList"><input type="button" value="목록으로"
+					class="btn"></a>
+			</div>
 		</div>
-		<div id="listbtn">
-			<c:if test="${idto.userid eq 'guest'}">
-				<input type="button" value="수정" id="upbtn" class="btn"
-					onclick="upform()">
-				<input type="button" value="삭제" id="delbtn" class="btn"
-					onclick="delform()">
-			</c:if>
-			<a href="/inquiry/inquiryList"><input type="button" value="목록으로"
-				class="btn"></a>
-		</div>
-	</div>
-
+	</section>
+</main>
 </body>
 </html>

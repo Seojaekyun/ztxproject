@@ -25,40 +25,33 @@ public class ReviewServiceImpl implements ReviewService {
 	private ReviewMapper mapper;
 
 	@Override
-	public String list(HttpServletRequest request, Model model, HttpSession session)
+	public String list(HttpServletRequest request, Model model)
 	{
-		if(session.getAttribute("userid") == null)
-		{
-			return "redirect:/login/login";
-		}
-		else
-		{
-			int page=1;
-			if (page <= 0) page = 1;
+		int page=1;
+		if (page <= 0) page = 1;
 
-		    // 페이지 계산
-		    int pstart = (page / 10) * 10 + 1; // 시작 페이지
-		    if (page % 10 == 0) pstart -= 10; // 페이지가 10으로 나누어지면 한 페이지 앞당겨줌
-		    int pend = pstart + 9; // 끝 페이지
+		// 페이지 계산
+		int pstart = (page / 10) * 10 + 1; // 시작 페이지
+		if (page % 10 == 0) pstart -= 10; // 페이지가 10으로 나누어지면 한 페이지 앞당겨줌
+		int pend = pstart + 9; // 끝 페이지
 
-		    // 전체 항목 수 가져오기 (mapper에서 전체 항목 수를 조회)
-		    int chong = mapper.getChong();
+		// 전체 항목 수 가져오기 (mapper에서 전체 항목 수를 조회)
+		int chong = mapper.getChong();
 
-		    // 끝 페이지가 전체 항목 수보다 크면 끝 페이지 수정
-		    if (pend > chong) pend = chong;
+		// 끝 페이지가 전체 항목 수보다 크면 끝 페이지 수정
+		if (pend > chong) pend = chong;
 
-		    // 해당 페이지에 맞는 데이터 가져오기
-		    int index = (page - 1) * 10;
+		// 해당 페이지에 맞는 데이터 가져오기
+		int index = (page - 1) * 10;
 		    
-			ArrayList<ReviewDto> revlist=mapper.list(index);
+		ArrayList<ReviewDto> revlist=mapper.list(index);
 			
-			model.addAttribute("revlist", revlist);
-			model.addAttribute("page", page);
-			model.addAttribute("pstart", pstart);
-			model.addAttribute("chong", chong);
+		model.addAttribute("revlist", revlist);
+		model.addAttribute("page", page);
+		model.addAttribute("pstart", pstart);
+		model.addAttribute("chong", chong);
 			
-			return "/review/list"; 
-		}
+		return "/review/list"; 
 	}
 
 	@Override
@@ -113,7 +106,7 @@ public class ReviewServiceImpl implements ReviewService {
 		{
 			String userid=session.getAttribute("userid").toString();
 			String fname=file.getOriginalFilename();
-			String imsi=ResourceUtils.getFile("classpath:static/file").toPath().toString()+"/"+fname;
+			String imsi=ResourceUtils.getFile("classpath:static/resources/files").toPath().toString()+"/"+fname;
 			
 			Path path=Paths.get(imsi);
 			Files.copy(file.getInputStream(), path);
@@ -125,6 +118,20 @@ public class ReviewServiceImpl implements ReviewService {
 			
 			return "redirect:/review/list";
 		}
+	}
+	
+	@Override
+	public String update(HttpServletRequest request, Model model)
+	{
+		String id=request.getParameter("id");
+		String page=request.getParameter("page");
+		
+		ReviewDto revdto=mapper.content(id);
+		
+		model.addAttribute("revdto", revdto);
+		model.addAttribute("page", page);
+		
+		return "/review/update";
 	}
 	
 	

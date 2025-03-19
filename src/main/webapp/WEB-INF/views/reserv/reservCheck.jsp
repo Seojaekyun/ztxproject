@@ -8,6 +8,15 @@
 <title>예약 확인</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
 <style>
+	main {
+		top: -95px;
+		position: relative;
+	}
+    .nullbox {
+		height: 95px;
+		display: flex;
+		background-color: #078EB9;
+	}
 	.reservation-info {
 		margin-top: 30px;
 	}
@@ -36,6 +45,8 @@
 
 </head>
 <body>
+<main>
+	<div class="nullbox"></div>
 	<div class="container">
 		<h2 class="mt-4">예약 정보 확인</h2>
 		<!-- 가는편 비행기 정보 -->
@@ -112,6 +123,7 @@
 			
 		</div>
 	</div>
+</main>
 <script>
 	function checkFormSubmission() {
 		const goingSeats = document.querySelector('input[name="goingSelectedSeats"]').value;

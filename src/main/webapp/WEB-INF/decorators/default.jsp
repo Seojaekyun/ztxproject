@@ -721,7 +721,7 @@
 				<div id="logocontainer">
 					<div id="logoimg">
 						<a href="/main/index">
-							<img src="../static/resources/ggorail(white).png" height="30px" align="middle">
+							<img src="../static/resources/ggologo(white).png" height="30px" align="middle">
 						</a>
 					</div>
 				</div>
@@ -753,7 +753,7 @@
 						<div id="logocontainer">
 							<div id="logoimg">
 								<a href="/main/index">
-									<img src="../static/resources/ggorail(blue).png" height="30px" align="middle">
+									<img src="../static/resources/ggologo(blue).png" height="30px" align="middle">
 								</a>
 							</div>
 						</div>
@@ -963,7 +963,7 @@
 					<div>본사 : 경기도 파주시 야당동 | TEL: 090-888-1234(유료) | 전화번호 : 010-1234-5678</div>
 				</div>
 				<div class="footer-logo">
-					<img alt="logo" src="../static/resources/ggorail(white).png" align="top">
+					<img alt="logo" src="../static/resources/ggologo(white).png" align="top">
 				</div>
 			</div>
 			<div id="famsite">

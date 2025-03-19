@@ -12,6 +12,15 @@
 		margin: 20px;
 		color: #333;
 	}
+	main {
+		top: -95px;
+		position: relative;
+	}
+    .nullbox {
+		height: 95px;
+		display: flex;
+		background-color: #078EB9;
+	}
 	h2 {
 		color: #222;
 		text-align: center;
@@ -87,6 +96,8 @@
 </style>
 </head>
 <body>
+<main>
+	<div class="nullbox"></div>
 	<h2>예약이 완료되었습니다!</h2>
 	<div class="train-box">
 		<div class="train-header">${routeDeparture} → ${routeArrival}</div>
@@ -110,7 +121,7 @@
 	</div>
 		
 	<button onclick="window.location.href='../main/index';">홈으로</button>
-
+</main>
 <script>
 	function toggleDetails(id) {
 		var details = document.getElementById(id);

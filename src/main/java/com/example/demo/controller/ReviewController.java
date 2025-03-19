@@ -23,9 +23,9 @@ public class ReviewController {
 	private ReviewService service;
 	
 	@GetMapping("/review/list")
-	public String list(HttpServletRequest request, Model model, HttpSession session)
+	public String list(HttpServletRequest request, Model model)
 	{
-		return service.list(request, model, session);
+		return service.list(request, model);
 	}
 	
 	@GetMapping("/review/readnum")
@@ -41,15 +41,28 @@ public class ReviewController {
 	}
 	
 	@GetMapping("/review/write")
-	public String write()
+	public String write(HttpSession session)
 	{
-		return "/review/write";
+		if(session.getAttribute("userid") == null)
+		{
+			return "redirect:/login/login?rev=1";
+		}
+		else
+		{
+			return "/review/write";
+		}
 	}
 	
 	@PostMapping("/review/writeOk")
 	public String writeOk(ReviewDto revdto, MultipartFile file, HttpSession session) throws IOException
 	{
 		return service.writeOk(revdto, file, session);
+	}
+	
+	@GetMapping("/review/update")
+	public String update(HttpServletRequest request, Model model)
+	{
+		return service.update(request, model);
 	}
 	
 
