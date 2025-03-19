@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>여행 후기 상세</title>
+<title>여행 후기</title>
 <style>
 	body {
 		font-family: Arial, sans-serif;
@@ -20,12 +20,6 @@
 		background-color: white;
 		padding: 20px;
 		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-	}
-	h2 {
-		font-size: 22px;
-		color: #00467F;
-		margin-bottom: 10px;
-		text-align: center;
 	}
 	table {
 		width: 100%;
@@ -47,7 +41,7 @@
 	#btn a {
 		display: inline-block;
 		padding: 10px 15px;
-		background-color: #00467F;
+		background-color:#004EA2;
 		color: white;
 		text-decoration: none;
 		border-radius: 5px;
@@ -60,7 +54,6 @@
 </head>
 <body>
 <div class="container">
-	<h2>여행 후기 상세</h2>
 	<table>
 		<tr>
 			<th>제 목</th>
@@ -73,7 +66,7 @@
 			<td>${revdto.readnum}</td>
 		</tr>
 		<tr>
-			<th>사 진</th>
+			<th> 파 일 </th>
 			<td colspan="3">${revdto.fname}</td>
 		</tr>
 		<tr>

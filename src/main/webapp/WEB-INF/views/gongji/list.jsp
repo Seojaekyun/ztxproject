@@ -4,7 +4,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>공지사항 관리</title>
+<title>공지사항</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 	body {
@@ -22,13 +22,6 @@
 		display: flex;
 		background-color: #078EB9;
 	}
-	h3 {
-      font-size:24px;
-      font-weight:bold;
-      color:#333;
-      text-align:center;
-      margin-bottom:20px;
-    }
 	section {
 	  width:1000px;
 	  height:550px;
@@ -37,9 +30,6 @@
 	  background-color:#fff;
 	  border-radius:8px;
 	  box-shadow:0 2px 10px rgba(0, 0, 0, 0.1);
-	}
-	#tbbox {
-	  height: 50px;
 	}
 	table {
 		width: 100%;
@@ -84,36 +74,27 @@
 		margin-right: 8px;
 		font-weight: 700;
 	}
-	#paging {
-	  text-align:center;
-  	  margin-top:25px;
+	.pagination {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
     }
-    #paging a, #paging span {
-      display:inline-block;
-      padding:5px 10px;
-      margin:0 3px;
-      font-size:13px;
-      color:#333;
-      text-decoration:none;
-      border:1px solid #ddd;
-      border-radius:3px;
-      transition:all 0.2s ease-in-out;
+    .pagination a {
+        color: #00467F;
+        padding: 8px 16px;
+        text-decoration: none;
+        border: 1px solid #ddd;
+        margin: 0 2px;
+        border-radius: 5px;
     }
-    #paging a:hover {
-      background-color:#004EA2;
-      color:white;
+    .pagination a:hover {
+        background-color: #00467F;
+        color: white;
     }
-    #paging .active {
-      background-color:#004EA2;
-      color:white;
-      font-weight:bold;
-      
-      pointer-events:none;
-    }
-    #paging .disabled {
-      color:#bbb;
-      
-      pointer-events:none;
+    .pagination .active {
+        background-color: #00467F;
+        color: white;
+        border: 1px solid #00467F;
     }
     .csc {
 		background-color: #078EB9;
@@ -155,59 +136,50 @@
 		</div>
 	</div>
 	 <section>
-	    <table>
-	        <tr>
-	            <th colspan="2">제목</th>
-	            <th>작성자</th>
-	            <th>조회수</th>
-	            <th>작성일</th>
-	        </tr>
-	        <c:forEach items="${glist}" var="gdto">
-	            <tr>
-	                <td width="100">
-	                    <c:if test="${gdto.state == 1}">
-	                        <span id="badge1">필독</span>
-	                    </c:if>
-	                    <c:if test="${gdto.state == 0}">
-	                        <span id="badge2">공지</span>
-	                    </c:if>
-	                </td>
-	                <td style="text-align:left">
-	                    <a href="readnum?id=${gdto.id}"> ${gdto.title }</a>
-	                </td>
-	                <td>${gdto.writer}</td>
-	                <td>${gdto.readnum}</td>
-	                <td>${gdto.writeday}</td>
-	            </tr>
-	        </c:forEach>
-	    </table>
+	   <table>
+	     <tr>
+	       <th>  </th>
+	       <th width="40%">제목</th>
+	       <th>작성자</th>
+	       <th>조회수</th>
+	       <th>작성일</th>
+	     </tr>
+	    <c:forEach items="${glist}" var="gdto">
+	     <tr>
+	       <td width="100">
+	        <c:if test="${gdto.state == 1}">
+	         <span id="badge1">필독</span>
+	        </c:if>
+	        <c:if test="${gdto.state == 0}">
+	         <span id="badge2">공지</span>
+	        </c:if>
+	       </td>
+	       <td>
+	         <a href="readnum?id=${gdto.id}"> ${gdto.title }</a>
+	       </td>
+	       <td>${gdto.writer}</td>
+	       <td>${gdto.readnum}</td>
+	       <td>${gdto.writeday}</td>
+	     </tr>
+	    </c:forEach>
+	   </table>
 	
-	    <!-- 페이징 처리 -->
-	    <div class="pagination">
-	        <c:set var="prevPage" value="${currentPage - 10 < 1 ? 1 : currentPage - 10}" />
-	        <a href="?page=${prevPage}">&laquo; 이전10</a>
-	        <c:set var="startPage" value="${currentPage <= 5 ? 1 : currentPage - 4}" />
-	        <c:set var="endPage" value="${startPage + 9}" />
-	        <c:if test="${startPage < 1}">
-	            <c:set var="startPage" value="1" />
-	        </c:if>
-	        <c:if test="${endPage > totalPages}">
-	            <c:set var="endPage" value="${totalPages}" />
-	            <c:set var="startPage" value="${endPage - 9 > 0 ? endPage - 9 : 1}" />
-	        </c:if>
-	        <c:forEach begin="${startPage}" end="${endPage}" var="i">
-	            <c:choose>
-	                <c:when test="${i == currentPage}">
-	                    <span class="active">${i}</span>
-	                </c:when>
-	                <c:otherwise>
-	                    <a href="?page=${i}">${i}</a>
-	                </c:otherwise>
-	            </c:choose>
-	        </c:forEach>
-	        <c:set var="nextPage" value="${currentPage + 10 > totalPages ? totalPages : currentPage + 10}" />
-	        <a href="?page=${nextPage}">다음10 &raquo;</a>
-	    </div>
+	   <!-- 페이징 처리 -->
+	   <div class="pagination">
+	    <c:if test="${currentPage > 1}">
+		 <a href="?page=${currentPage - 1}&selectedDate=${selectedDate}&departureAirport=${departureAirport}&arrivalAirport=${arrivalAirport}">이전</a>
+		</c:if>
+		<c:set var="startPage" value="${currentPage - (currentPage - 1) % 10}"/>
+		  <c:forEach begin="${startPage}" end="${startPage + 9}" var="i">
+			<c:if test="${i <= totalPages}">
+			  <a href="?page=${i}&selectedDate=${selectedDate}&departureAirport=${departureAirport}&arrivalAirport=${arrivalAirport}" 
+			  class="${i == currentPage ? 'active' : ''}">${i}</a>
+			</c:if>
+		  </c:forEach>
+		  <c:if test="${currentPage < totalPages}">
+			<a href="?page=${currentPage + 1}&selectedDate=${selectedDate}&departureAirport=${departureAirport}&arrivalAirport=${arrivalAirport}">다음</a>
+		  </c:if>
+	   </div>
 	</section>
 </main>
 </body>

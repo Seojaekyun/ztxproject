@@ -65,5 +65,11 @@ public class ReviewController {
 		return service.update(request, model);
 	}
 	
+	@GetMapping("/review/delete")
+	public String delete(HttpServletRequest request)
+	{
+		return "redirect:/review/list";
+	}
+	
 
 }

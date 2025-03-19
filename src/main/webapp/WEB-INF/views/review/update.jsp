@@ -15,11 +15,11 @@
 	</tr>
 	<tr>
 	  <th> 작성자 </th>
-	  <td> <input type="text" name="userid" id="userid" value="${revdto.userid}"> </td>
+	  <td> ${revdto.userid} </td>
 	</tr>
 	<tr>
 	  <th> 파 일 </th>
-	  <td>${revdto.fname}</td>
+	  <td> ${revdto.fname} </td>
 	</tr>
 	<tr>
 	  <th> 내 용 </th>
