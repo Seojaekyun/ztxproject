@@ -215,7 +215,7 @@
 					<c:forEach items="${revlist}" var="revdto">
 						<tr>
 							<td style="text-align: left" colspan="2">
-								<a href="reviewReadnum?id=${revdto.id}">
+								<a href="readnum?id=${revdto.id}">
 									${revdto.title}
 								</a>
 							</td>

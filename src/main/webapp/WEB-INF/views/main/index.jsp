@@ -140,7 +140,7 @@
 	}	
 	.booking_contents {
 		position: relative;
-		top: 17.8rem;
+		top: 16.6rem;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -448,18 +448,6 @@
 		font-size: 26px;
 		font-weight: 400;
 	}
-	.fade-in-section {
-		width: 100%;
-		margin: auto;
-		padding: 50px 0;
-		opalocation: 0;
-		transform: translateY(20px);
-		transition: opalocation 0.6s ease-out, transform 0.6s ease-out;
-	}
-	.fade-in-section.visible {
-		opalocation: 1;
-		transform: translateY(0);
-	}
 	.promotion-section {
 		background-color: #fff;
 		padding: 50px 0;
@@ -539,6 +527,25 @@
 	a {
 		text-decoration: none;
 		color: black;
+	}
+	#annaebox {
+		width: 100%;
+		display: flex;
+		justify-content: center;
+	}
+	#annaebox #annae0 {
+		display: flex;
+		justify-content: flex-end;
+		width: 50%;
+		height: auto;
+		background: #0d2e5a;
+	}
+	#annaebox #annae1 {
+		display: flex;
+		justify-content: flex-start;
+		width: 50%;
+		height: auto;
+		background: #0054a6;
 	}
 	
 </style>
@@ -981,11 +988,19 @@
 				</c:forEach>
 			</div>
 		</div>
+		<div id="annaebox">
+			<div id="annae0">
+				<img src="../static/resources/annae0.png">
+			</div>
+			<div id="annae1">
+				<img src="../static/resources/annae1.png">
+			</div>		
+		</div>
 		<div id="sec3" class="sec3 customer-review-section fade-in-section">
 			<h3 style="text-align: center;">고객 후기</h3>
 			<div class="review-container">
 				<c:forEach items="${relist}" var="redto">
-				<div class="review" onclick="window.location.href='../review/reviewReadnum?id=${redto.id }'">
+				<div class="review" onclick="window.location.href='../review/readnum?id=${redto.id }'">
 					<div>
 						<h3>${redto.name}</h3>
 						<p>${redto.content}</p>
