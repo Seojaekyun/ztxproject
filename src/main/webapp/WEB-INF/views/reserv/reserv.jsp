@@ -78,6 +78,7 @@
 	}
 	section select, input[type="text"] {
 		width: 100%;
+		height: 50px;
 		padding: 10px;
 		margin-top: 8px;
 		border: 1px solid #ccc;

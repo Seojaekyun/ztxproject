@@ -131,7 +131,6 @@
 					<input type="text" id="pnr" name="PNR" required>
 					<input type="submit" value="예약 조회">
 				</div>
-				
 			</form>
 		</div>
 	</section>
