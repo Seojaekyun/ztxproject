@@ -59,13 +59,13 @@
 }
 
 .search-bar img {
-	width: 24px;
-	height: 24px;
+	width: 30px;
+	height: 30px;
 	cursor: pointer;
 }
 
 table {
-	width: 100%;
+	width: 1100px;
 	border-collapse: collapse;
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
@@ -74,23 +74,12 @@ table th, table td {
 	padding: 14px 12px;
 	border-bottom: 1px solid #ddd;
 	font-size: 15px;
+	text-align: center;
 }
 
 table th {
 	background: #f8f8f8;
 	font-weight: 600;
-}
-
-table td:nth-child(1) {
-	text-align: center;
-}
-
-table td:nth-child(2) {
-	text-align: center;
-}
-
-table td:nth-child(3) {
-	text-align: center;
 }
 
 .btn-group button {
@@ -150,11 +139,11 @@ main {
 				</ul>
 			</div>
 
+			<div class="search-bar search-bar-global">
+				<input type="text" id="search-all" placeholder="전체 역 검색" onkeyup="globalSearch()"> <img src="../static/resources/search.png">
+			</div>
 
 			<div id="ztx" class="tab-content active">
-				<div class="search-bar">
-					<input type="text" id="search-ztx" placeholder="역이름 입력" onkeyup="filterStations('ztx')"><img src="../static/resources/search.png">
-				</div>
 				<table>
 					<thead>
 						<tr>
@@ -224,9 +213,6 @@ main {
 
 
 			<div id="train" class="tab-content">
-				<div class="search-bar">
-					<input type="text" id="search-train" placeholder="역이름 입력" onkeyup="filterStations('train')"><img src="../static/resources/search.png">
-				</div>
 				<table>
 					<thead>
 						<tr>
@@ -258,11 +244,7 @@ main {
 				</table>
 			</div>
 
-
 			<div id="train1" class="tab-content">
-				<div class="search-bar">
-					<input type="text" id="search-train1" placeholder="역이름 입력" onkeyup="filterStations('train1')"><img src="../static/resources/search.png">
-				</div>
 				<table>
 					<thead>
 						<tr>
@@ -299,11 +281,8 @@ main {
 					</tbody>
 				</table>
 			</div>
-			
+
 			<div id="train2" class="tab-content">
-				<div class="search-bar">
-					<input type="text" id="search-train2" placeholder="역이름 입력" onkeyup="filterStations('train2')"><img src="../static/resources/search.png">
-				</div>
 				<table>
 					<thead>
 						<tr>
@@ -322,11 +301,8 @@ main {
 					</tbody>
 				</table>
 			</div>
-			
+
 			<div id="train3" class="tab-content">
-				<div class="search-bar">
-					<input type="text" id="search-train3" placeholder="역이름 입력" onkeyup="filterStations('train3')"><img src="../static/resources/search.png">
-				</div>
 				<table>
 					<thead>
 						<tr>
@@ -338,36 +314,74 @@ main {
 					<tbody id="station-list-train3">
 						<tr data-name="김천역">
 							<td>김천역</td>
-							<td>경상북도 김천시 김천로 111(평화동 264-1)</td>
+							<td>경상북도 김천시 김천로 111(평화동 264-1</td>
 							<td class="btn-group"><button>상세보기</button>
 								<button>지도보기</button></td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
+
+			<div id="search-result-container"
+				style="display: none; width: 1100px; margin: 0 auto;">
+				<table>
+					<thead>
+						<tr>
+							<th>역명</th>
+							<th>주소</th>
+							<th>상세정보</th>
+						</tr>
+					</thead>
+					<tbody id="search-result-body"></tbody>
+				</table>
+			</div>
 		</div>
 	</main>
 
 	<script>
-    function changeTab(e, id) {
-        e.preventDefault();
-        $('.tab li').removeClass('active');
-        $(e.target).parent('li').addClass('active');
-        $('.tab-content').removeClass('active');
-        $('#' + id).addClass('active');
+function changeTab(e, id) {
+    e.preventDefault();
+    $('.tab li').removeClass('active');
+    $(e.target).parent('li').addClass('active');
+    $('.tab-content').removeClass('active');
+    $('#' + id).addClass('active');
+}
+
+function globalSearch() {
+    const keyword = $('#search-all').val().trim();
+    $('#search-result-container').hide();
+    $('#search-result-body').empty();
+    $('.tab li').removeClass('active');
+
+    let hasResult = false;
+    let results = [];
+
+    if (!keyword) {
+        $('.tab-content').hide();
+        $('#ztx').addClass('active').show();
+        $('.tab li').first().addClass('active');
+        return;
     }
 
-    function filterStations(tabId) {
-        const keyword = $('#search-' + tabId).val().trim();
-        $('#station-list-' + tabId + ' tr').each(function() {
-            const name = $(this).data('name');
-            if (!keyword || name.includes(keyword)) {
-                $(this).show();
-            } else {
-                $(this).hide();
-            }
-        });
+    $('.tab-content tbody tr').each(function() {
+        const name = $(this).data('name');
+        if (name && name.includes(keyword)) {
+            const cloned = $(this).clone();
+            results.push(cloned);
+            hasResult = true;
+        }
+    });
+
+    $('.tab-content').hide();
+
+    if (hasResult) {
+        results.forEach(row => $('#search-result-body').append(row));
+        $('#search-result-container').show();
+    } else {
+        $('#ztx').addClass('active').show();
+        $('.tab li').first().addClass('active');
     }
+}
 </script>
 </body>
 </html>
