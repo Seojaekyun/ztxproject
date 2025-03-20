@@ -822,6 +822,7 @@
 							<div><a href="/main/etiquette">탑승 안내</a></div>
 							<div><a href="/main/station">철도역 안내</a></div>
 							<div><a href="/main/information">역 편의 시설</a></div>
+							<div><a href="/main/traininformation">열차 편의시설</a></div>
 						</div>
 					</div>						
 				</div>

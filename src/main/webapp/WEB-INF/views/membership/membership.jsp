@@ -61,7 +61,7 @@
     <div class="membership-container">
         <h2 class="section-title">가입방법</h2>
         <div class="info-box">
-            <p>- 꼬레일(<a href="http://localhost:8095/main/index" class="highlight">http://localhost:8095/main/index</a>) 홈페이지에서 회원 가입 시 코레일멤버십 혜택을 받을 수 있습니다.</p>
+            <p>- 꼬레일(<a href="http://localhost:8095/main/index" class="highlight">http://localhost:8095/main/index</a>) 홈페이지에서 회원 가입 시 꼬레일멤버십 혜택을 받을 수 있습니다.</p>
         </div>
         
         <h2 class="section-title">꼬레일멤버십카드</h2>

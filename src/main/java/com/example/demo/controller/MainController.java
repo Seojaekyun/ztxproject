@@ -99,6 +99,12 @@ public class MainController {
 		return "/main/information";
 	}
 	
+	@GetMapping("/main/traininformation")
+	public String taininformation()
+	{
+		return "/main/traininformation";
+	}
+	
 	@GetMapping("/membership/membership")
     public String membershipPage() {
         return "/membership/membership";  

@@ -313,7 +313,7 @@ main {
 					<tbody id="station-list-train3">
 						<tr data-name="김천역">
 							<td>김천역</td>
-							<td>경상북도 김천시 김천로 111(평화동 264-1</td>
+							<td>경상북도 김천시 김천로 111(평화동 264-1)</td>
 							<td class="btn-group"><button>상세보기</button>
 								<button>지도보기</button></td>
 						</tr>
@@ -337,7 +337,6 @@ main {
 		</div>
 		</div>
 	</main>
-
 	<script>
 function changeTab(e, id) {
     e.preventDefault();

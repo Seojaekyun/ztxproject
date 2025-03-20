@@ -2,13 +2,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>레일로 자유여행 패스 안내</title>
+<title>역 편의 시설 안내</title>
 <style>
 .tab-menu {
 	display: flex;
 	gap: 10px;
 	margin-bottom: 25px;
-	margin-top: 30px; /* 추가 */
+	margin-top: 30px; 
 }
 
 .tab-menu button {
@@ -60,10 +60,20 @@
 	font-size: 24px;
 	font-weight: 600;
 }
+main {
+	top: -95px;
+	position: relative;
+}
+.nullbox {
+	height: 95px;
+	display: flex;
+	background-color: #078EB9;
+}
 </style>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
+<main>
 	<div class="nullbox"></div>
 	<div class="csc">역 편의 시설</div>
 	<div class="membership-container">
@@ -101,7 +111,7 @@
 				<p>※ 기존 멤버십 카드 및 개인 신용카드 홈페이지 등록 고객은 모바일 멤버십 카드로 사용(’19.3.4일~)</p>
 			</div>
 			<br><br>
-			<h2 font-size="20px;">모바일 멤버십 카드 확인 방법</h2>
+			<h2>모바일 멤버십 카드 확인 방법</h2>
 			<br>
 			<div>
 				<img src="../static/resources/card.png" width="1000px;" />
@@ -170,10 +180,11 @@
 			<br><br>
 			<div>
 				<h2 class="section-title">전국 여행센터 연락처(전국 2개)</h2> <br>
-				<img src="../static/resources/center.png" width="1000px;"/>
+				<img src="../static/resources/center.png" width="1000px"/>
 			</div>
 		</div>
 	</div>
+</main>
 	<script>
 		$('.tab-menu button').on('click', function() {
 			$('.tab-menu button').removeClass('active');
