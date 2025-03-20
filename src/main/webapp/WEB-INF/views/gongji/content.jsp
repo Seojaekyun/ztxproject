@@ -4,8 +4,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-  <style>
-    body {
+<style>
+	body {
 		margin: 0;
 		padding: 0;
 		background-color: #f4f4f4;
@@ -81,7 +81,7 @@
 		text-decoration: none;
 		font-weight: bold;
 	}
-  </style>
+</style>
 </head>
 <body> <!-- gongji/content.jsp -->
 <main>
@@ -96,18 +96,18 @@
 		</div>
 	</div>
 	<table>
-	  <tr>
-		<th>제목</th>
-		<td>${gdto.title}</td>
-	  </tr>
-	  <tr>
-		<th>조회수</th>
-		<td>${gdto.readnum}</td>
-	  </tr>
-	  <tr>
-		<th>내용</th>
-		<td id="content">${gdto.content}</td>
-	  </tr>
+		<tr>
+			<th>제목</th>
+			<td>${gdto.title}</td>
+		</tr>
+		<tr>
+			<th>조회수</th>
+			<td>${gdto.readnum}</td>
+		</tr>
+		<tr>
+			<th>내용</th>
+			<td id="content">${gdto.content}</td>
+		</tr>
 	</table>
 	<div id="btn">
 		<a href="list">목록</a>

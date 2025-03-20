@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-
 import com.example.demo.dto.PromotDto;
 import com.example.demo.dto.ReviewDto;
 import com.example.demo.mapper.PromotMapper;
@@ -53,21 +52,71 @@ public class MainServiceImpl implements MainService {
         chatMessages.clear();  // 채팅 기록을 비움
 		return null;
     }
-
-	@Override
-	public String csCustomer(HttpServletRequest request, Model model) {
-		return "/main/csCustomer";
-	}
-	
-	@Override
-	public String pickup() {
-		return "/main/pickup";
-	}
-
+    
 	@Override
 	public String reservInfo() {
 		return "/reserv/reservInfo";
 	}
+	
+	@Override
+	public String csCustomer(HttpServletRequest request, Model model) {
+		return "/other/csCustomer";
+	}
+	
+	@Override
+	public String pickup() {
+		return "/other/pickup";
+	}
+	
+	@Override
+	public String trainservice() {
+		return "/other/trainservice";
+	}
+	
+	@Override
+	public String theme() {
+		return "/other/theme";
+    }
+	
+	@Override
+	public String free() {
+		return "/other/free";
+	}
+	
+	@Override
+	public String etiquette() {
+		return "/other/etiquette";
+	}
+	
+	@Override
+	public String station() {
+		return "/other/station";
+	}
+	
+	@Override
+	public String info() {
+		return "/other/info";
+	}
+	
+	@Override
+	public String traininfo() {
+		return "/other/traininfo";
+	}
+	
+	@Override
+    public String mship() {
+        return "/other/mship";  
+    }
+    
+	@Override
+    public String mshipsogae() {
+    	return "/other/mshipsogae";
+    }
+    
+	@Override
+    public String mshipcoupon() {
+    	return "/other/mshipcoupon";
+    }
 	
 	
 }

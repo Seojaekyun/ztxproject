@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
 @Controller
 public class MainController {
 	@Autowired
@@ -53,71 +52,69 @@ public class MainController {
 		return service.clearChatMessages();
 	}
 	
-	@GetMapping("/main/csCustomer")
-	public String csCustomer(HttpServletRequest request, Model model) {
-		return service.csCustomer(request, model);
-	}
-	
 	@GetMapping("/reserv/reservInfo")
 	public String reservInfo() {
 		return service.reservInfo();
 	}
 	
-	@GetMapping("/main/pickup")
+	@GetMapping("/other/csCustomer")
+	public String csCustomer(HttpServletRequest request, Model model) {
+		return service.csCustomer(request, model);
+	}
+	
+	@GetMapping("/other/pickup")
 	public String pickup() {
 		return service.pickup();
 	}
 	
-	@GetMapping("/main/trainservice")
+	@GetMapping("/other/trainservice")
 	public String trainservice() {
-		return "/main/trainservice";
+		return service.trainservice();
 	}
 	
-	@GetMapping("/main/theme")
+	@GetMapping("/other/theme")
 	public String theme() {
-		return "/main/theme";
+		return service.theme();
     }
 	
-	@GetMapping("/main/free")
+	@GetMapping("/other/free")
 	public String free() {
-		return "/main/free";
+		return service.free();
 	}
 	
-	@GetMapping("/main/etiquette")
+	@GetMapping("/other/etiquette")
 	public String etiquette() {
-		return "/main/etiquette";
+		return service.etiquette();
 	}
 	
-	@GetMapping("/main/station")
+	@GetMapping("/other/station")
 	public String station() {
-		return "/main/station";
+		return service.station();
 	}
 	
-	@GetMapping("/main/information")
-	public String information()
-	{
-		return "/main/information";
+	@GetMapping("/other/info")
+	public String info() {
+		return service.info();
 	}
 	
-	@GetMapping("/main/traininformation")
-	public String taininformation()
-	{
-		return "/main/traininformation";
+	@GetMapping("/other/traininfo")
+	public String traininfo() {
+		return service.traininfo();
 	}
 	
-	@GetMapping("/membership/membership")
-    public String membershipPage() {
-        return "/membership/membership";  
+	@GetMapping("/other/mship")
+    public String mship() {
+		return service.mship();
     }
     
-    @GetMapping("/membership/membershipsogae")
-    public String membershipsogae() {
-    	return "/membership/membershipsogae";
+    @GetMapping("/other/mshipsogae")
+    public String mshipsogae() {
+    	return service.mshipsogae();
     }
     
-    @GetMapping("/membership/membershipcoupon")
-    public String membershipcoupon() {
-    	return "/membership/membershipcoupon";
+    @GetMapping("/other/mshipcoupon")
+    public String mshipcoupon() {
+    	return service.mshipcoupon();
     }
 	
 	

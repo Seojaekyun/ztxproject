@@ -26,7 +26,7 @@
 	<select id="getUserList" resultType="com.example.demo.dto.UserDto">
 		select * from user limit #{itemsPerPage} OFFset #{offset}
 	</select>
-	<select id="getTotalUsercount" resultType="int">
+	<select id="getTotalUserCount" resultType="int">
 		select count(*) from user
 	</select>
 	<update id="updateUserLevelByUserid" parameterType="String">

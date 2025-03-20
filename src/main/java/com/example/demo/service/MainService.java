@@ -14,6 +14,16 @@ public interface MainService {
 	String csCustomer(HttpServletRequest request, Model model);
 	String pickup();
 	String reservInfo();
+	String trainservice();
+	String theme();
+	String free();
+	String etiquette();
+	String station();
+	String info();
+	String traininfo();
+	String mship();
+	String mshipsogae();
+	String mshipcoupon();
 	
 	
 }

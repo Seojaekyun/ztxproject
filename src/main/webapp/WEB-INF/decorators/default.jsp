@@ -819,10 +819,10 @@
 					<div class="menu">
 						<div id="subtitle" style="font-size: 22px; border-right: solid 1px lightgray;">철도역·열차</div>
 						<div id="submenu">
-							<div><a href="/main/etiquette">탑승 안내</a></div>
-							<div><a href="/main/station">철도역 안내</a></div>
-							<div><a href="/main/information">역 편의 시설</a></div>
-							<div><a href="/main/traininformation">열차 편의시설</a></div>
+							<div><a href="/other/etiquette">탑승 안내</a></div>
+							<div><a href="/other/station">철도역 안내</a></div>
+							<div><a href="/other/info">역 편의 시설</a></div>
+							<div><a href="/other/traininfo">열차 편의시설</a></div>
 						</div>
 					</div>						
 				</div>
@@ -830,11 +830,11 @@
 					<div class="menu">
 						<div id="subtitle" style="font-size: 22px; border-right: solid 1px lightgray;">고객서비스</div>
 						<div id="submenu">
-							<div><a href="/main/csCustomer">고객센터</a></div>
-							<div><a href="/main/pickup">유실물</a></div>
-							<div><a href="/main/trainservice">열차 서비스</a></div>
-							<div><a href="/main/free">자유 여행</a></div>
-							<div><a href="/main/theme">테마 여행</a></div>
+							<div><a href="/other/csCustomer">고객센터</a></div>
+							<div><a href="/other/pickup">유실물</a></div>
+							<div><a href="/other/trainservice">열차 서비스</a></div>
+							<div><a href="/other/free">자유 여행</a></div>
+							<div><a href="/other/theme">테마 여행</a></div>
 						</div>
 					</div>
 				</div>
@@ -842,8 +842,8 @@
 					<div class="menu">
 						<div id="subtitle" style="font-size: 22px; border-right: solid 1px lightgray;">멤버십</div>
 						<div id="submenu">
-							<div><a href="/membership/membership">멤버십 소개</a></div>
-							<div><a href="/membership/membershipsogae">멤버십 제휴소개</a></div>
+							<div><a href="/other/mship">멤버십 소개</a></div>
+							<div><a href="/other/mshipsogae">멤버십 제휴소개</a></div>
 							<div><a href="">멤버십 가입신청</a></div>
 						</div>
 					</div>
