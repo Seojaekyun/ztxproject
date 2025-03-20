@@ -3,7 +3,6 @@
 <html>
 <head>
 <title>레일로 자유여행 패스 안내</title>
-<link rel="stylesheet" href="/css/common.css">
 <style>
 .tab-menu {
 	display: flex;

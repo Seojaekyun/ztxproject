@@ -6,7 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <title>유실물신고안내</title>
-<link rel="stylesheet" href="/resources/css/style.css">
 <style>
 .membership-container {
 	width: 1100px;

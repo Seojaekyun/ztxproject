@@ -644,6 +644,7 @@
 	}
 	function viewMenu(n) {
 		document.getElementById("sub").style.display = "inline-block";
+		
 		let menus = document.getElementsByClassName("menu");
 		for (let i = 0; i < menus.length; i++) {
 			menus[i].style.display = "none";
@@ -793,21 +794,21 @@
 					<div class="menu">
 						<div id="subtitle" style="font-size: 22px; border-right: solid 1px lightgray;">철도역·열차</div>
 						<div id="submenu">
-							<div><a href="../main/etiquette">탑승 안내</a></div>
-							<div><a href="../main/station">철도역 안내</a></div>
-							<div><a href="../guide/baggageGuide">열차 안내</a></div>
+							<div><a href="/main/etiquette">탑승 안내</a></div>
+							<div><a href="/main/station">철도역 안내</a></div>
+							<div><a href="/main/information">역 편의 시설</a></div>
 						</div>
-					</div>
+					</div>						
 				</div>
 				<div id="main3" onmouseover="viewMenu(2)" onmouseout="hideMenu(2)">
 					<div class="menu">
 						<div id="subtitle" style="font-size: 22px; border-right: solid 1px lightgray;">고객서비스</div>
 						<div id="submenu">
-							<div><a href="../main/csCustomer">고객센터</a></div>
-							<div><a href="../main/pickup">유실물</a></div>
-							<div><a href="../main/trainservice">열차 서비스</a></div>
-							<div><a href="../main/free">자유 여행</a></div>
-							<div><a href="../main/theme">테마 여행</a></div>
+							<div><a href="/main/csCustomer">고객센터</a></div>
+							<div><a href="/main/pickup">유실물</a></div>
+							<div><a href="/main/trainservice">열차 서비스</a></div>
+							<div><a href="/main/free">자유 여행</a></div>
+							<div><a href="/main/theme">테마 여행</a></div>
 						</div>
 					</div>
 				</div>

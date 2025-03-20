@@ -6,7 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <title>ZTX 마일리지 & 회원쿠폰</title>
-<link rel="stylesheet" type="text/css" href="/resources/css/style.css">
 <style>
 	main {
 		top: -95px;

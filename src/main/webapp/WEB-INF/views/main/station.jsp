@@ -5,7 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>역 안내</title>
-<link rel="stylesheet" href="/resources/css/style.css">
 <style>
 .container {
 	width: 1100px;
@@ -335,6 +334,7 @@ main {
 					<tbody id="search-result-body"></tbody>
 				</table>
 			</div>
+		</div>
 		</div>
 	</main>
 
