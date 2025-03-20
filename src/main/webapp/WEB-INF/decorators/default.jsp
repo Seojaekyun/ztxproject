@@ -380,6 +380,20 @@
 		flex-wrap: wrap;
 		font-size: 15px;
 	}
+	#social {
+		width: 400px;
+		height: 80px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		padding-right: 60px;
+	}
+	#social img {
+		margin-left: 10px;
+	}
+	#social > img:hover {
+		cursor: pointer;
+	}
 	#famsite {
 		width: 400px;
 		height: 120px;
@@ -966,8 +980,12 @@
 			<div class="footer" style="color: white">
 				이용약관 ㆍ 여객운송약관 및 부속약관 ㆍ 개인정보처리방침 ㆍ 이메일무단수집거부 ㆍ 저작권정책지원 ㆍ 브라우저 안내
 			</div>
-			<div id="famsite">
-				🛸🛰🌌🪐🛸🛰🌌🪐
+			<div id="social">
+				<a href="https://www.youtube.com/c/%ED%95%9C%EA%B5%AD%EC%B2%A0%EB%8F%84TV" target="_blank"><img src="/static/resources/youtube.png"></a>
+				<a href="https://www.facebook.com/KoreaRailroad" target="_blank"><img src="/static/resources/facebook.png"></a>
+				<a href="https://www.instagram.com/korail_official_/" target="_blank"><img src="/static/resources/insta.png"></a>
+				<a href="https://blog.naver.com/korailblog" target="_blank"><img src="/static/resources/blog.png"></a>
+				<a href="https://x.com/korail_official" target="_blank"><img src="/static/resources/twitter.png"></a>
 			</div>
 		</div>
 		<div id="footerbox2">

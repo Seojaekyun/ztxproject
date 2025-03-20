@@ -56,37 +56,27 @@ public class ReviewServiceImpl implements ReviewService {
 
 	@Override
 	public String readnum(HttpSession session, HttpServletRequest request) {
-		if(session.getAttribute("userid") == null) {
-			return  "redirect:/login/login";
-		}
-		else {
-			String page=request.getParameter("page");
-			String id=request.getParameter("id");
-			
-			mapper.readnum(id);
-			
-			return "redirect:/review/content?id="+id+"&page="+page;
-		}
+		String page=request.getParameter("page");
+		String id=request.getParameter("id");
+		
+		mapper.readnum(id);
+		
+		return "redirect:/review/content?id="+id+"&page="+page;
 	}
 
 	@Override
 	public String content(HttpSession session, HttpServletRequest request, Model model) {
-		if(session.getAttribute("userid") == null) {
-			return  "redirect:/login/login";
-		}
-		else {
-			String id=request.getParameter("id");
-			String page=request.getParameter("page");
-			
-			ReviewDto revdto=mapper.content(id);
-			
-			revdto.setContent(revdto.getContent().replace("/r/n", "<br>"));
-			
-			model.addAttribute("revdto", revdto);
-			model.addAttribute("page", page);
-			
-			return "/review/content";
-		}
+		String id=request.getParameter("id");
+		String page=request.getParameter("page");
+		
+		ReviewDto revdto=mapper.content(id);
+		
+		revdto.setContent(revdto.getContent().replace("/r/n", "<br>"));
+		
+		model.addAttribute("revdto", revdto);
+		model.addAttribute("page", page);
+		
+		return "/review/content";
 	}
 	
 	@Override

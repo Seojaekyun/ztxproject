@@ -491,16 +491,15 @@
 		margin: auto;
 		display: flex;
 		flex-wrap: wrap;
-		gap: 20px;
+		gap: 10px;
 	}
 	.review {
 		background-color: #fff;
 		border-radius: 10px;
 		padding: 20px;
-		margin-bottom: 20px;
-		width: 32%;
+		width: 100%;
 		display: flex;
-		justify-content: space-between;
+		justify-content: flex-start;
 	}
 	.review div{
 		background-color: #fff;
@@ -1000,15 +999,15 @@
 		<div class="review-container">
 			<c:forEach items="${rvlist}" var="rvdto">
 			<div class="review" onclick="window.location.href='../review/readnum?id=${rvdto.id }'">
-				<div>
-					<h3>${rvdto.userid}</h3>
-					<p>${rvdto.content}</p>
-				</div>
 				<c:if test="${rvdto.fname != null}">
 				<div>
 					<img src="../static/resources/files/${rvdto.fname}" style="width: 100px;" alt="리뷰 이미지">
 				</div>
 				</c:if>
+				<div>
+					<h4>&nbsp;${rvdto.userid} &nbsp;${rvdto.title}</h4>
+					<p>&nbsp;${rvdto.content}</p>
+				</div>
 			</div>
 			</c:forEach>
 		</div>
