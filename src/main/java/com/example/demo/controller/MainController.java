@@ -93,6 +93,12 @@ public class MainController {
 		return "/main/station";
 	}
 	
+	@GetMapping("/main/information")
+	public String information()
+	{
+		return "/main/information";
+	}
+	
 	@GetMapping("/membership/membership")
     public String membershipPage() {
         return "/membership/membership";  

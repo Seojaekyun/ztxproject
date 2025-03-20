@@ -5,7 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>코레일 멤버십</title>
-<link rel="stylesheet" type="text/css" href="/resources/css/style.css">
 <style>
 	main {
 		top: -95px;
