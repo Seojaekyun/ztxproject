@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>레일로 자유여행 패스 안내</title>
+<title>자유여행</title>
 <style>
 main {
 	top: -95px;

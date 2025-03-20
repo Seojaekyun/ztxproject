@@ -2,13 +2,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>레일로 자유여행 패스 안내</title>
+<title>역 편의 시설 안내</title>
 <style>
 .tab-menu {
 	display: flex;
 	gap: 10px;
 	margin-bottom: 25px;
-	margin-top: 30px; /* 추가 */
+	margin-top: 30px; 
 }
 
 .tab-menu button {
