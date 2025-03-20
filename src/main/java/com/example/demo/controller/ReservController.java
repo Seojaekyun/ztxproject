@@ -1,14 +1,10 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.ReservDto;
-import com.example.demo.dto.RoutesDto;
 import com.example.demo.service.ReservService;
-import com.example.demo.service.RoutesService;
-
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 

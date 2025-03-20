@@ -864,155 +864,155 @@
 	});
 </script>
 </head>
-	<body>
-	<section>
-		<div class="main_content">
-			<div class="train_service">
-				<div class="evecon">
-					<div class="market">
-						<div id="product">
-							<img id="proimg" src="../static/resources/mar0.jpg">
-							<button class="button prev">＜</button>
-							<!-- 우측 버튼 -->
-							<button class="button next">＞</button>
-						</div>
-					</div>
-					<div class="dairy">
-						<div id="schbtn">
-							<div><a href="">
-								<img src="../static/resources/directions_railway.png">승차권 예매
-							</a></div>
-							<div><a href="../reserv/reservInfo">
-								<img src="../static/resources/transit_ticket.png">승차권 확인
-							</a></div>
-							<div><a href="../reserv/list">
-								<img src="../static/resources/confirmation_number.png">예약 승차권 조회/취소
-							</a></div>
-							<div><a href="">
-								<img src="../static/resources/dictionary.png">승차권 이용안내
-							</a></div>
-							<div><a href="csCustomer">
-								<img src="../static/resources/support_agent.png">고객센터
-							</a></div>
-						</div>
+<body>
+<section>
+	<div class="main_content">
+		<div class="train_service">
+			<div class="evecon">
+				<div class="market">
+					<div id="product">
+						<img id="proimg" src="../static/resources/mar0.jpg">
+						<button class="button prev">＜</button>
+						<!-- 우측 버튼 -->
+						<button class="button next">＞</button>
 					</div>
 				</div>
-				<div class="booking_contents">
-					<div id="popup-overlay" class="popup-overlay" style="display: none;"></div>
-					<form action="${pageContext.request.contextPath}/routes/search" method="get">
-						<div class="quick_booking_aligner">
-							<div id="quick_booking">
-								<div class="qbbtitle">
-									<div class="qbbdep">출발</div>
-									<div class="qbbarr">도착</div>
-								</div>
-								<div class="quickbook">
-									<div class="quick_booking_button" onclick="openPopup('departure')">
-										<span id="from-text">From</span>
-										<i class="fa-solid fa-paper-plane"></i>
-									</div>
-									
-									<div class="quick_booking_button" onclick="openPopup('arrival')">
-										<span id="to-text">부산</span>
-										<i class="fa-solid fa-location-dot"></i>
-									</div>
-								</div>
+				<div class="dairy">
+					<div id="schbtn">
+						<div><a href="">
+							<img src="../static/resources/directions_railway.png">승차권 예매
+						</a></div>
+						<div><a href="../reserv/reservInfo">
+							<img src="../static/resources/transit_ticket.png">승차권 확인
+						</a></div>
+						<div><a href="../reserv/list">
+							<img src="../static/resources/confirmation_number.png">예약 승차권 조회/취소
+						</a></div>
+						<div><a href="">
+							<img src="../static/resources/dictionary.png">승차권 이용안내
+						</a></div>
+						<div><a href="csCustomer">
+							<img src="../static/resources/support_agent.png">고객센터
+						</a></div>
+					</div>
+				</div>
+			</div>
+			<div class="booking_contents">
+				<div id="popup-overlay" class="popup-overlay" style="display: none;"></div>
+				<form action="${pageContext.request.contextPath}/routes/search" method="get">
+					<div class="quick_booking_aligner">
+						<div id="quick_booking">
+							<div class="qbbtitle">
+								<div class="qbbdep">출발</div>
+								<div class="qbbarr">도착</div>
 							</div>
-							<div id="popup" class="popup" style="display: none;">
-								<span class="close-btn" onclick="closePopup('departure')">&times;</span>
-								<h2>출발지 선택</h2>
-								<div id="station-list" class="station-list"></div>
-							</div>
+							<div class="quickbook">
+								<div class="quick_booking_button" onclick="openPopup('departure')">
+									<span id="from-text">From</span>
+									<i class="fa-solid fa-paper-plane"></i>
+								</div>
 								
-							<div id="arrival-popup" class="popup" style="display: none;">
-								<span class="close-btn" onclick="closePopup('arrival')">&times;</span>
-								<h2>도착지 선택</h2>
-								<div id="arrival-list" class="station-list"></div>
-							</div>
-							<input type="hidden" name="departure" id="from-hidden">
-							<input type="hidden" name="arrival" id="to-hidden">
-							<div class="date_selection">
-								<div class="datetitle">
-									<div class="qbbdep">출발일</div>
+								<div class="quick_booking_button" onclick="openPopup('arrival')">
+									<span id="to-text">부산</span>
+									<i class="fa-solid fa-location-dot"></i>
 								</div>
-								<div class="date_wrap">
-									<input type="text" id="date-btn" placeholder="가는 날 : ">
-									<i class="fa-solid fa-calendar-alt"></i>
-								</div>
-							</div>
-							<input type="hidden" name="departureDate" id="departureDate-hidden">
-							<div id="passenger_selection">
-								<div class="passtitle">
-									<div class="qbbdep">인원</div>
-								</div>
-								<div class="passenger-btn" onclick="openPopup('passenger')">
-									총&nbsp;<span id="passenger-btn">인원수</span>
-									<i class="fa-solid fa-user"></i>
-								</div>
-							</div>
-							<input type="hidden" name="resnum" id="resnum-hidden" value="1">
-							<div id="passenger-selection-popup" class="passenger-popup" style="display: none;">
-								<span class="close-btn" onclick="closePopup('passenger')">&times;</span>
-								<h2>인원</h2>
-								<div class="passenger-er">
-									<div class="passenger-type">
-										<button type="button" class="decrease-btn" onclick="decrease('resnum')">-</button>
-										<span id="resnum">1</span>
-										<button type="button"class="increase-btn" onclick="increase('resnum')">+</button>
-									</div>
-								</div>
-							</div>
-							<div id="search">
-								<button type="submit" id="search_button">
-									<span>열차 조회하기</span>
-								</button>
 							</div>
 						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-		<div id="sec2" class="sec2 promotion-section fade-in-section">
-			<h3 style="text-align: center;"> 꼬레일은 다양한 <b>이벤트</b>로 고객에게 다가가고 있습니다.</h3>
-			<div class="promotion-container">
-				<c:forEach items="${plist}" var="pdto">
-				<div class="promotion-item" onclick="window.location.href='../promot/readnum?id=${pdto.id}'">
-					<div id="promobox">
-						<img src="../static/resources/${pdto.fname}" alt="이벤트 이미지">
+						<div id="popup" class="popup" style="display: none;">
+							<span class="close-btn" onclick="closePopup('departure')">&times;</span>
+							<h2>출발지 선택</h2>
+							<div id="station-list" class="station-list"></div>
+						</div>
+							
+						<div id="arrival-popup" class="popup" style="display: none;">
+							<span class="close-btn" onclick="closePopup('arrival')">&times;</span>
+							<h2>도착지 선택</h2>
+							<div id="arrival-list" class="station-list"></div>
+						</div>
+						<input type="hidden" name="departure" id="from-hidden">
+						<input type="hidden" name="arrival" id="to-hidden">
+						<div class="date_selection">
+							<div class="datetitle">
+								<div class="qbbdep">출발일</div>
+							</div>
+							<div class="date_wrap">
+								<input type="text" id="date-btn" placeholder="가는 날 : ">
+								<i class="fa-solid fa-calendar-alt"></i>
+							</div>
+						</div>
+						<input type="hidden" name="departureDate" id="departureDate-hidden">
+						<div id="passenger_selection">
+							<div class="passtitle">
+								<div class="qbbdep">인원</div>
+							</div>
+							<div class="passenger-btn" onclick="openPopup('passenger')">
+								총&nbsp;<span id="passenger-btn">인원수</span>
+								<i class="fa-solid fa-user"></i>
+							</div>
+						</div>
+						<input type="hidden" name="resnum" id="resnum-hidden" value="1">
+						<div id="passenger-selection-popup" class="passenger-popup" style="display: none;">
+							<span class="close-btn" onclick="closePopup('passenger')">&times;</span>
+							<h2>인원</h2>
+							<div class="passenger-er">
+								<div class="passenger-type">
+									<button type="button" class="decrease-btn" onclick="decrease('resnum')">-</button>
+									<span id="resnum">1</span>
+									<button type="button"class="increase-btn" onclick="increase('resnum')">+</button>
+								</div>
+							</div>
+						</div>
+						<div id="search">
+							<button type="submit" id="search_button">
+								<span>열차 조회하기</span>
+							</button>
+						</div>
 					</div>
-					<br>
-					<h3>${pdto.title}</h3>
-					<p>${pdto.subtitle}</p>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div id="sec2" class="sec2 promotion-section fade-in-section">
+		<h3 style="text-align: center;"> 꼬레일은 다양한 <b>이벤트</b>로 고객에게 다가가고 있습니다.</h3>
+		<div class="promotion-container">
+			<c:forEach items="${plist}" var="pdto">
+			<div class="promotion-item" onclick="window.location.href='../promot/readnum?id=${pdto.id}'">
+				<div id="promobox">
+					<img src="../static/resources/${pdto.fname}" alt="이벤트 이미지">
 				</div>
-				</c:forEach>
+				<br>
+				<h3>${pdto.title}</h3>
+				<p>${pdto.subtitle}</p>
 			</div>
+			</c:forEach>
 		</div>
-		<div id="annaebox">
-			<div id="annae0">
-				<img src="../static/resources/annae0.png">
-			</div>
-			<div id="annae1">
-				<img src="../static/resources/annae1.png">
-			</div>		
+	</div>
+	<div id="annaebox">
+		<div id="annae0">
+			<img src="../static/resources/annae0.png">
 		</div>
-		<div id="sec3" class="sec3 customer-review-section fade-in-section">
-			<h3 style="text-align: center;">고객 후기</h3>
-			<div class="review-container">
-				<c:forEach items="${rvlist}" var="rvdto">
-				<div class="review" onclick="window.location.href='../review/readnum?id=${rvdto.id }'">
-					<div>
-						<h3>${rvdto.userid}</h3>
-						<p>${rvdto.content}</p>
-					</div>
-					<c:if test="${rvdto.fname != null}">
-					<div>
-						<img src="../static/resources/files/${rvdto.fname}" style="width: 100px;" alt="리뷰 이미지">
-					</div>
-					</c:if>
+		<div id="annae1">
+			<img src="../static/resources/annae1.png">
+		</div>		
+	</div>
+	<div id="sec3" class="sec3 customer-review-section fade-in-section">
+		<h3 style="text-align: center;">고객 후기</h3>
+		<div class="review-container">
+			<c:forEach items="${rvlist}" var="rvdto">
+			<div class="review" onclick="window.location.href='../review/readnum?id=${rvdto.id }'">
+				<div>
+					<h3>${rvdto.userid}</h3>
+					<p>${rvdto.content}</p>
 				</div>
-				</c:forEach>
+				<c:if test="${rvdto.fname != null}">
+				<div>
+					<img src="../static/resources/files/${rvdto.fname}" style="width: 100px;" alt="리뷰 이미지">
+				</div>
+				</c:if>
 			</div>
+			</c:forEach>
 		</div>
-	</section>
-	</body>
+	</div>
+</section>
+</body>
 </html>

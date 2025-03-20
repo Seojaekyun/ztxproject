@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>MonoRail - ZTX</title>
+<link rel="icon" type="image/x-icon" href="/static/resources/favicon.png">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/ko.js"></script>
@@ -16,11 +17,11 @@
 		margin: 0;
 		padding: 0;
 		box-sizing: border-box;
-		font-family: "Noto Sans KR", arial, sans-serif !important;
+		font-family: "Noto Sans KR", arial, sans-serif;
 	}
 	body {
 		margin: auto;
-		font-family: "Noto Sans KR", arial, sans-serif !important;
+		font-family: "Noto Sans KR", arial, sans-serif;
 	}
 	header {
 		width: 100%;
