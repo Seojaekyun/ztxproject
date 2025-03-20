@@ -5,19 +5,21 @@
 <title>레일로 자유여행 패스 안내</title>
 <style>
 main {
-		top: -95px;
-		position: relative;
-	}
-	.nullbox {
-		height: 95px;
-		display: flex;
-		background-color: #078EB9;
-	}
+	top: -95px;
+	position: relative;
+}
+
+.nullbox {
+	height: 95px;
+	display: flex;
+	background-color: #078EB9;
+}
+
 .tab-menu {
 	display: flex;
 	gap: 10px;
 	margin-bottom: 25px;
-	margin-top: 30px; /* 추가 */
+	margin-top: 30px; 
 }
 
 .tab-menu button {
@@ -45,19 +47,6 @@ main {
 	display: block;
 }
 
-.btn-primary {
-	background: #007bff;
-	color: white;
-	padding: 10px 20px;
-	border: none;
-	cursor: pointer;
-	display: inline-block;
-}
-
-.btn-primary:hover {
-	background: #0056b3;
-}
-
 .membership-container {
 	width: 1100px;
 	margin: auto;
@@ -69,12 +58,6 @@ main {
 	background-color: #f9f9f9;
 	padding: 30px;
 	border-left: 5px solid #003366;
-	margin-bottom: 20px;
-}
-
-.info-box-1 {
-	background-color: #f9f9f9;
-	padding: 30px;
 	margin-bottom: 20px;
 }
 
