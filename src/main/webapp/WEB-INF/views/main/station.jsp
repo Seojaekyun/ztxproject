@@ -142,19 +142,18 @@ main {
 
 			<div class="tab">
 				<ul>
-					<li class="active"><a href="#ktx"
-						onclick="changeTab(event, 'ktx')">ZTX역</a></li>
-					<li><a href="#normal" onclick="changeTab(event, 'normal')">일반철도</a></li>
-					<li><a href="#metro" onclick="changeTab(event, 'metro')">광역철도</a></li>
+					<li class="active"><a href="#ztx" onclick="changeTab(event, 'ztx')">경부선</a></li>
+					<li><a href="#train" onclick="changeTab(event, 'train')">강릉선</a></li>
+					<li><a href="#train1" onclick="changeTab(event, 'train1')">호남선</a></li>
+					<li><a href="#train2" onclick="changeTab(event, 'train2')">경전선</a></li>
+					<li><a href="#train3" onclick="changeTab(event, 'train3')">경북선</a></li>
 				</ul>
 			</div>
 
 
-			<div id="ktx" class="tab-content active">
+			<div id="ztx" class="tab-content active">
 				<div class="search-bar">
-					<input type="text" id="search-ktx" placeholder="역이름 입력"
-						onkeyup="filterStations('ktx')"><img
-						src="../static/resources/search.png">
+					<input type="text" id="search-ztx" placeholder="역이름 입력" onkeyup="filterStations('ztx')"><img src="../static/resources/search.png">
 				</div>
 				<table>
 					<thead>
@@ -164,9 +163,93 @@ main {
 							<th>상세정보</th>
 						</tr>
 					</thead>
-					<tbody id="station-list-ktx">
-						<tr data-name="강릉">
-							<td>강릉</td>
+					<tbody id="station-list-ztx">
+						<tr data-name="서울역">
+							<td>서울역</td>
+							<td>서울시 용산구 한강대로 405 (동자동 43-205)</td>
+							<td class="btn-group"><button>상세보기</button>
+								<button>지도보기</button></td>
+						</tr>
+						<tr data-name="광명역">
+							<td>광명역</td>
+							<td>경기도 광명시 광명역로 21(일직동)</td>
+							<td class="btn-group"><button>상세보기</button>
+								<button>지도보기</button></td>
+						</tr>
+						<tr data-name="수원역">
+							<td>수원역</td>
+							<td>경기도 수원시 팔달구 덕영대로 924 수원역</td>
+							<td class="btn-group"><button>상세보기</button>
+								<button>지도보기</button></td>
+						</tr>
+						<tr data-name="천안아산역">
+							<td>천안아산역</td>
+							<td>충남 아산시 배방읍 희망로 100번지(장재리 364-4)</td>
+							<td class="btn-group"><button>상세보기</button>
+								<button>지도보기</button></td>
+						</tr>
+						<tr data-name="오송역">
+							<td>오송역</td>
+							<td>충북 청주시 흥덕구 오송읍 오송가락로 123</td>
+							<td class="btn-group"><button>상세보기</button>
+								<button>지도보기</button></td>
+						</tr>
+						<tr data-name="대전역">
+							<td>대전역</td>
+							<td>대전 동구 중앙로 218</td>
+							<td class="btn-group"><button>상세보기</button>
+								<button>지도보기</button></td>
+						</tr>
+						<tr data-name="울산역">
+							<td>울산역</td>
+							<td>울산광역시 울주군 삼남면 울산역로 177</td>
+							<td class="btn-group"><button>상세보기</button>
+								<button>지도보기</button></td>
+						</tr>
+						<tr data-name="부산역">
+							<td>부산역</td>
+							<td>부산 동구 중앙대로 206 (초량3동 1187-1번지) 부산역</td>
+							<td class="btn-group"><button>상세보기</button>
+								<button>지도보기</button></td>
+						</tr>
+						<tr data-name="동대구역">
+							<td>동대구역</td>
+							<td>대구광역시 동구 동대구로 550</td>
+							<td class="btn-group"><button>상세보기</button>
+								<button>지도보기</button></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+
+			<div id="train" class="tab-content">
+				<div class="search-bar">
+					<input type="text" id="search-train" placeholder="역이름 입력" onkeyup="filterStations('train')"><img src="../static/resources/search.png">
+				</div>
+				<table>
+					<thead>
+						<tr>
+							<th>역명</th>
+							<th>주소</th>
+							<th>상세정보</th>
+						</tr>
+					</thead>
+					<tbody id="station-list-train">
+						<tr data-name="원주역">
+							<td>원주역</td>
+							<td>강원도 원주시 북원로 1860</td>
+							<td class="btn-group"><button>상세보기</button>
+								<button>지도보기</button></td>
+						</tr>
+						<tr data-name="춘천역">
+							<td>춘천역</td>
+							<td>강원특별자치도 춘천시 공지로 591 (근화동 190)</td>
+							<td class="btn-group"><button>상세보기</button>
+								<button>지도보기</button></td>
+						</tr>
+						<tr data-name="강릉역">
+							<td>강릉역</td>
 							<td>강원도 강릉시 용지로 176</td>
 							<td class="btn-group"><button>상세보기</button>
 								<button>지도보기</button></td>
@@ -176,11 +259,9 @@ main {
 			</div>
 
 
-			<div id="normal" class="tab-content">
+			<div id="train1" class="tab-content">
 				<div class="search-bar">
-					<input type="text" id="search-normal" placeholder="역이름 입력"
-						onkeyup="filterStations('normal')"><img
-						src="../static/resources/search.png">
+					<input type="text" id="search-train1" placeholder="역이름 입력" onkeyup="filterStations('train1')"><img src="../static/resources/search.png">
 				</div>
 				<table>
 					<thead>
@@ -190,23 +271,38 @@ main {
 							<th>상세정보</th>
 						</tr>
 					</thead>
-					<tbody id="station-list-normal">
-						<tr data-name="곡성">
-							<td>곡성</td>
-							<td>전남 곡성군 곡성읍 곡성로 920</td>
+					<tbody id="station-list-train1">
+						<tr data-name="광주송정역">
+							<td>광주송정역</td>
+							<td>광주광역시 광산구 상무대로 201</td>
+							<td class="btn-group"><button>상세보기</button>
+								<button>지도보기</button></td>
+						</tr>
+						<tr data-name="목포역">
+							<td>목포역</td>
+							<td>전남 목포시 영산로 98(호남동1-1)</td>
+							<td class="btn-group"><button>상세보기</button>
+								<button>지도보기</button></td>
+						</tr>
+						<tr data-name="순천역">
+							<td>순천역</td>
+							<td>전라남도 순천시 팔마로 135</td>
+							<td class="btn-group"><button>상세보기</button>
+								<button>지도보기</button></td>
+						</tr>
+						<tr data-name="여수엑스포역">
+							<td>여수엑스포역</td>
+							<td>전라남도 여수시 망양로 2</td>
 							<td class="btn-group"><button>상세보기</button>
 								<button>지도보기</button></td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
-
-
-			<div id="metro" class="tab-content">
+			
+			<div id="train2" class="tab-content">
 				<div class="search-bar">
-					<input type="text" id="search-metro" placeholder="역이름 입력"
-						onkeyup="filterStations('metro')"><img
-						src="../static/resources/search.png">
+					<input type="text" id="search-train2" placeholder="역이름 입력" onkeyup="filterStations('train2')"><img src="../static/resources/search.png">
 				</div>
 				<table>
 					<thead>
@@ -216,10 +312,33 @@ main {
 							<th>상세정보</th>
 						</tr>
 					</thead>
-					<tbody id="station-list-metro">
-						<tr data-name="공주">
-							<td>공주</td>
-							<td>충남 공주시 이인면 새빛로 100</td>
+					<tbody id="station-list-train2">
+						<tr data-name="진주역">
+							<td>진주역</td>
+							<td>경상남도 진주시 진주역로 130</td>
+							<td class="btn-group"><button>상세보기</button>
+								<button>지도보기</button></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			
+			<div id="train3" class="tab-content">
+				<div class="search-bar">
+					<input type="text" id="search-train3" placeholder="역이름 입력" onkeyup="filterStations('train3')"><img src="../static/resources/search.png">
+				</div>
+				<table>
+					<thead>
+						<tr>
+							<th>역명</th>
+							<th>주소</th>
+							<th>상세정보</th>
+						</tr>
+					</thead>
+					<tbody id="station-list-train3">
+						<tr data-name="김천역">
+							<td>김천역</td>
+							<td>경상북도 김천시 김천로 111(평화동 264-1)</td>
 							<td class="btn-group"><button>상세보기</button>
 								<button>지도보기</button></td>
 						</tr>
