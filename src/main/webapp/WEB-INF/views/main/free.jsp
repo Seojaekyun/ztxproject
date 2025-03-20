@@ -5,6 +5,15 @@
 <title>레일로 자유여행 패스 안내</title>
 <link rel="stylesheet" href="/css/common.css">
 <style>
+main {
+		top: -95px;
+		position: relative;
+	}
+	.nullbox {
+		height: 95px;
+		display: flex;
+		background-color: #078EB9;
+	}
 .tab-menu {
 	display: flex;
 	gap: 10px;
@@ -145,6 +154,7 @@
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 </head>
 <body>
+<main>
 	<div class="nullbox"></div>
 	<div class="csc">자유여행</div>
 	<div class="membership-container">
@@ -338,7 +348,7 @@
 			</div>
 		</div>
 	</div>
-	</div>
+</main>
 	<script>
 		$('.tab-menu button').on('click', function() {
 			$('.tab-menu button').removeClass('active');

@@ -353,16 +353,23 @@
 	footer {
 		width: 100%;
 		min-width: 1200px;
-		height: 150px;
+		height: 200px;
 		background: #343c45;
 		color: white;
 		text-align: center;
 		font-size: 10px;
 		margin-top: 40px;
 	}
+	#footerbox1 {
+		border-bottom: 1px solid gray;
+		height: 80px;
+	}
 	#footerbox1, #footerbox2 {
 		display: flex;
 		justify-content: space-around;
+	}
+	#footerbox2 {
+		height: 120px;
 	}
 	.footer-container {
 		display: flex;
@@ -375,8 +382,10 @@
 	}
 	#famsite {
 		width: 400px;
+		height: 120px;
 		display: flex;
 		justify-content: center;
+		align-items: center;
 	}
 	.footer-logo {
 		margin-left: 40px;
@@ -617,6 +626,7 @@
 	select {
 		background: #343c45;
 		width: 150px;
+		height: 35px;
 		border-radius: 25px;
 		text-align: center;
 		border: 2px solid white;
@@ -956,6 +966,7 @@
 				이용약관 ㆍ 여객운송약관 및 부속약관 ㆍ 개인정보처리방침 ㆍ 이메일무단수집거부 ㆍ 저작권정책지원 ㆍ 브라우저 안내
 			</div>
 			<div id="famsite">
+				🛸🛰🌌🪐🛸🛰🌌🪐
 			</div>
 		</div>
 		<div id="footerbox2">
