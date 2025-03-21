@@ -837,7 +837,7 @@
 </script>
 <script>
 	document.addEventListener('DOMContentLoaded', function() {
-		const imagePaths = ["../static/resources/mar0.jpg", "../static/resources/mar1.jpg"];
+		const imagePaths = ["../static/resources/mar0.jpg", "../static/resources/mar1.jpg", "../static/resources/mar2.png"];
 		
 		let index = 0; // 현재 이미지 인덱스
 		const imageElement = document.getElementById("proimg"); // 이미지 요소
