@@ -12,7 +12,6 @@
 		background-color: #f7f7f7;
 	}
 	.container {
-		margin-top: 20px;
 		max-width: 100%; /* 창 폭 제한 */
 	}
 	.train {
@@ -99,17 +98,12 @@
 	    justify-content: center;
 	    margin-bottom: 12px;
 	}
-	input [type="button"] {
+	.btn-primary {
 		width: 100px;
 		padding: 5px 10px;
+		border-radius: 25px;
 		font-size: 12px;
-		font-weight: 600;
-		background-color: #00aaff;
-		border: none;
-		border-radius: 20px;
-		transition: background-color 0.3s;
-		dsiplay: inline-block;
-		align: right;
+		background: #078EB9;
 	}
 	.btn-primary:hover {
 		background-color: #0077cc;
@@ -121,28 +115,30 @@
 		transform: scale(1.1);
 		background-color: #0099cc; /* 좌석 호버 시 색상 */
 	}
-	.mt-5 {
+	.mt-1 {
+		background: white;
 		display: flex;
 		justify-content: space-between;
+		align-items: center;
+		padding: 10px;
 	}
 	.pagination {
 		margin: auto;
 		display: flex;
 		justify-content: center;
-	}
-	
-	#currentPage {
-		width: 100px;
-		text-align: center;
-	}
-	button {
-		padding: 5px 10px;
-		background: #00aaff;
-		border-radius: 20px;
-		border: none;
-		font-size: 12px;
-		color: white;
 		font-weight: bold;
+	}
+	.pagination > a {
+		text-decoration: none;
+	}
+	#currentPage {
+		margin-top: 1.5px;
+		width: 70px;
+		height: 22px;
+		text-align: center;
+		line-height: 20px;
+		border-top: 2.5px solid black;
+		border-bottom: 2.5px solid black;
 	}
 </style>
 <script>
@@ -199,22 +195,32 @@
 	<div class="container">
 		<h2 class="mt-4">좌석 선택 - ${resnum}</h2>
 		<p><b>열차:&nbsp;</b> 은하-${routeid}&nbsp;&nbsp;<b>탑승객 수:&nbsp;</b> ${resnum}명</p>
-		<div class="pagination">
-			<c:if test="${currentPage > 0}">
-			<a href="/routes/seats?routeid=${routeid}&resnum=${resnum}&page=${currentPage - 1}&size=${pageSize}">
-				<button>이전호</button></a>
-			</c:if>
-			<span id="currentPage">${1 + currentPage}호차</span>
-			<c:if test="${(currentPage+1) < totalPages}">
-			<a href="/routes/seats?routeid=${routeid}&resnum=${resnum}&page=${currentPage + 1}&size=${pageSize}">
-				<button>다음호</button></a>
-			</c:if>
-		</div>
 		<!-- 선택한 좌석 표시 -->
-		<div class="mt-5">
-			<span>선택한 좌석:&nbsp;<span id="selectedSeatsDisplay"></span></span>
+		<div class="mt-1">
+			<div style="width:200px; margin-left: 100px;">선택한 좌석:&nbsp;<span id="selectedSeatsDisplay"></span></div>
+			<div class="pagination">
+				<c:if test="${currentPage == 0}">
+				이전<img src="../static/resources/prevtrain.png" style="width: 70px; cursor: not-allowed;">
+				</c:if>
+				<c:if test="${currentPage > 0}">
+				<a href="/routes/seats?routeid=${routeid}&resnum=${resnum}&page=${currentPage - 1}&size=${pageSize}">
+					이전<img src="../static/resources/prevtrain.png" style="width: 70px;">
+				</a>
+				</c:if>
+				<span id="currentPage">${1 + currentPage}호차</span>
+				<c:if test="${(currentPage+1) < totalPages}">
+				<a href="/routes/seats?routeid=${routeid}&resnum=${resnum}&page=${currentPage + 1}&size=${pageSize}">
+					<img src="../static/resources/nexttrain.png" style="width: 70px;">다음
+				</a>
+				</c:if>
+				<c:if test="${(currentPage+1) == totalPages}">
+				<img src="../static/resources/nexttrain.png" style="width: 70px; cursor: not-allowed;">다음
+				</c:if>
+			</div>
 			<!-- 선택 완료 버튼 -->
-			<input type="button" class="btn btn-primary mt-4" onclick="confirmSelection()" value="선택 완료">
+			<div style="width:200px; padding-left: 100px; margin-right: 100px;">
+				<input type="button" class="btn btn-primary" onclick="confirmSelection()" value="선택 완료">
+			</div>
 		</div>
 		<div id="seatsContainer" class="train">
 		    <div class="seat-container">

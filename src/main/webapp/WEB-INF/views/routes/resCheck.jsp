@@ -34,7 +34,7 @@
 	}
 	table {
 		width: 100%;
-		margin-bottom: 30px;
+		
 	}
 	th, td {
 		text-align: center;
@@ -52,10 +52,6 @@
 	}
 	.btn-seat-select:hover, .btn-reservation:hover {
 		background-color: #003A66;
-	}
-	.action-buttons {
-		margin-top: 20px;
-		margin-bottom: 50px;
 	}
 	.seat-selection-btn {
 		margin-right: 10px;

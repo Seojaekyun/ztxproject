@@ -152,7 +152,7 @@
 		top: 0; /* 부모 요소의 중앙 */
 		right: 0; /* 부모 요소의 중앙 */
 	}
-	#loginMenu > #langMenu > select {
+	#loginMenu > #langMenu > #langsel {
 		font-size: 16px;
 		width: 100px;
 		background: white;
@@ -637,7 +637,7 @@
 		text-decoration: none;
 		color:#004EA2;
 	}
-	select {
+	#famsel {
 		background: #343c45;
 		width: 150px;
 		height: 35px;
@@ -734,7 +734,7 @@
 						</ul>
 					</div>
 					<div id="langMenu">
-						<select>
+						<select id="langsel">
 							<option>Language</option>
 							<option>KOREAN</option>
 						</select>
@@ -1000,7 +1000,7 @@
 				</div>
 			</div>
 			<div id="famsite">
-				<select onchange="goToSite(this)">
+				<select id="famsel" onchange="goToSite(this)">
 					<option>패밀리 사이트</option>
 					<option value="http://localhost:8099/main/index">eLT항공</option>
 					<option value="https://www.kobus.co.kr/main.do">코버스</option>
