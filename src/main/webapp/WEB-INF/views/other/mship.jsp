@@ -73,8 +73,8 @@
         <h2 class="section-title">꼬레일멤버십 기본서비스</h2>
         <ul>
             <li><span class="highlight">철도승차권 예약</span> - 꼬레일멤버십 회원이면 누구나 인터넷(<a href="http://localhost:8095/main/index" class="highlight">http://localhost:8095/main/index</a>), 철도고객센터(☎1588-7788)에서 승차권을 예약할 수 있습니다.</li>
-            <li><span class="highlight">마일리지 & 회원쿠폰 지급</span> - <a href="/membership/membershipcoupon" class="button">자세히 보기</a></li>
-            <li><span class="highlight">꼬레일멤버십 제휴 가맹점 할인</span> - 꼬레일멤버십 카드(모바일 회원카드 포함)를 제시하면 제휴 가맹점에서 할인 혜택을 받을 수 있습니다. <a href="/membership/membershipsogae" class="button">멤버십 제휴 혜택 바로가기</a></li>
+            <li><span class="highlight">마일리지 & 회원쿠폰 지급</span> - <a href="/other/mshipcoupon" class="button">자세히 보기</a></li>
+            <li><span class="highlight">꼬레일멤버십 제휴 가맹점 할인</span> - 꼬레일멤버십 카드(모바일 회원카드 포함)를 제시하면 제휴 가맹점에서 할인 혜택을 받을 수 있습니다. <a href="/other/mshipsogae" class="button">멤버십 제휴 혜택 바로가기</a></li>
             <li>철도 관련 여행명소, 이벤트 등 공지사항 수신</li>
         </ul>
     </div>
