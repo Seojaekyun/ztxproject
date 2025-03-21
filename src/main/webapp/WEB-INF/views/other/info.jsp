@@ -183,6 +183,8 @@ main {
 				<img src="../static/resources/center.png" width="1000px"/>
 			</div>
 		</div>
+		
+		
 	</div>
 </main>
 	<script>

@@ -126,6 +126,16 @@ main {
 					<p>ZTX의 경우 시속 300km이상으로 고속 운행함에 따라 인터넷 속도가 느리고 일부구간에서 장애가 발생할 수 있습니다.</p>
 				</div>
 			</div>
+			
+			<div id="service3" class="tab-content">
+				<br>
+				<br>
+				<img src="../static/resources/traininfo.png" width="1100px"/>
+				<br>
+				<br>
+				<p>※ 열차 내 이동판매는 2017년 12월 30일부터 중단되었습니다.</p>
+				
+			</div>
 		</div>
 	</main>
 	<script>
