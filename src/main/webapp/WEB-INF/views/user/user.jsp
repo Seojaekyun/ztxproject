@@ -46,7 +46,7 @@
 		font-size:24px;
 		margin-bottom:25px;
 	}
-	section input, section select {
+	section input, section > #select {
 		width:100%;
 		padding:10px;
 		margin:5px 0;
