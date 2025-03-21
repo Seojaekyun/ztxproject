@@ -34,7 +34,6 @@
 	}
 	table {
 		width: 100%;
-		
 	}
 	th, td {
 		text-align: center;
@@ -74,7 +73,16 @@
     	display: flex;
     	justify-content: space-between;
     }
-
+    /* 모달의 기본 위치와 크기 조정 */
+	.modal {
+		display: none; /* 기본적으로 숨겨짐 */
+		
+		top: 60%; /* 화면 수직 중앙 */
+		left: 42.5%; /* 화면 수평 중앙 */
+		transform: translate(-50%, -50%); /* 정확한 중앙 정렬 */
+		z-index: 1050; /* 모달을 최상단에 표시 */
+	}
+    
 </style>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
@@ -131,7 +139,7 @@
 			</thead>
 			<tbody>
 			<tr>
-				<td>은하-${routeid}</td>
+				<td>은하-${routeid}호</td>
 				<td>${routeDeparture}</td>
 				<td>${routeArrival}</td>
 				<td>${routeTime}</td>
@@ -187,7 +195,7 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<iframe id="seatSelectionFrame" style="width:100%; height:600px; border:none;"></iframe>
+					<iframe id="seatSelectionFrame" style="width:100%; height:380px; border:none;"></iframe>
 				</div>
 			</div>
 		</div>

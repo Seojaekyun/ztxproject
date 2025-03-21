@@ -207,8 +207,8 @@
 		display: inline-block;
 		list-style-type: none;
 		width: 190px;
-		height: 30px !important;
-		line-height: 30px !important;
+		/* height: 30px !important;
+		line-height: 30px !important; */
 		text-align: right;
 		font-size: 22px;
 		font-weight: 600;
@@ -257,6 +257,7 @@
 		margin: auto;
 		display: flex;
 		justify-content: space-between;
+		margin-top: -1px;
 	}
 	#sub > #section2 > #s2container > #logocontainer {
 		margin: auto;
@@ -289,14 +290,16 @@
 		display: inline-block;
 		list-style-type: none;
 		width: 190px;
-		height: 30px !important;
-		line-height: 30px !important;
 		text-align: right;
 		font-size: 22px;
 		font-weight: 600;
 		position: relative;
 		z-index: 12;
 		color: black;
+		align: right;
+	}
+	#sub > #section2 > #s2container > #nav > #main > div > div {
+		display: inline-block;
 	}
 	#sub > #section2 > #s2container > #nav > #main > div > a{
 		text-decoration: none !important;
@@ -359,14 +362,19 @@
 		text-align: center;
 		font-size: 10px;
 		margin-top: 40px;
+		align-items: center;
+	}
+	#fbox {
+		border-bottom: 1px solid gray;
 	}
 	#footerbox1 {
-		border-bottom: 1px solid gray;
 		height: 80px;
 	}
 	#footerbox1, #footerbox2 {
+		width: 1650px;
 		display: flex;
-		justify-content: space-around;
+		justify-content: center;
+		margin: auto;
 	}
 	#footerbox2 {
 		height: 120px;
@@ -440,56 +448,6 @@
 		flex-wrap: wrap;
 		font-size: 14px;
 		line-height: 60px;
-	}
-	
-	@media (max-width: 768px) {
-		.footer-container {
-			flex-direction: column;
-			text-align: center;
-		}
-		.footer-info, .footer-contact {
-			text-align: center;
-		}
-	}
-	#main1 .icona {
-		margin-right: 8px;
-		opacity: 0;
-		transition: opacity 0.3s;
-	}
-	#main1:hover .icona {
-		opacity: 1;
-	}
-	#main2 .iconb {
-		margin-right: 8px;
-		opacity: 0;
-		transition: opacity 0.3s;
-	}
-	#main2:hover .iconb {
-		opacity: 1;
-	}
-	#main3 .iconc {
-		margin-right: 8px;
-		opacity: 0;
-		transition: opacity 0.3s;
-	}
-	#main3:hover .iconc {
-		opacity: 1;
-	}
-	#main4 .icond {
-		margin-right: 8px;
-		opacity: 0;
-		transition: opacity 0.3s;
-	}
-	#main4:hover .icond {
-		opacity: 1;
-	}
-	#main5 .icone {
-		margin-right: 8px;
-		opacity: 0;
-		transition: opacity 0.3s;
-	}
-	#main5:hover .icone {
-		opacity: 1;
 	}
 	.iconmem {
 		margin-right: 8px;
@@ -675,9 +633,17 @@
 			menus[i].style.display = "none";
 		}
 		
-		// 선택한 메뉴만 보이게 하기
 		if (menus[n]) {
 			menus[n].style.display = "flex";
+		}
+		
+		let mainItems = document.querySelectorAll("#sub > div > div > div > div > div > div");
+		for(let i = 0; i < mainItems.length; i++) {
+			mainItems[i].style.borderBottom = "none";
+		}
+		
+		if(mainItems[n]) {
+			mainItems[n].style.borderBottom = "4px solid #078EB9";
 		}
 	}
 	function hideMenu(n) {
@@ -685,7 +651,6 @@
 		
 	}
 	
-
 </script>
 
 <sitemesh:write property="head" />
@@ -755,16 +720,16 @@
 				<div id="nav">
 					<div id="main">
 						<div id="main1" onmouseover="viewMenu(0)">
-							<span class="icona">🚄</span>승차권
+							<div class="icon"><div style="height: 95px;">승차권</div></div>
 						</div>
 						<div id="main2" onmouseover="viewMenu(1)">
-							<span class="iconb">🚄</span>철도역·열차
+							<div class="icon"><div style="height: 95px;">철도역·열차</div></div>
 						</div>
 						<div id="main3" onmouseover="viewMenu(2)">
-							<span class="iconc">🚄</span>고객서비스
+							<div class="icon"><div style="height: 95px;">고객서비스</div></div>
 						</div>
 						<div id="main4" onmouseover="viewMenu(3)">
-							<span class="icond">🚄</span>꼬레일 멤버십
+							<div class="icon"><div style="height: 95px;">꼬레일 멤버십</div></div>
 						</div>
 					</div>
 				</div>
@@ -787,16 +752,16 @@
 						<div id="nav">
 							<div id="main">
 								<div id="main1" onmouseover="viewMenu(0)">
-									<span class="icona">🚄</span>승차권
+									<div class="icon"><div style="height: 95px;">승차권</div></div>
 								</div>
 								<div id="main2" onmouseover="viewMenu(1)">
-									<span class="iconb">🚄</span>철도역·열차
+									<div class="icon"><div style="height: 95px;">철도역·열차</div></div>
 								</div>
 								<div id="main3" onmouseover="viewMenu(2)">
-									<span class="iconc">🚄</span>고객서비스
+									<div class="icon"><div style="height: 95px;">고객서비스</div></div>
 								</div>
 								<div id="main4" onmouseover="viewMenu(3)">
-									<span class="icond">🚄</span>꼬레일 멤버십
+									<div class="icon"><div style="height: 95px;">꼬레일 멤버십</div></div>
 								</div>
 							</div>
 						</div>
@@ -977,7 +942,8 @@
 <sitemesh:write property="body" />
 	
 	<footer>
-		<div id="footerbox1">
+		<div id="fbox">
+			<div id="footerbox1">
 			<div class="footer" style="color: white">
 				이용약관 ㆍ 여객운송약관 및 부속약관 ㆍ 개인정보처리방침 ㆍ 이메일무단수집거부 ㆍ 저작권정책지원 ㆍ 브라우저 안내
 			</div>
@@ -987,6 +953,7 @@
 				<a href="https://www.instagram.com/korail_official_/" target="_blank"><img src="/static/resources/insta.png"></a>
 				<a href="https://blog.naver.com/korailblog" target="_blank"><img src="/static/resources/blog.png"></a>
 				<a href="https://x.com/korail_official" target="_blank"><img src="/static/resources/twitter.png"></a>
+			</div>
 			</div>
 		</div>
 		<div id="footerbox2">

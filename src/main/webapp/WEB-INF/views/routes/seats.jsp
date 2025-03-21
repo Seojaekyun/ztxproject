@@ -18,62 +18,50 @@
 	    display: flex;
 	    flex-direction: column;
 	    justify-content: center;
-	    background-image: url('../static/resources/trainseat2.jpg');
-	    background-size: 1035px 270px;
+	    background-image: url('../static/resources/trainseat.jpg');
+	    background-size: 1035px 272px;
 	    background-repeat: no-repeat;
+	    height: 273px;
 	}
 	.seat-container {
 	    display: flex;
 	    flex-direction: column;
 	    align-items: flex-start;
 	    padding-left: 143px;
-	    padding-top: 15px;
-	}
-	.seatf {
-		width: 42px; /* 크기 줄임 */
-		height: 40px; /* 크기 줄임 */
-		background-color: #00aaff; /* 하늘색 */
-		color: white;
-		font-size: 12px; /* 글씨 크기 줄임 */
-		font-weight: bold;
-		text-align: center;
-		line-height: 60px;
-		cursor: pointer;
-		border-radius: 8px;
-		margin: 2px 5px;
-		transition: transform 0.3s, box-shadow 0.3s;
-	}
-	.seatb {
-		width: 42px; /* 크기 줄임 */
-		height: 40px; /* 크기 줄임 */
-		background-color: #00aaff;
-		color: white;
-		font-size: 12px; /* 글씨 크기 줄임 */
-		font-weight: bold;
-		text-align: center;
-		line-height: 55px;
-		cursor: pointer;
-		border-radius: 8px;
-		margin: 2px 5px;
-		transition: transform 0.3s, box-shadow 0.3s;
+	    padding-top: 9px;
 	}
 	.seat {
 	    width: 42px;  /* 좌석의 너비 */
-	    height: 40px; /* 좌석의 높이 */
-	    background-color: #00aaff;
-	    color: white;
+	    height: 40.5px; /* 좌석의 높이 */
+	    color: black;
 	    font-size: 12px;
 	    font-weight: bold;
 	    text-align: center;
-	    line-height: 50px;
 	    cursor: pointer;
 	    border-radius: 8px;
-	    margin: 2px 5px;
+	    margin: 0px 5px 2px;
 	    transition: transform 0.3s, box-shadow 0.3s;
+	    position: relative;
+	    display: inline-block;
+	}
+	.seat-image-wrapper {
+	    position: relative;
+	    display: inline-block;
+	}
+	.seat-image-wrapper img {
+	    width: 100%; /* 또는 원하는 크기 */
+	    height: auto; /* 비율을 유지하면서 크기 조정 */
 	}
 	.seat-number {
-	    font-size: 10px;
-	    font-weight: normal;
+	    position: absolute;
+	    top: 50%;
+	    left: 50%;
+	    width: 50px;
+	    transform: translate(-50%, -50%);
+	    color: black; /* 텍스트 색상 */
+	    font-size: 10px; /* 텍스트 크기 */
+	    font-weight: bold; /* 텍스트 굵기 */
+	    text-align: left;
 	}
 	.available {
 	    opacity: 1;
@@ -113,7 +101,7 @@
 	}
 	.seat-container .row div:hover {
 		transform: scale(1.1);
-		background-color: #0099cc; /* 좌석 호버 시 색상 */
+		
 	}
 	.mt-1 {
 		background: white;
@@ -145,6 +133,7 @@
 	var maxSelectableSeats = ${resnum};  // 탑승객 수
 	var selectedSeats = [];
 	
+	// 좌석 선택 함수
 	function selectSeat(element) {
 		var isAvailable = element.getAttribute('data-available') === 'false';
 		if (!isAvailable) {
@@ -172,9 +161,14 @@
 		
 		// 선택한 좌석 표시 업데이트
 		document.getElementById('selectedSeatsDisplay').innerText = selectedSeats.join(', ');
+
+		// 선택된 좌석 수 실시간 업데이트
+		document.getElementById('selectedSeatCount').innerText = selectedSeats.length;
 	}
 	
+	// 선택 확인 함수
 	function confirmSelection() {
+		const seatCountElement = document.getElementById('selectedSeatCount');
 	    if (selectedSeats.length === 0) {
 	        alert('최소 한 개의 좌석을 선택해야 합니다.');
 	        return;
@@ -188,13 +182,19 @@
 	    // 부모 페이지로 데이터 전송
 	    window.parent.postMessage({ type: 'goingSeatsSelected', seats: selectedSeats }, '*');
 	}
-
 </script>
+
 </head>
 <body>
 	<div class="container">
-		<h2 class="mt-4">좌석 선택 - ${resnum}</h2>
-		<p><b>열차:&nbsp;</b> 은하-${routeid}&nbsp;&nbsp;<b>탑승객 수:&nbsp;</b> ${resnum}명</p>
+		<div style="display: flex; justify-content: space-between;">
+			<div style="display: inline-block;"><b>열차:&nbsp;</b> 은하-${routeid}호&nbsp;&nbsp;<b>선택한 좌석 수:&nbsp;&nbsp;<span id="selectedSeatCount">0</span>&nbsp;/&nbsp;${resnum}명</b> </div>
+			<div align="right" style="font-size: 12px; display: inline-block;">
+				&nbsp;선택가능<img src="/static/resources/seat.png">
+				&nbsp;선택불가<img src="/static/resources/xseat.png">
+				&nbsp;콘센트<img src="/static/resources/concent.png">
+			</div>
+		</div>
 		<!-- 선택한 좌석 표시 -->
 		<div class="mt-1">
 			<div style="width:200px; margin-left: 100px;">선택한 좌석:&nbsp;<span id="selectedSeatsDisplay"></span></div>
@@ -237,7 +237,8 @@
 								     data-seat-number="${seats[index].seatnum}" 
 								     data-available="${seats[index].reserv ? 'false' : 'true'}" 
 								     onclick="selectSeat(this)">
-								    ${seats[index].seatnum}
+									<img src="${seats[index].reserv ? '/static/resources/avai_seat.png' : '/static/resources/disable_seat.png'}">
+									<span class="seat-number">&nbsp;&nbsp;${seats[index].seatnum}</span>
 								</div>
 		                    </c:if>
 		                </c:forEach>

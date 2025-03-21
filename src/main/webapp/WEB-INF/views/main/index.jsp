@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <style>
+@import url('https://fonts.googleapis.com/css2?family=42dot+Sans:wght@300..800&display=swap');
 	body {
 		margin: 0;
 		background-color: #f4f4f4;
@@ -463,17 +464,22 @@
 	}
 	.promotion-item {
 		flex: 1 1 calc(25.0% - 20px);
-		background-color: #eaeaea;
+		background-color: #d7e8f4;
 		border-radius: 10px;
+		border: 2px solid #83d2ef;
 		overflow: hidden;
 		text-align: center;
 	}
 	.promotion-item > #promobox {
 		height: 205px;
 		overflow: hidden;
+		border-bottom: 2px solid #83d2ef;	
 	}
 	.promotion-item img {
 		width: 336px;
+	}
+	.promotion-item h3 {
+		font-weight: 600;
 	}
 	.promotion-item p {
 		padding: 0 15px 15px;
@@ -483,7 +489,12 @@
 		position: relative;
 		z-index: 1;
 		background-color: #D0E7F6;
-		padding: 50px 0;
+		padding: 10px 0;
+	}
+	.customer-review-section > h3 {
+		font-size: 40px;
+		font-family: "42dot Sans", sans-serif;
+		font-weight: 600;
 	}
 	.review-container {
 		width: 1000px;
@@ -507,8 +518,14 @@
 	}
 	.review h4 {
 		margin-bottom: 10px;
+		font-size: 24px;
+		font-family: "42dot Sans", sans-serif;
+		font-weight: 400;
 	}
 	.review p {
+		font-size: 20px;
+		font-family: "42dot Sans", sans-serif;
+		font-weight: 300;
 		color: #555;
 	}
 	.promotion-container .promotion-item:hover {

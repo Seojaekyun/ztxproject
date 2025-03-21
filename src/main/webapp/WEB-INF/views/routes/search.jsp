@@ -63,7 +63,7 @@
 	    <table class="table table-bordered text-center">
 	        <thead>
 	            <tr>
-	                <th>열차 번호</th>
+	                <th>노선번호</th>
 	                <th>출발역</th>
 	                <th>도착역</th>
 	                <th>출발일</th>
