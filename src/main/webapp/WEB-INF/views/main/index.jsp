@@ -489,10 +489,11 @@
 		position: relative;
 		z-index: 1;
 		background-color: #D0E7F6;
-		padding: 10px 0;
+		padding: 10px 20px;
 	}
 	.customer-review-section > h3 {
-		font-size: 40px;
+		margin-top: 20px;
+		font-size: 30px;
 		font-family: "42dot Sans", sans-serif;
 		font-weight: 600;
 	}
@@ -895,7 +896,7 @@
 				</div>
 				<div class="dairy">
 					<div id="schbtn">
-						<div><a href="">
+						<div><a href="../reserv/reserv">
 							<img src="../static/resources/directions_railway.png">승차권 예매
 						</a></div>
 						<div><a href="../reserv/reservInfo">
